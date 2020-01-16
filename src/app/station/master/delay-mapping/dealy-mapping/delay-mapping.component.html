@@ -1,0 +1,83 @@
+<div class="test-class">
+  <h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+    <img src="assets/images/master/Delay_code_icon.png" class="Delay-code-icon">
+    <span *ngIf="details.mode !== 'ADD'"> &nbsp;Edit Delay Code Mapping</span>
+    <span *ngIf="details.mode == 'ADD'"> &nbsp;Add New Delay Code Mapping</span>
+    <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+  </h1>
+
+  <form #form="ngForm" autocomplete="nope" id="staff">
+    <div class="" [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+      <app-scroll-highlight>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="model-content-margin" id="staff1">
+          <div *ngIf="details.mode !== 'EDIT'" fxFlex="100" fxLayout="row" fxLayoutWrap="wrap">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always" fxFlex="100">
+              <mat-label>TASK NAME</mat-label>
+              <!-- <div class="task-codes-title">TASK NAME<sup class="required-astricks">*</sup></div> -->
+              <mat-select name="tname" [(ngModel)]="currentDT.task_id" #tname="ngModel" required>
+                <mat-option *ngFor="let fullTask of nonAssignedTasks" [value]="fullTask.id" class="mat-normal-option">{{fullTask.name}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="tname.hasError('required')">Task Name is required</mat-error> -->
+            </mat-form-field>
+            <div *ngIf="tname.touched && tname.errors" class="error_msg error-position">
+              <div [hidden]="!tname.errors.required">Select a task to continue</div>
+            </div>
+          </div>
+          <!-- <div style="width:100%;" *ngIf="profileForm.controls['tname'].errors && profileForm.controls['tname'].touched" class="error-msg">
+        <div [hidden]="!profileForm.controls['tname'].errors.required">Select a Task to continue</div>
+      </div>
+      <br/> -->
+
+          <div class="w-100" *ngIf="details.mode === 'EDIT'">
+            <div class="task-codes-title">TASK NAME <sup class="required-astricks">*</sup></div>
+            <label class="w-100 delay-task-name">{{currentDT.task_name}}</label>
+          </div>
+
+          <div class="task-codes-title">TASK CODES <sup class="required-astricks">*</sup></div>
+          <div class="mb-1 task-codes-block">
+            <!-- <mat-form-field class="w-100">
+          <mat-icon matPrefix class="tc-search">search</mat-icon>
+          <input #myInput placeholder="Search delay code" matInput name="delay" (input)="filterDelayCat(myInput.value)"
+            [(ngModel)]="serachBydelay" >
+        </mat-form-field> -->
+            <div class="task-codes i-scroll">
+              <div class="i-mat-form-field" *ngFor="let task of dependencyTasks; let i = index">
+                <mat-checkbox class="primary-checkbox i-mat-checkbox" [name]="dependencyTasks[i].name" (ngModelChange)="onChange(task)"
+                  [(ngModel)]="task.selected"> {{task.name}} </mat-checkbox>
+              </div>
+            </div>
+            <!-- <div *ngIf="profileForm.controls['delay'].errors && profileForm.controls['delay'].touched" class="error-msg">
+          <div [hidden]="!profileForm.controls['delay'].errors.required">Select default delay code</div>
+        </div> -->
+          </div>
+
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <mat-label>DEFAULT DELAY CODE </mat-label>
+            <!-- <div class="task-codes-title">DEFAULT DELAY CODE <sup class="required-astricks">*</sup></div> -->
+            <!-- <input type ="hidden" [(ngModel)]="nextDropVal" value="{{nextDropVal}}" required> -->
+            <mat-select name="taskCode" [(ngModel)]="defaultDT" #taskCode="ngModel" required>
+              <mat-option *ngFor=" let nextIns of nextDrop" [value]="nextIns.id" class="mat-normal-option">{{nextIns.code}}</mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="taskCode.hasError('required')">Default delay is required</mat-error> -->
+          </mat-form-field>
+          <div *ngIf="taskCode.touched && taskCode.errors " class="error_msg error-position">
+            <div [hidden]="!taskCode.errors.required">Default delay code is required</div>
+          </div>
+          <!-- <div *ngIf="profileForm.controls['taskCode'].errors && profileForm.controls['taskCode'].touched" class="error-msg">
+        <div [hidden]="!profileForm.controls['taskCode'].errors.required">Default delay is required</div>
+      </div> -->
+
+        </div>
+      </app-scroll-highlight>
+
+    </div>
+
+    <mat-dialog-actions>
+      <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" [disabled]="!form.valid" (click)="addTaskDelayMapping()">DONE</button>
+      <!-- !currentDT.task_id -->
+      <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="!nextDropVal" (click)="updateTaskDelayMapping()">UPDATE</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+    </mat-dialog-actions>
+  </form>

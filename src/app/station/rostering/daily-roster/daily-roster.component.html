@@ -1,0 +1,171 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex="80">
+    <div class="roster-currentdate" fxLayout="row">
+      <div fxFlex="12" class="text-left pad-top-7">
+        <!-- <div fxFlex="25" class="text-left"><span>{{currentdate | date:'EEE, dd MMM yyyy'}}</span> -->
+        <!-- <img src="assets/images/dashboard/arrow_img.png" alt="arrow-icon"> -->
+        <span>Shifts ({{shifts.length}})</span></div>
+        <div fxFlex.gt-lg="3" fxFlex.gt-md="5" fxFlex.gt-sm="6" class="time-select">
+          <button
+            [disabled]="(filter.from | date:'dd MMM yy': zoneOffset ) === (mindate | date:'dd MMM yy' : zoneOffset )"
+            (click)="daterange(filter.from,'oldstate')">
+            <mat-icon>chevron_left </mat-icon>
+          </button>
+        </div>
+        <div fxFlex.gt-lg="10" fxFlex.gt-md="20" fxFlex.gt-sm="20" class="time-date">
+          <span>
+            <div class="date-pad">
+              <input matInput [min]="mindate" readonly [matDatepicker]="from" placeholder="From" [(ngModel)]="filter.from"
+                (dateChange)="daterange($event,'from')" class="w-100 form-field-from">
+              <!-- <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle> -->
+              <mat-datepicker class="form-field-from" #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+  
+            </div>
+          </span>
+        </div>
+        <div fxFlex.gt-lg="3" fxFlex.gt-md="5" fxFlex.gt-sm="6" class="time-select align-right">
+          <button (click)="daterange(filter.from,'to')">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      <!-- <div  fxFlex="33" class="">
+        <div></div>
+      </div> -->
+      <!-- <div fxFlex="60" fxLayout="row" class="text-right pad-right">
+        <div fxFlex="10">
+          <span (click)="scrollLeftCheck()" class="leftChevron">
+            <mat-icon>chevron_left</mat-icon>
+          </span>
+        </div>
+        <div fxFlex="80">
+          <span #checkboxContent class="flex-div-checkbox">
+            <mat-checkbox [(ngModel)]="checked_all"><span class="checkbox-shifts">All</span></mat-checkbox>
+            <span class="checkbox-shifts-span" *ngFor="let assign of shifts;let i=index ">
+              <mat-checkbox [checked]="assign.checked" (change)="shiftChange(shifts,assign,$event, i)"><span class="checkbox-shifts">{{assign.name}}</span></mat-checkbox>
+            </span>
+          </span>
+        </div>
+        <div fxFlex="10">
+          <span (click)="scrollRightCheck()" class="rightChevron">
+            <mat-icon>chevron_right</mat-icon>
+          </span>
+        </div>
+      </div> -->
+      <div fxFlex="50" class="text-right pad-right pad-top-7">
+        <span (click)="leftScroll()" class="leftChevron" [class.disable]="disableLeftScroll">
+          <mat-icon>chevron_left</mat-icon>
+        </span>
+        <span (click)="rightScroll()" class="rightChevron" [class.disable]="disableRightScroll">
+          <mat-icon>chevron_right</mat-icon>
+        </span>
+      </div>
+
+    </div>
+    <div [hidden]="noData" fxLayout="row" #widgetsContent class="shift-assign-card-width-div">
+      <div class="shift-assign-card-width" [ngClass]="{'daydisbale':assign.disable}"
+        *ngFor="let assign of shifts; let i = index ">
+        <mat-card class="shift-assign-mat-card-div" droppable (onDrop)="onItemDrop($event,assign)"
+          [ngClass]="{'dc-blue': i === 0, 'dc-red': i === 1, 'dc-yellow': i === 2, 'dc-green': i === 3, 'dc-g-white': i === 4, 'dc-purple': i === 5, 'dc-violet': i === 6,'dc-eight': i === 7,'dc-nine': i === 8}"
+          id="scroll1">
+          <div class="shifts-name">
+            <div>{{assign.name}}({{assign.totalcount}})</div>
+          </div>
+          <mat-accordion [multi]="true">
+            <mat-expansion-panel *ngFor="let designation of shiftsByDesign;let j = index;" class=""
+               style="margin: 5px 0;" [expanded]="true">
+              <mat-expansion-panel-header class="panel-header-officer-assign" [expandedHeight]="'48px'"
+                [collapsedHeight]="'48px'">
+                <mat-panel-title>
+                  {{designation.designation}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="shift-person-parent-div">
+                <div draggable *ngFor="let employee of designation.employees" [dragData]="employee"
+                  class="example-list">
+                  <div *ngFor="let day of employee.dates;">
+                    <mat-card *ngIf="assign.alias === day.shift" class="shift-person-matcard example-box">
+                      <!-- <img src="assets/images/master/vector-smart-object-copy-5.png" /> -->
+                      <span>{{employee.name}}</span></mat-card>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="noData == true">
+      <div class="shift-nodata">
+        Shift allocation not performed
+      </div>
+    </div>
+  </div>
+  <!-- (scroll)="onWindowScroll($event)" to be inserted in the below row -->
+  <div fxFlex="20" class="static_background" id="scroll">
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel *ngFor="let assign of NAShifts;let i = index" (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+        [ngClass]="{'dc-ten': i === 0||i === 1||i === 2||i === 3||i === 4||i === 5||i === 6}" class="panel-margin"
+        droppable (onDrop)="onItemDrop($event,assign)" [expanded]="assign.totalcount>0">
+        <mat-expansion-panel-header class="panel-header-shift-assign" [expandedHeight]="'48px'"
+          [collapsedHeight]="'48px'">
+          <mat-panel-title>
+            {{assign.name}}({{assign.totalcount}})
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let designation of shiftsByDesign;let j = index;">
+          <div class="shift-person-parent-div">
+            <div draggable *ngFor="let employee of designation.employees" [dragData]="employee" class="example-list">
+              <div *ngFor="let day of employee.dates;">
+                <mat-card *ngIf="assign.alias === day.shift" class="shift-person-matcard example-box">
+                  <!-- <img src="assets/images/master/vector-smart-object-copy-5.png" /> -->
+                  <span>{{employee.name}}</span></mat-card>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+
+<!-- footer section -->
+<div [hidden]="true" class="i-footer density-footer">
+  <div fxLayout="row" class="actions" class="daily-roster-footer-center">
+    <div fxFlex.gt-lg="35" fxFlex.gt-md="40" fxFlex.gt-sm="55" class="tab-section-daily-roster" fxLayout="row">
+      <div fxFlex.gt-lg="35" fxFlex.gt-md="40" fxFlex.gt-sm="55" class="time-label">DAILY ROSTER</div>
+      <!-- <div fxFlex.gt-lg="15" fxFlex.gt-md="15" fxFlex.gt-sm="15" class="time-select">
+        <button
+          [disabled]="(filter.from | date:'dd MMM yy': zoneOffset ) === (mindate | date:'dd MMM yy' : zoneOffset )"
+          (click)="daterange(filter.from,'oldstate')">
+          <mat-icon>chevron_left </mat-icon>
+        </button>
+      </div>
+      <div fxFlex.gt-lg="30" fxFlex.gt-md="35" fxFlex.gt-sm="45" class="time-date">
+        <span>
+          <div class="date-pad">
+            <input matInput [min]="mindate" readonly [matDatepicker]="from" placeholder="From" [(ngModel)]="filter.from"
+              (dateChange)="daterange($event,'from')" class="w-100 form-field-from">
+            <mat-datepicker class="form-field-from" #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+
+          </div>
+        </span>
+      </div>
+      <div fxFlex.gt-lg="15" fxFlex.gt-md="15" fxFlex.gt-sm="15" class="time-select">
+        <button (click)="daterange(filter.from,'to')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div> -->
+    </div>
+    <!-- <div fxFlex="15" class="tab-section-roster" fxLayout="row">
+      <div fxFlex="100" class="time-label">SCHEDULE ROSTER</div>
+    </div> -->
+  </div>
+</div>

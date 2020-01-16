@@ -1,0 +1,324 @@
+.div-width {
+  width: 1336px;
+  margin: 0 auto;
+}
+
+.noc-title {
+  font-size: 24px;
+  line-height: 1.9;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin: 0px 10px 15px 0px;
+}
+
+//for date pad
+.date-pad {
+  font-size: 16px;
+  text-align: left;
+  color: #000000;
+  height: 40px;
+  background-color: #ffffff;
+  padding-left: 8px;
+  outline: none;
+  border-radius: 40px 0px 0px 40px;
+}
+
+.date-pads {
+  font-size: 16px;
+  text-align: left;
+  color: #000000;
+  height: 40px;
+  background-color: #ffffff;
+  padding-left: 8px;
+  outline: none;
+  border-radius: 0px 40px 40px 0px;
+}
+
+.date-arrows {
+  font-size: 16px;
+  text-align: left;
+  color: #a4a4a4;
+  height: 40px;
+  padding: 9px;
+  background-color: #ffffff;
+  outline: none;
+  // cursor: pointer;
+}
+
+.date-arrows .mat-icon:active {
+  background-color: #e8e4e4;
+  height: 25px;
+  width: 25px;
+  border-radius: 14px;
+}
+
+.date-arrow {
+  color: #000000;
+  font-size: 24px;
+  outline: none;
+}
+
+.date-selector .mat-icon-button {
+  outline: none !important;
+}
+
+.date-selector {
+  padding: 2px;
+}
+
+::ng-deep .date-selector .mat-form-field-infix {
+  border-top: 0px !important;
+  width: 100px !important;
+}
+
+::ng-deep .date-selector.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+}
+
+.noc-tab {
+  padding: 10px;
+  margin: 12px;
+  height: 340px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.04);
+}
+
+.width {
+  width: 392px;
+}
+
+.width2 {
+  width: 598px;
+}
+
+.white-bg {
+  background-color: #ffffff;
+}
+
+
+.tab-title {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #717185;
+}
+
+.turn-one round-progress {
+  width: 230px !important;
+  height: 230px !important;
+  overflow: visible !important;
+}
+
+
+.turn-two round-progress {
+  width: 163px !important;
+  height: 163px !important;
+  position: relative;
+  bottom: 196px;
+  left: 36px;
+  overflow: visible !important;
+}
+
+.turn-three round-progress {
+  width: 98px !important;
+  height: 80px !important;
+  position: relative;
+  bottom: 20.4rem;
+  left: 4.4rem;
+  overflow: visible !important;
+}
+
+.turn-div {
+  padding: 22px;
+  height: 300px;
+}
+
+.noc-otp-title {
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: left;
+  color: #1b55e2;
+  width: 32px;
+  padding: 10px 7px;
+  height: 32px;
+  background-color: rgba(73, 129, 253, 0.34);
+  border-radius: 36px;
+}
+
+.noc-otp-per {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #1b55e2;
+  font-weight: normal;
+  padding: 1px 8px;
+}
+
+
+.noc-otp-title1 {
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: left;
+  color: #7821de;
+  background-color: #ceb6ea;
+  width: 32px;
+  padding: 10px 7px;
+  height: 32px;
+  border-radius: 36px;
+}
+
+.noc-otp-per1 {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #7821de;
+  font-weight: normal;
+  padding: 1px 8px;
+}
+
+.noc-otp-title2 {
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: left;
+  color: #d62470;
+  width: 32px;
+  padding: 10px 7px;
+  height: 32px;
+  background-color: #ecb8d1;
+  border-radius: 36px;
+}
+
+.noc-otp-per2 {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #d62470;
+  font-weight: normal;
+  padding: 1px 8px;
+}
+
+.turn-left {
+  margin-top: 62px;
+}
+
+.noc-titles {
+  display: inline-flex;
+  margin: 10px;
+}
+
+.noc-dep-chart {
+  position: relative;
+  width: 380px;
+  height: 245px;
+  margin: 15px auto;
+}
+
+.noc-equip-chart {
+  position: relative;
+  width: 375px;
+  height: 245px;
+  margin: 11px auto;
+}
+
+.noc-flight-chart {
+  position: relative;
+  width: 562px;
+  height: 272px;
+  margin: 15px auto;
+}
+
+.title-filt {
+  border-radius: 16px;
+  width: 110px;
+  padding: 0px 2px 0px 16px;
+  height: 35px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .title-filt .mat-select-value {
+  font-size: 16px !important;
+}
+
+
+::ng-deep .title-filt .mat-select-value-text {
+  color: #000000 !important;
+}
+
+::ng-deep .title-filt .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background: transparent !important;
+}
+
+::ng-deep .title-filt .mat-form-field-underline {
+  background: transparent !important;
+}
+
+::ng-deep .title-filt .mat-form-field-infix {
+  margin-top: -15px !important;
+}
+
+.divide-noc {
+  width: 0;
+  height: 48px;
+  border: solid 1px #031134;
+  margin-left: 24px;
+}
+
+.vs-title {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 3;
+  color: #999999;
+}
+
+.station-card {
+  border-radius: 20px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.05);
+  border: solid 1px #d7dae2;
+  background-color: #ffffff;
+  width: 140px;
+  padding: 5px 10px;
+  height: 35px;
+  margin: 3px 18px;
+  box-sizing: border-box;
+  max-width: 12%;
+  display: flex;
+}
+
+.title-card {
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: left;
+  width: 28px;
+  padding: 9px 5px;
+  height: 28px;
+  border-radius: 18px;
+  margin: -3px -7px;
+}
+
+
+.bg {
+  color: #1b55e2;
+  background-color: rgba(73, 129, 253, 0.34);
+}
+
+.bg1 {
+  color: #7821de;
+  background-color: #ceb6ea;
+}
+
+.bg2 {
+  color: #d62470;
+  background-color: #ecb8d1;
+}

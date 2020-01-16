@@ -1,0 +1,24 @@
+<h1 mat-dialog-title class="add-mat-dialog-title eqp-title" id="staffHeader">
+  Equipment Details
+  <img src="assets/images/dashboard/arrow_img.png" alt="arrow-icon"> {{log.depFlightNumber}}
+  <span class="close-action" (click)="cancel()">x</span>
+</h1>
+
+<!-- <h1 mat-dialog-title class="add-mat-dialog-title">
+    Update
+    <span fxFlex></span>
+    <button mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+</h1> -->
+<div fxLayout="row" fxLayoutWrap="wrap" class="eqp-cnt">
+  <div fxFlex="50" class="eqp-block" *ngFor="let eqp of log.equipment">
+    <div fxFlex="100" class="eqp-det">
+      <span class="eqp-tot">{{eqp.total}} <span>x</span></span>
+      <span class="eqp-name">
+      {{eqp.name}}
+      </span>
+    </div>
+  </div>
+</div>
+<mat-dialog-actions align='center'>
+  <!-- <button mat-button class="cancel-btn" [mat-dialog-close]>CLOSE</button> -->
+</mat-dialog-actions>

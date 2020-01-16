@@ -1,0 +1,124 @@
+
+.shift-pg .shifts-icon{
+  width: 48px;
+  height: 48px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+.shift-pg .shifts-title{
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+}
+.shift-pg .tot-shifts{
+  font-size: 59px;
+  font-weight: normal;
+  line-height: 0.84;
+  letter-spacing: 0.6px;
+}
+.shift-pg .i-hr{
+  margin: 15px 0px
+}
+.shift-pg .shift-card{
+  cursor: default;
+  transition: 0.4s;
+  border-radius: 5px;
+}
+.shift-pg .shift-card:hover{
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35) !important;
+  transition: 0.4s;
+}
+.shift-pg .shift-card mat-card-title{
+  padding: 5px 15px 0px 15px;
+  margin: 0px;
+}
+.shift-pg .shift-card mat-card-title .title{
+  top: 5px;
+  position: relative;
+  height: fit-content;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.71;
+  color: #000000;
+}
+.shift-card mat-card-content{
+  padding: 17px 15px 25px 15px;
+}
+.shift-card mat-card-content .timings .title{
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.71;
+  color: #666666;
+}
+.shift-card mat-card-content .timings .time{
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 0.86;
+  color: #000000;
+}
+.mandatory-field {
+  color: red;
+  // font-size:15px;
+}
+// .task-name {
+//   font-style: normal;
+//   font-stretch: normal;
+//   letter-spacing: normal;
+//   text-align: center;
+//   font-size: 17.5px;
+//   font-weight: 600;
+//   line-height: 1.17;
+//   padding-top: 25px;
+// }
+// .service-name {
+//   font-size: 14px;
+//   font-weight: normal;
+//   font-style: normal;
+//   font-stretch: normal;
+//   line-height: 1.61;
+//   letter-spacing: normal;
+//   text-align: center;
+//   color: #000000;
+// }
+.priority-title {
+  font-size: 10px;
+  line-height: 1.4;
+  color: #999999;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+}
+.dependency-report {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+
+  
+.dc-card{
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  padding: 0px 10px;
+  color: #000000;
+  transition: 0.4s;
+  cursor: default;
+}
+.dc-card:hover{
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: 0.4s;
+}
+.dc-card .dc-row{
+  align-items: center;
+}
+.dc-card .dc-tab-btn{
+  margin-right: 4px;
+}

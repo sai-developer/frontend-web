@@ -1,0 +1,96 @@
+// background
+$dark-background :#191c29; // dark black
+$color-black:#000000; // black
+$color-white:#ffffff; // white // Used for both font and background 
+$color-background: #dadfe7; // overall background Color
+$color-green:#5cbb1d; // green
+$color-amber:#e9ab15; // amber
+$color-red: #e81426; // red
+$color-grey:#999999; // grey
+$color-grey-medium: #777b90;
+$color-dark-grey:#666666; // dark-grey
+$color-gradient-red:#f93b1d; // for gradient - red
+$color-gradient-amber:#fca22d; // for gradient - orange
+$color-final-red: #ec1c24; // for final approach - red
+$color-box-shadow-grey: #464748; 
+
+
+
+
+
+$medium-grey: #565966; // medium grey;
+$bright-org: #f93b1d; // bright orange
+$grey-white: #d9dee6; // greyish white
+
+
+
+
+
+
+// font colors:
+$white: #fff ;//; white
+$color: #909090; //light grey
+$medium-grey: #565966; //dark grey                remove
+$color: #000000; // black
+$color: #999999; // grey
+$color: #acacac; // lighter grey   remove
+$color: #ffffff; // whiter
+$color: #777b90; // medium grey   for all disabled and on dark backgrounds
+$color: #898b91; // grey replace with 999999  inactive icons + location pin
+$color: #fefefe; // white  fff
+$color: #828282; // another grey   replace with 9999999
+$color: #010101; // shade of black   replace with 000000
+$color: #2b2e41; // darker ggrey    removed
+$color: #969393; // grey   replace by 999999
+
+// border
+$color: #f93b1d; // orange
+$color: #acacac; // lighter grey                565966
+$color: #cccccc; // very light grey       999999
+$color: #d7d7d7; // shade of white      
+$color: #c7c8ca; // grey/white          565966
+$color: #ccc; //; grey/white    999
+$color: #babfc7; // very     565966
+
+// gantt chart:
+$color: #e81426; //red
+$color: #5cbb1d; // green
+$color: #e9ab15; // yellow
+
+// Dashboard Progress bar (delay categorization)                replace with gantt chart colors
+$color: #86c43d; // green
+$color: #fbb216; // yellow
+$color: #e91c19; // red
+
+// error messages
+$color: #FF0000; // red    replace with e81426
+
+
+//#dadfe7 background 
+
+
+//dashborad page  font colors,Bordercolors
+
+$color: #0f113d; //fontcolor
+$color: #b7b7b7; // border color
+$back-color: #ec1c24; // final-approach back-color
+$grey: #666666; // dashboard time 
+$grey-back: #e9e9e9; // dashboard flight equipment type background color
+$grey-color: #444444; // dashboard flight equipment type color
+$flight-bayNo-bayType:  #0c506d; // flight bay number / bay type
+$flight-bayno-baytype: #cdf0ff; // background color flight bayno/baytype
+$gradient-color: #f93b1d, #fca22d; // gradient color - metar/notam arrow
+$otp-value-color:  #33aade; // otp chart otp value 
+$otp-value-dept:  #753d95; // otp chart otp depart value
+$delay-cat-hover: #ecf5fa; // Delay categorization task hover
+
+
+// station layout 
+
+$border-color: #2f3243;
+// common app.scss layout 
+
+$border-color: #2f3243
+
+
+

@@ -1,0 +1,326 @@
+<!-- loader section -->
+<!-- <div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div> -->
+<div [hidden]="test">
+  test
+</div>
+
+<div class="gantt-head">
+  <div class="back-icon" *ngIf="showLive">
+    <button mat-raised-button (click)="backToLive()" class="back-button">
+      <!-- matTooltip="BACK TO STAFF LOCATION" -->
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      <span>BACK TO LIVE STATUS</span>
+    </button>
+  </div>
+  <!-- <div fxFlex="10" class="all-flights">All Flights</div> -->
+</div>
+<!-- <div *ngIf="!load"> -->
+<div fxLayout="row" fxLayoutWrap="wrap" class="map-full-view">
+  <div fxFlex>
+    <div class="agmMapShadow">
+      <!--   -->
+      <agm-map [zoom]="zoom" [latitude]="lat" [longitude]="long" [styles]="styles" [keyboardShortcuts]="false"
+        [mapTypeControl]="false" [zoomControl]="false" [mapDraggable]="true" [disableDoubleClickZoom]="true"
+        [rotateControl]="false" [panControl]="false" [scaleControl]="false" [scrollwheel]="false"
+        [streetViewControl]="false" [fullscreenControl]="false" [disableDefaultUI]="false" [clickableIcons]="false">
+        <agm-marker [visible]="ind" *ngFor="let m of stations;let i = index" [latitude]="m.lat" [longitude]="m.lng"
+          [iconUrl]="m.iconUrl" (markerClick)="city(infoWindow, $event)" (mouseOver)="onMouseOver(infoWindow, $event)" (mouseOut)="onMouseOut(infoWindow, $event)">
+          <agm-info-window #infoWindow>
+            <strong>{{m.name}}</strong>
+          </agm-info-window>
+        </agm-marker>
+        <agm-marker *ngFor="let m of baynumberList;let i = index" [latitude]="m.bayLat" [longitude]="m.bayLon"
+          [iconUrl]="m.iconn" (mouseOver)="onMouseOver(infoWindow, $event)" (mouseOut)="onMouseOut(infoWindow, $event)"
+          (markerClick)="bayEntry(m, m.bayLat, m.bayLon)">
+          <agm-info-window #infoWindow>
+            <strong>{{m.bayCode}}</strong>
+          </agm-info-window>
+        </agm-marker>
+        <agm-marker [visible]="staffLoc" *ngFor="let s of userDetails;let i = index" [latitude]="s.lat" [longitude]="s.lng">
+        <!-- [iconUrl]="m.iconUrl" -->
+        <!-- <agm-info-window #infoWindow>
+            <strong>{{s.name}}</strong>
+          </agm-info-window> -->
+      </agm-marker>
+        <!-- <agm-circle *ngFor="let c of circle" [latitude]="c.lati" [longitude]="c.longi" [radius]="c.radius" [fillColor]="c.color">
+
+        </agm-circle> -->
+        <!-- <agm-polygon [paths]="coordinates" [fillOpacity]="fill_opacity" [fillColor]="fill_color">
+        </agm-polygon> -->
+      </agm-map>
+    </div>
+    <!-- svg section start -->
+    <div [hidden]="!showTask">
+      <svg class="svg-cls" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 240 240"
+        style="enable-background:new 0 0 240 240;" xml:space="preserve">
+        <style type="text/css">
+          .st0 {
+            /* fill: #424143; */
+          }
+
+          .st1 {
+            fill: #F7F7F7;
+          }
+
+          .st2 {
+            fill: #D6D6D6;
+          }
+
+          .st3 {
+            fill: #FDFEFF;
+          }
+
+          .flight-clr {
+            fill: #e9ab15;
+          }
+
+          .hidden {
+            visibility: hidden;
+          }
+
+          .visible {
+            visibility: visible !important;
+          }
+
+          .flt-save {
+            fill: #5cbb1d !important;
+          }
+
+          .flt-delay {
+            fill: #e81426;
+          }
+
+          .save {
+            display: unset !important;
+            fill: #5cbb1d !important;
+          }
+
+          .warning {
+            fill: #e9ab15;
+          }
+
+          .delay {
+            fill: #e81426;
+          }
+        </style>
+        <g id="Flight">
+          <g>
+            <path class="st0"
+              [ngClass]="{'flt-save': selFlt?.arrColor == 'ontime_plane', 'flt-delay': selFlt?.arrColor == 'delayed_plane'}"
+              d="M224.6,152.5c0-0.9-0.5-1.8-1.2-2.4l-93.6-73.2V68c0-4-0.2-8-0.8-12c-1.4-10.1-4.6-28.2-9-28.2
+         c-4.5,0-7.6,18.3-9,28.3c-0.5,3.9-0.8,7.8-0.8,11.7v8.5l-93.6,73.2c-0.7,0.6-1.2,1.5-1.2,2.4c0,0.1,0,15.5,0,15.5
+         c1.3-0.6,2.7-1.3,4-1.9c3.4-1.6,6.8-3.2,10.2-4.8c4.5-2.1,9.1-4.3,13.6-6.4c4.8-2.2,9.5-4.5,14.3-6.7c4.1-1.9,8.2-3.8,12.2-5.8
+         c4-1.9,7.8-4.1,12.1-5.5c4.1-1.3,8.4-2.4,12.8-2.7c4.2-0.4,9-0.5,12.7,1.6c0.4,0.2,2.9,1.5,2.9,2v13c0,6.4,0.5,7.2,1.5,13.5
+         l4.6,26.8L84.7,222v10.2l35.3-15.5l35.3,15.5V222l-31.6-31.5l4.6-26.8c1-6.3,1.5-7.1,1.5-13.4v-12.5c0-0.5,2.5-1.8,2.9-2
+         c3.7-2.1,8.5-2,12.7-1.6c4.4,0.3,8.7,1.4,12.8,2.7c4.3,1.4,8.1,3.6,12.1,5.5c4,2,8.1,3.9,12.2,5.8c4.8,2.2,9.5,4.5,14.3,6.7
+         c4.5,2.1,9.1,4.3,13.6,6.4c3.4,1.6,6.8,3.2,10.2,4.8c1.3,0.6,2.7,1.3,4,1.9C224.6,168,224.6,152.7,224.6,152.5z" />
+            <path class="st1"
+              d="M221.9,152.2l-93.1-73.5V67.3c0-3.9-0.3-7.8-1-11.6c-2.9-16.6-6.1-20.6-7.8-22.5c-1.7,1.8-4.9,5.9-7.8,22.5
+         c-0.7,3.7-1,7.6-1,11.4V78l-93.1,73.5c-0.1,0.1-0.2,0.3-0.2,0.5v11.5c0-0.1,1.2-0.6,1.3-0.6c1.2-0.6,2.5-1.2,3.7-1.8
+         c1.8-0.9,3.7-1.8,5.6-2.7c2.3-1.1,4.7-2.2,7-3.3c2.7-1.2,5.3-2.5,7.9-3.7c2.7-1.2,5.4-2.5,8.1-3.8c2.7-1.2,5.3-2.5,7.9-3.7
+         c2.3-1.1,4.7-2.2,7-3.3c1.9-0.9,3.8-1.8,5.7-2.7c1.5-0.7,2.9-1.4,4.4-2.1c4.3-2.1,8.8-3.5,13.5-4.3c2.6-0.4,5.1-0.7,7.7-0.7
+         c2.5,0,5,0.1,7.5,0.7c1,0.3,2,0.6,2.9,1c0.2,0.1,1.8,0.8,3.1,1.9v15.2c0,6.2,0.6,6.9,1.8,13l6.5,30.1h-1.8l-30.2,30.2v4.9
+         l32.5-14.4l32.5,14.4v-4.9l-30.2-30.2h-1.8l6.5-30c1.2-6.2,1.8-6.9,1.8-13.1v-14.4c1.5-1.3,2.9-1.9,3.1-2c0.9-0.4,1.9-0.7,2.9-1
+         c2.5-0.6,5-0.7,7.5-0.7c2.6,0,5.1,0.3,7.7,0.7c4.7,0.8,9.2,2.2,13.5,4.3c1.5,0.7,2.9,1.4,4.4,2.1c1.9,0.9,3.8,1.8,5.7,2.7
+         c2.3,1.1,4.7,2.2,7,3.3c2.6,1.2,5.2,2.5,7.9,3.7c2.7,1.3,5.4,2.6,8.1,3.8c2.6,1.2,5.2,2.5,7.9,3.7c2.3,1.1,4.7,2.2,7,3.3
+         c1.9,0.9,3.8,1.8,5.6,2.7c1.2,0.6,2.5,1.2,3.7,1.8c0.1,0,1.3,0.5,1.3,0.6v-11.5C222.1,152.5,222,152.3,221.9,152.2z" />
+          </g>
+          <path class="st2" d="M121.6,49.9c-0.4-0.2-0.9-0.3-1.6-0.3s-1.3,0.1-1.6,0.3c-3.6,1.6-4.5,8-4.5,8V61c0,0,1.2-4.3,6.1-4.3
+       c5,0,6.1,4.3,6.1,4.3v-3.1C126.1,57.9,125.2,51.5,121.6,49.9z" />
+        </g>
+        <g>
+          <g id="catering-blk" class="hidden">
+            <ellipse id="catering" matTooltip="Catering" class="st0" cx="139.2" cy="171.2" rx="7.7"
+              ry="7.6" />
+            <g>
+              <path class="st3" d="M139.2,163.9c4,0,7.3,3.3,7.3,7.3c0,4-3.3,7.3-7.3,7.3c-4,0-7.3-3.3-7.3-7.3
+           C131.8,167.2,135.1,163.9,139.2,163.9 M139.2,163.3c-4.4,0-8,3.5-8,8c0,4.5,3.6,8,8,8c4.4,0,8-3.5,8-8
+           C147.2,166.8,143.6,163.3,139.2,163.3L139.2,163.3z" />
+            </g>
+          </g>
+        </g>
+        <g>
+          <g id="fuel-blk" class="hidden">
+            <circle id="fuel" matTooltip="Fuelling" class="st0 fuel" cx="212.7" cy="132.3" r="7.7" />
+            <g>
+              <path class="st3"
+                d="M212.7,124.9c4,0,7.3,3.3,7.3,7.3s-3.3,7.3-7.3,7.3c-4,0-7.3-3.3-7.3-7.3S208.6,124.9,212.7,124.9
+            M212.7,124.3c-4.4,0-8,3.6-8,8c0,4.4,3.6,8,8,8c4.4,0,8-3.6,8-8C220.7,127.9,217,124.3,212.7,124.3L212.7,124.3z" />
+            </g>
+          </g>
+        </g>
+        <g>
+          <g id="doors-open" class="hidden">
+            <ellipse id="doorsOpen" class="st0 door-open" matTooltip="Pax doors open" cx="96.1" cy="66.1" rx="7.7"
+              ry="7.6" />
+            <path class="st3" d="M96.1,58.8c4,0,7.3,3.3,7.3,7.3s-3.3,7.3-7.3,7.3s-7.3-3.3-7.3-7.3S92,58.8,96.1,58.8 M96.1,58.2
+         c-4.4,0-8,3.5-8,8s3.6,8,8,8s8-3.5,8-8C104.1,61.7,100.4,58.2,96.1,58.2L96.1,58.2z" />
+          </g>
+        </g>
+        <g>
+          <g id="baggage-blk" class="hidden">
+            <circle id="baggage" class="st0 baggage" matTooltip="Baggage loading" cx="143.9" cy="66.3"
+              r="7.6" />
+            <g>
+              <path class="st3" d="M143.9,59c4,0,7.3,3.3,7.3,7.3s-3.3,7.3-7.3,7.3c-4,0-7.3-3.3-7.3-7.3S139.9,59,143.9,59 M143.9,58.3
+           c-4.4,0-8,3.5-8,8c0,4.5,3.5,8,8,8c4.5,0,8-3.5,8-8C151.9,61.8,148.3,58.3,143.9,58.3L143.9,58.3z" />
+            </g>
+          </g>
+        </g>
+        <g>
+          <g id="con-blk" class="hidden">
+            <ellipse id="chocksOn" class="chocks-on" matTooltip="Chocks on" cx="120.2" cy="14.8" rx="7.7" ry="7.7" />
+            <path class="st3" d="M120.2,7.4c4,0,7.3,3.3,7.3,7.4s-3.3,7.4-7.3,7.4c-4,0-7.3-3.3-7.3-7.4C112.8,10.8,116.1,7.4,120.2,7.4
+          M120.2,6.8c-4.4,0-8,3.6-8,8s3.6,8,8,8c4.4,0,8-3.6,8-8C128.1,10.4,124.5,6.8,120.2,6.8L120.2,6.8z" />
+          </g>
+        </g>
+      </svg>
+
+    </div>
+    <!-- svg section end -->
+    <!-- task block start -->
+    <div class="taskDiv" *ngIf="showTask" [hidden]="!viewTask">
+      <div class="task-filters">
+        <!-- filter options start -->
+        <div class="filter-options">
+          <span>Filters:</span>
+          <input type="radio" name="button" class="buttonState" checked id="button1" />
+          <label class="button" for="button1" (click)="filterTask('ALL')">All</label>
+          <input type="radio" name="button" class="buttonState" id="button2" />
+          <label class="button" for="button2" (click)="filterTask('DELAY')"><span
+              class="task-delayed"></span><span>Delay</span></label>
+          <input type="radio" name="button" class="buttonState" id="button3" />
+          <label class="button" for="button3" (click)="filterTask('AMBER')"><span
+              class="task-amber"></span><span>Buffer</span></label>
+        </div>
+        <!-- filter options end -->
+        <!-- task list start -->
+        <div class="taskSubDiv" *ngFor="let task of htmlToAdd2">
+          <div class="task-lst i-gantt-details-{{task.class}}">
+            <div class="activities-title">
+              <span>{{task.tasks}}</span>
+              <div *ngIf="!task.start">
+                <span class="task-time-{{task.class}} task-time pull-right">{{task.end}}</span>
+              </div>
+              <div *ngIf="task.start" class="pull-right">
+                <span class="task-time-{{task.class}} task-time">{{task.start}}</span>
+                <span class="task-time-{{task.class}} task-time">{{task.end}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- task list end -->
+      </div>
+    </div>
+    <!-- task block end -->
+    <!-- staff block start -->
+    <div class="taskDiv" *ngIf="showTask" [hidden]="!viewStaff">
+      <!-- filter options start -->
+      <div class="filter-options">
+        <span>Filters:</span>
+        <input type="radio" name="staffBtn" class="buttonState" checked id="allBtn" />
+        <label class="button" for="allBtn" (click)="filterStaff('ALL')">All</label>
+        <input type="radio" name="staffBtn" class="buttonState" id="activeBtn" />
+        <label class="button" for="activeBtn" (click)="filterStaff('active')"><span
+            class="task-delayed"></span><span>Active</span></label>
+      </div>
+      <div *ngFor="let stff of sampleStaff" class="staff-list" fxLayout="row wrap">
+        <div fxFlex="7">
+          <mat-icon>location_on</mat-icon>
+        </div>
+        <div fxFlex="38" class="staff-det">
+          <div class="staff-name">{{stff.name}}</div>
+          <div class="staff-role">{{stff.role}}</div>
+        </div>
+        <div fxFlex="40">
+          <div class="last-seen">
+            <span class="last-seen-blk"><span class="last-seen-label"></span>{{stff.last_seen}}</span>
+          </div>
+        </div>
+        <div fxFlex="15" class="task-det">
+          <div>
+            <span class="task-completed">{{stff.task_completed}}</span>/<span class="task-total">{{stff.task_assigned}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- filter options end -->
+    </div>
+    <!-- staff block end -->
+    <div fxLayout="row wrap" *ngIf="showTask" class="flightDiv">
+      <div class="fltData" fxLayout="row wrap">
+        <div fxFlex="50" class="back-btn" (click)="getBayNumber()">
+          <mat-icon>keyboard_backspace</mat-icon>
+          <div class="back-title">BACK TO AIRPORT VIEW</div>
+        </div>
+        <div fxFlex="50"></div>
+        <div fxFlex="20" class="txt-center bay-sec">
+          <div class="bay-title">BAY</div>
+          <div class="bay-no">{{selFlt.bayCode}}</div>
+          <div class="bay-type">{{selFlt.bayType == 1 ? 'CONTACT' : 'OPEN'}}</div>
+        </div>
+        <div fxFlex="27">
+          <div class="flt-org">{{selFlt.originAirportCode}}</div>
+          <div class="flt-no">{{selFlt.arrFlightNumber}}</div>
+          <div class="base-align" fxLayout="row" *ngIf="!selFlt.arrFlightNumber">
+            BASE
+          </div>
+          <div fxLayout="row" *ngIf="selFlt.arrFlightNumber">
+            <div fxFlex="30">
+              <mat-icon>flight_land</mat-icon>
+            </div>
+            <div fxFlex="70">
+              <div class="flt-time">STA: <span
+                  class="bold">{{(selFlt.standardArrivalTime | date:'HH:mm' : zoneOffset)}}</span></div>
+              <div class="flt-time">ATA: <span
+                  class="bold">{{(selFlt.actualArrivalTime | date:'HH:mm' : zoneOffset)}}</span></div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="23" class="eqp-sec">
+          <div class="flt-eqp txt-center">{{selFlt.equipmentType}}</div>
+          <div class="task-count txt-center">{{selFlt.taskCompletedCount}}/{{selFlt.totalTaskCount}}</div>
+        </div>
+        <div fxFlex="27" class="flt-dep">
+          <div class="flt-org">{{selFlt.destinationAirportCode}}</div>
+          <div class="flt-no">{{selFlt.depFlightNumber}}</div>
+          <div fxLayout="row">
+            <div fxFlex="70">
+              <div class="flt-time">STD: <span
+                  class="bold">{{(selFlt.standardDepartureTime | date:'HH:mm' : zoneOffset)}}</span></div>
+              <div class="flt-time">ETD: <span
+                  class="bold">{{(selFlt.estimatedDepartureTime | date:'HH:mm' : zoneOffset)}}</span></div>
+            </div>
+            <div fxFlex="30">
+              <mat-icon>flight_takeoff</mat-icon>
+            </div>
+          </div>
+        </div>
+        <!-- view-filter start -->
+        <div fxFlex="100">
+          <div fxFlexLayout="row" class="fltFilter-sec">
+            <div fxFlex="33">
+              <input type="radio" name="flt" class="fltFilter" checked id="flt" (click)="viewChange('task')" />
+              <label class="fltBtn" for="flt">TASKS</label>
+            </div>
+            <div fxFlex="33">
+              <input type="radio" name="flt" class="fltFilter" id="staff" />
+              <label class="fltBtn" for="staff" (click)="viewChange('staff')"><span
+                  class="task-delayed"></span><span>STAFF</span></label>
+            </div>
+            <div fxFlex="33">
+              <input type="radio" name="flt" class="fltFilter" id="equip" />
+              <label class="fltBtn" for="equip"><span class="task-amber"></span><span>EQUIPMENT</span></label>
+            </div>
+          </div>
+        </div>
+        <!-- view-filter end -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

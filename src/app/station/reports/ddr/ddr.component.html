@@ -1,0 +1,113 @@
+<!-- <div fxLayout="row" fxLayoutWrap="wrap" class="sp-date">
+  <div fxFlex="10">
+    <h4>Report for</h4>
+  </div>
+  <div fxFlex="20">
+    <mat-form-field class="i-mat-form-field">
+      <input readonly matInput [max]="today" [matDatepicker]="picker" [(ngModel)]="selDate" (ngModelChange)="dateChange($event)"
+        placeholder="DATE">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div> -->
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load">
+  <div fxLayout="row" fxLayoutWrap="wrap" class="dc-page top-row">
+    <img src="assets/images/master/task-icon.png" class="task-icon">
+    <div fxFlex="15">
+      <div class="dc-txt">FLIGHTS DEPARTED</div>
+      <div class="dc-no">{{reportList.length || 0}}</div>
+    </div>
+    <!-- <div fxFlex="10">
+      <h4>Report for</h4>
+    </div> -->
+    <div fxFlex="20">
+      <mat-form-field class="i-mat-form-field title-filters">
+        <div class="task-codes-title">Report for</div>
+        <input readonly matInput [max]="today" [matDatepicker]="picker" [(ngModel)]="selDate"
+          (ngModelChange)="dateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon class="">keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <hr class="i-hr">
+  <div class="mat-elevation-z8">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" class="master-fixed-header">
+        <div fxLayout="row" class="dc-th">
+          <div fxFlex>FLIGHT NO.</div>
+          <div fxFlex>DEST</div>
+          <div fxFlex>STD</div>
+          <div fxFlex>RTD</div>
+          <div fxFlex>CHOCKS ON</div>
+          <div fxFlex>CHOCKS OFF</div>
+          <div fxFlex>TIME DIFF<br>(in mins)</div>
+          <div fxFlex>EQUIPMENT</div>
+          <div fxFlex>LOAD DETAILS</div>
+        </div>
+      </div>
+      <div fxFlex="100" class="no-datamsg"
+        *ngIf="(reportList | ReportSearch : searchText : 'depFlightNumber' :'destinationAirportCode').length === 0  && searchText">
+        No
+        match found</div>
+      <div fxFlex="100">
+        <div class="dc-card"
+          *ngFor="let row of reportList | ReportSearch : searchText : 'depFlightNumber' :'destinationAirportCode'">
+          <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+            <div fxFlex class="staff-data">{{row.depFlightNumber}}</div>
+            <div fxFlex class="staff-data">{{row.destinationAirportCode}}</div>
+            <div fxFlex class="staff-data">
+              {{row.standardDepartureTime ? (row.standardDepartureTime | date:'HH:mm': zoneOffset) : ''}}</div>
+            <div fxFlex class="staff-data">
+              {{row.estimatedDepartureTime ? (row.estimatedDepartureTime | date:'HH:mm': zoneOffset) : ''}}</div>
+            <div fxFlex class="staff-data">
+              {{row.actualArrivalTime ? (row.actualArrivalTime | date:'HH:mm': zoneOffset) : ''}}</div>
+            <div fxFlex class="staff-data">
+              {{row.actualDepartureTime ? (row.actualDepartureTime | date:'HH:mm': zoneOffset) : ''}}</div>
+            <div fxFlex class="staff-data"
+              [ngClass]="{'rowSaved': row.flightStatus == 'saved', 'rowDelay': row.flightStatus == 'delayed' }">
+              {{row.timeDiff}}</div>
+            <div fxFlex [ngClass]="{'equipdis': row.equipment.length==0}" class="staff-data">
+              <span class="view-ddr" (click)="viewEqps(row)">
+                <i class="fa-1x fa fa-eye"></i>
+              </span>
+            </div>
+            <div fxFlex class="staff-data">
+              <span class="view-ddr" (click)="viewDdr(row,'view')">
+                <i class="fa-1x fa fa-eye"></i>
+              </span>
+              <mat-icon class="send-mail" (click)="sendMail(row)">
+                email
+              </mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="i-footer density-footer">
+    <div fxFlex="100" fxLayout="row" class="actions">
+      <div fxFlex="33">
+      </div>
+      <div fxFlex="33" fxLayout="row" class="tab-section-daily-roster">
+        <div fxFlex class="time-label footer-label-align">REPORT FOR</div>
+        <div fxFlex class="time-date footer-label-align">
+          <mat-form-field class="i-mat-form-field date-pad">
+            <input readonly matInput  [max]="today" [matDatepicker]="picker" [(ngModel)]="selDate"
+              (ngModelChange)="dateChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

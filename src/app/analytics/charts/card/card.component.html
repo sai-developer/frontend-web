@@ -1,0 +1,21 @@
+<div [@animator]="animationType?animationType:'show'" class="ibox float-e-margins">
+  <div class="ibox-title ibox-title-bg" [ngClass]="'ibox-' + card.skin">
+    <div class="col-lg-12">
+      <h5 class="col-lg-12">
+        {{ card.title }} <small> {{ card.braceText }}</small>
+      </h5>
+    </div>
+    <div class="col-lg-1  navbar-center">
+      <i class="fa fa-1x" [ngClass]="card.icon"></i>
+    </div>
+  </div>
+  <div class="ibox-content" [ngClass]="'ibox-' + card.skin">
+    <h1 class="no-margins">
+      <span id="OTP">{{ card.mainValue }}</span>
+    </h1>
+    <div class="stat-percent font-bold">
+      <span id="DelayFlight">{{ card.subValue }}</span>
+    </div>
+    <small>{{ card.description }} &nbsp;</small>
+  </div>
+</div>

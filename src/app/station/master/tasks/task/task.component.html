@@ -1,0 +1,186 @@
+<div class="test-class">
+  <h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <span fxFlex="5">
+        <img src="assets/images/master/task-icon.png" class="shifts-icon">
+      </span>
+      <div fxFlex="35">
+        <span *ngIf="details.mode !== 'ADD'"> &nbsp;Edit Task Details</span>
+        <span *ngIf="details.mode == 'ADD'"> &nbsp;Add New Task</span>
+      </div>
+      <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+      <div class="text-right task-info-type" fxFlex="60">
+        <span>{{preferenceFlight}}</span>
+        <span>{{preferenceBay}}</span>
+        <span>{{preferenceEquipment}}</span>
+      </div>
+    </div>
+  </h1>
+  <form #form="ngForm" autocomplete="nope" id="staff">
+    <div class="" [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+      <app-scroll-highlight>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="task-blk model-content-margin" id="staff1">
+          <div fxFlex="100">
+            <div *ngIf="details.mode !== 'EDIT'">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <!-- <div class="task-codes-title">TASK NAME
+                  <sup class="required-astricks">*</sup>
+                </div> -->
+                <mat-label>TASK NAME</mat-label>
+                <mat-select name="taskName" [(ngModel)]="taskInfo.taskId.id" required #taskName="ngModel"
+                  (ngModelChange)="modList($event)">
+                  <mat-option *ngFor="let task of sourceTasks" [value]="task.id" class="mat-normal-option">{{task.name}}</mat-option>
+                  <!-- <mat-option>Aft Doors Closed</mat-option> -->
+                </mat-select>
+                <!-- <mat-error *ngIf="tname.hasError('required')">Task Name is required</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="taskName.touched && taskName.errors" class="error_msg error-position">
+                <div [hidden]="!taskName.errors.required">Task Name is required</div>
+              </div>
+            </div>
+            <div class="w-100" *ngIf="details.mode == 'EDIT'">
+              <div class="task-codes-title">TASK NAME
+                <sup class="required-astricks">*</sup>
+              </div>
+              <label class="w-100 task-Name">{{taskInfo.taskId.name}}</label>
+            </div>
+            <!-- <div *ngIf="profileForm.controls['tname'].errors && profileForm.controls['tname'].touched" class="error-msg">
+              <div [hidden]="!profileForm.controls['tname'].errors.required">Select a Task to continue</div>
+            </div> -->
+          </div>
+          <div fxFlex="100" style="margin: 10px 0;padding-bottom: 15px">
+            <div fxFlex="45">
+              <!-- <div class="task-codes-title">PRIORITY</div> -->
+              <!-- <mat-tab-group [(ngModel)]="taskInfo.optional" [(selectedIndex)]="taskInfo.optional" mat-stretch-tabs (selectedTabChange)="optionalValue($event)"  > -->
+              <!-- formControlName="optional" [formControl]="optional" #tabGroup -->
+              <!-- <mat-tab label="MANDATORY"></mat-tab><mat-tab label="OPTIONAL"></mat-tab></mat-tab-group> -->
+              <div class="custom-toggle width-100" role="group">
+                <!-- [ngClass]="{'btn-active': !taskInfo.optional}" use this class 'btn-active' based on condition for active option -->
+                <button type="button" [ngClass]="{'btn-active': !taskInfo.optional}" (click)="taskInfo.optional = 0"
+                  class="width-50">MANDATORY</button>
+                <button type="button" [ngClass]="{'btn-active': taskInfo.optional}" (click)="taskInfo.optional = 1"
+                  class="width-50">OPTIONAL</button>
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <div fxFlex="50">
+              <!-- <div class="task-codes-title">TYPE </div> -->
+              <div class="custom-toggle width-100" role="group">
+                <!-- [ngClass]="{'btn-active': !taskInfo.optional}" use this class 'btn-active' based on condition for active option -->
+                <button type="button" [ngClass]="{'btn-active': taskInfo.arrDepType}" (click)="taskInfo.arrDepType = 1"
+                  [disabled]="groupBy.flightType == 0" class="width-50">ARRIVAL (+)</button>
+                <button type="button" [ngClass]="{'btn-active': !taskInfo.arrDepType}" (click)="taskInfo.arrDepType = 0"
+                  [disabled]="groupBy.flightType == 3" class="width-50">DEPARTURE (-)</button>
+              </div>
+
+              <!-- <mat-tab-group [(ngModel)]="taskInfo.arrDepType" mat-stretch-tabs (selectedTabChange)="arrDepValue($event)"> -->
+              <!-- formControlName="arrDep"   [formControl]="arrDep" #tabGroup -->
+              <!-- <mat-tab label="ARRIVAL(+)"></mat-tab><mat-tab label="DEPARTURE(-)"></mat-tab></mat-tab-group> -->
+            </div>
+          </div>
+          <div fxFlex="31">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">START TIME
+                <sup class="required-astricks">*</sup>
+              </div> -->
+              <mat-label>START TIME</mat-label>
+              <input type="text" matInput name="start" [(ngModel)]="taskInfo.activityStart" maxlength="3" pattern="[0-9]+"
+                name="startTime" #startTime="ngModel" required>
+              <!-- <mat-error *ngIf="stime.hasError('required')">Specify the start time for the task</mat-error><mat-error *ngIf="stime.hasError('pattern')">Enter only numeric values</mat-error> -->
+            </mat-form-field>
+            <div *ngIf="startTime.touched && startTime.errors" class="error_msg error-position">
+              <div [hidden]="!startTime.errors.required">Specify the start time for the task</div>
+              <div [hidden]="!startTime.errors.pattern">Enter only numeric values</div>
+            </div>
+            <!-- <div *ngIf="profileForm.controls['stime'].errors && profileForm.controls['stime'].touched" class="error-msg">
+                <div [hidden]="!profileForm.controls['stime'].errors.required">Specify the start time for the Task</div>
+                <div [hidden]="!profileForm.controls['stime'].errors.pattern">Enter only numeric values</div>
+              </div> -->
+          </div>
+          <div fxFlex="2"></div>
+          <div fxFlex="31">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">DURATION
+                <sup class="required-astricks">*</sup>
+              </div> -->
+              <mat-label>DURATION</mat-label>
+              <input type="text" matInput name="duration" [(ngModel)]="taskInfo.duration" required maxlength="3"
+                pattern="[0-9]+" #duration="ngModel">
+              <!-- <mat-error *ngIf="duration.hasError('required')">Specify a duration for the task</mat-error><mat-error *ngIf="duration.hasError('pattern')">Enter only numeric values</mat-error> -->
+            </mat-form-field>
+            <div *ngIf="duration.touched && duration.errors" class="error_msg error-position">
+              <div [hidden]="!duration.errors.required">Specify the duration for the task</div>
+              <div [hidden]="!duration.errors.pattern">Enter only numeric values</div>
+            </div>
+            <!-- <div *ngIf="profileForm.controls['duration'].errors && profileForm.controls['duration'].touched" class="error-msg">
+                  <div [hidden]="!profileForm.controls['duration'].errors.required">Specify a duration for the Task</div>
+                  <div [hidden]="!profileForm.controls['duration'].errors.pattern">Enter only numeric values</div>
+                </div> -->
+          </div>
+          <div fxFlex="2"></div>
+          <div fxFlex="31">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">SEQUENCE
+                <sup class="required-astricks">*</sup>
+              </div> -->
+              <mat-label>SEQUENCE</mat-label>
+              <input type="text" matInput name="sequence" [(ngModel)]="taskInfo.taskSequenceNumber" maxlength="3"
+                pattern="[0-9]+" #sequence="ngModel" required>
+              <!-- <mat-error *ngIf="seqno.hasError('required')">Provide a sequence number</mat-error><mat-error *ngIf="seqno.hasError('pattern')">Enter only numeric values</mat-error> -->
+            </mat-form-field>
+            <div *ngIf="sequence.touched && sequence.errors" class="error_msg error-position">
+              <div [hidden]="!sequence.errors.required">Provide a sequence number</div>
+              <div [hidden]="!sequence.errors.pattern">Enter only numeric values greater than zero</div>
+            </div>
+            <!-- <div *ngIf="profileForm.controls['seqno'].errors && profileForm.controls['seqno'].touched" class="error-msg">
+                    <div [hidden]="!profileForm.controls['seqno'].errors.required">Provide a sequence number</div>
+                    <div [hidden]="!profileForm.controls['seqno'].errors.pattern">Enter only numeric values</div>
+                  </div> -->
+          </div>
+          <div class="task-codes-title">DEPENDENCY</div>
+          <div class="task-codes-block">
+            <div fxLayout="row">
+              <mat-form-field fxFlex="100">
+                <span matPrefix>
+                  <mat-icon>search</mat-icon> &nbsp;
+                </span>
+                <input type="text" name="search" matInput placeholder="Search Task name" class="search-input"
+                  [(ngModel)]="searchText">
+                <span matSuffix class="taskCheckedCount">{{checkedCount()}}</span>
+              </mat-form-field>
+            </div>
+            <div class="row dependancy-task mat-dialog-content" fxLayout="row">
+
+              <div class="col-sm-12 task-option-list " *ngFor="let task of depTasks | FilterPipe : searchText : 'itemName'; let taskIndex = index">
+                <div class="task-option " fxLayout="row">
+                  <mat-checkbox fxFlex="50" id="task{{taskIndex}}" name="task{{taskIndex}}" [(ngModel)]="task.checked"
+                    class="primary-checkbox i-mat-checkbox1" #task{{taskIndex}}="ngModel" (change)="selectDependency(task)">
+                    {{task.itemName}} </mat-checkbox>
+                  <div fxFlex class="options-button pull-right text-center" role="group" *ngIf="task.checked">
+                    <button type="button" class="btn-options" [ngClass]="{'btn-select': task.dependency_type === 0}"
+                      (click)="selectDepType(task, 0)">F-S</button>
+                    <button type="button" class="btn-options" [ngClass]="{'btn-select': task.dependency_type === 1}"
+                      (click)="selectDepType(task, 1)">S-S</button>
+                    <button type="button" class="btn-options" [ngClass]="{'btn-select': task.dependency_type === 2}"
+                      (click)="selectDepType(task, 2)">S-F</button>
+                    <button type="button" class="btn-options" [ngClass]="{'btn-select': task.dependency_type === 3}"
+                      (click)="selectDepType(task, 3)">F-F</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <mat-form-field class="w-100"><mat-icon matPrefix class="tc-search">search</mat-icon><input type="text" placeholder="Dependancy" matInput /></mat-form-field><div class="task-codes i-scroll"><div class="i-mat-form-field" *ngFor="let i of [1,2,3,4,5,6,7,8,9]"><mat-checkbox class="primary-checkbox i-mat-checkbox" name="dependancy">
+                          Chocks On </mat-checkbox></div></div>  -->
+          </div>
+        </div>
+      </app-scroll-highlight>
+    </div>
+    <mat-dialog-actions>
+      <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" (click)="saveTaskDependency()" [disabled]="!form.valid">DONE</button>
+      <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="!form.valid" (click)="saveTaskDependency()"
+        [mat-dialog-close]>UPDATE</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+    </mat-dialog-actions>
+  </form>
+</div>

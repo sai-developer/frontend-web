@@ -1,0 +1,44 @@
+<div>
+	<h6 align="center">{{tableTitle}}</h6>
+</div>
+
+<div id="checkinGrid_wrapper" class="dataTables_wrapper no-footer">
+	<div class="dataTables_length" id="checkinGrid_length">
+		<label>Show
+			<select name="checkinGrid_length" aria-controls="checkinGrid" class="" [(ngModel)]="pageSize" (change)="selectPageSize()">
+				<option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option>
+			</select> entries</label>
+	</div>
+	<div id="checkinGrid_filter" class="dataTables_filter">
+		<label>Search:
+			<input type="search" [(ngModel)]="searchValue" (ngModelChange)="searchTable()" class="" placeholder="" aria-controls="checkinGrid">
+		</label>
+	</div>
+	<table width="100%" class="display dataTable no-footer" id="checkinGrid" role="grid" aria-describedby="checkinGrid_info" style="width: 100%;">
+		<thead>
+			<tr role="row">
+				<th [class]="getHeaderClass(colName)" tabindex="0" aria-controls="checkinGrid" 
+					rowspan="1" colspan="1" aria-sort="ascending" 
+					*ngFor="let colName of getColNames()"
+					(click)="sortTable(colName)">{{colName}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr role="row" class="odd" *ngFor="let rowData of displayData; let i=index"  [class]="getRowClass(i)">
+				<td *ngFor="let colName of getColNames(); let j=index" [class]="getCellClass(colName)" [style.text-align]="j>2?'right':'left'">{{rowData[colName]}}</td>
+				
+			</tr>
+		</tbody>
+	</table>
+	<div class="dataTables_info" id="checkinGrid_info" role="status" aria-live="polite">
+		Showing page {{pageNo}} of {{totalPages}} pages
+	</div>
+	<div class="dataTables_paginate paging_simple_numbers" id="checkinGrid_paginate">
+		<a class="paginate_button previous" aria-controls="checkinGrid" 
+			data-dt-idx="0" tabindex="0" id="checkinGrid_previous" 
+			*ngIf="pageNo>1" (click)="showPrevious()">Previous</a>
+		<a class="paginate_button next" aria-controls="checkinGrid" 
+			data-dt-idx="2" tabindex="0" id="checkinGrid_next" 
+			*ngIf="pageNo<totalPages" (click)="showNext()">Next</a>
+	</div>
+</div>

@@ -1,0 +1,133 @@
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div [hidden]="load" fxLayout="row" fxLayoutWrap="wrap" class="gantt-head">
+  <div fxFlex="3">
+      <button (click)="backToLive()" class="back-live" matTooltip="Back to Live status">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+  </div>
+  <div fxFlex="10" class="flt-label">FLIGHT NO :</div>
+  <div fXFlex="10" class="single-flight">
+    {{flightDet.arrFlightNumber ? flightDet.arrFlightNumber : 'BASE'}} - {{flightDet.depFlightNumber ? flightDet.depFlightNumber
+      : 'HALT'}}
+  </div>
+  <div fxFlex="7">
+    <!-- <span class="task-head">TASKS
+      <br>
+    </span>
+    <span class="task-cnt">{{flightDet.completedTask || 0}}/{{flightDet.totalTask || 0}}</span> -->
+  </div>
+  <div fxFlex="7">
+    <!-- <span class="task-head">DELAYED
+        <br>
+      </span>
+      <span class="task-cnt">{{taskCounts.taskDelayedCount}}</span> -->
+  </div>
+  <div fxFlex="7">
+    <!-- <span class="task-head">ONGOING
+        <br>
+      </span>
+      <span class="task-cnt">00</span> -->
+  </div>
+  <div fxFlex="7">
+    <!-- <span class="task-head">AMBER
+        <br>
+      </span>
+      <span class="task-cnt">00</span> -->
+  </div>
+  <div fxFlex="7"></div>
+  <div fxFlex="20" class="arrival-blk" [hidden]="flightDet.flightType === 0">
+    <mat-icon class="">flight_land</mat-icon>
+    <div fxFlex class="">STA
+      <br>
+      <span
+        class="">{{flightDet.standardArrivalTime ? (flightDet.standardArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+    </div>
+    <div fxFlex class="">ETA
+      <br>
+      <span
+        class="">{{flightDet.estimatedArrivalTime ? (flightDet.estimatedArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+    </div>
+    <div fxFlex class="">ATA
+      <br>
+      <span
+        class="">{{flightDet.actualArrivalTime ? (flightDet.actualArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+    </div>
+  </div>
+  <div fxFlex="20" class="departure-blk" [hidden]="flightDet.flightType === 3">
+    <mat-icon class="">flight_takeoff</mat-icon>
+    <div fxFlex class="">STD
+      <br>
+      <span
+        class="">{{flightDet.standardDepartureTime ? (flightDet.standardDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+    </div>
+    <div fxFlex class="">ETD
+      <br>
+      <span
+        class="">{{flightDet.estimatedDepartureTime ? (flightDet.estimatedDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+    </div>
+    <div fxFlex class="">ATD
+      <br>
+      <span
+        class="">{{flightDet.actualDepartureTime ? (flightDet.actualDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+    </div>
+  </div>
+</div>
+<div [hidden]="load" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="100" class="ganttchart">
+    <!-- Vis js component start -->
+    <div class="vis-fixed-bar">
+      <div id="fscganttChart" class="i-vis-timeline i-gant-chart"></div>
+
+    </div>
+    <!-- Vis js component end -->
+  </div>
+  <!-- footer section start -->
+  <div class="i-footer gantt-footer">
+    <div fxLayout="row" (click)="click()" class="actions">
+      <!-- <div fxFlex="30"></div> -->
+      <!-- <div fxFlex="40"> -->
+      <!-- <button (click)="move('left')" [disabled]="stopLeft" [ngClass]="{disabled:stopLeft}"><mat-icon>chevron_left</mat-icon></button>
+                <button (click)="move('right')" [disabled]="stopRight" class="pull-right" [ngClass]="{disabled:stopRight}"><mat-icon>chevron_right</mat-icon></button> -->
+      <!-- </div> -->
+      <!-- <div fxFlex="15"></div> -->
+      <div fxFlex="100" clas="pull-right">
+        <span>
+          <button (click)="move('left')" [disabled]="stopLeft" [ngClass]="{disabled:stopLeft}">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <span class="move-btn">TRACK</span>
+          <button (click)="move('right')" [disabled]="stopRight" class="move-right" [ngClass]="{disabled:stopRight}">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+          <!-- </span>
+                <span class="pull-right"> -->
+          <button (click)="zoom('zoomOut')" [disabled]="stopZoomOut" class="zoom-left"
+            [ngClass]="{disabled:stopZoomOut}">
+            <mat-icon>zoom_out</mat-icon>
+          </button>
+          <button (click)="zoom('zoomIn')" [disabled]="stopZoomIn" class="zoom-in" [ngClass]="{disabled:stopZoomIn}">
+            <mat-icon>zoom_in</mat-icon>
+          </button>
+        </span>
+      </div>
+    </div>
+    <!-- <mat-slider
+              class="example-margin"
+              [disabled]="disabled"
+              [invert]="invert"
+              [max]="max"
+              [min]="min"
+              [step]="step"
+              [thumbLabel]="thumbLabel"
+              [tickInterval]="tickInterval"
+              [(ngModel)]="value"
+              [vertical]="vertical">
+          </mat-slider> -->
+  </div>
+  <!-- footer section end -->
+
+</div>

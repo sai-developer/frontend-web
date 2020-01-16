@@ -1,0 +1,16 @@
+<div class="critical-gantt-sec">
+  <div fxLayout="row" fxLayoutWrap="wrap" class="critical-sec-head">
+    <div fxFlex="3" class="back-icon">
+      <button (click)="backToLive()" class="back-gantt" matTooltip="Back to Gantt Chart">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="97">CRITICAL PATH</div>
+    <div fxFlex="100" class="critical-sec">
+      <div *ngFor="let c of criticalArray" class="critical-name"> {{c.name}} </div>
+    </div>
+    <div fxFlex="100" class="vis-fixed-bar critical-gantt-fixed">
+      <div id="cTimeline" class="i-vis-timeline i-flight-chart i-critical-gantt"></div>
+    </div>
+  </div>
+</div>

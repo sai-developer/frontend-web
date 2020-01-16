@@ -1,0 +1,34 @@
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-sm="25" *ngFor="let flight of flights | ReportSearch : searchText :'arrFlightNumber' : 'depFlightNumber'">
+    <div class="summary-card" (click)="summarySheet(flight)">
+      <!-- <h1> flight details</h1>
+    </div> -->
+      <div [hidden]="flight.flightType === 0" fxFlex>
+        <div class="station">{{flight.originAirportCode}}</div>
+        <div class="flight-no">{{flight.arrFlightNumber}}</div>
+        <div class="timing">STA:
+          <span>{{flight.standardArrivalTime ? (flight.standardArrivalTime | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+        </div>
+      </div>
+      <div *ngIf="flight.flightType === 0" class="base-flt">
+        <span>BASE</span>
+      </div>
+      <div [hidden]="flight.flightType === 3" fxFlex class="text-right">
+        <div class="station">{{flight.destinationAirportCode}}</div>
+        <div class="flight-no">{{flight.depFlightNumber}}</div>
+        <div class="timing">STD:
+          <span>{{flight.standardDepartureTime ? (flight.standardDepartureTime | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+        </div>
+      </div>
+      <div *ngIf="flight.flightType === 3" class="base-flt">
+        <span>HALT</span>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="100" class="no-datamsg" *ngIf="(flights | ReportSearch : searchText :'arrFlightNumber' : 'depFlightNumber').length === 0 && searchText">No match found</div>
+</div>

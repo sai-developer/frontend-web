@@ -1,0 +1,155 @@
+<!-- <h1 mat-dialog-title>0/29 tasks done<mat-icon class="close" (click)="closeModal()">close</mat-icon></h1> -->
+<mat-dialog-content class="flight_status" id="flight_status">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" [hidden]="(((flight.taskAssignedCount==0) && (flight.actualDepartureTime)) || ((flight.taskAssignedCount==0) && (flight.actualArrivalTime)))"  class="task-count">{{flight.taskCompletedCount || 0}}/{{flight.taskAssignedCount || 0}} Tasks
+      completed</div>
+      <div *ngIf="(((flight.taskAssignedCount==0) && (flight.actualDepartureTime)) || ((flight.taskAssignedCount==0) && (flight.actualArrivalTime)))" fxFlex="100" class="button-list">
+        <div class="message">
+          <span>Flight not currently handled by Rapid</span>
+        </div>
+      </div>
+    <div [hidden]="(((flight.taskAssignedCount==0) && (flight.actualDepartureTime)) || ((flight.taskAssignedCount==0) && (flight.actualArrivalTime)))" fxFlex="100" class="button-list">
+      <!-- <button mat-raised-button color="primary" class="add-btn" (click)="taskAssign()" [mat-dialog-close] [hidden]="flight.taskAssignedCount!=0"> ASSIGN TASKS</button> -->
+      <button mat-raised-button color="primary" class="add-btn" (click)="taskAssign()" [mat-dialog-close]
+        [hidden]="flight.taskAssignedCount!=0">
+        ASSIGN</button>
+        <!-- <button mat-raised-button color="primary" class="add-btn" (click)="criticalpath()" [mat-dialog-close]>
+        Dependency</button>   -->
+      <button mat-raised-button color="primary" class="add-btn" (click)="taskAssign()" [mat-dialog-close]
+        [hidden]="((flight.taskAssignedCount==0) || ((flight.actualArrivalTime) && (flight.flightType == 3)) || ((flight.actualDepartureTime)&&(flight.flightType == 0)) || (flight.actualDepartureTime))">REASSIGN</button>
+      <button mat-raised-button color="primary" class="add-btn" (click)="ganttChart()"
+        [hidden]="flight.taskAssignedCount==0" [mat-dialog-close]>TRACK</button>
+      <button mat-raised-button class="edit-btn" [hidden]="disableOption || ((flight.flightType == 3) && disableAta)"
+        (click)="editFlight()" [ngClass]="{'save-btn': btnState == 'SAVE'}">{{btnState}}</button>
+        <!-- <button mat-raised-button color="primary" class="cancl-btn" (click)="editFlight('cancel')" [mat-dialog-close]
+        [hidden]="btnState == 'SAVE'" [disabled]="flight.flight_status == 0">CANCEL</button> -->
+    </div>
+  </div>
+  <hr class="seperator">
+  <div fxLayout="row" fxLayoutWrap="wrap" class="bay-blk">
+    <div fxFlex="25" class="">
+      <span class="labels">BAY</span><br>
+      <span [hidden]="((btnState == 'SAVE') && !ataCopy)">{{flight.bayCode}}</span>
+      <span [hidden]="((btnState == 'EDIT') || ataCopy)">
+        <mat-form-field>
+          <mat-select name="bay" [(ngModel)]="flight.bayId" disableOptionCentering>
+            <mat-option *ngFor="let bay of bays" [value]="bay.id" class="mat-normal-option">{{bay.bayCode}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+    </div>
+    <div fxFlex="5"></div>
+    <div fxFlex="30">
+      <span class="labels">REG#</span><br>
+      <span [hidden]="((btnState == 'SAVE') && !ataCopy)">{{flight.tailNumber || "-----"}}</span>
+      <span [hidden]="((btnState == 'EDIT') || ataCopy)">
+        <mat-form-field class="reg-no-width">
+          <mat-select name="tailNumber" [(ngModel)]="flight.equipmentId" disableOptionCentering>
+            <mat-option *ngFor="let tail of tailNumber" [value]="tail.id" class="mat-normal-option">{{tail.tail_number}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+    </div>
+    <div fxFlex="5"></div>
+    <div fxFlex="30">
+      <span class="labels">EQUIPT.</span><br>
+      <span>{{flight.equipmentType || "-----"}}</span>
+    </div>
+  </div>
+  <hr class="bay-seperator">
+  <div fxLayout="row" fxLayoutWrap="wrap" class="flight-blk arrival-blk" [hidden]="flight.flightType == 0">
+    <div fxFlex="20" class="">
+      <mat-icon>flight_land</mat-icon>
+    </div>
+    <div fxFlex="80">
+      <div>
+        <!-- <span>
+          <span [hidden]="btnState == 'SAVE'">{{flight.tailNumber || "-----"}}</span>
+          <mat-form-field [hidden]="btnState == 'EDIT'" class="">
+            <mat-select name="tailNumber" required>
+              <mat-option *ngFor="let tail of tailNumber" [value]="tail.id" class="mat-normal-option">{{tail.tailNumber}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <span class="location">{{flight.equipmentType || "-----"}}</span>
+        </span><br> -->
+        {{flight.arrFlightNumber || "-----"}}
+        <span class="location">{{flight.originAirportCode}}</span><br>
+        <div class="inline-block flight-time1">
+          STA
+          <br>
+          {{(flight.standardArrivalTime | date:'HH:mm' : zoneOffset) || "--:--"}}
+        </div>
+        <div class="inline-block flight-time">
+          ETA
+          <br>
+          <span [hidden]="(btnState == 'SAVE') && !ataCopy">{{(etaCopy)
+            || "--:--"}}</span>
+          <span [hidden]="(btnState == 'EDIT') || ataCopy">
+            <input [textMask]="{mask: time}" (focusout)="checkZero(etaCopy,'eta')" (keyup)="timeCheck(etaCopy)"
+              [(ngModel)]="etaCopy" name="eta">
+          </span>
+        </div>
+        <div class="inline-block flight-time">
+          ATA
+          <br>
+          <span [hidden]="(btnState == 'SAVE') && !disableAta">{{(flight.actualArrivalTime | date:'HH:mm' : zoneOffset)
+            || "--:--"}}</span>
+
+          <span [hidden]="(btnState == 'EDIT') || disableAta">
+            <input [textMask]="{mask: time}" (focusout)="checkZero(ataCopy,'ata')" (keyup)="timeCheck(ataCopy)"
+              [(ngModel)]="ataCopy" name="ata">
+          </span>
+        </div>
+        <hr class="flight-seperator">
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="flight-blk" [hidden]="flight.flightType == 3">
+    <div fxFlex="20" class="">
+      <mat-icon>flight_takeoff</mat-icon>
+    </div>
+    <div fxFlex="80">
+      <div>
+        <!-- <span>
+            <span [hidden]="btnState == 'SAVE'">{{flight.tailNumber || "-----"}}</span>
+            <mat-form-field [hidden]="btnState == 'EDIT'" class="">
+                <mat-select name="tailNumber" required>
+                  <mat-option *ngFor="let tail of tailNumber" [value]="tail.id" class="mat-normal-option">{{tail.tailNumber}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <span class="location">{{flight.equipmentType || "-----"}}</span>
+          </span><br> -->
+        {{flight.depFlightNumber || "-----"}}
+        <span class="location">{{flight.destinationAirportCode}}</span><br>
+        <div class="inline-block flight-time1">
+          STD
+          <br>
+          {{(flight.standardDepartureTime | date:'HH:mm' : zoneOffset) || "--:--"}}
+        </div>
+        <div class="inline-block flight-time">
+          ETD
+          <br>
+          <span [hidden]="(btnState == 'SAVE') && !atdCopy">{{(etdCopy) || "--:--"}}</span>
+          <span [hidden]="(btnState == 'EDIT') || atdCopy">
+            <input [textMask]="{mask: time}" (focusout)="checkZero(etdCopy,'etd'); checkTime(etaCopy,etdCopy,'etd')"
+              (keyup)="timeCheck(etdCopy)" [(ngModel)]="etdCopy" name="etd">
+          </span>
+          <!-- <span [hidden]="btnState == 'EDIT'">
+              <input type="time" [(ngModel)]="etdCopy" name="etd">
+            </span> -->
+        </div>
+        <div class="inline-block flight-time">
+          ATD
+          <br>
+          <span [hidden]="(btnState == 'SAVE') && !disableAtd">{{(flight.actualDepartureTime | date:'HH:mm' :
+            zoneOffset) || "--:--"}}</span>
+          <span [hidden]="(btnState == 'EDIT') || disableAtd">
+            <input [textMask]="{mask: time}" (focusout)="checkZero(atdCopy,'atd'); checkTime(ataCopy,atdCopy,'atd')"
+              (keyup)="timeCheck(atdCopy)" [(ngModel)]="atdCopy" name="atd">
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,3196 @@
+/*
+//--Theme Info--//
+
+Theme Name: Optima Angular 5 Admin Template
+Version: 1.0
+Author: TrendSetter Themes
+
+
+//-- Table of Content --//
+
+---------------
+1. Core
+---------------
+    1.1 Scaffolding
+    1.2 Typography
+    1.3 Main Sidebar
+    1.4 Main Header
+    1.5 Main Panel
+    1.6 Sessions
+
+---------------
+2. Components
+---------------
+---------------
+3. Material
+---------------
+    3.1 Material Variables
+    3.2 Material Theme
+    3.3 App Variables
+    3.4 Mixin
+    3.5 Material
+
+---------------
+3. Utilities
+---------------*/
+@import "scss/material.variables";
+@import "~jsgantt-improved/dist/jsgantt.css";
+@import "scss/material.themes";
+@import "scss/mixins/bi-app/bi-app-ltr";
+// Core Variables and Mixins
+@import "scss/app.variables";
+@import "scss/mixins";
+// Core Styles
+@import "scss/core";
+@import "scss/material";
+@import "scss/utilities/utilities";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~ngx-toastr/toastr.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "scss/rapid.variables";
+@import "scss/analytics.component.scss";
+
+@font-face {
+  font-family: Averta;
+  // src: url(assets/fonts/Uni-Sans.otf);
+  src: url(assets/fonts/AvertaRegular.otf);
+}
+
+@font-face {
+  font-family: AvertaBold;
+  // src: url(assets/fonts/Uni-Sans.otf);
+  src: url(assets/fonts/AvertaBold.otf);
+}
+
+body,
+.mat-raised-button,
+.mat-card,
+.mat-option,
+.mat-toolbar,
+.mat-select,
+input,
+.mat-tab-group,
+.mat-button {
+  font-family: Averta !important;
+}
+.align-right{
+  text-align: right;
+}
+
+.header-light-black {
+  .mat-toolbar.main-header {
+    background: $dark-background !important;
+    box-shadow: none;
+  }
+}
+
+.header-light-black {
+  color: $dark-background;
+}
+
+.header-light-black {
+  .sidebar-panel {
+    .bg-overlay {
+      background: $dark-background !important;
+    }
+  }
+}
+
+.header-light-black .menu-links>.mat-icon-button {
+  color: $white;
+}
+
+.header-light-black {
+  mat-toolbar.main-header .search-bar .search-form {
+    background: transparent;
+  }
+
+  mat-toolbar.main-header .search-bar .search-form .material-icons {
+    color: #909090;
+  }
+
+  mat-toolbar.main-header .search-bar .search-form input {
+    border: 0px;
+    color: $medium-grey;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 2.5;
+  }
+}
+
+.top-rapid-logo {
+  height: 36px;
+  //position: relative;
+  //top: 17px;
+}
+
+//CUSTOM HORIZONTAL MENU STYLES
+
+body .otp-card,
+body .delay-cat-v3,
+body .fs-v2,
+body .mat-expansion-panel,
+body .task-grid,
+body .schedule-card,
+body .shift-assign-mat-card-div,
+body .shift-person-matcard {
+  border-radius: 5px !important;
+  box-shadow: none !important;
+}
+
+body .otp-card:hover,
+.delay-cat-v3:hover,
+.department-card-v3:hover,
+.fs-v2:hover,
+.task-grid:hover,
+.schedule-card:hover,
+.dc-grid:hover,
+.shift-assign-mat-card-div:hover,
+.shift-person-matcard:hover {
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35) !important;
+  transition: 0.4s;
+}
+
+.top-menu .horizontal-menu .main-h-list>li>a {
+  padding: 10px 5px 10px 0px;
+  color: inherit;
+}
+
+.top-menu .horizontal-menu .main-h-list>li>a.active {
+  border-bottom: 4px solid $color-gradient-red;
+}
+
+.top-menu .horizontal-menu .main-h-list>li>a>span {
+  font-weight: bold;
+  line-height: 2;
+  color: $color-black;
+}
+
+.db-page .mat-tab-header {
+  border-bottom: 1px solid transparent;
+}
+
+.db-page .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: transparent;
+}
+
+.db-page .mat-tab-label {
+  min-width: 75px !important;
+  opacity: 1 !important;
+}
+
+.db-page .mat-tab-label .mat-tab-label-content {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 2;
+  color: $color-grey;
+}
+
+.db-page .mat-tab-label-active .mat-tab-label-content {
+  color: $color-black;
+  margin-top: 4px;
+  border-bottom: 4px solid $color-gradient-red;
+}
+
+.i-flight-chart .vis-labelset .vis-label{
+  margin-top: 10px !important;
+}
+
+.ft-card-v2 .mat-tab-label-active .mat-tab-label-content {
+  height: 35px;
+  opacity: 1;
+  border-bottom: none !important;
+}
+
+.cust-mat-tab-group .mat-tab-header {
+  border-bottom: 1px solid transparent;
+}
+
+.cust-mat-tab-group.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: transparent;
+}
+
+.cust-mat-tab-group .mat-tab-label {
+  min-width: 75px !important;
+  opacity: 1 !important;
+}
+
+.cust-mat-tab-group .mat-tab-label .mat-tab-label-content {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 2;
+  color: $color-grey;
+}
+
+.cust-mat-tab-group .mat-tab-label-active .mat-tab-label-content {
+  color: $color-black;
+  margin-top: 4px;
+  border-bottom: 4px solid $color-gradient-red;
+}
+
+.ft-block .mat-tab-label:last-child {
+  padding-right: 0px;
+}
+
+.ft-block .mat-tab-label {
+  background: transparent !important;
+}
+
+.body-container {
+  margin-bottom: -6px !important;
+}
+
+agm-map {
+  height: 400px;
+}
+
+.agm-map-container-inner {
+  border: 2px solid #ccc;
+}
+
+.fs-accordion .mat-expansion-panel-body {
+  padding: 0px !important;
+}
+
+.opt-menu .mat-menu-content {
+  padding: 0px;
+}
+
+.cust-mat-menu .mat-menu-content {
+  padding: 0px !important;
+  border-radius: 2px;
+  background-color: $dark-background;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.33);
+}
+
+.cust-mat-menu button.mat-menu-item {
+  color: #acacac;
+  line-height: 26px;
+  height: 40px;
+}
+
+.cust-mat-menu button.mat-menu-item:hover {
+  background: $medium-grey;
+  color: $color-white;
+  z-index: 1000;
+}
+
+.cust-action-btn {
+  height: 25px !important;
+  opacity: 0.3;
+  width: fit-content !important;
+}
+
+.cust-action-btn .mat-button-wrapper {
+  position: relative;
+  top: -7px;
+}
+
+.dc-tab-btn .mat-button-wrapper {
+  top: -3px;
+}
+
+button.no-out:focus,
+.cust-mat-menu .mat-menu-item:focus,
+.cust-action-btn:focus,
+.mat-menu-item:focus {
+  outline: none !important;
+}
+
+.i-mat-btg.mat-button-toggle-group {
+  border: none;
+  box-shadow: none;
+}
+
+.i-mat-btg .mat-button-toggle {
+  border: 1px solid #acacac;
+}
+
+.dc-page .i-mat-btg .mat-button-toggle {
+  width: 40px;
+}
+
+.i-mat-btg .mat-button-toggle-checked {
+  background: $dark-background;
+  color: $color-white;
+  border-radius: 0px;
+  border: 1px solid $dark-background;
+}
+
+.i-mat-btg .mat-button-toggle-button:focus {
+  outline: none !important;
+}
+
+.dc-page.top-row .options .mat-button-toggle-label-content {
+  padding: 0px 8px;
+}
+
+mat-dialog-container {
+  padding: 0px !important;
+  // box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.33) !important;
+  box-shadow: 0 0 50px 0px $color-black !important;
+  border-radius: 5px !important;
+  margin-right: 10px !important;
+  overflow-y: hidden !important;
+}
+
+// .cdk-overlay-pane {
+//   transform: none!important;
+//   transition: none!important;
+// }
+// cdk-overlay-pane
+
+.modelOpen {
+  transform: translateY(100%);
+  animation: slideDown 0.2s forwards 0s ease-in;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(130%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.cdk-overlay-container>* {
+  transition: none !important;
+  transform: none !important;
+}
+
+mat-dialog-content {
+  padding: 0px !important;
+  margin: 0 15px !important;
+}
+
+.mat-dialog-content {
+  max-height: 93vh !important;
+  padding-top: 20px !important;
+  // padding-bottom: 20px!important;
+}
+
+.mat-dialog-title {
+  padding: 8px 15px;
+  background-color: $color-white;
+  font-size: 22px;
+  font-weight: bold;
+  color: black;
+  margin: 0px !important;
+}
+
+.mat-dialog-title mat-icon.close {
+  width: 16px;
+  height: 16px;
+  font-size: 18px;
+  position: relative;
+  top: 9px;
+  float: right;
+  color: black;
+  opacity: 1;
+}
+
+.cdk-overlay-pane {
+  //position: absolute !important;
+  //top: 10vh;
+}
+
+.cdk-global-overlay-wrapper {
+  background: #00000096;
+}
+
+.mat-dialog-content::-webkit-scrollbar-track,
+.i-scroll::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: $white;
+}
+
+.mat-dialog-content::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  background-color: $white;
+}
+
+.mat-dialog-content::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $dark-background;
+}
+
+.horizontal-top-bar .nav-timings {
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #777b90;
+}
+
+.horizontal-top-bar .nav-timings span {
+  font-size: 14px;
+  line-height: 1.29;
+  color: $white;
+}
+
+.top-menu .horizontal-menu .main-h-list li.left-li {
+  position: absolute;
+  left: 0px;
+  padding: 5px;
+  color: $color-white;
+  font-size: 12px;
+  margin-left: 10px;
+  min-width: 100px;
+  line-height: 3.5;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+.top-menu .horizontal-menu .main-h-list li.right-li {
+  position: absolute;
+  right: 0px;
+  padding: 0px;
+  color: $color-white;
+  font-size: 12px;
+  margin-right: 10px;
+  min-width: 100px;
+  line-height: 3.5;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+.top-menu .horizontal-menu .main-h-list li.right-li button {
+  min-width: 110px;
+  outline: none !important;
+}
+
+.top-menu .horizontal-menu .main-h-list li.right-li .add-new-btn mat-icon {
+  margin: 0px;
+  font-size: 16px;
+  width: 15px;
+  height: 19px;
+  position: relative;
+  left: -7px;
+}
+
+.top-menu .horizontal-menu .main-h-list li.left-li button {
+  outline: none !important;
+  background-color: $dark-background;
+  color: $color-white;
+}
+
+.top-menu .horizontal-menu .main-h-list li.left-li button:active {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.top-menu .horizontal-menu .main-h-list li.left-li button mat-icon {
+  position: relative;
+  margin: 0px;
+  left: -5px;
+}
+
+.top-menu .horizontal-menu .main-h-list li.left-li button .txt {
+  position: relative;
+  left: -7px;
+  top: 1px;
+}
+
+// Staion layout scss
+.user-station mat-select {
+  color: $color-white;
+  position: relative;
+  top: -3px;
+}
+
+.user-station .mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+  display: none;
+}
+
+.user-station .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  height: 0px !important;
+}
+
+.user-station .mat-select-arrow {
+  border: 0px !important;
+}
+
+.user-station mat-icon {
+  // padding: 18px 20px;
+  color: #898b91;
+  font-size: 17px;
+}
+
+.user-station {
+  margin-top: -20px;
+  padding: 0px 10px;
+}
+
+.mat-option {
+  background: $dark-background;
+  color: $color-grey;
+}
+
+.mat-normal-option.mat-option {
+  background: $color-white;
+}
+
+.mat-option:hover:not(.mat-option-disabled),
+.mat-option.mat-selected:not(.mat-option-multiple),
+.mat-option.mat-active {
+  background: $medium-grey !important;
+  color: #fefefe !important;
+}
+
+.mat-normal-option.mat-option:hover:not(.mat-option-disabled),
+.mat-normal-option.mat-option.mat-selected:not(.mat-option-multiple),
+.mat-normal-option.mat-option.mat-active {
+  background: rgba(0, 0, 0, 0.04) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.cust-mat-menu button.mat-menu-item:hover {
+  background: $medium-grey;
+  color: #fefefe;
+}
+
+.user-station span {
+  font-weight: bold;
+}
+
+.user-station .mat-select-value {
+  font-size: 12px;
+}
+
+.i-mat-form-field .mat-form-field-infix {
+  // font-weight: 600;
+  color: $color-grey;
+  font-size: 14px;
+  line-height: 1.05;
+}
+
+.i-mat-form-field .mat-input-element,
+.i-mat-form-field .mat-select-trigger {
+  font-size: 17.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.17 !important;
+  color: $color-black;
+}
+
+.i-mat-form-field .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: $color-grey;
+}
+
+.i-mat-form-field.mat-form-field.mat-focused .mat-form-field-label {
+  color: $color-grey;
+  text-transform: uppercase;
+}
+
+.i-mat-form-field .mat-select-trigger {
+  padding-bottom: 0px;
+}
+
+.i-mat-form-field .mat-select-value {
+  color: $color-grey;
+}
+
+.i-mat-form-field.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: $medium-grey;
+}
+
+.i-mat-form-field .mat-checkbox-inner-container {
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+}
+
+.i-mat-form-field .mat-checkbox-frame {
+  border: 1px solid #cccccc;
+}
+
+.i-mat-checkbox .mat-checkbox-layout .mat-checkbox-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-dark-grey;
+  // position: relative;
+  // top: 1px;
+  // text-overflow: ellipsis;
+  // overflow: hidden;
+  white-space: normal;
+}
+
+.i-mat-checkbox.mat-checkbox-checked .mat-checkbox-layout .mat-checkbox-label {
+  color: $color-black;
+}
+
+.i-mat-checkbox.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $dark-background;
+}
+
+.i-mat-checkbox1.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $color-gradient-red;
+}
+
+.i-mat-form-field.mat-form-field.mat-focused .mat-form-field-ripple,
+.task-codes-block .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: $dark-background;
+}
+
+.task-codes-block .mat-form-field-wrapper {
+  margin: 0px 10px;
+}
+
+.task-codes-block .mat-input-element {
+  font-size: 18px;
+  color: $color-grey;
+}
+
+.task-codes-block .mat-form-field-appearance-legacy .mat-form-field-label {
+  font-size: 16px;
+  color: $color-grey;
+}
+
+.task-codes-block .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: $medium-grey;
+}
+
+.task-codes-block .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  display: none !important;
+}
+
+.mat-raised-button {
+  min-width: 110px;
+  box-shadow: none !important;
+  outline: none !important;
+  font-size: 11.5px;
+  font-weight: bold;
+  color: $white;
+  border-radius: 5px !important;
+}
+
+.mat-raised-button.mat-primary {
+  color: $white;
+  // background-color: $color-gradient-red;
+  background: linear-gradient(to right, $color-gradient-red, $color-gradient-amber);
+}
+
+.i-primary .mat-progress-bar-primary::after {
+  background-color: $dark-background;
+}
+
+// Timeline css for flight status
+.i-vis-timeline {
+  margin-top: -25px;
+  margin-bottom: 25px;
+  z-index: 100;
+  position: relative;
+}
+
+.vis-fixed-bar {
+  z-index: 9;
+  margin: 41px 0px 0px 0px;
+}
+
+.vis-custom-time::before {
+  font-family: Material Icons;
+  // font-family: Averta !important;
+  content: "\e904";
+  display: inline-block;
+  transform: scale(1.5);
+  color: blue;
+}
+
+.vis-custom-time:nth-child(odd)::before {
+  font-family: Material Icons;
+  // font-family: Averta !important;
+  content: "\e905";
+  display: inline-block;
+  transform: scale(1.5);
+  color: $color-green;
+}
+
+.vis-custom-time {
+  background-color: #6e94ff;
+  width: 2px;
+  cursor: pointer !important;
+  z-index: 3;
+}
+
+.vis-custom-time:nth-child(odd) {
+  background-color: $color-green;
+}
+
+.vis-custom-time * {
+  position: fixed !important;
+}
+
+/* new flight status left side */
+.i-flight-detail {
+  padding: 4px 5px;
+  height: 40px;
+  color: $color-black;
+  width: 310px;
+  display: flex;
+  background: $white;
+}
+
+.i-flight-detail .regNo {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.i-flight-detail img {
+  width: 20px;
+  height: 32px;
+}
+
+.i-flight-chart .vis-panel .vis-left {
+  min-width: 310px !important;
+}
+
+.i-flight-chart .vis-timeline {
+  border: 0px solid transparent;
+}
+
+.i-flight-chart .vis-labelset .vis-label .vis-inner {
+  padding: 0px 0px 0px 0px;
+}
+
+.vis-labelset .vis-label {
+  height: 50px !important;
+  // margin-top: 10px;
+  margin-top: 0px;
+  border: 0px solid transparent !important;
+}
+
+.i-flight-chart .vis-current-time {
+  background: #464748;
+  // box-shadow: -4px 0px 14px $color-black;
+  width: 2px !important;
+  z-index: 100;
+}
+
+.i-flight-chart .vis-item.vis-range {
+  top: 0px !important;
+  /* height: 100%; */
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  border: 0px;
+  // margin:10px 0px;
+}
+
+.i-flight-chart .vis-foreground .vis-group {
+  height: 40px !important;
+  border-bottom: 0px !important;
+  overflow: hidden;
+  background: $white;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+/* styling for the left side conttent */
+
+.i-flight-detail .fs-acc-icon {
+  width: 20px;
+  height: 32px;
+  margin-top: 2px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.i-flight-detail .fs-tail-no {
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-black;
+  padding-top: 5px;
+  margin-right: 50px;
+  position: relative;
+  top: -4px;
+  width: 75.85px;
+  height: 32px;
+
+}
+
+.i-flight-detail .fs-tail-no span {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #828282;
+  background: $white;
+  padding: 0px 3px;
+}
+
+.i-flight-detail .fs-route-info {
+  max-height: 35px;
+  position: relative;
+  top: -3px;
+}
+
+.i-flight-detail .fs-cur-route {
+  font-size: 18px;
+  line-height: 1.3;
+  color: $color-black;
+  font-weight: bold;
+}
+
+.i-flight-detail .fs-tot-route {
+  font-size: 12px;
+  color: $color-black;
+  font-weight: bold;
+}
+
+.i-flight-detail .fs-routes {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0;
+  letter-spacing: normal;
+  text-align: left;
+  color: $color-grey;
+  position: relative;
+  top: -8px;
+}
+
+.m-r-50 {
+  margin-right: 50px;
+}
+
+.fs-location {
+  line-height: 1;
+  font-size: 16px;
+  position: relative;
+}
+
+.fs-location span {
+  font-size: 10px;
+  text-align: center;
+  padding: 0px 3px;
+}
+
+.fs-dummy {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #d7d7d7;
+  line-height: 0.1em;
+  margin: 15px 0px;
+}
+
+.fs-dummy .link {
+  background: $white;
+  padding: 0 10px;
+}
+
+.fs-dummy .flt-no {
+  font-size: 12px;
+}
+
+.vis-item.vis-range.delay {
+  background: #fde8e9 !important;
+  // color: $color-black !important;
+  color: $color-red !important;
+  border: 1px solid $color-red;
+}
+
+.vis-item.vis-range.expecting {
+  background: #e6e6e6 !important;
+  color: $color-black !important;
+  border: none;
+}
+
+.vis-item.vis-range.save {
+  background: #e2f8d3 !important;
+  // color: $color-black !important;
+  color: $color-green !important;
+  border: 1px solid $color-green;
+}
+
+.vis-item.vis-range.warning {
+  background: #fbeed0 !important;
+  // color: $color-black !important;
+  color: $color-amber !important;
+  border: 1px solid $color-amber;
+}
+
+#ganttChart .vis-item.vis-range.delay {
+  background: $color-red !important;
+  // color: $white !important;
+  color: #000 !important;
+  z-index:1;
+  // border: 1px solid $color-red;
+  height: 10px !important;
+  top: 26px !important;
+  margin-top: 0px !important;
+  border-radius: 10px !important;
+}
+
+#ganttChart .vis-item.vis-range.expecting {
+  // background: $color-grey !important;
+  background: transparent !important;
+  // color: $white !important;
+  color: #000 !important;
+  z-index:1;
+  height: 10px !important;
+  top: 26px !important;
+  margin-top: 0px !important;
+  // border: 1px solid $color-grey;
+  border-radius: 10px !important;
+}
+
+#ganttChart .vis-item.vis-range.save {
+  background: $color-green !important;
+  // color: $white !important;
+  color: #000 !important;
+  z-index:1;
+  height: 10px !important;
+  top: 26px !important;
+  margin-top: 0px !important;
+  // border: 1px solid $color-green;
+  border-radius: 10px !important;
+}
+
+#ganttChart .vis-item.vis-range.warning {
+  background: $color-amber !important;
+  // color: $white !important;
+  color: #000 !important;
+  z-index:1;
+  height: 10px !important;
+  top: 26px !important;
+  margin-top: 0px !important;
+  // border: 1px solid $color-amber;
+  border-radius: 10px !important;
+}
+
+// .vis-item.vis-range.transparent{
+//     background: transparent !important;
+//     color:$color-grey !important;
+// }
+
+// flight status color
+/* Ontime flight */
+.dot-left-green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-green;
+  position: absolute;
+  left: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-left-no-green{
+  border: 3px solid $color-green;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+.dot-right-green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-green;
+  position: absolute;
+  right: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-right-no-green{
+  border: 3px solid $color-green;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  right: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+/* Warning flight amber */
+.dot-left-amber {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-amber;
+  position: absolute;
+  left: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-left-no-amber{
+  border: 3px solid $color-amber;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+.dot-right-amber {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-amber;
+  position: absolute;
+  right: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-right-no-amber{
+  border: 3px solid $color-amber;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  right: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+/* Yet to arrive grey */
+.dot-left-grey {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-grey;
+  position: absolute;
+  left: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-left-no-grey{
+  border: 3px solid $color-grey;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+.dot-right-grey {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-grey;
+  position: absolute;
+  right: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-right-no-grey{
+  border: 3px solid $color-grey;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  right: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+/* delay red */
+.dot-left-red {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-red;
+  position: absolute;
+  left: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-left-no-red{
+  border: 3px solid $color-red;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+.dot-right-red {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-red;
+  position: absolute;
+  right: -8px;
+  top: 11px;
+  border: 1px solid $color-white;
+}
+.dot-right-no-red{
+  border: 3px solid $color-red;
+  border-radius: 12px;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  right: -6px !important;
+  top: 18px !important;
+  background: #ffffff;
+}
+
+#mytimeline .dot-left-green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-green;
+  position: absolute;
+  left: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+#mytimeline .dot-right-green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-green;
+  position: absolute;
+  right: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+/* Warning flight amber */
+#mytimeline .dot-left-amber {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-amber;
+  position: absolute;
+  left: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+#mytimeline .dot-right-amber {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-amber;
+  position: absolute;
+  right: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+/* Yet to arrive grey */
+#mytimeline .dot-left-grey {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-grey;
+  position: absolute;
+  left: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+#mytimeline .dot-right-grey {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-grey;
+  position: absolute;
+  right: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+/* delay red */
+#mytimeline .dot-left-red {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-red;
+  position: absolute;
+  left: -12px !important;
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+#mytimeline .dot-right-red {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: $color-red;
+  position: absolute;
+  right: -12px !important; 
+  top: 11px !important;
+  border: 1px solid $color-white;
+}
+
+//additional styling required for this page inn timeline
+
+.vis-item.vis-range .vis-item-content {
+  display: grid !important;
+  position: initial !important;
+}
+
+.delay-cat-v3 .dc-mat-tab-group .mat-tab-label {
+  height: 30px !important;
+}
+
+.delay-cat-v3 .dc-mat-tab-group .mat-tab-label .mat-tab-label-content {
+  font-size: 12px;
+  color: $color-black !important;
+}
+
+.delay-cat-v3 .dc-mat-tab-group .mat-tab-label.mat-tab-label-active .mat-tab-label-content {
+  font-weight: bold;
+}
+
+.delay-cat-v3 .dc-mat-tab-group .mat-tab-label.mat-tab-label-active {
+  opacity: 1;
+}
+
+.delay-cat-v3 .mat-tab-group.mat-primary .mat-ink-bar,
+.task-family .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: $color-gradient-red;
+}
+
+.task-family .bayStands-tab.mat-primary .mat-ink-bar {
+  position: absolute;
+  top: 0;
+  height: 2px;
+  transition: 0.5s cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+.task-family .bayStands-tab .mat-tab-header {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: none;
+}
+
+.mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus {
+  background-color: transparent;
+}
+
+// Page,mat-tab,footer and Fsc user  in active, set the cursor as default
+.mat-tab-group.mat-primary .mat-tab-label-active,
+.top-menu .horizontal-menu .main-h-list>li>a.active,
+.i-footer ul.actions li.active.action-icon,
+.i-footer .footer-title.active {
+  pointer-events: none;
+  cursor: default;
+}
+
+.ft-card-v2 .mat-tab-label {
+  height: 35px;
+}
+
+
+
+.ft-card-v2 .mat-tab-label .mat-tab-label-content {
+  font-size: 12px;
+  font-weight: bold;
+  color: #010101;
+  font-family: Averta !important;
+}
+
+.ft-card-v2 .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: $color-gradient-red;
+  height: 2px;
+}
+
+.shifts-div .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #f93b1d;
+  height: 4px;
+}
+
+.shifts-div .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #f93b1d;
+  height: 4px;
+}
+
+// Bay allocation timeline css
+.i-bay-detail {
+  padding: 20px 25px;
+  height: 70px;
+  color: #828282;
+  width: 130px;
+  line-height: 9px;
+  display: block;
+  background: $white;
+}
+
+.i-bay-detail .bay-txt {
+  padding: 0px 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.i-bay-detail .bay-txt span {
+  color: $color-black;
+  font-size: 18px;
+}
+
+.i-bay-detail .tc-separator {
+  border-top: 1px solid $medium-grey;
+}
+
+.i-bay-detail .flight-list {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 5px;
+}
+
+// styling for the card list for bay allocation
+.i-bay-chart .vis-panel .vis-left {
+  min-width: 310px !important;
+}
+
+.i-bay-chart .vis-timeline {
+  border: 0px solid transparent;
+}
+
+.i-bay-chart .vis-labelset .vis-label .vis-inner {
+  padding: 0px 0px 0px 0px;
+}
+
+.vis-labelset .vis-label {
+  height: 50px !important;
+  // margin-top: 10px;
+  margin-top: 0px;
+  border: 0px solid transparent !important;
+}
+
+.i-bay-chart .vis-current-time {
+  background: #464748;
+  // box-shadow: -4px 0px 14px $color-black;
+  width: 2px !important;
+  z-index: 100;
+}
+
+.i-bay-chart .vis-item.vis-range {
+  top: 0px !important;
+  /* height: 100%; */
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  border: 0px;
+  // margin:10px 0px;
+}
+
+.i-bay-chart .vis-foreground .vis-group {
+  height: 70px !important;
+  border-bottom: 0px !important;
+  overflow: hidden;
+  background: $white;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.i-bay-chart .vis-labelset .vis-label {
+  height: 80px !important;
+}
+
+.i-bay-chart .flt-location {
+  font-weight: normal;
+}
+
+.i-bay-chart .flt-no {
+  margin-top: -5px;
+  font-size: 18px;
+}
+
+.i-bay-chart .flt-time span {
+  color: #b1b1b1;
+}
+
+.i-high .progress-bar {
+  background-color: #86c43d;
+}
+
+.i-mid .progress-bar {
+  background-color: #fbb216;
+}
+
+.i-low .progress-bar {
+  background-color: #e91c19;
+}
+
+
+.term-progress-bar .progress-bar {
+  background-color : #ffffff;
+  }
+
+.vis-item.white {
+  border: 1px solid #828282 !important;
+  background: $white;
+  border-radius: 6px;
+}
+
+th.high-light {
+  border-bottom: 4px solid $color-gradient-red !important;
+}
+
+//gantt chart styles css
+//newly Applied
+
+::ng-deep .task-fixed1 {
+  position: fixed !important;
+  top: 40px !important;
+  margin-left: 72px !important;
+  background-color: #DADFE7;
+  z-index: 98;
+  padding-top: 30px
+}
+
+::ng-deep .task-fixed1 .vis-text.vis-minor.vis-odd {
+  background: #f1f1f1;
+}
+
+::ng-deep .task-fixed1 .vis-time-axis.vis-foreground .vis-text.vis-major {
+  border-left: 1px solid #bfbfbf;
+
+  &~.vis-minor {
+    border-left: 1px solid #bfbfbf;
+  }
+}
+
+
+::ng-deep .i-gantt-chart .vis-current-time.fixed-time {
+  position: fixed !important;
+  top: 123px !important;
+  margin-left: 203px !important;
+  z-index: 1;
+}
+
+::ng-deep .i-gantt-chart .vis-panel.vis-left {
+  z-index: 98;
+  background-color: #dadfe7;
+}
+
+::ng-deep .i-gantt-chart .vis-panel.task-fixed1:before {
+  display: block;
+  background: #dadfe7;
+  width: 177px;
+  content: '';
+  height: 84px;
+  position: absolute;
+  left: -178px;
+  z-index: 102;
+  top: 0;
+  padding-top: 80px;
+}
+
+
+
+::ng-deep .i-gant-chart .vis-current-time.fixed-time {
+  position: fixed !important;
+  top: 123px !important;
+  margin-left: 203px !important;
+  z-index: 1;
+}
+
+::ng-deep .i-gant-chart .vis-panel.vis-left {
+  z-index: 98;
+  background-color: #dadfe7;
+}
+
+::ng-deep .i-gant-chart .vis-panel.task-fixed1:before {
+  display: block;
+  background: #dadfe7;
+  width: 177px;
+  content: '';
+  height: 84px;
+  position: absolute;
+  left: -178px;
+  z-index: 102;
+  top: 0;
+  padding-top: 80px;
+}
+
+//
+
+.i-gantt-details-expecting {
+  // padding-left: 9px;
+  // height: 30px;
+  // color: #828282;
+  // width: 180px;
+  // line-height: 9px;
+  // display: block;
+  padding: 10px 10px;
+  height: 40px;
+  color: #828282;
+  width: 300px;
+  line-height: 9px;
+  display: block;
+  background: $white;
+  border-bottom: 1px solid #aaaaaa;
+  // border-radius: 5px;
+}
+
+.i-gantt-details-delay {
+  background: linear-gradient(to right, #fde8e9, $color-white, $color-white);
+  border-left: 4px solid #e81a1a !important;
+  padding: 10px 10px;
+  height: 40px;
+  width: 300px;
+  line-height: 9px;
+  display: block;
+  border-bottom: 1px solid #aaaaaa;
+  // border-radius: 5px;
+}
+
+.i-gantt-details-save {
+  background: linear-gradient(to right, #e2f8d3, $color-white, $color-white);
+  // border-left: 4px solid $color-green !important;
+  padding: 10px 10px;
+  height: 40px;
+  width: 300px;
+  line-height: 9px;
+  display: block;
+  border-bottom: 1px solid #aaaaaa;
+  // border-radius: 5px;
+}
+
+.i-gantt-details-warning {
+  background: linear-gradient(to right, #fbeed0, $color-white, $color-white);
+  border-left: 4px solid $color-amber !important;
+  padding: 10px 10px;
+  height: 40px;
+  width: 300px;
+  line-height: 9px;
+  display: block;
+  border-bottom: 1px solid #aaaaaa;
+  // border-radius: 5px;
+}
+
+.i-gantt-detail-expecting:hover {
+  border-radius: 5px;
+  background-color: $white;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+}
+
+.i-gantt-details-expecting .activities-title,
+.i-gantt-details-warning .activities-title,
+.i-gantt-details-save .activities-title,
+.i-gantt-details-delay .activities-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  // line-height: 2.8;
+  letter-spacing: normal;
+  text-align: left;
+  color: $color-black;
+  margin: 5px 0px;
+}
+
+// .i-gantt-details .activities-title:nth-child(1) {
+//   font-size: 12px;
+//   font-weight: bold;
+//   font-style: normal;
+//   font-stretch: normal;
+//   line-height: 2.8;
+//   letter-spacing: normal;
+//   text-align: center;
+//   color: $color-black;
+//   margin-top: 12px;
+// }
+
+.i-gantt-detail-expecting .services-title {
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.88;
+  letter-spacing: normal;
+  text-align: left;
+  color: $color-black;
+}
+
+.i-gantt-detail-expecting .tc-separator {
+  border-top: 1px solid $medium-grey;
+}
+
+.i-gantt-chart .vis-panel .vis-left {
+  min-width: 30px !important;
+}
+
+.i-gantt-chart .vis-timeline {
+  border: 0px solid transparent;
+}
+
+.i-gantt-chart .vis-labelset .vis-label .vis-inner {
+  padding: 0px 0px 0px 0px;
+}
+
+.i-gant-chart .vis-panel .vis-left {
+  min-width: 30px !important;
+}
+
+.i-gant-chart .vis-timeline {
+  border: 0px solid transparent;
+}
+
+.i-gant-chart .vis-labelset .vis-label .vis-inner {
+  padding: 0px 0px 0px 0px;
+}
+
+
+.vis-labelset .vis-label {
+  height: 40px !important;
+  margin-top: 10px;
+  // margin-top : 0px;
+  border: 0px solid transparent !important;
+}
+
+.i-gantt-chart .vis-current-time {
+  background: #464748;
+  // box-shadow: -4px 0px 14px $color-black;
+  width: 2px !important;
+  z-index: 100;
+  // z-index: 0 !important;
+}
+
+.i-gant-chart .vis-current-time {
+  background: #464748;
+  // box-shadow: -4px 0px 14px $color-black;
+  width: 2px !important;
+  z-index: 100;
+  // z-index: 0 !important;
+}
+
+// .i-vis-timeline.i-gantt-chart{
+//   z-index: 0 !important;
+// }
+
+// .i-gantt-chart .vis-item.vis-range {
+//   top: 0px !important;
+//     /* height: 100%; */
+//     height: 40px;
+//     font-weight: bold;
+//     text-align: center;
+//     border: 0px;
+//     background: $white;
+//     // border-radius: 15px;
+// }
+
+// .i-gantt-chart .vis-foreground .vis-group {
+//   height: 30px !important;
+//   border-bottom: 0px !important;
+//   overflow: hidden;
+//   background: $white;
+//   margin: 10px 0px;
+//   border-radius: 5px;
+//   background-color: $white;
+// }
+
+// .i-gantt-chart .vis-foreground .vis-group:first-child {
+//   height: 30px !important;
+//   border-bottom: 0px !important;
+//   overflow: hidden;
+//   // margin: 10px 0px;
+//   border-radius: 5px;
+//   background-color: initial;
+//   padding: 0px;
+//   margin: 0px;
+// }
+
+// .i-gantt-chart .vis-foreground .vis-group:nth-child(6) {
+//   height: 30px !important;
+//   border-bottom: 0px !important;
+//   overflow: hidden;
+//   margin: 10px 0px;
+//   // border-radius: 5px;
+//   background-color: initial;
+//   padding: 0px;
+//   margin: 0px;
+// }
+
+.i-gantt-chart .vis-background {
+  color: #828282;
+}
+
+.i-gantt-chart .vis-labelset .vis-label {
+  height: 40px !important;
+  width: 300px !important;
+}
+
+
+.i-gant-chart .vis-background {
+  color: #828282;
+}
+
+// .i-gant-chart .vis-labelset .vis-label {
+//   height: 40px !important;
+//   width: 300px !important;
+// }
+
+// .i-gantt-chart .vis-labelset .vis-label:first-child {
+//   height: 30px !important;
+//   margin-top: -0px;
+// }
+
+.i-gantt-chart .vis-foreground .vis-group {
+  height: 40px !important;
+  // border-bottom: 0px !important;
+  border-bottom: 1px solid #707070;
+  overflow: hidden;
+  background: $white;
+  // margin-bottom: 10px !important;
+  // margin-top: 10px !important;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+
+
+
+.i-gant-chart .vis-foreground .vis-group {
+  height: 40px !important;
+  border-bottom: 0px !important;
+  overflow: hidden;
+  background: $white;
+  margin-bottom: 10px !important;
+  margin-top: 10px !important;
+}
+
+.vis-item.green {
+  background-color: $color-green;
+}
+
+.vis-item.white {
+  background-color: $white;
+}
+
+// stylings required for live status timeline chart
+.i-live-detail {
+  padding: 10px 10px;
+  height: 50px;
+  color: #828282;
+  width: 130px;
+  line-height: 9px;
+  display: block;
+  background: $white;
+  border-radius: 5px;
+}
+
+.i-live-detail .live-txt {
+  padding: 0px 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.i-live-detail .tc-separator {
+  border-top: 1px solid $medium-grey;
+}
+
+.i-live-detail .flight-list {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 5px;
+}
+
+// styling for the card list for live allocation
+.i-live-chart .vis-panel .vis-left {
+  min-width: 310px !important;
+}
+
+.i-live-chart .vis-timeline {
+  border: 0px solid transparent;
+}
+
+.i-live-chart .vis-labelset .vis-label .vis-inner {
+  padding: 0px 0px 0px 0px;
+}
+
+.vis-labelset .vis-label {
+  height: 50px !important;
+  // margin-top: 10px;
+  margin-top: 0px;
+  border: 0px solid transparent !important;
+}
+
+.i-live-chart .vis-current-time {
+  background: #464748;
+  // box-shadow: -4px 0px 14px $color-black;
+  width: 2px !important;
+  z-index: 100;
+}
+
+// .i-live-chart .vis-item.vis-range{
+//   top: 0px !important;
+//   /* height: 100%; */
+//   height: 50px;
+//   font-weight: bold;
+//   text-align: center;
+//   border: 0px;
+//   // margin:10px 0px;
+// }
+
+.i-live-chart .vis-foreground .vis-group {
+  height: 50px !important;
+  border-bottom: 0px !important;
+  overflow: hidden;
+  background: $white;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.i-live-chart .vis-labelset .vis-label {
+  height: 60px !important;
+  margin-top: 10px !important;
+}
+
+.i-live-detail .live-txt .bay-type {
+  border-radius: 2px;
+  background-color: $white;
+  padding: 3px 6px;
+  font-weight: 500;
+}
+
+.i-live-detail .live-txt .bay-no {
+  color: $color-black;
+  font-size: 18px;
+}
+
+.task-detail .task-txt {
+  font-size: 10px;
+}
+
+.task-detail .task-no {
+  font-size: 12px;
+}
+
+.mat-raised-button {
+  text-transform: uppercase;
+  font-size: 14px !important;
+}
+
+.taskAssign mat-dialog-container,
+.ganttChart mat-dialog-container {
+  background: $grey-white !important;
+}
+
+.taskAssign mat-dialog-container {
+  max-height: 93vh !important;
+}
+
+.ls-modal mat-dialog-container {
+  background: #2b2e41;
+  color: $white;
+}
+
+// mat-dialog-container #flight_status{
+//   background: #2f3243 !important;
+// }
+
+// .mat-dialog-container{
+//   background: #2f3243 !important;
+// }
+
+// bay allocation scss file
+
+.bay-allocate-flight-right {
+  float: right;
+  line-height: 18px;
+}
+
+.bay-allocate-flight-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.map-width-height-grid .agm-map-container-inner {
+  border: none !important;
+}
+
+.bay-allocate-left-right {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bay-allocate-flight-left {
+  float: left;
+  line-height: 18px;
+}
+
+.bayAllocateFlightName {
+  font-weight: 100;
+  font-size: 12px;
+}
+
+.bayAllocateFlightID {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bayAllocationFlightTime {
+  line-height: 27px;
+}
+
+.mt-10 {
+  margin-top: 10%;
+}
+
+// bay allocation drag and drop
+.task-right {
+  margin: 0em 0 0 2em;
+}
+
+.head-margin {
+  margin-bottom: 1rem;
+  padding: 0 26px;
+}
+
+.margin-topBottom {
+  margin: 0 0 1em 0 !important;
+}
+
+.panel-Changes {
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.task-mat-divider {
+  margin: 0.5em 0 !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.task-list-item {
+  border: 1px solid #ccc;
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-size: 14px;
+  height: auto !important;
+}
+
+.task-list-item:hover {
+  background-color: $white;
+  box-shadow: 0 0 8px 0 rgba(1, 1, 1, 0.3);
+}
+
+.task-drop-class {
+  padding: 5px;
+  border-radius: 5px;
+  background: #ebebeb;
+  font-size: 13px;
+  // margin: 5px 0;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.task-heading {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+mat-panel-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.task-expansion-panel .mat-content {
+  flex: none !important;
+}
+
+.task-drag-close {
+  border-radius: 5px;
+  font-size: 17px;
+  background: $color-black;
+  color: $white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+
+.task-close-hover:hover .task-drag-close {
+  visibility: visible;
+}
+
+.task-close-hover {
+  margin: 3px 3px;
+}
+
+.departedFlight {
+  opacity: 0.4;
+}
+
+.mar-left-5 {
+  margin: 0 0 0 5px !important;
+}
+
+.departedFlightClose {
+  display: none;
+}
+
+.task-drag-extension-close {
+  position: relative;
+  top: 1px;
+  font-size: 17px;
+  /* left: 1em; */
+  background: $color-black;
+  color: $white;
+  cursor: pointer;
+  float: right;
+}
+
+.task-item-list-height {
+  height: auto !important;
+  padding: 0;
+}
+
+.mat-list-item,
+.mat-list-option,
+.mat-tab-label,
+.mat-tab-link,
+.mat-dialog-title,
+.mat-form-field,
+.mat-checkbox {
+  font-family: Averta !important;
+}
+
+.task-item-list-height .mat-list-item-content,
+.task-expansion-panel-title .mat-list {
+  padding: 0 !important;
+}
+
+// .margin-topBottom .mat-expansion-panel-header {
+//   height: 78px!important;
+//   padding: 10px 24px;
+// }
+// .margin-topBottom .mat-expansion-panel-header.mat-expanded {
+//   height: 84px!important;
+// }
+
+// bay allocation drag and drop ends
+
+//
+.master-fixed-header {
+  border-bottom: 1px solid #babfc7;
+  position: -webkit-sticky;
+  position: sticky;
+  background: $grey-white;
+  top: -20px;
+  z-index: 2;
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
+
+.mat-raised-button.mat-primary[disabled] {
+  opacity: 0.7;
+  background: grey !important;
+  cursor: no-drop;
+}
+
+.p-l-0 {
+  padding-left: 0px;
+}
+
+// TASK PAGE DESIGN
+.task-blk .mat-tab-label {
+  min-width: 50px !important;
+  justify-content: left !important;
+  // opacity: 1 !important;
+}
+
+.task-blk .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: $color-gradient-red;
+  width: 120px !important;
+  height: 4px;
+}
+
+.task-blk .mat-tab-group[mat-stretch-tabs] .mat-tab-label {
+  max-width: 120px !important;
+}
+
+[draggable] {
+  cursor: move;
+}
+
+.mat-form-field-label:focus {
+  text-transform: uppercase;
+}
+
+.task-codes-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 2;
+  color: $color-grey;
+}
+
+.model-content-margin {
+  margin: 0 10px 0 0;
+}
+
+.error-msg {
+  color: #ff0000;
+  font-size: 14px;
+  position: relative;
+  top: -10px;
+}
+
+.error_msg {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+// .task-count {
+//   position: relative;
+//   top: 17px;
+// }
+.flight-name-left {
+  color: $color-grey;
+  float: left;
+}
+
+.flight-name-right {
+  color: $color-grey;
+  float: right;
+}
+
+.arrivaltime {
+  font-size: 11px;
+  color: $color-grey;
+  margin-left: -57px;
+  float: left;
+  position: relative;
+  top: 10px;
+}
+
+.departuretime {
+  font-size: 11px;
+  color: $color-grey;
+  float: right;
+  margin-right: -60px;
+  position: relative;
+  top: 10px;
+}
+
+.task-detail-save .arrivaltime,
+.task-detail-delay .arrivaltime,
+.task-detail-warning .arrivaltime,
+.task-detail-expecting .arrivaltime {
+  font-size: 11px;
+  color: $color-grey;
+  float: left;
+  margin-left: -57px;
+  position: relative;
+  top: 6px;
+}
+
+.task-detail-save .departuretime,
+.task-detail-delay .departuretime,
+.task-detail-warning .departuretime,
+.task-detail-expecting .departuretime {
+  font-size: 11px;
+  color: $color-grey;
+  float: right;
+  margin-right: -60px;
+  position: relative;
+  top: 6px;
+}
+
+.task-detail-save {
+  background-color: $color-green;
+  margin: 6px -5px;
+  color: $white;
+}
+
+.task-detail-delay {
+  background-color: $color-red;
+  margin: 8px -5px;
+  color: $white;
+}
+
+.task-detail-expecting {
+  background-color: $color-grey;
+  color: $white;
+  margin: 6px -5px;
+}
+
+.task-detail-warning {
+  background-color: $color-amber;
+  color: $white;
+  margin: 6px -5px;
+}
+
+// live status new
+.flt-comp-save {
+  background-color: #e6e6e6;
+  border: 1px solid $color-black;
+  color:  $color-green;
+}
+
+.flt-comp-delay {
+  background-color: #e6e6e6;
+  border: 1px solid $color-black;
+  color:  $color-red;
+}
+
+.flt-comp-expecting {
+  background-color: #e6e6e6;
+  border: 1px solid $color-black;
+  color:  $color-black;
+}
+
+.flt-comp-warning {
+  background-color: #e6e6e6;
+  border: 1px solid $color-black;
+  color:  $color-amber;
+}
+
+.required-astricks {
+  color: $color-red;
+}
+
+// Loader css start
+// gradient animation
+.card-load {
+  height: 55px;
+  margin: 15px 0px !important;
+  width: 100wh;
+  // height: 90vh;
+  color: $white;
+  // background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background: linear-gradient(-45deg, #dfdfdf, $color-white, #dfdfdf, $color-white);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 5s ease infinite;
+  animation-direction: normal;
+}
+
+.expansion-panel-head-indicator .mat-expansion-indicator {
+  display: none !important;
+}
+
+.mat-expansion-panel-header[aria-disabled="true"] {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.w-100 .mat-tab-label {
+  width: 50% !important;
+}
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover {
+  background: transparent !important;
+}
+
+.mat-expansion-panel-header,
+.mat-expansion-panel-content {
+  font-family: Averta !important;
+}
+
+// temporary Fix
+.panel-head-indicator .mat-expansion-indicator {
+  cursor: pointer !important;
+}
+
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.sp-top {
+  background-color: $color-white;
+  padding: 15px !important;
+  border-radius: 5px;
+}
+
+.sp-top h2 {
+  font-size: 22px;
+  color: #969393;
+  text-align: center;
+}
+
+#mytimeline .vis-item .vis-item-overflow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+
+// Loader css end
+
+#bayAllocation .vis-grid.vis-vertical.vis-minor.vis-odd,
+#ganttChart .vis-grid.vis-vertical.vis-minor.vis-odd,
+#mytimeline .vis-grid.vis-vertical.vis-minor.vis-odd {
+  background: #f1f1f1;
+  // z-index: 11111;
+}
+
+.mat-form-field-fromDate .mat-form-field-suffix .mat-datepicker-toggle .mat-icon-button,
+.mat-form-field-toDate .mat-form-field-suffix .mat-datepicker-toggle .mat-icon-button {
+  position: relative;
+  top: 15px;
+  font-size: 29px;
+  outline: none;
+}
+
+.header-expansion-panel-count .mat-content {
+  flex: none !important;
+  padding: 0 10px 0 0;
+  // width: 95%;
+}
+
+.mat-dialog-content::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar,
+.mat-dialog-content::-webkit-scrollbar-track,
+.i-scroll::-webkit-scrollbar-track {
+  background-color: transparent !important;
+}
+
+#mytimeline .vis-item.vis-point.vis-selected,
+.vis-item.vis-selected {
+  background-color: transparent;
+  border-color: inherit;
+}
+
+.no-content
+{
+  margin :110px;
+}
+
+#mytimeline .vis-item.vis-range {
+  background-color: transparent;
+}
+
+#ganttChart .vis-item.vis-selected {
+  background-color: $white;
+}
+
+.bay-expansion-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px 0 0;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.bay-expansion-div {
+  margin: 0 0 0 12.5em;
+  padding: 1em 0;
+  align-items: center;
+  justify-content: left;
+}
+
+.text-content-center {
+  display: inline-flex;
+  // align-items: center;
+  justify-content: center;
+}
+
+.text-content-align {
+  display: inline-flex;
+  align-items: center;
+}
+
+.map-width-height-grid .gm-svpc,
+.map-width-height-grid .gmnoprint {
+  display: none !important;
+}
+
+.checkbox-shifts-span .mat-checkbox .mat-checkbox-inner-container,
+.flex-div-checkbox .mat-checkbox .mat-checkbox-inner-container {
+  display: none !important;
+}
+
+// .station-app-inner .mat-toolbar.main-header {
+//   height: 64px;
+//   position: fixed;
+//   top: 0;
+//   transition: top 0.2s ease-in-out;
+//   width: 100%;
+// }
+
+.mat-form-field.mat-focused .mat-form-field-infix input {
+  // border-bottom: 1px solid green!important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: $color-black !important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+.mat-form-field.mat-focused .mat-form-field-label,
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: $color-black !important;
+}
+
+.mat-focused .mat-form-field-required-marker {
+  color: $color-red;
+}
+
+.scrollBottomScroll {
+  -moz-box-shadow: inset 0 -5px 5px rgba(71, 71, 71, 0.75);
+  -webkit-box-shadow: inset 0 -5px 5px rgba(71, 71, 71, 0.75);
+  box-shadow: inset 0 -5px 5px rgba(71, 71, 71, 0.75);
+}
+
+.scrollTopScroll {
+  -moz-box-shadow: 0 5px 5px rgba(71, 71, 71, 0.75);
+  -webkit-box-shadow: 0 5px 5px rgba(71, 71, 71, 0.75);
+  box-shadow: 0 5px 5px rgba(71, 71, 71, 0.75);
+}
+
+delay-mapping .dialogModel,
+flight-schedule .dialogModel {
+  max-height: 80vh !important;
+}
+task-info .dialogModel{
+  max-height: 75vh !important;
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
+  .mat-dialog-content {
+    max-height: 94vh !important;
+    padding-top: 20px !important;
+    // padding-bottom: 20px!important;
+  }
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) {
+  .mat-dialog-content {
+    max-height: 95vh !important;
+    padding-top: 20px !important;
+    // padding-bottom: 20px!important;
+  }
+
+  .bay-expansion-div {
+    margin: 0 0 0 17.6em;
+    padding: 1em 0;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .master-fixed-header {
+    border-bottom: 1px solid #babfc7;
+    position: -webkit-sticky;
+    position: sticky;
+    background: #d9dee6;
+    top: -19px;
+    z-index: 2;
+    padding-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .summary-dialogs .mat-dialog-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-height: 84vh !important;
+  }
+}
+
+.top-menu .mat-drawer-content.mat-sidenav-content {
+  background: $grey-white !important;
+}
+
+.view-Grid-List {
+  color: $white;
+  position: relative;
+  top: -4px;
+  cursor: pointer;
+}
+
+// .cdk-overlay-backdrop.cdk-overlay-backdrop-showing{
+//   opacity: 0 !important;
+// }
+.error-position div {
+  margin: -14px 0px 16px 0px !important;
+}
+
+.error-position-time {
+  margin-top: 2px 0px 16px 0px !important;
+}
+
+.mat-dialog-actions {
+  margin-bottom: 1% !important;
+}
+
+//new css for the outline text fields
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  height: 50px;
+  min-width: 150px !important;
+  width: 150px !important;
+}
+
+// .mat-select{
+//   width: 93% !important;
+// }
+.noData-content {
+  font-family: Averta;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.56;
+  letter-spacing: normal;
+  text-align: center;
+  color: #777b90;
+}
+
+.flt-no-bold {
+  font-weight: bold;
+}
+
+.font-uppercase {
+  text-transform: uppercase;
+}
+
+.dc-card .staff-data {
+  font-size: 14px;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.dc-card .staff-data span {
+  font-weight: bold;
+  // padding: 0 5px 0 0;
+}
+
+.dc-th {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.22;
+  color: $color-black;
+  margin-bottom: 5px !important;
+  padding: 10px 10px !important;
+}
+
+.task-grid .service-name {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.61;
+  letter-spacing: normal;
+  text-align: center;
+  color: $color-black;
+}
+
+.task-grid .task-name {
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.17;
+  padding-top: 25px;
+}
+
+.top-row .dc-no {
+  font-size: 59px;
+  line-height: 0.84;
+  letter-spacing: 0.6px;
+  position: relative;
+  left: -3px;
+}
+
+.staffs-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.test-class {
+  max-height: 96vh !important;
+  min-height: 96vh !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .body-container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: 2rem 1rem 3rem 2rem !important;
+    margin-bottom: 2rem;
+  }
+
+  .ft-card-v2 .dashboard-flight-card .mat-tab-label {
+    height: 35px;
+    opacity: 1;
+    min-width: 40px;
+  }
+
+
+  .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
+  }
+
+  .delay-cat-v3 .dc-mat-tab-group .mat-tab-label {
+    height: 30px !important;
+    min-width: 100px;
+  }
+
+  .master-fixed-header {
+    border-bottom: 1px solid #babfc7;
+    position: -webkit-sticky;
+    position: sticky;
+    background: #d9dee6;
+    top: -33px;
+    z-index: 2;
+    padding-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .dc-card .staff-data {
+    font-size: 12px;
+  }
+
+  .dc-th {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.22;
+    color: $color-black;
+    margin-bottom: 5px !important;
+    padding: 10px 10px !important;
+  }
+
+  .task-grid .service-name {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.61;
+    letter-spacing: normal;
+    text-align: center;
+    color: $color-black;
+  }
+
+  .task-grid .task-name {
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: center;
+    font-size: 15.5px;
+    font-weight: 600;
+    line-height: 1.17;
+    padding-top: 25px;
+  }
+
+  .mat-raised-button {
+    text-transform: uppercase;
+    font-size: 12px !important;
+  }
+
+  .task-codes-title {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
+    color: $color-grey;
+  }
+
+  .top-row .dc-no {
+    font-size: 50px;
+    line-height: 0.84;
+    letter-spacing: 0.6px;
+    position: relative;
+    left: -3px;
+  }
+
+  .staffs-icon {
+    width: 42px;
+    height: 42px;
+    margin-top: 15px;
+    margin-right: 15px;
+  }
+
+  .test-class {
+    max-height: 96vh !important;
+    min-height: 96vh !important;
+  }
+
+  .mat-tab-task .bayStands-tab .mat-tab-label {
+    height: 30px !important;
+    min-width: 50px;
+    font-size: 11px;
+  }
+
+  .task-heading {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .bay-allocate-text {
+    margin: 25px 0 0 0;
+    font-size: 15px !important;
+    font-weight: 600;
+  }
+
+  .taskAssignAnchor {
+    position: relative;
+    padding: 5px;
+    font-size: 9px !important;
+    background: #f5f5f5;
+    color: $color-black !important;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .bayAllocateFlightID {
+    font-size: 15px !important;
+    font-weight: 600;
+  }
+
+  .bayAllocateFlightName {
+    font-weight: 100;
+    font-size: 10px !important;
+  }
+
+  .bayAllocationFlightTime {
+    line-height: 27px;
+    font-size: 12px !important;
+  }
+
+  .mt-10 {
+    margin-top: 0% !important;
+  }
+
+  .bay-allocate-left-right {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .bay-allocate-flight-center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .bay-expansion-div {
+    margin: 0 0 0 10em;
+    padding: 1em 0;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .i-gantt-details-expecting .activities-title,
+  .i-gantt-details-warning .activities-title,
+  .i-gantt-details-save .activities-title,
+  .i-gantt-details-delay .activities-title {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    // line-height: 2.8;
+    letter-spacing: normal;
+    text-align: left;
+    color: $color-black;
+    margin: 5px 0px;
+  }
+
+  .i-mat-form-field .mat-input-element,
+  .i-mat-form-field .mat-select-trigger {
+    font-size: 15.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.17 !important;
+    color: $color-black;
+
+  }
+
+
+}
+
+
+
+@media screen and (min-width: 1025px) and (max-width: 1279px) and (orientation: landscape) {
+  .test-class {
+    max-height: 86vh !important;
+    min-height: 86vh !important;
+  }
+
+  .ft-card-v2 .dashboard-flight-card .mat-tab-label {
+    height: 35px;
+    opacity: 1;
+    min-width: 100px;
+  }
+
+  .mat-tab-task .bayStands-tab .mat-tab-label {
+    min-width: 40px;
+  }
+
+  .mat-tab-header-pagination {
+    display: none !important;
+  }
+
+  .taskAssignAnchor {
+    position: relative;
+    padding: 5px;
+    font-size: 11px !important;
+    background: #f5f5f5;
+    color: $color-black !important;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .bayAllocateFlightID {
+    font-size: 15px !important;
+    font-weight: 600;
+  }
+
+  .bay-allocate-left-right {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .bay-expansion-div {
+    margin: 0 0 0 11em;
+    padding: 1em 0;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .bay-allocate-flight-center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .bay-allocate-text {
+    margin: 25px 0 0 0;
+    font-size: 15px !important;
+    font-weight: 600;
+  }
+
+  .i-gantt-details-expecting .activities-title,
+  .i-gantt-details-warning .activities-title,
+  .i-gantt-details-save .activities-title,
+  .i-gantt-details-delay .activities-title {
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    // line-height: 2.8;
+    letter-spacing: normal;
+    text-align: left;
+    color: $color-black;
+    margin: 5px 0px;
+  }
+
+}
+
+.no-datamsg {
+  text-align: center !important;
+  margin-top: 15px !important;
+  font-size: 15px;
+}
+
+.date-selector .mat-icon-button {
+  outline: none;
+}
+
+//analytics otp tab
+
+.otp-tab .dc-mat-tab-group .mat-tab-label {
+  height: 30px !important;
+}
+
+.otp-tab .dc-mat-tab-group .mat-tab-label .mat-tab-label-content {
+  font-size: 14px;
+  color: $color-black !important;
+}
+
+.otp-tab .dc-mat-tab-group .mat-tab-label.mat-tab-label-active .mat-tab-label-content {
+  font-weight: bold;
+}
+
+.otp-tab .dc-mat-tab-group .mat-tab-label.mat-tab-label-active {
+  opacity: 1;
+}
+
+.otp-tab .mat-tab-group.mat-primary .mat-ink-bar {
+  height: 4px;
+  background-color: #1b55e2;
+}
+
+// critical path
+.criticalpath mat-dialog-container{
+  transform: none;
+  opacity: 1;
+  overflow-y: scroll !important;
+  height: 20vh;
+}
+
+// css for the critical path page
+.gmainleft{
+  max-width: 330px;
+}
+.gmilestone{
+  font-size: 40px;
+  top: -16px;
+  left: -2px;
+}
+.gmilecaption{
+  display: none;
+}
+.gcaption{
+  display: none;
+}
+.gtaskname div, .gtaskname,
+.gresource{
+  font-size: 14px !important;
+  font-weight: bold;
+  height: 25px !important;
+  padding-top: 6px !important;
+  min-width: 200px;
+  max-width: 200px !important; 
+  width: 200px !important;
+  min-width: 200px !important;
+}
+.gresource{
+  font-size: 14px !important;
+  font-weight: bold;
+  height: 25px !important;
+  padding-top: 6px !important;
+  min-width: 200px;
+  max-width: 80px !important;
+  width: 80px !important;
+  min-width: 80px !important;
+}
+.gmajorheading{
+  font-size: 14px;
+  height: 32px;
+  padding: 5px 0px !important;
+}
+.gminorheading{
+  height: 25px;
+}
+td.gtaskcell{
+  height: 32px;
+}
+.ggroupblack, 
+.gtaskblue, 
+.gtaskred, 
+.gtaskgreen, 
+.gtaskyellow, 
+.gtaskpurple, 
+.gtaskpink{
+height: 24px !important;
+margin-top: -6px !important;
+}
+
+// css for the critical path gantt chart
+
+.fs-blank {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #d7d7d7;
+  line-height: 0.1em;
+  margin: 15px 0px;
+}
+
+.fs-blank .link {
+  background: #fff;
+  // padding: 0 10px;
+}
+
+.fs-blank .flt-no {
+  font-size: 12px
+}
+
+.criticalpath mat-dialog-container{
+  background: #dadfe7;
+}
+
+.criticaldata mat-dialog-container{
+  background: #dadfe7;
+}
+
+.i-critical-gantt .vis-item.vis-range.yet{
+background: #e6e6e6 !important;
+border-radius: 30px;
+border-color : gray;
+}
+.i-critical-gantt .vis-item.vis-range.ontime{
+background: #5cbb1d !important;
+border-radius: 30px;
+border-color : gray;
+color: #fff;
+}
+.i-critical-gantt .vis-item.vis-range.amber{
+background: #d7a01d !important;
+border-radius: 30px;
+border-color : gray;
+color: #fff;
+}
+.i-critical-gantt .vis-item.vis-range.delayed{
+  background: #e81a1a !important;
+  border-radius: 30px;
+  border-color : gray;
+  color: #fff;
+  }
+
+// ::ng-deep .circle-yet {
+//   margin-top: -2px;
+//   border-radius: 30px;
+//   width: 36px;
+//   height: 36px;
+//   background-color: #e9e9e9;
+//   border: solid 1px #ffffff;
+//   margin-left: -23px;
+//   float: left;
+//   border: 2px solid grey;
+// }
+
+#cTimeline .vis-item .vis-item-overflow{
+  overflow: inherit !important;
+}
+.event-name{
+  transform: rotate(-45deg) !important;
+}
+.userName{
+  margin-top : -25px;
+  font-size: 14px;
+  font-weight: normal;
+  color: gray;
+}
+.task-expecting{
+  background: transparent;
+  color: transparent;
+}
+.task-save{
+  background:#d5ffe0;
+  color: #34a853;
+}
+.task-warning{
+  background: #ffecb7;
+  color: #ff9900;
+}
+.task-delay{
+  background: #ffdbd4;
+  color: #f65314;
+}
+.userName-event{
+  font-size: 14px;
+  color: gray;
+  font-weight: normal;
+  margin-left: 28px;
+}
+.round-pro svg {
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.3)) !important;
+}
+
+
+//COpa changes for the color
+
+// .mat-raised-button.mat-primary {
+//   color: $white !important;
+//   background: linear-gradient(270deg, #006cb3 0%, #0060a9 100%) !important;
+// }
+
+// .header-light-black .mat-toolbar.main-header {
+//   background: linear-gradient(90deg, #12416e 0%, #0d3050 100%) !important;
+//   box-shadow: none !important;
+// }
+
+// .menu-without-child {
+//   border-bottom: 4px solid transparent;
+//   width: 210px;
+//   padding-bottom: 3px !important;
+//   margin-bottom: 1px !important;
+//   background: linear-gradient(270deg, #006cb3 0%, #0060a9 100%) !important;
+//   color: #ffffff;
+// }
+
+// .top-menu .horizontal-menu .main-h-list>li>a.active {
+//   border-bottom: 4px solid #0f3050 !important;
+// }
+
+// .main-menu nav ul.main-list li:hover {
+//   padding-bottom: 5px;
+//   background-size: 100% 3px;
+//   border-bottom: 3px solid #1f78bc;
+// }
+
+// .mat-tab-group.mat-primary .mat-ink-bar {
+//   height: 4px;
+//   background-color: #1b55e2 !important;
+// }
+
+
+// .i-footer ul.actions li.action-icon.active .active {
+//   border-top: 3px solid #1b55e2 !important;
+// }
+
+// .weather-block .wb-row:hover .more-info {
+//   color: white;
+//   transition: 0.3s;
+//   background: linear-gradient(270deg, #006cb3 0%, #0060a9 100%) !important;
+// }
+
+// th.high-light {
+//   border-top: 4px solid #1b55e2 !important;
+// }
+
+// .tab-section-daily-roster {
+//   border-top: 4px solid #1b55e2 !important;
+// }
+// .taskAssignAnchor:hover{
+//   background: linear-gradient(270deg, #006cb3 0%, #0060a9 100%) !important;
+// }

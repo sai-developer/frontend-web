@@ -1,0 +1,145 @@
+<div fxLayout="row" fxLayoutWrap="wrap" class="dc-page top-row">
+  <img src="assets/images/master/staff-icon.png" class="staffs-icon">
+  <div fxFlex="90">
+    <div class="dc-txt">HEADCOUNT</div>
+    <div class="dc-no">{{staffList.length}}
+    </div>
+  </div>
+  <!-- <div fxFlex="90">
+      <div class="options">
+        <button mat-button class="opt-btn">EXPORT <mat-icon class="export">file_upload</mat-icon></button>
+        <button mat-button class="opt-btn">PRINT <mat-icon>print</mat-icon></button>
+        <mat-button-toggle-group class="i-mat-btg" #viewMode="matButtonToggleGroup" [value]="'list'">
+          <mat-button-toggle value="grid"><mat-icon>view_module</mat-icon></mat-button-toggle>
+          <mat-button-toggle value="list"><mat-icon>view_headline</mat-icon></mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div> -->
+</div>
+<hr class="i-hr">
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load">
+  <div *ngIf="viewType === 'LIST_VIEW'" fxLayout="row" fxLayoutWrap="wrap">
+    <!-- list view start -->
+    <div fxFlex="100" class="master-fixed-header">
+      <div fxLayout="row" class="dc-th">
+        <div fxFlex>FIRST NAME</div>
+        <div fxFlex>LAST NAME</div>
+        <div fxFlex>USER ID</div>
+        <div fxFlex>ROLE</div>
+        <div fxFlex>CONTACT NO.</div>
+        <!-- <div fxFlex>CERTIFICATIONS</div> -->
+        <div fxFlex="5" class="text-right">ACTION</div>
+      </div>
+    </div>
+    <div fxFlex="100" class="no-datamsg"
+      *ngIf="(staffList   | SearchPipe : searchText : 'firstName' : 'userId' : 'lastName' : 'name').length === 0  && searchText">
+      No
+      match found</div>
+    <div fxFlex="100">
+      <div class="dc-card"
+        *ngFor="let staff of staffList  | SearchPipe : searchText : 'firstName' : 'userId' : 'lastName' : 'name';let i =index;">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row"  [ngClass]="{'higlighted': i===selectedRow}"> 
+          <div fxFlex class="staff-data">{{staff.firstName}}</div>
+          <div fxFlex class="staff-data">{{staff.lastName}}</div>
+          <div fxFlex class="staff-data">{{staff.userId}}</div>
+          <div fxFlex class="staff-data">{{staff.userRoleMasterList[0].name}}</div>
+          <div fxFlex class="staff-data staff-mobile"><span>{{staff.mobile}}</span></div>
+          <!-- <div fxFlex class="staff-data certificate">
+            <div *ngIf="i == '1'">
+              <button mat-button  class="red">
+                1
+              </button>
+            </div>
+            <div *ngIf="i == '3'">
+              <button mat-button  class="green">
+                1
+              </button>
+            </div>
+            <div *ngIf="i == '5'">
+              <button (click)="showStatus(i)" mat-button [mat-menu-trigger-for]="certiMenu" class="red">
+                1
+              </button>
+              <button mat-button [mat-menu-trigger-for]="certiMenu" class="green">
+                1
+              </button>
+              <mat-menu #certiMenu="matMenu" class="certi-menu">
+                <ul class="certi-list">
+                  <li>
+                    <p class="item-name">Load & Trim - B 7378</p>
+                    <p class="item-date expired">3 MAR 2019 <span>EXPIRED</span></p>
+                  </li>
+                  <li>
+                    <p class="item-name">DGR Handling</p>
+                    <p class="item-date valid">15 Jun 2020 <span>VALID</span></p>
+                  </li>
+                </ul>
+              </mat-menu>
+            </div>
+          </div> -->
+          <div fxFlex="5" class="text-right">
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <button mat-menu-item (click)="edit(staff)">EDIT</button>
+              <button mat-menu-item (click)="delete(staff)">REMOVE</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- card view start -->
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'GRID_VIEW'">
+    <div fxFlex.xl="20" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-sm="33"
+      *ngFor="let staff of staffList   | SearchPipe : searchText : 'firstName' : 'userId' : 'lastName' : 'name'; let i =index;">
+      <mat-card fxFlex="100" class="task-grid">
+        <mat-card-title>
+          <span fxFlex></span>
+          <div class="task-name">{{staff.firstName}}&nbsp;{{staff.lastName}}<div class="service-name">
+              {{staff.userRoleMasterList[0].name}}</div>
+          </div>
+
+          <span fxFlex></span>
+
+          <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+            <button mat-menu-item (click)="edit(staff)">EDIT</button>
+            <button mat-menu-item (click)="delete(staff)">REMOVE</button>
+          </mat-menu>
+        </mat-card-title>
+        <!-- <mat-card-subtitle>
+          <div class=dependency-title>DEPENDENCY</div>
+          <div class="dependency-report">Cockpit crew reporting to AC</div>
+        </mat-card-subtitle> -->
+        <!-- <div class="dep-name">DEPENDENCY
+            <div *ngFor="let dependency of task.dependency" class="deps">{{dependency.dependent_task_desc}}</div>
+          </div> -->
+        <hr class="grid-hr">
+        <mat-card-content>
+          <div fxLayout="row">
+            <div fxFlex="50">
+              <div class="priority-title">USER ID</div>
+              <div class="dependency-report">{{staff.userId}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="priority-title">PHONE</div>
+              <div class="dependency-report">{{staff.mobile}}</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(staffList   | SearchPipe : searchText : 'firstName' : 'userId' : 'lastName' : 'name').length === 0  && searchText">
+      No match found </div>
+  </div>
+  <!-- card view end -->
+</div>

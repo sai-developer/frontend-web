@@ -1,0 +1,40 @@
+.shift-list {
+    padding: 0;
+    li { 
+        margin-top: 10px;
+        margin-bottom: 10px;
+        .icon-selected {
+            position: absolute;
+            left: -2px;
+            line-height: 37px;
+            font-size: 16px;
+            vertical-align: middle;
+        }
+        button {
+            color: rgba(0, 0, 0, 0.87);
+            min-width: 60px;
+        }
+        // &:nth-child(-n+7) button {
+        //         background:#d6f5c1;
+        // }
+        // &:nth-child(n+8):nth-child(-n+9) button {
+        //     background:  #ffecc1;
+        // }
+        // &:nth-child(n+10):nth-child(-n+11) button {
+        //     background:  #dcb6b8;
+        // }
+    }
+}
+::ng-deep .cdk-global-overlay-wrapper {
+    background: transparent;
+}
+
+::ng-deep .ls-modal .mat-dialog-content {
+    max-height: 50vh!important;
+}
+.act-shift{
+    background:#d6f5c1;
+}
+.not-shift{
+    background:  #ffecc1;
+}

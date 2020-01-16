@@ -1,0 +1,577 @@
+.new-content {
+  font-size: 36px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: 0.4px;
+  text-align: center;
+  color: #191c29;
+  padding: 35px 0px 35px 0px;
+}
+
+.add-cont {
+  width: 190px;
+  height: 40px;
+  border-radius: 3px;
+  background-image: linear-gradient(to right, #f93b1d, #fca22d);
+}
+
+.add-icon {
+  height: 28px !important;
+}
+
+.contract-icon {
+  width: 38px;
+  height: 48px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.con-txt {
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.1px;
+  text-align: left;
+  color: #000000;
+}
+
+.con-no {
+  font-size: 59px;
+  line-height: 0.84;
+  letter-spacing: 0.6px;
+  position: relative;
+  left: -3px;
+}
+
+
+.contract-img {
+  height: 285px;
+}
+
+.grid-hr {
+  margin: 0px 5px;
+}
+
+
+.cont-grid {
+  text-align: left;
+  padding: 0px 5px;
+  border-radius: 3px 3px 0px 0px;
+  height: 50px !important;
+}
+
+.cont-grid img {
+  height: 30px;
+  margin: 9px 0px 0px 10px;
+}
+
+.spice {
+  background: #eb1f28;
+}
+
+.al {
+  background: #006271;
+}
+
+.cust-action-btn {
+  height: 25px !important;
+  opacity: 0.3;
+  width: fit-content !important;
+}
+
+
+.cont-head {
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.17;
+  color: #000000;
+  text-align: center;
+  padding-top: 18px;
+}
+
+.cont-shead {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.55;
+  letter-spacing: normal;
+  text-align: center;
+  color: #25b755;
+  padding-bottom: 18px;
+}
+
+.cont-tab {
+  border-radius: 5px;
+  background-color: #ffffff;
+  height: 0%;
+  margin: 10px;
+}
+
+.cont-tit {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.05;
+  letter-spacing: normal;
+  text-align: center;
+  color: #666666;
+}
+
+.cont-date {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #000000;
+}
+
+.date-row {
+  padding: 8px 0px 8px 0px;
+}
+
+.accord-cont {
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+}
+
+.mat-expansion-panel-header {
+  font-size: 13px;
+  text-align: left;
+  padding: 0px 12px;
+}
+
+.cont-detail {
+  border-radius: 2px;
+  background-color: #191c29;
+  color: #ffffff;
+  margin-right: 10px;
+  padding: 3px;
+}
+
+.mat-expansion-panel-header-description {
+  margin: 0 !important;
+}
+
+.cont-start {
+  overflow: hidden;
+  height: 22px;
+}
+
+.cont-indicator {
+  padding: 1px;
+  background-color: #191c29;
+  color: #ffffff;
+  margin-right: 10px;
+  width: 18px;
+  top: 10px;
+  position: relative;
+  text-align: center;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.add-contract {
+  height: 100%;
+}
+
+.add-contract .stepper {
+  height: 100%;
+  background: #fff;
+}
+
+.add-contract .add-wizard {
+  height: 100%;
+  background: #fff;
+  padding: 15px;
+  border-top: 4px solid;
+  border-radius: 5px;
+}
+
+.add-contract .block-head {
+  font-size: 22px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+::ng-deep .custom-toggle button {
+  background: white;
+  padding: 5px 40px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.center {
+  text-align: center;
+  margin: 14px;
+}
+
+::ng-deep .btn-active {
+  border-radius: 3px;
+  border: solid 1px #f93b1d !important;
+  color: #f93b1d;
+  background: #fee3de !important;
+}
+
+.service-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.55;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.edit-ser {
+  background-color: #f93b1d;
+  font-size: 11.5px;
+  text-align: left;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.add-ser {
+  background-image: linear-gradient(to left, #f93b1d, #fca22d);
+  height: 35px;
+  border-radius: 5px !important;
+  float: right !important;
+  top: 7px;
+}
+
+.cancl {
+  font-size: 11.5px;
+  border: 1px solid #a2a2a2;
+  text-align: left;
+  color: #a2a2a2;
+  height: 35px;
+  border-radius: 5px !important;
+  top: 7px;
+  margin-right: 10px;
+}
+
+.service-con {
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  padding: 0px 54px 16px 0px;
+}
+
+.del {
+  border-radius: 3px;
+  color: #999999;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.service-head {
+  font-size: 24px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: left;
+  padding: 8px 0px 15px 18px;
+  color: #000000;
+}
+
+.button-section {
+  padding: 10px;
+}
+
+::ng-deep .service-mat span.mat-content {
+  display: block;
+}
+
+.service-card {
+  border-radius: 3px;
+  border: solid 1px #c7c8ca;
+  background-color: #ffffff;
+  margin: 10px;
+  width: 100%;
+  // border-left: 45px solid #ebebeb;
+  padding: 20px 0px 0px 0px;
+}
+
+::ng-deep .edit-ser.mat-raised-button {
+  font-size: 12px !important;
+}
+
+.w-80 {
+  width: 85% !important;
+}
+
+.save-ser {
+  border-radius: 2px;
+  background-color: #52b157;
+}
+
+.final {
+  padding: 0px 0px 8px 0px;
+}
+
+.mat-inputs {
+  padding-left: 14px;
+}
+
+
+::ng-deep .mat-vertical-content {
+  color: #fefefe;
+}
+
+::ng-deep .descript .mat-form-field-infix {
+  height: 100px !important;
+}
+
+
+::ng-deep .mat-step .mat-step-header .mat-step-label.mat-step-label-active {
+  color: #fefefe
+}
+
+::ng-deep .mat-step .mat-vertical-stepper-header .mat-step-icon {
+  // background: #56b459;
+  // color: #56b459;
+  background: transparent;
+  color: transparent;
+  border: 2px solid #56b459;
+}
+
+.client-font
+{
+font-size: 16px;
+}
+
+::ng-deep .step-details .mat-icon {
+  vertical-align: middle;
+  height: auto;
+  width: auto;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+::ng-deep .i-mat-form-field .mat-icon-button
+{
+  bottom:8px !important;
+  outline: none;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-not-touched {
+  background-color: #b7b7b7;
+  color: #b7b7b7;
+}
+
+::ng-deep .mat-step {
+  background-color: #191c29;
+}
+
+.step-details {
+  margin-bottom: 10px;
+  font-family: Averta !important;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+::ng-deep .mat-stepper-vertical-line::before {
+  background: #c7c8ca;
+}
+
+.contract-type {
+  background-color: var(--white);
+  margin: 10px 35px 0px 0px;
+  border-radius: 3px;
+  border: solid 1px #c7c8ca;
+  padding: 10px 0px 2px 2px;
+}
+
+::ng-deep .services-expansion .mat-expansion-indicator {
+  display: none !important;
+}
+
+
+::ng-deep .client-accord .mat-expansion-indicator {
+  display: none !important;
+}
+
+.create {
+  font-size: 14px !important;
+  height: 40px;
+  outline: none;
+}
+
+::ng-deep .services-type .mat-checkbox-inner-container {
+  height: 14px;
+  width: 14px;
+  ;
+}
+
+
+
+::ng-deep .services-expansion .mat-checkbox-inner-container {
+  display: inline-block;
+  height: 14px;
+  line-height: 0;
+  margin: auto;
+  margin-right: 18px;
+  order: 0;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 14px;
+  flex-shrink: 0;
+  color: #cccccc !important;
+}
+
+.services-option {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.86;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
+
+.service-accord {
+  width: 100%
+}
+
+.contracts-head {
+  margin-top: 15px;
+  font-family: Averta !important;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.footer-section {
+  width: 65vw;
+}
+
+.contract-footer {
+  z-index: 100;
+  bottom: 3% !important;
+  height: 40px;
+  position: fixed;
+  right: 3%;
+  border-radius: 5px;
+}
+
+.anz {
+  background: #000;
+}
+
+.equip-list {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-align: left;
+  color: #999999;
+  cursor: pointer;
+  text-align: center;
+  padding: 6px 0px 0px 0px;
+  border-bottom: 1px solid;
+}
+
+.eqp-active {
+  color: #f93b1d;
+  border-bottom: 4px solid #f93b1d;
+}
+
+.eqp-value-active {
+  color: #000000 !important;
+}
+
+.equip-value {
+  color: #c5c5c5;
+}
+
+.roles-lists {
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+.roles-list {
+  padding: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.increment {
+  background: black;
+  font-size: 18px;
+  height: 20px;
+  width: 20px;
+  border: none;
+  vertical-align: middle;
+  position: relative;
+  color: white;
+  left: 10px;
+  bottom: 4px;
+  outline: none;
+  border-radius: 10px;
+  padding: 0px;
+}
+
+
+
+
+.decrement {
+  background: black;
+  font-size: 18px;
+  height: 20px;
+  width: 20px;
+  border: none;
+  vertical-align: middle;
+  position: relative;
+  color: white;
+  left: -9px;
+  bottom: 4px;
+  outline: none;
+  border-radius: 10px;
+  padding: 0px;
+}
+
+
+
+
+.icon {
+  font-size: 22px;
+  text-align: center;
+  color: #666666;
+}
+
+
+.manpower-list {}

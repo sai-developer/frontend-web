@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-sm="25" *ngFor="let flight of flights">
+    <div class="summary-card change-display" (click)="openInvoice(flight)">
+      <div class="airline-title" [ngClass]="{'spice': flight.bg == 'spice', 'al': flight.bg == 'al', 'delta': flight.bg == 'delta', 'klm': flight.bg == 'klm', 'anz': flight.bg == 'anz', 'emirates': flight.bg == 'emirates'}">
+        <img [src]='"assets/images/billing/"+flight.airline+".png"'>
+      </div>
+      <div class="flight-det">
+        <!-- <div class="flt-no">
+            {{flight.arrFlightNumber ? flight.arrFlightNumber : 'BASE'}} - {{flight.depFlightNumber ? flight.depFlightNumber : 'HALT'}}
+        </div> -->
+        <div [hidden]="flight.flightType === 0" fxFlex>
+            <div class="station station-top">{{flight.originAirportCode}}</div>
+          <div class="flight-no">{{flight.arrFlightNumber}}</div>
+        </div>
+        <div *ngIf="flight.flightType === 0" class="base-flt">
+          <span>BASE</span>
+        </div>
+        <div [hidden]="flight.flightType === 3" fxFlex class="text-right">
+            <div class="station station-top">{{flight.destinationAirportCode}}</div>
+          <div class="flight-no">{{flight.depFlightNumber}}</div>
+        </div>
+        <div *ngIf="flight.flightType === 3" class="base-flt">
+          <span>HALT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

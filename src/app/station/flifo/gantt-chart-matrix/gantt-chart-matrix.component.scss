@@ -1,0 +1,149 @@
+// .matrix-body{
+//     margin-top: 5%;
+//     // overflow-x: scroll;
+// }
+.table .task-head-name{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.table .flight-row{
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    max-width: 93vw;
+    height: 50px;
+}
+.table .flight-row:hover{
+    box-shadow: 0 0 10px 0 #000;
+    // transform: scale(1.005);
+    transition : 0.3s;
+}
+.table .flight-row .flight-det{
+    border-right: 1px solid #dee2e6;
+    padding-top: 5px;
+    text-align: -webkit-center;
+}
+.table .flight-row .flight-no{
+    font-size: 11px;
+    font-weight: bold;
+    color: #000;
+}
+.table .flight-row .flight-arr{
+margin-right: 10px;
+}
+.table .flight-row .flight-dep{
+
+}
+.table .cross-sec{    
+    border-right: 1px solid #dee2e6;   
+}
+.table .task-name-head:nth-child(even){
+    // background: #cecece;
+}
+.table .task-color-blk:nth-child(even){
+    // background: #cecece;
+}
+.table .task-color-grid-plan{
+    background: transparent;
+    // height: 34px;
+    border-radius: 5px;
+}
+.table .task-color-grid-delay{
+    background: #e81a1a !important;
+        height: 32px;
+    margin-top: 4px;
+    border-radius: 5px;
+}
+.table .task-color-grid-warning{
+    background: #d7a01d !important;
+        height: 32px;
+    margin-top: 4px;
+    border-radius: 5px;
+}
+.table .task-color-grid-save{
+    background: #5cbb1d !important;
+        height: 32px;
+    margin-top: 4px;
+    border-radius: 5px;
+}
+.table .task-color-grid-skipped{
+    background: Url('assets/images/skip.svg') no-repeat center;
+    height: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    opacity: 1 !important;
+}
+.table .task-color-blk .task-done{
+    opacity: 0.3;
+}
+.table td.task-color-blk{
+    padding: 0.35rem;
+    border-right: 1px solid #dee2e6;
+}
+.table th.task-name-blk:nth-child(2){
+    margin-left: -65px !important;
+}
+.table .task-name-blk{
+    // background: yellow;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    max-height: 44px;
+    min-width: 196px !important;
+    margin-left: -156px;
+    position: relative;
+    bottom: -50px;
+}
+.table .table-head-row{
+    height: 150px
+}
+.table .task-head{
+    min-width: 10%;
+}
+.table .flight-time{
+    padding: 8px 20px;
+    text-align: center;
+    display: -webkit-inline-box;
+}
+// New Flex css for the table
+.table .task-name{
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    overflow: hidden; 
+    min-width: 130px !important;
+    max-width: 130px !important;
+    text-overflow: ellipsis;
+}
+.table .head-row{
+    max-width: 93vw;
+    height: 150px;
+}
+.gantt-fixed-header{
+    // border-bottom: 1px solid #babfc7;
+    position: -webkit-sticky;
+    position: sticky;
+    background: #d9dee6;
+    overflow: hidden !important;
+    top: -20px;
+    z-index: 2;
+}
+.table thead tr.head-row th:nth-child(even) {
+    background: #f4f4f4;
+    // background: rgba(245, 245, 245, 0.36);
+  }
+  .table tbody tr.flight-row td:nth-child(even) {
+    background: #f4f4f4;
+    // background: rgba(245, 245, 245, 0.36);
+  }
+  .gantt-fixed-header .extra-sec{
+      margin-bottom: -17px;
+  }
+  .table th.task-name-head{
+      padding: 0.45rem !important;
+  }
+
+  @media screen and (min-width: 1600px) and (max-width: 1920px) {
+    .table th.task-name-head{
+        padding: 0.75rem !important;
+    }
+  }

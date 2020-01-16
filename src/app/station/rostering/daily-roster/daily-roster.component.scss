@@ -1,0 +1,568 @@
+.static_background {
+  background: #d3d8df;
+  height: 71vh;
+  padding-top: 67px !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  top: -17px;
+}
+
+.panel-margin {
+  width: 90%;
+  margin: 15px auto;
+}
+
+.expansion-panel-margin {
+  margin: 2px 5px;
+}
+
+.roster-currentdate {
+  margin: 2px 0 15px 15px;
+  font-size: 20px;
+}
+
+.panel-header-shift-assign mat-panel-title span {
+  font-size: larger;
+}
+
+.shift-person-matcard {
+  padding: 10px !important;
+  border: 1px solid #ccc;
+  margin: 0;
+}
+
+.shift-person-matcard:hover {
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35) !important;
+  transition: 0.4s;
+}
+
+.daydisbale {
+  pointer-events: none !important;
+  opacity: 0.5;
+}
+
+.daydisbale:hover {
+  cursor: no-drop;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+  border-radius: 0 !important;
+}
+
+.shift-person-matcard span {
+  margin: 0 10px;
+}
+
+.shift-assign-card-width-div {
+  // overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.shift-assign-card-width:first-child {
+  margin-left: 1em
+}
+
+.shift-assign-card-width:last-child {
+  margin-right: 1em;
+}
+
+.shift-assign-card-width {
+  margin: 0 .5em;
+}
+
+.shift-assign-card-width-div::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar {
+  height: 7px !important;
+  background-color: #F5F5F5;
+}
+
+.shift-assign-card-width-div::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #191c29;
+}
+
+.shift-assign-mat-card-div {
+  min-width: 225px;
+  height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.shift-assign-mat-card-div::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar,
+.static_background::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar {
+  width: 3px !important;
+  background-color: #F5F5F5;
+}
+
+.shift-assign-mat-card-div::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb,
+.static_background::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #191c29;
+}
+
+.panel-header-officer-assign mat-panel-title span {
+  color: #666666 !important;
+  font-size: small !important;
+  text-align: left;
+}
+
+.shifts-name {
+  padding: 10px;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.shifts-name span {
+  text-transform: capitalize !important;
+}
+
+.pad-right {
+  padding: 0 10px 0 0;
+}
+.pad-top-7{
+  padding-top: 7px;
+}
+
+.leftChevron,
+.rightChevron {
+  border: 1px solid #fff;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px 10px 0;
+  margin: 0 3px;
+}
+
+.leftChevron:hover,
+.rightChevron:hover {
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35) !important;
+  cursor: pointer;
+}
+
+.leftChevron mat-icon,
+.rightChevron mat-icon {
+  font-weight: 600;
+}
+
+.panel-header-shift-assign.mat-expanded,
+.panel-header-officer-assign.mat-expanded {
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+}
+
+.text-left img {
+  padding: 0 10px;
+  position: relative;
+  top: -2px;
+}
+
+//footer 
+
+.density-footer {
+  bottom: 1% !important;
+  position: fixed !important;
+  width: 98vw;
+  background: #191c29;
+  left: 15px !important;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.use-shift {
+  color: #ffffff;
+  // margin-top: 6px;
+  font-weight: 600;
+  border-right: 1px solid;
+}
+
+.use-shift mat-icon {
+  font-size: 28px;
+  color: #ccc;
+  position: relative;
+  top: 5px;
+}
+
+.use-shift-icons {
+  color: #ffffff;
+  border-right: 1px solid;
+  font-size: 25px;
+}
+
+.use-shift-icons mat-icon {
+  position: relative;
+  top: 5px;
+}
+
+.time-date span {
+  position: relative;
+  top: 7px;
+  font-size: 16px;
+}
+
+.use-shift span {
+  top: -4px;
+  right: -5px;
+  position: relative;
+}
+
+.time-select button {
+  background: #2f3243;
+  border: 0px solid transparent !important;
+  border-radius: 5px;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+
+.time-date .date-pad input {
+  background: transparent;
+  border: transparent;
+  color: #ffffff !important;
+  font-size: 18px;
+  position: relative;
+  right: -17px;
+  text-align: left !important;
+}
+
+.time-date .date-pad input::placeholder {
+  color: #ffffff;
+}
+
+.time-select span {
+  margin-top: 3px;
+}
+
+.time-select .mat-icon {
+  color: #ffffff !important;
+  margin-top: 2px !important;
+}
+
+.time-date {
+  background: #2f3243;
+  border-radius: 3px;
+  height: 36px;
+  margin-top: 3px;
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1.0;
+}
+
+.time-label {
+  max-width: 13%;
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 7px;
+}
+
+.disable {
+  opacity: 0.35;
+}
+
+.empty {
+  background: #dadfe7 !important;
+}
+
+.from-label {
+  font-size: 9px;
+}
+
+.density-footer .add-slot {
+  text-align: right !important;
+}
+
+.delay-cat-v3 .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #f93b1d;
+}
+
+.tab-section-roster,
+.tab-section-daily-roster {
+  // border-right: 1px solid;
+  // border-left: 1px solid;
+  color: #ffffff;
+}
+
+.tab-section-daily-roster {
+  border-top: 4px solid red;
+}
+
+.time-select button:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
+}
+
+//footer ends 
+.checkbox-shifts {
+  font-size: 14px;
+  margin: 0 10px;
+  padding: 5px 7px;
+}
+
+.checkbox-shifts-span .mat-checkbox.mat-checkbox-checked .checkbox-shifts,
+.flex-div-checkbox .mat-checkbox.mat-checkbox-checked .checkbox-shifts {
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  margin: 0 10px;
+  padding: 5px 7px;
+  border-radius: 5px;
+}
+
+.all-condition-check:disabled {
+  background: #dddddd;
+}
+
+.flex-div-checkbox {
+  width: 100%;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-blue,
+.static_background .panel-margin.dc-blue {
+  border-top: 5px solid #006ddf;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-red,
+.static_background .panel-margin.dc-red {
+  border-top: 5px solid #ed3f23;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-yellow,
+.static_background .panel-margin.dc-yellow {
+  border-top: 5px solid #fbb216;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-green,
+.static_background .panel-margin.dc-green {
+  border-top: 5px solid #86c43d;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-g-white,
+.static_background .panel-margin.dc-g-white {
+  border-top: 5px solid #00b8a3;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-purple,
+.static_background .panel-margin.dc- {
+  border-top: 5px solid #531b9b;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-violet,
+.static_background .panel-margin.dc-violet {
+  border-top: 5px solid #7f154e;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-eight,
+.static_background .panel-margin.dc-eight {
+  border-top: 5px solid #249d2d;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-nine,
+.static_background .panel-margin.dc-nine {
+  border-top: 5px solid #dfdfdf;
+}
+
+.shift-assign-card-width-div .shift-assign-mat-card-div.dc-ten,
+.static_background .panel-margin.dc-ten {
+  border-top: 5px solid #8c94b4;
+}
+
+.static_background .panel-margin.dc-ten.mat-expanded {
+  border-top: 5px solid #000000;
+}
+
+.shift-assign-mat-card-div::before {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.shift-assign-mat-card-div::after {
+  background: linear-gradient(white, rgba(255, 255, 255, 0.3));
+}
+
+// .scrollBottomScroll1 {
+
+// }
+
+.scrollBottomScroll {
+  -moz-box-shadow: inset 0 -10px 10px -10px #000000;
+  -webkit-box-shadow: inset 0 -10px 10px -10px #000000;
+  box-shadow: inset 0 -10px 10px -10px #000000;
+}
+
+.scrollTopScroll {
+  -moz-box-shadow: inset 10px -10px 0px -10px #000000;
+  -webkit-box-shadow: inset 10px -10px 0px -10px #000000;
+  box-shadow: inset 10px -10px 0px -10px #000000;
+}
+
+.daily-roster-footer-center {
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) {
+  .checkbox-shifts {
+    font-size: 15px;
+    margin: 0 10px;
+    padding: 5px 13px;
+  }
+
+  .checkbox-shifts-span .mat-checkbox.mat-checkbox-checked .checkbox-shifts,
+  .flex-div-checkbox .mat-checkbox.mat-checkbox-checked .checkbox-shifts {
+    background: #000;
+    color: #fff;
+    font-size: 15px;
+    margin: 0 10px;
+    padding: 5px 7px;
+    border-radius: 5px;
+  }
+
+  .panel-header-shift-assign mat-panel-title span {
+    font-size: 23px;
+  }
+
+  .shifts-name {
+    padding: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .static_background {
+    background: #d3d8df;
+    height: 81vh;
+    padding-top: 70px !important;
+    position: relative;
+    top: -15px;
+  }
+
+  .shift-assign-mat-card-div {
+    min-width: 260px;
+    height: 73vh;
+    // overflow-y: auto;
+    // overflow-x: hidden;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .shift-assign-mat-card-div {
+    min-width: 230px;
+    height: 74vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .shifts-name {
+    padding: 10px;
+    font-size: small;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  mat-panel-title {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .example-box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 12px;
+    border-radius: 0 !important;
+  }
+
+  .roster-currentdate {
+    margin: 2px 0 15px 15px;
+    font-size: 18px;
+  }
+
+  .time-label {
+    max-width: 13%;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 7px;
+    font-size: 13px;
+  }
+
+  .time-date .date-pad input {
+    background: transparent;
+    border: transparent;
+    color: #ffffff !important;
+    font-size: 15px;
+    position: relative;
+    right: -17px;
+    text-align: left !important;
+  }
+
+  .time-date {
+    background: #2f3243;
+    border-radius: 3px;
+    height: 30px;
+    margin-top: 3px;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: 1.0;
+  }
+
+  .time-select button {
+    background: #2f3243;
+    border: 0px solid transparent !important;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1279px) and (orientation: landscape) {
+  .shift-assign-mat-card-div {
+    min-width: 275px;
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .shifts-name {
+    padding: 10px;
+    font-size: medium;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  mat-panel-title {
+    font-size: 13px;
+    font-weight: bold;
+  }
+}
+
+.leftChevron,
+.rightChevron {
+  &.disable {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.shift-nodata {
+  text-align: center;
+  font-size: 25px;
+  padding-top:35px;
+}

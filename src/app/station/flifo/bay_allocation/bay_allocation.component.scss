@@ -1,0 +1,277 @@
+.margin-topBottom,
+.task-list-item {
+  border-radius: 5px;
+}
+
+.task-list-item {
+  padding: 10px 0;
+}
+
+mat-list-item.bayAllocateFlightContact {
+  font-size: 12px !important;
+  font-weight: 100;
+}
+
+.margin_0_size {
+  margin: 0;
+  font-size: 14px;
+}
+
+.text_align_center {
+  text-align: center;
+}
+
+.arr_dep_flight_size {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.arr_dep_flight_icon {
+  vertical-align: sub;
+  margin: 0 5px;
+}
+
+.task-expansion-overflow {
+  width: 100%;
+  overflow-y: scroll;
+  max-height: 66vh !important;
+  padding: 0 10px 0 0 !important;
+  margin: 0;
+}
+
+.task-expansion-overflow1 {
+  width: 100%;
+  overflow-y: scroll;
+  max-height: 60vh !important;
+  padding: 0 10px 0 0 !important;
+  margin: 0;
+}
+
+//temporary fix to hide the expansion panel to fix
+.bay-expansion-panel-click-arrow {
+  cursor: auto !important;
+}
+
+.taskCount {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.taskAssignAnchor {
+  position: relative;
+  padding: 5px;
+  font-size: 12px;
+  background: #f5f5f5;
+  color: #000 !important;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.taskAssignAnchor:hover {
+  background: linear-gradient(to left, #f93b1d, #fca22d);
+  padding: 5px;
+  color: #fff !important;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.font-size-30 {
+  font-size: 20px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.bayAllocationFlightTimeSTD,
+.bayAllocationFlightTimeSTA {
+  font-weight: 600;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.bay-allocate-text {
+  margin: 25px 0 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+::ng-deep .flt-no-left {
+  margin-left: -46px;
+  color: #000000;
+  font-size: 11px;
+  float: left;
+}
+
+::ng-deep .flt-no-right {
+  margin-right: -67px;
+  color: #000000;
+  font-size: 11px;
+  float: right;
+}
+
+.stdArrivaltime {
+  font-size: 11px;
+  color: #999999;
+  float: left;
+}
+
+.stdDeparturetime {
+  font-size: 11px;
+  color: #999999;
+  float: right;
+}
+
+
+// ::ng-deep .mat-dialog-content {
+//     max-height: 82vh!important;
+//     padding-top: 20px!important;
+//     padding-bottom: 20px!important;
+//   }
+.baystands-align {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000;
+}
+
+.baystands-aircode {
+  color: #000;
+  font-weight: 100;
+  font-size: 12px;
+}
+
+.baystands-time {
+  color: #000;
+  font-weight: 100;
+  font-size: 0.875rem !important;
+}
+
+.baystands-timecolor {
+  color: #000;
+}
+
+.baystands-count {
+  margin-top: -2px;
+}
+
+.baystands-baseHalt {
+  margin: 20px 0 0 0;
+  color: #000000
+}
+
+@media screen and (min-width: 1370px) and (max-width: 1920px) {
+  .task-expansion-overflow {
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 77vh !important;
+    padding: 0 10px 0 0 !important;
+    margin: 0;
+  }
+
+  .task-expansion-overflow1 {
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 72vh !important;
+    padding: 0 10px 0 0 !important;
+    margin: 0;
+  }
+
+  .baystands-align {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .task-expansion-overflow {
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 67vh !important;
+    padding: 0 10px 0 0 !important;
+    margin: 0;
+  }
+
+  .task-expansion-overflow1 {
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 63vh !important;
+    padding: 0 10px 0 0 !important;
+    margin: 0;
+  }
+
+  .baystands-time {
+    color: #000;
+    font-weight: 100;
+    font-size: 11px !important;
+  }
+
+  .baystands-align {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .baystands-aircode {
+    color: #000;
+    font-weight: 100;
+    font-size: 11px;
+  }
+
+  .font-size-30 {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 600;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1279px) and (orientation: landscape) {
+  .task-expansion-overflow {
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 63vh !important;
+    padding: 0 10px 0 0 !important;
+    margin: 0;
+  }
+
+  .task-expansion-overflow1 {
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 58vh !important;
+    padding: 0 10px 0 0 !important;
+    margin: 0;
+  }
+
+  .baystands-time {
+    color: #000;
+    font-weight: 100;
+    font-size: 12px !important;
+  }
+
+  .baystands-align {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .font-size-30 {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 600;
+  }
+}
+
+.arms-msg {
+  text-align: center;
+  font-size: 14px;
+  text-align: center;
+  line-height: 0.2;
+  color: #F1011E;
+  text-transform: none;
+}
+
+.rule {
+  width: 100%;
+  padding: 5px 0px;
+}

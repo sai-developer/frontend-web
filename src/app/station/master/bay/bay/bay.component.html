@@ -1,0 +1,49 @@
+<div class="test-class">
+  <h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+    <img src="assets/images/master/bays-icon.png" class="shifts-icon">
+    <span *ngIf="details.mode !== 'ADD'"> &nbsp;Edit {{constants.bayName}} Info</span>
+    <span *ngIf="details.mode == 'ADD'"> &nbsp;Add {{constants.bayName}} Info</span>
+    <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+  </h1>
+  <form #form="ngForm" [formGroup]="profileForm" autocomplete="nope" id="staff">
+    <div class="" [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+      <app-scroll-highlight>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="model-content-margin" id="staff1">
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <!-- <div class="task-codes-title">{{constants.bayTitle}} TYPE<sup class="required-astricks">*</sup></div> -->
+            <mat-label>{{constants.bayTitle}} TYPE</mat-label>
+            <mat-select name="bayType" [(ngModel)]="bay.bayType" required formControlName="bayType">
+              <mat-option [value]="bay.id" class="mat-normal-option" *ngFor="let bay of bayType;">{{bay.type}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="profileForm.controls['bayType'].errors && profileForm.controls['bayType'].touched" class="error_msg error-position">
+            <div [hidden]="!profileForm.controls['bayType'].errors.required">Select a
+              {{this.appService.toTitleCase(constants.bayName)}} type.</div>
+          </div>
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <!-- <div class="task-codes-title">{{constants.bayTitle}} NUMBER<sup class="required-astricks">*</sup></div> -->
+            <mat-label>{{constants.bayTitle}} NUMBER</mat-label>
+            <input type="text" matInput name="bayCode" [(ngModel)]="bay.bayCode" minlenght="1" maxlength="4" required
+              formControlName="bayCode" (ngModelChange)="bayCodeChange()" spellcheck="false">
+          </mat-form-field>
+          <div *ngIf="profileForm.controls['bayCode'].errors && profileForm.controls['bayCode'].touched" class="error_msg error-position">
+            <div [hidden]="!profileForm.controls['bayCode'].errors.required">Enter
+              {{this.appService.toTitleCase(common.bayName)}} number</div>
+            <div [hidden]="!profileForm.controls['bayCode'].errors.pattern">{{this.appService.toTitleCase(constants.bayName)}}
+              Number should be either numeric or
+              alphanumeric</div>
+          </div>
+        </div>
+      </app-scroll-highlight>
+    </div>
+
+    <mat-dialog-actions>
+      <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" [disabled]="!profileForm.valid" (click)="addBay()">DONE</button>
+      <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="!profileForm.valid" (click)="updateBay()"
+        [mat-dialog-close]>UPDATE</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+
+    </mat-dialog-actions>
+  </form>
+</div>

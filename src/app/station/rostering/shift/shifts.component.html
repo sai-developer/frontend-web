@@ -1,0 +1,98 @@
+<div fxLayout="row" fxLayoutWrap="wrap" class="shift-pg">
+  <img src="assets/images/master/shifts-icon.png" class="shifts-icon">
+  <div fxFlex="90">
+    <div class="shifts-title">SHIFTS</div>
+    <div class="tot-shifts">{{shiftList.length}}</div>
+    <div style="text-align:right;">
+      <span class="mandatory-field"> Note: <b>+</b> indicates next day </span>
+    </div>
+  </div>
+  <div fxFlex="100">
+    <hr class="i-hr">
+  </div>
+  <div *ngIf="load" fxFlex="100">
+    <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+      <h2 *ngIf="i == 2">Turning Around . . .</h2>
+    </div>
+  </div>
+  <div *ngIf="!load" fxFlex="100">
+    <div *ngIf="viewType === 'LIST_VIEW'" fxLayout="row" fxLayoutWrap="wrap">
+      <!-- list view start -->
+      <div fxFlex="100" class="master-fixed-header">
+        <div fxLayout="row" class="dc-th">
+          <div fxFlex>SHIFT NAME</div>
+          <div fxFlex>ALIAS</div>
+          <div fxFlex>START TIME</div>
+          <div fxFlex>END TIME</div>
+          <div fxFlex="5" class="text-right">ACTION</div>
+        </div>
+      </div>
+      <div fxFlex="100" class="no-datamsg"
+        *ngIf="(shiftList  | SearchPipe: searchText :  'alias' :'name').length === 0  && searchText">No
+        match found</div>
+      <div fxFlex="100">
+        <div class="dc-card" *ngFor="let shift of shiftList  | SearchPipe: searchText :  'alias' :'name'">
+          <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+            <div fxFlex class="staff-data">{{shift.name}}</div>
+            <div fxFlex class="staff-data">{{shift.alias}}</div>
+            <div fxFlex class="staff-data">{{shift.startTime | date: 'HH:mm': zoneOffset}}</div>
+            <div fxFlex class="staff-data">{{shift.endTime | date: 'HH:mm': zoneOffset}}
+              <sup class="mandatory-field">{{(shift.startTime | date: 'HH:mm': zoneOffset) > (shift.endTime | date:
+                'HH:mm': zoneOffset)? "+":""}}</sup>
+            </div>
+            <div fxFlex="5" class="text-right">
+              <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+                <button mat-menu-item (click)="edit(shift)">EDIT</button>
+                <button mat-menu-item (click)="delete(shift)">REMOVE</button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- card view start -->
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'GRID_VIEW'">
+      <div fxFlex.xl="20" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-sm="33"
+        *ngFor="let shift of shiftList  | SearchPipe: searchText :  'alias' :'name'">
+        <mat-card fxFlex="100" class="task-grid">
+          <mat-card-title>
+            <span fxFlex></span>
+            <div class="task-name">{{shift.name}}<div class="service-name">{{shift.alias}}</div>
+            </div>
+            <span fxFlex></span>
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <button mat-menu-item (click)="edit(shift)">EDIT</button>
+              <button mat-menu-item (click)="delete(shift)">REMOVE</button>
+            </mat-menu>
+          </mat-card-title>
+          <hr class="grid-hr">
+          <mat-card-content>
+            <div fxLayout="row">
+              <div fxFlex="50">
+                <div class="priority-title">START TIME</div>
+                <div class="dependency-report">{{shift.startTime | date: 'HH:mm': zoneOffset}}</div>
+              </div>
+              <div fxFlex="50">
+                <div class="priority-title">END TIME</div>
+                <div class="dependency-report">{{shift.endTime | date: 'HH:mm': zoneOffset}}
+                  <sup class="mandatory-field">{{(shift.startTime | date: 'HH:mm': zoneOffset) > (shift.endTime | date:
+                    'HH:mm': zoneOffset)? "+":""}}</sup>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="100" class="no-datamsg"
+        *ngIf="(shiftList  | SearchPipe: searchText :  'alias' :'name').length === 0  && searchText">No
+        match found</div>
+      <!-- card view end -->
+    </div>
+  </div>
+</div>

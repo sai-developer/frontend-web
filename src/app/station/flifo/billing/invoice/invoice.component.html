@@ -1,0 +1,321 @@
+<div fxLayout="row" fxLayoutWrap="wrap" class="invoice-container">
+  <div fxFlex="100" class="">
+    <div fxFlex="25" class="contract-sec" [ngClass]="{'spice': flight.bg == 'spice', 'al': flight.bg == 'al', 'delta': flight.bg == 'delta', 'klm': flight.bg == 'klm', 'anz': flight.bg == 'anz', 'emirates': flight.bg == 'emirates'}">
+      <div fxLayout="column" class="contract-details">
+        <div fxLayout="column" class="form-intro">
+          Handling form for:
+        </div>
+        <div class="airline-name">
+          <!-- <img src="assets/images/"+ {{flight.airline}}+""> -->
+          <img [src]='"assets/images/billing/"+flight.airline+".png"'>
+        </div>
+        <div class="flt-eqp">
+          <hr>
+          <div>EQUIPMENT TYPE
+            <br>
+            <span>{{flight.eqpType}}</span>
+          </div>
+          <hr>
+        </div>
+        <div class="flt-det">
+          <div fxLayout="row" class="arrDet">
+            <div fxFlex="20" class="flt-icon">
+              <mat-icon>flight_land</mat-icon>
+            </div>
+            <!-- standard arrival -->
+            <div fxFlex="80">
+              <div>{{flight.originAirportCode}}</div>
+              <div class="num">{{flight.arrFlightNumber}}</div>
+              <div fxLayout="row" class="timeDet">
+                <!-- standard sec -->
+                <div fxFlex="50">
+                  STA
+                  <br>
+                  <span class="staDate">{{flight.standardArrivalTime ? flight.date : ''}}
+                    <br>
+                  </span>
+                  <span class="staTime">{{flight.standardArrivalTime ? flight.standardArrivalTime : '--:--'}}</span>
+                </div>
+                <!-- actual section -->
+                <div fxFlex="50">
+                    ATA
+                    <br>
+                    <span class="staDate">{{flight.actualArrivalTime ? flight.date : ''}}
+                      <br>
+                    </span>
+                    <span class="staTime">{{flight.actualArrivalTime ? flight.actualArrivalTime : '--:--'}}</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- departure section -->
+          <div fxLayout="row" class="depDet">
+              <div fxFlex="20" class="flt-icon depIcon">
+                <mat-icon>flight_takeoff</mat-icon>
+              </div>
+              <div fxFlex="80">
+                <hr>
+                <div>{{flight.destinationAirportCode}}</div>
+                <div class="num">{{flight.depFlightNumber}}</div>
+                <div fxLayout="row" class="timeDet">
+                  <!-- standard sec -->
+                  <div fxFlex="50">
+                    STD
+                    <br>
+                    <span class="staDate">{{flight.standardDepartureTime ? flight.date : ''}}
+                      <br>
+                    </span>
+                    <span class="staTime">{{flight.standardDepartureTime ? flight.standardDepartureTime : '--:--'}}</span>
+                  </div>
+                  <!-- actual sec -->
+                  <div fxFlex="50">
+                      ATD
+                      <br>
+                      <span class="staDate">{{flight.actualDepartureTime ? flight.date : ''}}
+                        <br>
+                      </span>
+                      <span class="staTime">{{flight.actualDepartureTime ? flight.actualDepartureTime : '--:--'}}</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <hr>
+        <div class="package">
+          <hr>
+            Under Comprehensive package
+        </div>
+        <div class="total">
+          BILLING AMOUNT
+          <br>
+          <span>{{flight.currency}} ***</span>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="5"></div>
+    <!-- equipment section start -->
+    <div fxFlex="70" class="table-sec">
+      <table class="table">
+        <thead>
+          <tr fxLayout="row" class="content-head">
+            <th fxFlex="30" class="static-head">
+              <div>Equipment Used</div>
+            </th>
+            <th fxFlex="10" class="static-head">
+              <div>Qty</div>
+            </th>
+            <th fxFlex="10" class="static-head">
+              <div>From</div>
+            </th>
+            <th fxFlex="10" class="static-head">
+              <div>To</div>
+            </th>
+            <th fxFlex="10" class="static-head">
+              <div>Duration</div>
+            </th>
+            <th fxFlex="30" class="static-head">
+              <div>Remarks</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr *ngFor="let eqp of eqpList" class="eqpDetails" fxLayout="row">
+            <td fxFlex="30" class="">
+              <div class="">{{eqp.used}}</div>
+            </td>
+            <td fxFlex="10" class="">
+              <div class="">{{eqp.qty}}</div>
+            </td>
+            <td fxFlex="10" class="">
+              <div class="">{{eqp.from}}</div>
+            </td>
+            <td fxFlex="10" class="">
+              <div class="">{{eqp.to}}</div>
+            </td>
+            <td fxFlex="10" class="">
+              <div class="">{{eqp.duration}}</div>
+            </td>
+            <td fxFlex="30" class="">
+              <div class="">{{eqp.remarks}}</div>
+            </td>
+          </tr>
+          <tr fxLayout="row" [hidden]="add" class="eqpDetails eqp-add" (click)="swap()">
+            <td fxFlex="100" class="add-btn"><mat-icon>add</mat-icon><span>ADD NEW EQUIPMENT</span></td>
+          </tr>
+          <tr fxLayout="row" [hidden]="!add" class="add-new">
+            <td fxFlex="30">
+              <!-- <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>Equipment used</mat-label>
+                <div class="">
+                  <input type="text" matInput name="eqpUsed" [(ngModel)]="formData.used" required class="mar-left-5">
+                </div>
+              </mat-form-field> -->
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>Equipment used</mat-label>
+                <mat-select name="eqpUsed" required [(ngModel)]="formData.used">
+                  <mat-option *ngFor="let eqpm of eqpMaster" [value]="eqpm.equipment" class="mat-normal-option">{{eqpm.equipment}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td fxFlex="10">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>Qty</mat-label>
+                <div class="">
+                  <input type="text" matInput name="qty" [(ngModel)]="formData.qty" required class="mar-left-5" maxlength="2">
+                </div>
+              </mat-form-field>
+            </td>
+            <td fxFlex="10">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>From</mat-label>
+                <div class="">
+                  <input type="text" matInput name="from" [(ngModel)]="formData.from" required class="mar-left-5" maxlength="5">
+                </div>
+              </mat-form-field>
+            </td>
+            <td fxFlex="10">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>To</mat-label>
+                <div class="">
+                  <input type="text" matInput name="to" required [(ngModel)]="formData.to"  class="mar-left-5" maxlength="5">
+                </div>
+              </mat-form-field>
+            </td>
+            <td fxFlex="10">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>Duration</mat-label>
+                <div class="">
+                  <input type="text" matInput name="duration" [(ngModel)]="formData.duration"  required class="mar-left-5" maxlength="5">
+                </div>
+              </mat-form-field>
+            </td>
+            <td fxFlex="20">
+              <mat-form-field class="w-100" floatLabel="never">
+                <mat-label>Remarks</mat-label>
+                <div class="">
+                  <input type="text" matInput name="remarks" [(ngModel)]="formData.remarks" required class="mar-left-5">
+                </div>
+              </mat-form-field>
+            </td>
+            <td fxFlex="5" class="complete">
+              <mat-icon (click)="addEqp(formData)">done_outline</mat-icon>
+            </td>
+            <td fxFlex="5" class="complete">
+              <mat-icon (click)="close()">close</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    <!-- equipment section end -->
+      <!-- mapower section start -->
+        <table class="table">
+          <thead>
+            <tr fxLayout="row" class="content-head">
+              <th fxFlex="30" class="static-head">
+                <div>Manpower Used</div>
+              </th>
+              <th fxFlex="10" class="static-head">
+                <div>Qty</div>
+              </th>
+              <th fxFlex="10" class="static-head">
+                <div>From</div>
+              </th>
+              <th fxFlex="10" class="static-head">
+                <div>To</div>
+              </th>
+              <th fxFlex="10" class="static-head">
+                <div>Duration</div>
+              </th>
+              <th fxFlex="30" class="static-head">
+                <div>Remarks</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <tr *ngFor="let man of manList" class="eqpDetails" fxLayout="row">
+              <td fxFlex="30" class="">
+                <div class="">{{man.role}}</div>
+              </td>
+              <td fxFlex="10" class="">
+                <div class="">{{man.qty}}</div>
+              </td>
+              <td fxFlex="10" class="">
+                <div class="">{{man.from}}</div>
+              </td>
+              <td fxFlex="10" class="">
+                <div class="">{{man.to}}</div>
+              </td>
+              <td fxFlex="10" class="">
+                <div class="">{{man.duration}}</div>
+              </td>
+              <td fxFlex="30" class="">
+                <div class="">{{man.remarks}}</div>
+              </td>
+            </tr>
+            <tr fxLayout="row" [hidden]="addMan" class="eqpDetails eqp-add" (click)="swapMan()">
+              <td fxFlex="100" class="add-btn"><mat-icon>add</mat-icon><span>ADD EXTRA MANPOWER</span></td>
+            </tr>
+            <tr fxLayout="row" [hidden]="!addMan" class="add-new">
+              <td fxFlex="30">
+                <mat-form-field class="w-100" floatLabel="never">
+                  <mat-label>ManPower used</mat-label>
+                  <div class="">
+                    <input type="text" matInput name="eqpUsed" [(ngModel)]="manData.role" required class="mar-left-5">
+                  </div>
+                </mat-form-field>
+              </td>
+              <td fxFlex="10">
+                <mat-form-field class="w-100" floatLabel="never">
+                  <mat-label>Qty</mat-label>
+                  <div class="">
+                    <input type="text" matInput name="qty" [(ngModel)]="manData.qty" required class="mar-left-5" maxlength="2">
+                  </div>
+                </mat-form-field>
+              </td>
+              <td fxFlex="10">
+                <mat-form-field class="w-100" floatLabel="never">
+                  <mat-label>From</mat-label>
+                  <div class="">
+                    <input type="text" matInput name="from" [(ngModel)]="manData.from" required class="mar-left-5" maxlength="5">
+                  </div>
+                </mat-form-field>
+              </td>
+              <td fxFlex="10">
+                <mat-form-field class="w-100" floatLabel="never">
+                  <mat-label>To</mat-label>
+                  <div class="">
+                    <input type="text" matInput name="to" required [(ngModel)]="manData.to"  class="mar-left-5" maxlength="5">
+                  </div>
+                </mat-form-field>
+              </td>
+              <td fxFlex="10">
+                <mat-form-field class="w-100" floatLabel="never">
+                  <mat-label>Duration</mat-label>
+                  <div class="">
+                    <input type="text" matInput name="duration" [(ngModel)]="manData.duration"  required class="mar-left-5" maxlength="5">
+                  </div>
+                </mat-form-field>
+              </td>
+              <td fxFlex="20">
+                <mat-form-field class="w-100" floatLabel="never">
+                  <mat-label>Remarks</mat-label>
+                  <div class="">
+                    <input type="text" matInput name="remarks" [(ngModel)]="manData.remarks" required class="mar-left-5">
+                  </div>
+                </mat-form-field>
+              </td>
+              <td fxFlex="5" class="complete">
+                <mat-icon (click)="addPower(manData)">done_outline</mat-icon>
+              </td>
+              <td fxFlex="5" class="complete">
+                <mat-icon (click)="closeMan()">close</mat-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- manpower section end -->
+    </div>
+  </div>
+</div>

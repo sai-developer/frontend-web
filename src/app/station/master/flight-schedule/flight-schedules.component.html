@@ -1,0 +1,186 @@
+<div fxLayout="row" fxLayoutWrap="wrap" class="dc-page top-row">
+  <img src="assets/images/master/task-icon.png" class="task-icon">
+  <div fxFlex="90">
+    <div class="dc-txt">FLIGHT ROUTES</div>
+    <!-- <div class="dc-no">{{(selectedData | MasterSearch : searchText : 'viewarrivalFlightNumber' : 'viewdepFlightNumber'
+      : 'code' : 'code' : 'flightType').length}}</div> -->
+    <div class="dc-no">{{selectdata.length}}</div>
+  </div>
+</div>
+<hr class="i-hr">
+<!-- loader section -->
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load">
+  <div *ngIf="viewType === 'LIST_VIEW'" fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" class="master-fixed-header">
+      <div fxLayout="row" class="dc-th">
+        <div fxFlex="9">FLT TYPE</div>
+        <div fxFlex="7">EQUIP</div>
+        <div fxFlex="7">ARR FLT #</div>
+        <div fxFlex="7">ORG</div>
+        <div fxFlex="7">STA</div>
+        <div fxFlex="7">DEP FLT #</div>
+        <div fxFlex="7">DEST</div>
+        <div fxFlex="6">STD</div>
+        <div fxFlex="19">FREQUENCY</div>
+        <div fxFlex="10">FROM</div>
+        <div fxFlex="10">TO</div>
+        <div fxFlex="4" class="text-right">ACTION</div>
+      </div>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(selectedData | MasterSearch : searchText : 'viewarrivalFlightNumber' : 'viewdepFlightNumber' : 'code' : 'code' : 'flightType').length === 0  && searchText">
+      No match found
+    </div>
+    <div fxFlex="100">
+      <div class="dc-card"
+        *ngFor="let flightInfo of selectedData | MasterSearch : searchText : 'viewarrivalFlightNumber' : 'viewdepFlightNumber' : 'code' : 'code' : 'flightType'">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+          <div fxFlex="9" class="staff-data">
+            <span *ngFor="let flightType of constants.flightType">
+              <span *ngIf="flightInfo.flightType == flightType.id">{{flightType.type}}</span>
+            </span>
+          </div>
+          <div fxFlex="7" class="staff-data">{{flightInfo.equipmentTypeId.type}}</div>
+          <div fxFlex="7" class="staff-data">{{flightInfo.viewarrivalFlightNumber}}</div>
+          <div fxFlex="7" class="staff-data">{{flightInfo.origin?.code}}</div>
+          <div fxFlex="7" class="staff-data">{{(flightInfo.standardArrivalTime | date:'HH:mm' : zoneOffset)}}</div>
+          <div fxFlex="7" class="staff-data">{{flightInfo.viewdepFlightNumber}}</div>
+          <div fxFlex="7" class="staff-data">{{flightInfo.destination?.code}}</div>
+          <div fxFlex="6" class="staff-data">{{(flightInfo.standardDepartureTime | date:'HH:mm' : zoneOffset)}} <span
+              *ngIf="flightInfo.flightType == 1 || flightInfo.flightType == 2" class="mandatory-field">{{(flightInfo.standardArrivalTime
+              | date:'HH:mm') >
+              (flightInfo.standardDepartureTime | date:'HH:mm')? "+":""}}</span></div>
+          <!-- <div fxFlex="18" class="staff-data">{{flightInfo.frequency}}</div> -->
+
+          <div fxFlex="19" fxLayout="row" fxLayoutWrap="wrap" class="weekDays-selector">
+            <div fxFlex="10" class="weekDays-selector" *ngFor="let flightFreq of flightInfo.flightFrequencyModified">
+              <input name="frequency" type="checkbox" id="{{flightFreq.id}}" class="weekday"
+                [(ngModel)]="flightFreq.flag" />
+              <label for="{{flightFreq.id}}">{{flightFreq.name}}</label>
+            </div>
+          </div>
+          <div fxFlex="10" class="staff-data">{{flightInfo.effectiveFrom | date: 'dd MMM yyyy' : zoneOffset}}</div>
+          <div fxFlex="10" class="staff-data">{{flightInfo.effectiveTo | date: 'dd MMM yyyy' : zoneOffset}}</div>
+          <div fxFlex="4" class="text-right">
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <button mat-menu-item (click)="edit(flightInfo)">EDIT</button>
+              <button mat-menu-item (click)="delete(flightInfo)">REMOVE</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+      <!-- for checkbox -->
+      <!-- <div class="weekDays-selector">
+      <span *ngFor="let day of days">
+        <input type="checkbox" id="weekday-{{day.name}}" class="weekday" />
+        <label for="weekday-{{day.name}}">{{day.name}}</label>
+      </span>
+    </div> -->
+    </div>
+  </div>
+  <div *ngIf="viewType === 'GRID_VIEW'" fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.xl="20" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-sm="33"
+      *ngFor="let flightInfo of selectedData | MasterSearch : searchText : 'viewarrivalFlightNumber' : 'viewdepFlightNumber' : 'code' : 'code' : 'flightType'">
+      <mat-card class="schedule-card">
+        <mat-card-title>
+          <div class="mat_action pull-right">
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <button mat-menu-item (click)="edit(flightInfo)">EDIT</button>
+              <!--<button mat-menu-item >EDIT</button>-->
+              <button mat-menu-item (click)="delete(flightInfo)">REMOVE</button>
+            </mat-menu>
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" class="arr-details">
+            <div fxFlex="50">
+              <div>
+                <div class="flight-txt" [hidden]="flightInfo.flightType === 0">ARRIVAL</div>
+                <div class="flight-num">{{flightInfo.arrFlightNumber}}</div>
+                <div class="stat-code">{{flightInfo.origin.code}}</div>
+              </div>
+              <div class="base-flight-text-center" *ngIf="flightInfo.flightType==0">
+                <div>BASE</div>
+              </div>
+              <div class="arr-time" [hidden]="flightInfo.flightType === 0">STA: <span>{{flightInfo.standardArrivalTime
+                  | date:'HH:mm' : zoneOffset}}</span></div>
+            </div>
+            <div fxFlex="50">
+              <div>
+                <div class="flight-txt text-right" [hidden]="flightInfo.flightType === 3">DEPARTURE</div>
+                <div class="flight-num text-right">{{flightInfo.depFlightNumber}}</div>
+                <div class="stat-code text-right">{{flightInfo.destination.code}}</div>
+              </div>
+              <div class="halt-flight-font text-right" *ngIf="flightInfo.flightType==3">
+                <div>HALT</div>
+              </div>
+              <div class="arr-time text-right" [hidden]="flightInfo.flightType === 3">STD: <span>{{flightInfo.standardDepartureTime
+                  | date:'HH:mm' : zoneOffset}} <span *ngIf="flightInfo.flightType == 1 || flightInfo.flightType == 2"
+                    class="mandatory-field">{{(flightInfo.standardArrivalTime
+                    | date:'HH:mm' : zoneOffset) >
+                    (flightInfo.standardDepartureTime | date:'HH:mm' : zoneOffset)? "+":""}}</span> </span></div>
+            </div>
+          </div>
+          <hr class="">
+          <!-- <div fxLayout="row" class="weekDays-selector disable-click"> -->
+          <!-- <span *ngFor="let day of days">
+                  <input type="checkbox" id="weekday-{{day.id}}" class="weekday"/>
+                  <label for="weekday-{{day.id}}">{{day.name}}</label>
+                </span> -->
+          <div class="card-freq">
+            <div class="weekDays-selector letter-spacing" *ngFor="let flightFreq of flightInfo.flightFrequencyModified">
+              <input name="frequency" type="checkbox" id="{{flightFreq.id}}" class="weekday"
+                [(ngModel)]="flightFreq.flag" />
+              <label for="{{flightFreq.id}}">{{flightFreq.name}}</label>
+            </div>
+          </div>
+          <!-- </div> -->
+          <div fxLayout="row" class="timings">
+            <div fxFlex="50">
+              <div class="arr-date">FROM</div>
+              <div class="arr-from">{{flightInfo.effectiveFrom | date: 'dd MMM yyyy' : zoneOffset}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="arr-date">TO</div>
+              <div class="arr-from">{{flightInfo.effectiveTo | date: 'dd MMM yyyy' : zoneOffset}}</div>
+            </div>
+          </div>
+          <hr class="">
+          <div fxLayout="row" class="equip-details">
+            <div fxFlex="50">
+              <div class="equip-title">EQUIP</div>
+              <div class="equip-type">{{flightInfo.equipmentTypeId.type}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="equip-title">FLIGHT TYPE</div>
+              <div class="equip-type">
+                <span *ngFor="let flightType of constants.flightType">
+                  <span *ngIf="flightInfo.flightType == flightType.id">{{flightType.type}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(selectedData | MasterSearch : searchText : 'viewarrivalFlightNumber' : 'viewdepFlightNumber' : 'code' : 'code' : 'flightType').length === 0  && searchText">
+      No match found
+    </div>
+  </div>
+</div>
+<!-- Card section -->
+<!-- <div *ngIf="!load">
+
+  </div> -->

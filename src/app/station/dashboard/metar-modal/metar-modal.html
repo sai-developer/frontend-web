@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>
+  <img class="metar-icon" src="assets/images/dashboard/metar-dark.png"/>
+  METAR
+  <mat-icon class="close" (click)="closeModal()">close</mat-icon>
+</h1>
+<mat-dialog-content class="">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="25" class="topic">Airport</div>
+    <div fxFlex="75" class="value">{{details.metarAirPortName}}</div>
+    <div fxFlex="25" class="topic">Airport Code </div>
+    <div fxFlex="75" class="value">{{details.metarAirPortTitle}}</div>
+    <div fxFlex="25" class="topic">Country Code</div>
+    <div fxFlex="75" class="value">{{details.metarCountryCode}}</div>
+    <div fxFlex="25" class="topic">Report</div>
+    <div fxFlex="75" class="value">{{details.metarRAW}}</div>
+  </div>
+</mat-dialog-content>

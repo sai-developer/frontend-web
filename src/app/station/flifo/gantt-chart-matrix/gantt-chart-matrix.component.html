@@ -1,0 +1,84 @@
+<!-- loader section -->
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+
+<!-- <div [hidden]="load" fxLayout="row" fxLayoutWrap="wrap" class="gantt-head">
+  <div fxFlex="3" class="back-icon">
+    <button (click)="backToLive()" class="back-live" matTooltip="BACK TO LIVE STATUS">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+  </div>
+  <div fxFlex="10" class="all-flights">Consolidated view</div>
+</div> -->
+
+<div [hidden]="load" fxLayout="row" fxLayoutWrap="wrap" class="matrix-body">
+  <!-- <div fxFlex="100" class="">
+    <table class="table">
+      <thead class="margin-top-5">
+        <tr class="" fxLayout="row" class="task-name-head-row">
+          <th fxFlex="12" class="">
+          </th>
+          <th *ngFor="let task of taskList" class="task-name-head">
+            <div class="task-name">{{task.name}}</div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div> -->
+  <div fxFlex="100" class="gantt-fixed-header">
+    <div class="extra-sec">
+      <table class="table">
+        <thead>
+          <tr fxLayout="row" class="head-row">
+            <th fxFlex="9" class="cross-sec">
+              <div [hidden]="true">test section</div>
+            </th>
+            <th  fxFlex="{{flexValue}}" *ngFor="let task of taskList" class="task-name-head">
+              <div fxFlex="{{flexValue}}" class="task-name">{{task.name}}</div>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div fxFlex="100" class="">
+    <div>
+      <table class="table">
+        <!-- <thead>
+          <tr fxLayout="row" class="head-row">
+            <th fxFlex="10" class="cross-sec">
+              <div [hidden]="true">test section</div>
+            </th>
+            <th fxFlex="{{flexValue}}" *ngFor="let task of taskList" class="task-name-head">
+              <div fxFlex class="task-name">{{task.name}}</div>
+            </th>
+          </tr>
+        </thead> -->
+        <tbody class="">
+          <tr *ngFor="let flt of flightsList" class="flight-row" fxLayout="row">
+            <td fxFlex="9" class="flight-det">
+              <div class="flight-no">{{flt.arrFlightNumber ? flt.arrFlightNumber : 'BASE'}} - {{flt.depFlightNumber ? flt.depFlightNumber : 'HALT'}}<br>
+                <div class="flight-time">
+                  <span [hidden]="flt.flightType == 0" class="flight-arr">{{flt.actualArrivalTime ? (flt.actualArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+                  <span [hidden]="flt.flightType == 3" class="flight-dep">{{flt.actualDepartureTime ? (flt.actualDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span>
+                </div>
+              </div>
+            </td>
+            <td fxFlex="{{flexValue}}" *ngFor="let task of taskList" class="task-color-blk">
+              <div *ngFor="let flight of flightsList">
+                <div *ngIf=" flt.flightSchedulesId == flight.flightSchedulesId">
+                  <div *ngFor="let tsk of flight.tasks">
+                    <div *ngIf="task.id == tsk.taskId" class="task-color-grid-{{tsk.state}}" [ngClass]="{'task-done': tsk.complete}"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

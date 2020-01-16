@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>
+  <img class="notam-icon" src="assets/images/dashboard/notam.png" />
+  NOTAM
+  <mat-icon class="close" (click)="closeModal()">close</mat-icon>
+</h1>
+<mat-dialog-content class="">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" class="content">
+      <pre>
+{{details.id}}<br>
+{{details.Subject}}<br>
+{{details.SubArea}}<br>
+{{details.condition}}<br>
+{{details.location}}<br>
+{{details.msg}}
+      </pre>
+    </div>
+  </div>
+</mat-dialog-content>

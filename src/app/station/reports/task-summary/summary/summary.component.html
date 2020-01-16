@@ -1,0 +1,111 @@
+<div class="summary-dialogs">
+  <div>
+    <img src="assets/images/master/task-icon-copy.png" class="tasks-icon">
+    <div class="task-title">Task Summary</div>
+    <!-- <button class="export_xls" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o "></i></button> -->
+    <mat-icon class="export-cls" matTooltip="Export as CSV" (click)="exportAsXLSX()">description</mat-icon>
+    <mat-icon class="close" (click)="close()">close</mat-icon>
+  </div>
+  <div class="summary-fixed-header ">
+    <div fxFlex="100">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="13" fxLayout="row" class="flight-card">
+          <div class="flight-img" [hidden]="taskData.flightType === 0">
+            <mat-icon>flight_land</mat-icon>
+            <div class="tail-no">{{taskData? taskData.arrFlightNumber:''}}</div>
+          </div>
+          <div [hidden]="taskData.flightType === 0">
+            <img src="assets\images\master\divider@1.png" class="Divider">
+          </div>
+          <div class="flight-img" [hidden]="taskData.flightType === 3">
+            <mat-icon>flight_takeoff</mat-icon>
+            <div class="tail-no">{{taskData? taskData.depFlightNumber:''}}</div>
+          </div>
+        </div>
+        <div fxFlex="7" class="task-head">TASKS
+          <div class="task-head-count">{{taskData.taskCompletedCount}}/{{taskData.taskAssignedCount}}</div>
+        </div>
+        <div fxFlex="7" class="task-head">DELAYED
+          <div class="task-delay-count">{{taskData.taskDelayedCount}}</div>
+        </div>
+        <div fxFlex="30">
+        </div>
+        <div fxFlex="20" class="flight-details" [hidden]="taskData.flightType === 0">
+          <mat-icon class="flight-icon">flight_land</mat-icon>
+          <div fxFlex class="task-filters">STA<br><span class="black">{{taskData.standardArrivalTime ?
+              (taskData.standardArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+          <div fxFlex class="task-filters">ETA<br><span class="black">{{taskData.estimatedArrivalTime ?
+              (taskData.estimatedArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+          <div fxFlex class="task-filters">ATA<br><span class="black">{{taskData.actualArrivalTime ?
+              (taskData.actualArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+        </div>
+        <div fxFlex="20" class="flight-details" [hidden]="taskData.flightType === 3">
+          <mat-icon class="flight-icon">flight_takeoff</mat-icon>
+          <div fxFlex class="task-filters">STD<br><span class="black">{{taskData.standardDepartureTime ?
+              (taskData.standardDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+          <div fxFlex class="task-filters">ETD<br><span class="black">{{taskData.estimatedDepartureTime ?
+              (taskData.estimatedDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+          <div fxFlex class="task-filters">ATD<br><span class="black">{{taskData.actualDepartureTime ?
+              (taskData.actualDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mat-dialog-content">
+    <div class="mat-elevation-z8 summary-sheet">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" class="summary-fix-head">
+          <div fxLayout="row" class="dc-bh">
+            <div fxFlex="20">TASK NAME</div>
+            <div fxFlex="12">STAFF</div>
+            <div fxFlex="7">PLANNED START</div>
+            <div fxFlex="7">PLANNED END</div>
+            <div fxFlex="7">ACTUAL START</div>
+            <div fxFlex="6">ACTUAL END</div>
+            <div fxFlex="7">MODIFIED START</div>
+            <div fxFlex="7">MODIFIED END</div>
+            <div fxFlex="18">DELAY CODE</div>
+            <div fxFlex="5">SKIPPED</div>
+            <div fxFlex="4" class="text-right"></div>
+          </div>
+        </div>
+        <div fxFlex="100">
+          <div class="dc-card" *ngFor="let row of taskList">
+            <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+              <div fxFlex="20" class="staff-data">{{row.taskName}}</div>
+              <div fxFlex="12" class="staff-data">{{row.name}}</div>
+              <div fxFlex="7" class="staff-data">{{(row.plannedStartTime !== null) ? (row.plannedStartTime |
+                date:'HH:mm'
+                :
+                zoneOffset)
+                : "" }}</div>
+              <div fxFlex="7" class="staff-data">{{(row.plannedEndTime !== null) ? (row.plannedEndTime | date:' HH:mm':
+                zoneOffset):
+                "" }}</div>
+              <div fxFlex="7" class="staff-data">{{(row.taskActualStartTime !== null) ? (row.taskActualStartTime
+                | date:'HH:mm': zoneOffset) : "" }}</div>
+              <div fxFlex="7" class="staff-data">{{(row.taskActualEndTime !== null) ? (row.taskActualEndTime |
+                date:'HH:mm': zoneOffset)
+                : "" }}</div>
+              <div fxFlex="7" class="staff-data">
+                <span>{{(row.taskModifiedStartTime !== null) ? (row.taskModifiedStartTime
+                  | date:' HH:mm': zoneOffset) : "-" }}</span>
+              </div>
+              <div fxFlex="7" class="staff-data">
+                <span>{{(row.taskModifiedEndTime !== null) ? (row.taskModifiedEndTime | date:'HH:mm': zoneOffset)
+                  : "-" }}</span>
+              </div>
+              <div fxFlex="17" class="staff-delay-data">
+                <span *ngIf="(row.taskDelayNumericCode)">{{row.taskDelayNumericCode}}({{row.taskDelayAlphabeticCode}}){{row.taskDelayCodeDescription}}</span>
+              </div>
+              <div fxFlex="5" class="staff-data"><span *ngIf="row.taskSkipped">Y</span></div>
+              <div fxFlex="4" class="staff-data text-center update-icon" (click)="edit(row)">
+                <mat-icon>create</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

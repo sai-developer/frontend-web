@@ -1,0 +1,39 @@
+<h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+  Load Details
+  <img src="assets/images/dashboard/arrow_img.png" alt="arrow-icon">
+ 
+  <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+</h1>
+
+<!-- <h1 mat-dialog-title class="add-mat-dialog-title">
+    Update
+    <span fxFlex></span>
+    <button mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+</h1> -->
+<form #form="ngForm" autocomplete="nope" id="staff">
+  <div class="">
+    <app-scroll-highlight>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <mat-form-field class="w-mb-0 w-100" appearance="outline" [(ngModel)]="mails" name="to" floatLabel="always">
+              <mat-label>To</mat-label>
+              <input name="to" type="email" matInput value={{mails}}>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100">
+            <mat-form-field class="mb-0 w-100" appearance="outline" floatLabel="always">
+              <mat-label>Subject</mat-label>
+              <input type="text" matInput name="subject" value={{sub}}>
+            </mat-form-field>
+          </div>
+        </div> 
+        
+    </app-scroll-highlight>
+  </div>
+
+  <mat-dialog-actions align='center'>
+    <!-- <button *ngIf="allowUpdate" mat-raised-button color="primary" [disabled]="form.invalid" (click)="update(log)">UPDATE</button> -->
+    <button mat-raised-button color="primary" (click)="send()">SEND</button>
+    <button mat-button class="cancel-btn" [mat-dialog-close]>CANCEL</button>
+  </mat-dialog-actions>
+</form>

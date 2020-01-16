@@ -1,0 +1,41 @@
+.title {
+  cursor: pointer;
+}
+
+.progress-small,
+.progress-mini {
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.progress-mini,
+.progress-mini .progress-bar {
+  height: 5px;
+  margin-bottom: 0;
+}
+
+.stat-percent {
+  float: right;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.progress-comp {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.red-bar {
+  background-color: #e81426;
+  // "#FA1516";
+}
+
+.green-bar {
+  background-color: #4caf50;
+  // "#19FE1E";
+}
+
+.amber-bar {
+  background-color: #ffa000;
+  // "#FEA319";
+}

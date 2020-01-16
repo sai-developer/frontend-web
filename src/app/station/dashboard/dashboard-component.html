@@ -1,0 +1,293 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+  <div fxFlex.gt-sm="65" fxFlex.gt-xs="100" fxFlex="100">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" class="top-chart m-gap">
+        <div class="chart-view" fxFlex="31">
+          <round-progress class="arrival" [current]="arrivalOtp" [max]="100" [rounded]="true" [radius]=50 [stroke]="15"
+            [semicircle]="false" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+            [color]="arrivalOtp > 75 ?'#5cbb1d' : arrivalOtp < 50 ? '#e81426' : '#e9ab15'" [background]="'#1a1f35'"
+            [clockwise]="true"></round-progress>
+          <span class="chart-num"
+            [ngStyle]="{'color':arrivalOtp > 75 ?'#5cbb1d' : arrivalOtp < 50 ? '#e81426' : '#e9ab15' }"><span>{{arrivalOtp}}<span>%</span></span><br>
+            <div class="chart-txt">ARRIVAL OTP</div>
+          </span>
+        </div>
+        <div class="chart-view" fxFlex="34.75">
+          <round-progress class="effi-icon" [current]="oAllPerEFF" [max]="100" [radius]=50 [rounded]="true"
+            [stroke]="15" [semicircle]="false" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+            [color]="oAllPerEFF > 75 ?'#5cbb1d' : oAllPerEFF < 50 ? '#e81426' : '#e9ab15'" [background]="'#1a1f35'"
+            [clockwise]="true"></round-progress>
+          <span class="chart-num"
+            [ngStyle]="{'color':oAllPerEFF > 75 ?'#5cbb1d' : oAllPerEFF < 50 ? '#e81426' : '#e9ab15' }"><span>{{oAllPerEFF}}<span>%</span></span><br>
+            <div class="chart-txt">TASK EFFICIENCY</div>
+          </span>
+        </div>
+        <div class="chart-view" fxFlex="33.45">
+          <round-progress class="depart-icon" [current]="totalOtppercentage" [max]="100" [radius]=50 [stroke]="15"
+            [rounded]="true" [semicircle]="false" [responsive]="false" [duration]="800" [animation]="'easeInOutQuart'"
+            [color]="totalOtppercentage > 75 ?'#5cbb1d' : totalOtppercentage < 50 ? '#e81426' : '#e9ab15'"
+            [background]="'#1a1f35'" [clockwise]="true"></round-progress>
+          <span class="chart-num"
+            [ngStyle]="{'color':totalOtppercentage > 75 ?'#5cbb1d' : totalOtppercentage < 50 ? '#e81426' : '#e9ab15' }"><span>{{totalOtppercentage}}<span>%</span></span><br>
+            <div class="chart-txt">DEPARTURE OTP</div>
+          </span>
+        </div>
+      </div>
+      <div fxFlex="100" class="m-gap">
+        <mat-card class="otp-card">
+          <mat-card-content>
+            <div class="otp-block">
+              <div class="otp-value">{{totalOtppercentage}}<span>%</span></div>
+              <div class="otp-txt">ON TIME PERFORMANCE</div>
+            </div>
+            <div class="otp-block">
+              <div class="otp-value fd-value">{{totalFlightsDeparted}}</div>
+              <div class="otp-txt">DEPARTURES</div>
+            </div>
+            <canvas height="100"  baseChart class="chart" [datasets]="ComboChartData" [labels]="lineChartLabels"
+              [options]="ComboChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div fxFlex="50">
+        <mat-card class="delay-cat-v3">
+          <mat-card-title>DELAY CATEGORIZATION</mat-card-title>
+          <mat-card-content class="pad-0">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="100">
+                <mat-tab-group mat-stretch-tabs class="dc-mat-tab-group" (selectedTabChange)="delayByActOrRep($event)"
+                  headerPosition="below">
+                  <mat-tab label="ACTUAL"></mat-tab>
+                  <mat-tab label="REPORTED"></mat-tab>
+                </mat-tab-group>
+              </div>
+              <div fxFlex="100" class="dc-chart">
+                <canvas height="200" baseChart class="chart" [data]="dcDoughnut.values" [labels]="dcDoughnut.labels"
+                  [options]="doughnut.options" [colors]="dcDoughnut.colors" [chartType]="doughnut.type">
+                </canvas>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let category of delayCats">
+              <div fxFlex="100" class="dc-block" [ngClass]="{'i-disabled': category.delay_percentage == 0}">
+                <div class="left-block">
+                  <div class="bullet level-{{category.id}}"></div>
+                  <div class="dc-topic">{{category.category_department}}</div>
+                  <div class="dc-percentage">{{category.delay_percentage.toFixed(0)}}<span>%</span></div>
+                  <!-- <div *ngIf="category.delay_percentage.toFixed(0) != 0 && category.details != null" class="tooltips">
+                    <div class="tooltiptexts">
+                      <span *ngFor="let detail of category.details">
+                        {{detail.delay_numeric_code}}({{detail.delay_alphabetic_code}})<span class="tooltip-right">{{detail.time ? detail.time : 0}} mins</span>
+                      </span>
+                    </div>
+                  </div> -->
+                </div>
+                <!-- <div class="right-block">
+                    <div class="inline-block">
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                    </div>
+                  </div> -->
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div fxFlex="50">
+        <mat-card class="department-card-v3">
+          <mat-card-title>DEPARTMENT EFFICIENCY</mat-card-title>
+          <mat-card-content class="pad-0">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="100" class="dept-chart">
+                <div class=progress-chart>
+                  <round-progress [current]="oAllPerEFF" [max]="100" [radius]=220 [stroke]="47" [semicircle]="true"
+                    [responsive]="true" [duration]="800" [animation]="'easeInOutQuart'" [color]="'#64af14'"
+                    [background]="'#eaeaea'"></round-progress>
+                </div>
+                <div class="efficiency-percent">
+                  <div class="eff-num">{{oAllPerEFF}}<span class="eff-per-sym">%</span></div>
+                  <!-- <div class="eff-num">86<span class="eff-per-sym">%</span></div> -->
+                  Overall Performance
+                </div>
+
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let category of temdata;">
+
+              <!-- <div fxFlex="100" class="dept-block"> -->
+              <div fxFlex="100" class="dept-block" [ngClass]="{'i-disabled': category.efficiencyPercentage == 100}">
+                <div class="left-block">
+                  <div class="dc-topic">{{category.activityName}}</div>
+                  <div class="dc-percentage">{{category.efficiencyPercentage.toFixed(0)}}<span>%</span></div>
+                  <!-- <div class="dc-percentage">{{category.delay_percentage.toFixed(0) < 10 ? '0' +
+                        category.delay_percentage.toFixed(0) : category.delay_percentage.toFixed(0)}}<span>%</span></div> -->
+                  <progressbar [value]="category.efficiencyPercentage" class="dc-progress-bar"
+                    [ngClass]="{'i-high': category.efficiencyPercentage > 70, 'i-mid': category.efficiencyPercentage > 30 && category.efficiencyPercentage <= 70, 'i-low': category.efficiencyPercentage <= 30}">
+                  </progressbar>
+                </div>
+                <!-- <div class="right-block">
+                    <div class="inline-block">
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                    </div>
+                  </div> -->
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!--It has been commented for v3-->
+      <!--<div fxFlex="100" class="m-gap">
+          <mat-card class="trans-bg-card">
+            <mat-card-title>EFFICIENCY FACTOR</mat-card-title>
+            <mat-card-content class="pad-0">
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="33.33" *ngFor="let efficiency of efficiencies">
+                  <div class="eff-block">
+                    <div class="r-content">{{efficiency.activityName}}</div>
+                    <div class="l-content">
+                      <round-progress
+                        [current]="efficiency.efficiencyPercentage"
+                        [max]="100"
+                        [rounded]="true"
+                        [stroke]="40"
+                        [color]="efficiency.efficiencyPercentage > 50 ?'#64af14' : '#ec8c21'"
+                        [responsive]="true"
+                        [duration]="800"
+                        [animation]="'easeInOutQuart'"
+                        [animationDelay]="0">
+                      </round-progress>
+                      <div class="eff-per">{{efficiency.efficiencyPercentage ? (efficiency.efficiencyPercentage).toFixed(0) : ""}}<span *ngIf=efficiency.efficiencyPercentage>%</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>-->
+    </div>
+  </div>
+
+  <div fxFlex.gt-sm="35" fxFlex.gt-xs="100" fxFlex="100">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <!-- radar -->
+      <div fxFlex="100" class="weather-block" (click)="popupMetar()">
+        <div fxLayout="row" class="wb-row">
+          <div fxFlex="80" fxLayout="row" class="wb-left">
+            <div fxFlex="30" class="weather-icon"><img src="assets/images/dashboard/metar-dark.png" /></div>
+            <div fxFlex="70" class="weather-info" *ngIf="metarDatas">
+              <div class="w-txt">METAR</div>
+              <!--<div class="w-temp"></div>-->
+              <div class="w-place">Report: <b>{{metarDatas.raw_metar}}</b></div>
+            </div>
+          </div>
+          <div fxFlex="20">
+            <div class="more-info">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxFlex="100" class="weather-block notam-block" (click)="notamDataPopup()">
+        <div fxLayout="row" class="wb-row">
+          <div fxFlex="80" fxLayout="row" class="notam">
+            <div fxFlex="30" class="nb-icon"><img src="assets/images/dashboard/notam.png" /></div>
+            <div fxFlex="70" class="nb-content" *ngIf="notamDatas">
+              <div class="title">NOTAM</div>
+              <div class="sub-title">Condition: <span>{{notamDatas.id}}</span></div>
+              <div class="sub-title">Subject: <span>{{notamDatas.Subject}}</span></div>
+            </div>
+          </div>
+          <div fxFlex="20">
+            <div class="more-info">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="100" class="m-gap p-gap">
+        <mat-card class="trans-bg-card ft-card-v2">
+          <mat-card-content class="flight-padding-0">
+            <div class="master-fixed-header">
+              <div class="ft-title">FLIGHTS</div>
+
+              <mat-tab-group mat-stretch-tabs (selectedTabChange)="selectFlights($event)" headerPosition="below"
+                class="dashboard-flight-card">
+                <mat-tab label="({{onGroundCount}}) ON GROUND"></mat-tab>
+                <mat-tab label="({{yetToArriveCount}})  YET TO ARRIVE" class="last-tab">
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+            <div class="flight-head" *ngFor="let flight of flights;">
+              <!-- *ngIf="etaCheck.boolenValue" -->
+              <span *ngIf="etaCheck.boolenValue" class="tooltiptext"><i
+                  class="material-icons">flight_land</i>{{etaCheck.number}}
+                is
+                on final approach</span>
+              <div fxLayout="row" class="fs-v2" fxLayoutWrap="wrap">
+                <div fxFlex="33">
+                  <!-- [hidden]="flight.flightType === 0" -->
+                  <div fxFlex>
+                    <div *ngIf="flight.flightType==0" class="mar-top-30">BASE</div>
+                    <div class="station" [ngClass]="{'no-value': false}">{{flight.originAirportCode || ''}}</div>
+                    <div class="flight-no" [ngClass]="{'no-value': false}">{{flight.arrFlightNumber || ''}}</div>
+                    <div class="timing mt-10" *ngIf="flight.flightType!=0" [ngClass]="{'no-value': false}">STA: <span>{{flight.standardArrivalTime
+                        ?
+                        (flight.standardArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                    <div class="timing" *ngIf="flight.actualArrivalTime == null" [hidden]="flight.flightType==0"
+                      [ngClass]="{'no-value': false}">ETA:
+                      <span>{{flight.estimatedArrivalTime
+                        ? (flight.estimatedArrivalTime | date: 'HH:mm': zoneOffset):'--:--'}}</span></div>
+                    <div class="timing" *ngIf="flight.actualArrivalTime" [ngClass]="{'no-value': false}">ATA: <span>{{flight.actualArrivalTime
+                        ? (flight.actualArrivalTime | date: 'HH:mm': zoneOffset):'--:--'}}</span></div>
+                  </div>
+                </div>
+                <div fxFlex="34">
+                  <div class="bay-info">{{flight.bayCode || '--'}}<span> | </span>{{flight.bayType == 0
+                    ?constants.bayType[0].type :(flight.bayType == 1)?constants.bayType[1].type : '----'}}</div>
+                  <div class="flights-handled">{{flight.taskCompletedCount || "0"}}<span>/{{flight.taskAssignedCount || "0"}}</span>
+                  </div>
+                  <div class="tail-no">{{flight.equipmentType}}</div>
+                </div>
+                <div fxFlex="33" class="text-right">
+                  <!-- [hidden]="flight.flightType === 3" -->
+                  <div fxFlex>
+                    <div *ngIf="flight.flightType==3" class="mar-top-30">HALT</div>
+                    <div class="station" [ngClass]="{'no-value': false}">{{flight.destinationAirportCode || ''}}</div>
+                    <div class="flight-no" [ngClass]="{'no-value': false}">{{flight.depFlightNumber || ''}}</div>
+                    <div class="timing mt-10" *ngIf="flight.flightType!=3" [ngClass]="{'no-value': false}">STD: <span>{{flight.standardDepartureTime
+                        ?
+                        (flight.standardDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                    <div class="timing" *ngIf="flight.actualDepartureTime == null" [hidden]="flight.flightType==3"
+                      [ngClass]="{'no-value': false}">ETD:
+                      <span>{{flight.estimatedDepartureTime ? (flight.estimatedDepartureTime | date: 'HH:mm':
+                        zoneOffset)
+                        :
+                        '--:--'}}</span>
+                    </div>
+                    <div class="timing" *ngIf="flight.actualDepartureTime" [ngClass]="{'no-value': false}">ATD: <span>{{flight.actualDepartureTime
+                        ? (flight.actualDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <!-- *ngIf="arrivalFlight(flight.actualArrivalTime)" -->
+              <div
+                *ngIf="etaCheck.boolenValue && etaCheck.number == (flight.depFlightNumber ? flight.depFlightNumber : flight.arrFlightNumber)"
+                class="fs-v22">
+                <i class="material-icons">
+                  flight_land
+                </i> {{etaCheck.number}} is on final approach
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+
+</div>

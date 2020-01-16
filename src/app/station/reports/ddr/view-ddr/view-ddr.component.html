@@ -1,0 +1,167 @@
+<h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+  Load Details
+  <img src="assets/images/dashboard/arrow_img.png" alt="arrow-icon">
+  {{log.depFlightNumber}}
+  <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+</h1>
+
+<!-- <h1 mat-dialog-title class="add-mat-dialog-title">
+    Update
+    <span fxFlex></span>
+    <button mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+</h1> -->
+<form #form="ngForm" autocomplete="nope" id="staff">
+  <div class="">
+    <app-scroll-highlight>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+          <div fxFlex="30">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">NO SHOW PAX</div> -->
+              <mat-label>NO SHOW PAX</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="No. of no Show Pax" [(ngModel)]="log.noOfNoShowPax"
+                #noShowPax="ngModel" minlength="1" maxlength="3" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="noShowPax.errors && noShowPax.touched" class="error_msg error-position">
+              <div [hidden]="!noShowPax.errors.pattern">
+                Please enter the valid characters
+              </div>
+            </div>
+          </div>
+          <div fxFlex="5"></div>
+          <div fxFlex="30">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>JOINING PAX</mat-label>
+              <!-- <div class="task-codes-title">JOINING PAX</div> -->
+              <input type="text" [disabled]="allowEdit" matInput name="Joining Pax" [(ngModel)]="log.joiningPax"
+                #joiningPax="ngModel" minlength="1" maxlength="3" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="joiningPax.errors && joiningPax.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!joiningPax.errors.required">Enter the Joining Pax details</div> -->
+              <div [hidden]="!joiningPax.errors.pattern">
+                Please enter the valid characters
+              </div>
+            </div>
+          </div>
+          <div fxFlex="5"></div>
+          <div fxFlex="30">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">INFANT</div> -->
+              <mat-label>INFANT</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="Infant" [(ngModel)]="log.infant" #infant="ngModel"
+                minlength="1" maxlength="3" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="infant.errors && infant.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!infant.errors.required">Enter the Infant details</div> -->
+              <div [hidden]="!infant.errors.pattern">
+                Please enter the valid characters
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div fxFlex="100">
+          <div fxFlex="45">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">TRANSIT</div> -->
+              <mat-label>TRANSIT</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="Transit" [(ngModel)]="log.transit" #transit="ngModel"
+                minlength="1" maxlength="3" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="transit.errors && transit.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!transit.errors.required">Enter the Transit details</div> -->
+              <div [hidden]="!transit.errors.pattern">
+                Please enter the valid characters
+              </div>
+            </div>
+          </div>
+          <div fxFlex="10"></div>
+          <div fxFlex="45">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">TRANSFER</div> -->
+              <mat-label>TRANSFER</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="Transfer" [(ngModel)]="log.transfer" #transfer="ngModel"
+                minlength="1" maxlength="3" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="transfer.errors && transfer.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!transfer.errors.required">Enter the Transfer details</div> -->
+              <div [hidden]="!transfer.errors.pattern">
+                Please enter the valid characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="100">
+          <div fxFlex="30">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">SKY MARSHAL</div> -->
+              <mat-label>SKY MARSHAL</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="Sky Marshal" [(ngModel)]="log.skyMarshal"
+                #skyMarshal="ngModel" minlength="1" maxlength="2" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="skyMarshal.errors && skyMarshal.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!skyMarshal.errors.required">Enter the Sky Marshal details</div> -->
+              <div [hidden]="!skyMarshal.errors.pattern">
+                Please enter the valid characters
+              </div>
+
+            </div>
+          </div>
+          <div fxFlex="5"></div>
+
+          <div fxFlex="30">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">CREW</div> -->
+              <mat-label>CREW</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="Crew" [(ngModel)]="log.crew" #crew="ngModel"
+                minlength="1" maxlength="2" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="crew.errors && crew.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!crew.errors.required">Enter the Infant details</div> -->
+              <div [hidden]="!crew.errors.pattern">
+                Please enter the valid characters
+              </div>
+
+            </div>
+          </div>
+          <div fxFlex="5"></div>
+          <div fxFlex="30">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <!-- <div class="task-codes-title">TOTAL ON-BOARD</div> -->
+              <mat-label>TOTAL ON-BOARD</mat-label>
+              <input type="text" [disabled]="allowEdit" matInput name="TOB" [(ngModel)]="log.tob" #totalBoard="ngModel"
+                minlength="1" maxlength="3" pattern="[0-9]+" required>
+            </mat-form-field>
+            <div *ngIf="totalBoard.errors && totalBoard.touched" class="error_msg error-position">
+              <!-- <div [hidden]="!totalBoard.errors.required">Enter the Total on board details</div> -->
+              <div [hidden]="!totalBoard.errors.pattern">
+                Please enter the valid characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="100">
+          <mat-form-field class="mb-0 w-100" appearance="outline" floatLabel="always">
+            <!-- <div class="task-codes-title">REMARKS</div> -->
+            <mat-label>REMARKS</mat-label>
+            <input type="text" [disabled]="allowEdit" matInput name="Remarks" [(ngModel)]="log.remarks" #remarks="ngModel"
+              pattern="[A-za-z0-9 ]+" required>
+          </mat-form-field>
+          <div *ngIf="remarks.errors && remarks.touched" class="error_msg error-position">
+            <!-- <div [hidden]="!remarks.errors.required">Enter the Remarks details</div> -->
+            <div [hidden]="!remarks.errors.pattern">
+              Please enter the valid characters
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </app-scroll-highlight>
+  </div>
+
+  <mat-dialog-actions align='center'>
+    <button *ngIf="allowUpdate" mat-raised-button color="primary" [disabled]="form.invalid" (click)="update(log)">UPDATE</button>
+    <button *ngIf="allowEdit" mat-raised-button color="primary" (click)="changeAction()">EDIT</button>
+    <button mat-button class="cancel-btn" [mat-dialog-close]>CANCEL</button>
+  </mat-dialog-actions>
+</form>

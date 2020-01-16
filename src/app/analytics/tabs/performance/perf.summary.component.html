@@ -1,0 +1,76 @@
+<!-- <analytics-filter (downloader)="downloadPDF()" (filtered)="myInit()"></analytics-filter> -->
+<analytics-filter (filtered)="myInit()" [class]="isLoading()?'div-disabled':''"></analytics-filter>
+
+<div class="loader-div" *ngIf="isLoading()">
+	<app-loader [isLoading]="isLoading()"></app-loader>
+</div>
+
+<div class="tab-content" *ngIf="!isLoading()">
+  <div id="tab-1" class="tab-pane active">
+    <div class="panel-body">
+      <div  #chart class="wrapper wrapper-content">
+      	<div>
+        <div class="row">
+          <div class="col-lg-3" *ngFor="let card of cards; let i=index">
+            <!-- <card-comp [card]="card" [animationType]="i==0?'slide-in-left':(i<cards.length-1?'slide-in-top':'slide-in-right')"></card-comp> -->
+            <card-comp [card]="card"></card-comp>
+          </div>
+        </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <!-- <bar-line-chart
+              id="flightOTP"
+              [chartId]="'flightOTP'"
+              [chartTitle]="'Number of Flights vs On Time Performance'"
+              [input]="flightOTPData"
+              [animationType]="'zoom-in-show'"
+            ></bar-line-chart> -->
+            <bar-line-chart
+              id="flightOTP"
+              [chartId]="'flightOTP'"
+              [chartTitle]="'Number of Flights vs On Time Performance'"
+              [input]="flightOTPData"
+            ></bar-line-chart>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <!-- <horz-bar-chart
+              id="top5Route"
+              [chartId]="'top5Route'"
+              [chartTitle]="'Top 5 Routes'"
+              [titleSuffix]="'(On Time Performance %)'"
+              [input]="top5RoutesData"
+              [animationType]="'zoom-in-show'"
+            ></horz-bar-chart> -->
+            <horz-bar-chart
+              id="top5Route"
+              [chartId]="'top5Route'"
+              [chartTitle]="'Top 5 Routes'"
+              [titleSuffix]="'(On Time Performance %)'"
+              [input]="top5RoutesData"
+            ></horz-bar-chart>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <!-- <horz-bar-chart
+              id="bottom5Route"
+              [chartId]="'bottom5Route'"
+              [chartTitle]="'Bottom 5 Routes'"
+              [titleSuffix]="'(On Time Performance %)'"
+              [input]="bottom5RoutesData"
+              [animationType]="'zoom-in-show'"
+            ></horz-bar-chart> -->
+            <horz-bar-chart
+              id="bottom5Route"
+              [chartId]="'bottom5Route'"
+              [chartTitle]="'Bottom 5 Routes'"
+              [titleSuffix]="'(On Time Performance %)'"
+              [input]="bottom5RoutesData"
+            ></horz-bar-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

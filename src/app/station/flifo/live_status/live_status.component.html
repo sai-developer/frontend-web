@@ -1,0 +1,21 @@
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div [hidden]="load" fxLayout="row" fxLayoutWrap="wrap">
+  <!-- <div fxFlex="100">
+      Select item(s): <input type="text" id="selection" value=""><input type="button" id="select" value="Select">
+  </div> -->
+  <div fxFlex="100">
+    <!-- Missing component start -->
+    <!-- <div *ngIf="noBay" class="sp-top">
+          <h2>No Bay Allocated</h2>
+      </div> -->
+    <div class="vis-fixed-bar">
+      <div id="bayAllocation" class="i-vis-timeline i-live-chart"></div>
+    </div>
+    <!-- Missing component end -->
+  </div>
+
+</div>

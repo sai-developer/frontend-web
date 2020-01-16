@@ -1,0 +1,323 @@
+// >>>>>> Copied from styles.scss
+.wrapper {
+  padding: 0 20px;
+}
+.wrapper-content {
+  padding: 20px 10px 40px;
+}
+
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+}
+
+.ibox:after,
+.ibox:before {
+  display: table;
+}
+.ibox-title {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  color: inherit;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 48px;
+}
+
+.ibox-title h5 {
+  display: inline-block;
+  font-size: 14px;
+  margin: 0 0 7px;
+  padding: 0;
+  text-overflow: ellipsis;
+  float: left;
+}
+
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 15px 20px 20px 30px;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+}
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid #e7eaec;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+.ibox-skin1 {
+  background-color: #003982;
+  border-color: #e7eaec;
+  color: #ffffff;
+}
+
+.ibox-skin2 {
+  background-color: #00b8a3;
+  border-color: #e7eaec;
+  color: #ffffff;
+}
+
+.ibox-skin3 {
+  background-color: #249d2d;
+  border-color: #e7eaec;
+  color: #ffffff;
+}
+
+.ibox-skin4 {
+  background-color: #fbb015;
+  border-color: #e7eaec;
+  color: #ffffff;
+}
+
+.tab-content .no-margins {
+  margin: 0 !important;
+}
+.tab-content h1,
+h5 {
+  font-weight: 600;
+}
+
+.tab-content .font-bold {
+  font-weight: 600;
+}
+
+.stat-percent {
+  float: right;
+}
+
+/* Add shadow effect to chart. If you don't like it, get rid of it. */
+.tab-content svg {
+  -webkit-filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+  /* filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.25) ); */
+}
+
+.tab-content .table > thead > tr > th {
+  border-bottom: 1px solid #dddddd;
+  vertical-align: bottom;
+}
+.tab-content .table > thead > tr > th,
+.tab-content .table > tbody > tr > th,
+.tab-content .table > tfoot > tr > th,
+.tab-content .table > thead > tr > td,
+.tab-content .table > tbody > tr > td,
+.tab-content .table > tfoot > tr > td {
+  border-top: 1px solid #e7eaec;
+  line-height: 1.42857;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.tab-content .label {
+  font-weight: 600;
+  padding: 3px 8px;
+  text-shadow: none;
+}
+
+.tab-content .label-primary,
+.tab-content .badge-primary {
+  background-color: #1ab394;
+  color: #ffffff;
+}
+.tab-content .label-success,
+.tab-content .badge-success {
+  background-color: #1c84c6;
+  color: #ffffff;
+}
+.tab-content .label-warning,
+.tab-content .badge-warning {
+  background-color: #f8ac59;
+  color: #ffffff;
+}
+.tab-content .label-warning-light,
+.tab-content .badge-warning-light {
+  background-color: #f8ac59;
+  color: #ffffff;
+}
+.tab-content .label-danger,
+.tab-content .badge-danger {
+  background-color: #ed5565;
+  color: #ffffff;
+}
+.tab-content .label-info,
+.tab-content .badge-info {
+  background-color: #23c6c8;
+  color: #ffffff;
+}
+.tab-content .label-inverse,
+.tab-content .badge-inverse {
+  background-color: #262626;
+  color: #ffffff;
+}
+.tab-content .label-white,
+.tab-content .badge-white {
+  background-color: #ffffff;
+  color: #5e5e5e;
+}
+.tab-content .label-white,
+.tab-content .badge-disable {
+  background-color: #2a2e36;
+  color: #8b91a0;
+}
+
+.tab-content .gray-bg,
+.bg-muted {
+  background-color: #f3f3f4;
+}
+
+.dataTables_wrapper {
+  padding-bottom: 30px;
+}
+//<<<<<< Copied from styles.scss
+
+// >>>>>> Moved from custom.scss
+body {
+  background-color: #dadfe7;
+}
+
+header {
+  // display: none;
+}
+
+.tab-content h6 {
+  font-weight: bolder;
+}
+
+.chart {
+  border-radius: 5px;
+  margin: 0px;
+  //background-color: #ffffff;
+}
+
+tab-list .nav-tabs {
+  border-bottom: none;
+  background-color: #ffffff;
+  border-radius: 0px;
+  //display: none;
+}
+tab-list .nav-tabs .nav-link:hover {
+  background-color: #ffffff;
+  border: none;
+}
+
+tab-list .nav-tabs .nav-link.active {
+  background-color: white;
+  border-color: white;
+  border-bottom: 4px solid #f93b1d;
+}
+
+/* Add shadow effect to chart. If you don't like it, get rid of it. */
+svg {
+  -webkit-filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+  /* filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.25) ); */
+}
+
+.loader-div {
+  left: 0%;
+  top: 0%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+}
+
+.obd-table-header-ontime {
+  color: #ffffff;
+  background-color: #4caf50;
+  /*#a0b700;*/
+}
+
+.obd-table-header-buffer {
+  color: #ffffff;
+  background-color: #ffa000;
+  /*#fec602;*/
+}
+
+.obd-table-header-delay {
+  color: #ffffff;
+  background-color: #e81426;
+  /*#fc6a0c;*/
+}
+
+.obd-table-value-ontime {
+  background-color: #4caf50;
+  /*#d3e07b;*/
+}
+
+.obd-table-value-buffer {
+  background-color: #ffa000;
+  /*#f9dc77;*/
+}
+
+.obd-table-value-delay {
+  background-color: #e81426;
+  /*#f9c6a6;*/
+}
+
+.obd-table-header-grey {
+  color: #ffffff;
+  background: #b3b3b1;
+}
+
+.obd-table-value-grey {
+  background: #e2e3de;
+}
+
+.gridheader0 {
+  color: #ffffff;
+  background: #b3b3b1;
+}
+.gridheader1 {
+  color: #ffffff;
+  background: #93a55e;
+}
+.gridheader3 {
+  color: #ffffff;
+  background: #e493b9;
+}
+
+.gridheader2 {
+  color: #ffffff;
+  background: #79a7b7;
+}
+
+.gridheader4 {
+  color: #ffffff;
+  background: #ffbf66;
+}
+
+.gridvalue0 {
+  background: #e2e3de;
+}
+.gridvalue1 {
+  background: #e3f7a9;
+}
+.gridvalue3 {
+  background: #f1cadc;
+}
+
+.gridvalue2 {
+  background: #b7ebfd;
+}
+
+.gridvalue4 {
+  background: #ffe9c9;
+}
+// <<<<<< Moved from custom.scss
+
+.no-data-div {
+  width: 100%;
+  margin-top: 50px;
+  color: red;
+}

@@ -1,0 +1,79 @@
+
+.top-row{
+  padding: 0px 10px 15px 10px;
+}
+.bay-card{
+  width: 60px;
+  height: 60px;
+  transition: 0.4s;
+}
+.bay-card:hover{
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: 0.4s;
+  cursor: default;
+}
+.bay-type-title{
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 2;
+  letter-spacing: 0.1px;
+}
+.bay-card .bay-no{
+  font-size: 24px;
+  line-height: 1.1;
+  text-align: center;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.bays-icon{
+  width: 48px;
+  height: 42px;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+.dc-card{
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  padding: 0px 10px;
+  color: #000000;
+  transition: 0.4s;
+  cursor: default;
+}
+.dc-card:hover{
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: 0.4s;
+}
+.dc-card .dc-row{
+  align-items: center;
+}
+.dc-card .dc-tab-btn{
+  margin-right: 4px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .bay-type-title{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 2;
+    letter-spacing: 0.1px;
+  }
+  .bay-card .bay-no{
+    font-size: 18px;
+    line-height: 1.1;
+    text-align: center;
+  }
+  .bay-card{
+    width: 50px;
+    height: 50px;
+    transition: 0.4s;
+  }
+  .bays-icon{
+    width: 38px;
+    height: 38px;
+    margin-right: 15px;
+    margin-top: 20px;
+  }
+}

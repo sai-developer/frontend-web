@@ -1,0 +1,136 @@
+<analytics-filter (filtered)="myInit()"></analytics-filter>
+<div class="loader-div" *ngIf="isLoading" style="z-index: 9999;">
+	<app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
+<div class="tab-content" *ngIf="!isLoading" >
+  <div id="tab-1" class="tab-pane active">
+    <div class="panel-body">
+      <div class="wrapper wrapper-content">
+        <div class="row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <h6 align="center">Equipment Type Statistics</h6>
+            <div *ngIf="equipTypeData && equipTypeData.length==0" class="no-data-div"> 
+				<h3 align="center">No Data Found</h3>
+			  </div>
+            <div *ngIf="equipTypeData && equipTypeData.length>0" style="height: 350px; overflow-y: auto">
+            <table class="table table-hover margin bottom" style="font-size: 13px !important">
+			  <thead>
+			    <tr>
+			      <th class="text-center">No</th>
+			      <th>Equipment Type</th>
+			      <th class="text-center">Avg OTP%</th>
+			      <th class="text-center">Avg Turnaround Duration (mins)</th>
+			      <th class="text-center">Avg Turnaround Delay (mins)</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let data of equipTypeData; let i=index">
+			    	<td>{{i+1}}</td>
+			    	<td>{{data.EQUIPMENT_TYPE}}</td>
+			    	<td class="text-center">{{data.AVERAGE_OTP}}%</td>
+			    	<td class="text-center">{{data.AVERAGE_TURNAROUND}}</td>
+			    	<td class="text-center">
+			    		<span class="label" [ngClass]="getEquipStatus(data.delay)" style="min-width: 15px;">{{data.AVERAGE_DELAY_IN_MINS?data.AVERAGE_DELAY_IN_MINS:0}}</span></td>
+			    </tr>
+		    </tbody>
+	      </table>
+	      	</div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <horz-bar-chart
+              id="flightsOTP"
+              [chartId]="'flightsOTP'"
+              [chartTitle]="'Flights On Time Performance'"
+              [titleSuffix]="''"
+              [input]="flightsOTPData"
+            ></horz-bar-chart>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <heatmap-chart
+              id="taskDepDelayHeatmap"
+              [chartId]="'taskDepDelayHeatmap'"
+              [chartTitle]="'Task Delays vs Departure Delays'"
+              [titleSuffix]="''"
+              [input]="taskDepDelayData"
+            ></heatmap-chart>
+          </div>
+        </div>
+        
+        <div class="row">
+        	<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" >
+		        <donut-chart id="delayCatDonut" [chartId]="'delayCatDonut'" [chartTitle]="'Delay Categorization'" 
+		                       [titleSuffix]="''"
+		                       [input]="delayCatData"></donut-chart>
+		    </div>
+		    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" >
+		    	<div style="margin-bottom: 0px">
+					<h6 align="center" class="no-margins graphtitle">OnTime Task Analysis</h6>
+					<span class="sub-title-red"><small>* BT-Before Time, OT-On Time, Del-Delay</small></span>					
+				</div>
+				<div class="row" style="margin-top: 15px; padding-left: 15px; height: 300px; overflow-y:scroll">
+					<table class="table table-hover margin bottom" style="font-size: 13px !important">
+						<thead>
+						<tr>
+							<th style="width: 20%; vertical-align: middle" rowspan="2" class="text-center gridheader0">Task</th>
+							<th colspan="3" class="text-center gridheader5">Overall</th>
+							<th colspan="3" class="text-center gridheader1">Base</th>
+							<th colspan="3" class="text-center gridheader2">Terminating</th>
+							<th colspan="3" class="text-center gridheader3">TurnAround</th>
+							<th colspan="3" class="text-center gridheader4">Transit</th>
+						</tr>
+						<tr>
+							<th class="text-center gridheader5">BT</th>
+							<th class="text-center gridheader5">OT</th>
+							<th class="text-center gridheader5">Del</th>
+							<th class="text-center gridheader1">BT</th>
+							<th class="text-center gridheader1">OT</th>
+							<th class="text-center gridheader1">Del</th>
+							<th class="text-center gridheader2">BT</th>
+							<th class="text-center gridheader2">OT</th>
+							<th class="text-center gridheader2">Del</th>
+							<th class="text-center gridheader3">BT</th>
+							<th class="text-center gridheader3">OT</th>
+							<th class="text-center gridheader3">Del</th>
+							<th class="text-center gridheader4">BT</th>
+							<th class="text-center gridheader4">OT</th>
+							<th class="text-center gridheader4">Del</th>
+
+						</tr>
+						</thead>
+						<tbody>
+							<tr *ngIf="!taskAnalysisData || taskAnalysisData.length==0">
+								<td colspan="4"><h3 align="center" class="no-data-div">No Data Found</h3></td>
+							</tr>
+							<tr *ngFor="let data of taskAnalysisData; let i=index">
+								<td class="gridvalue0">{{data.taskName}}</td>
+								<td class="gridvalue5">{{getOverallTaskCellData(data.flights, "BT_PERCENT")}}</td>
+								<td class="gridvalue5">{{getOverallTaskCellData(data.flights, "OT_PERCENT")}}</td>
+								<td class="gridvalue5">{{getOverallTaskCellData(data.flights, "Del_PERCENT")}}</td>
+								
+								<td class="gridvalue1">{{getOTTaskCellData(data.flights.BASE, "BT_PERCENT")}}</td>
+								<td class="gridvalue1">{{getOTTaskCellData(data.flights.BASE, "OT_PERCENT")}}</td>
+								<td class="gridvalue1">{{getOTTaskCellData(data.flights.BASE, "Del_PERCENT")}}</td>
+								
+								<td class="gridvalue2">{{getOTTaskCellData(data.flights.TERMINATING, "BT_PERCENT")}}</td>
+								<td class="gridvalue2">{{getOTTaskCellData(data.flights.TERMINATING, "OT_PERCENT")}}</td>
+								<td class="gridvalue2">{{getOTTaskCellData(data.flights.TERMINATING, "Del_PERCENT")}}</td>
+								
+								<td class="gridvalue3">{{getOTTaskCellData(data.flights.TURNAROUND, "BT_PERCENT")}}</td>
+								<td class="gridvalue3">{{getOTTaskCellData(data.flights.TURNAROUND, "OT_PERCENT")}}</td>
+								<td class="gridvalue3">{{getOTTaskCellData(data.flights.TURNAROUND, "Del_PERCENT")}}</td>
+								
+								<td class="gridvalue4">{{getOTTaskCellData(data.flights.TRANSIT, "BT_PERCENT")}}</td>
+								<td class="gridvalue4">{{getOTTaskCellData(data.flights.TRANSIT, "OT_PERCENT")}}</td>
+								<td class="gridvalue4">{{getOTTaskCellData(data.flights.TRANSIT, "Del_PERCENT")}}</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>

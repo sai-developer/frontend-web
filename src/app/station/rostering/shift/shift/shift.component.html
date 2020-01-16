@@ -1,0 +1,95 @@
+<h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+  <img src="assets/images/master/shifts-icon.png" class="shifts-icon">
+  <span *ngIf="details.mode !== 'ADD'"> &nbsp;Edit Shift Details</span>
+  <span *ngIf="details.mode == 'ADD'"> &nbsp;Add New Shift</span>
+  <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+</h1>
+
+<form #form="ngForm" [formGroup]="profileForm" autocomplete="nope" id="staff">
+  <div class="" [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+    <app-scroll-highlight>
+      <div fxLayout="row" fxLayoutWrap="wrap" class="model-content-margin" id="staff1">
+        <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+          <mat-label>SHIFT NAME </mat-label>
+          <!-- <div class="task-codes-title">SHIFT NAME <sup class="required-astricks">*</sup></div> -->
+          <input type="text" matInput name="name" [(ngModel)]="shift.name" required formControlName="sname" minlength="2"
+            maxlength="10" (ngModelChange)="shiftNameChange()" spellcheck="false">
+          <!-- <mat-error *ngIf="sname.hasError('required')">Provide a name for the shift (eg. General,S9)</mat-error>
+            <mat-error *ngIf="sname.hasError('minlength')">Shift name must be at least 2 characters long</mat-error>
+            <mat-error *ngIf="sname.hasError('pattern')">Shift name should not have special characters</mat-error> -->
+        </mat-form-field>
+
+        <div *ngIf="profileForm.controls['sname'].errors && profileForm.controls['sname'].touched" class="error-msg">
+          <div [hidden]="!profileForm.controls['sname'].errors.required">Provide a name for the shift (eg. Morning)</div>
+          <div [hidden]="!profileForm.controls['sname'].errors.minlength">Shift name must be at least 2 characters long</div>
+          <div [hidden]="!profileForm.controls['sname'].errors.pattern">Shift name should not have special characters
+            or
+            only numbers</div>
+        </div>
+
+        <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+          <mat-label>ALIAS </mat-label>
+          <!-- <div class="task-codes-title">ALIAS <sup class="required-astricks">*</sup></div> -->
+          <input type="text" matInput name="alias" [(ngModel)]="shift.alias" required formControlName="alias" maxlength="2"
+            pattern="[A-Za-z0-9]+" spellcheck="false">
+          <!-- <mat-error *ngIf="alias.hasError('required')">Provide a alias name for the shift (eg. MO,NI,AF)</mat-error>
+          <mat-error *ngIf="alias.hasError('minlength')">Alias name must be at least 2 characters long</mat-error>
+          <mat-error *ngIf="alias.hasError('pattern')">Alias name should not have special characters</mat-error> -->
+        </mat-form-field>
+
+        <div *ngIf="profileForm.controls['alias'].errors && profileForm.controls['alias'].touched" class="error-msg">
+          <div [hidden]="!profileForm.controls['alias'].errors.required">Provide an alias name for the shift (eg.
+            MO,NI,AF)</div>
+          <div [hidden]="!profileForm.controls['alias'].errors.minlength">Alias name must be at least 2 characters long</div>
+          <div [hidden]="!profileForm.controls['alias'].errors.pattern">Alias name should not have special characters</div>
+        </div>
+        <!-- <mat-form-field class="mb-1 w-100">
+        <input type="text" matInput placeholder="Start Time" name="startTime" [(ngModel)]="shift.startTime" required>
+      </mat-form-field> -->
+        <div fxFlex="100">
+          <div fxFlex="45">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>START TIME</mat-label>
+              <input [textMask]="{mask: time}" matInput name="startTime" formControlName="startTime" [(ngModel)]="shift.startTime"
+                (focusout)="checkZero(shift.startTime,'mstart')" (keyup)="timeCheck(shift.startTime)" required>
+            </mat-form-field>
+
+            <div *ngIf="profileForm.controls['alias'].errors && profileForm.controls['alias'].touched" class="error-msg">
+              <div [hidden]="!profileForm.controls['alias'].errors.required">Provide an alias name for the shift (eg.
+                MO,NI,AF)</div>
+              <div [hidden]="!profileForm.controls['alias'].errors.minlength">Alias name must be at least 2 characters
+                long</div>
+              <div [hidden]="!profileForm.controls['alias'].errors.pattern">Alias name should not have special
+                characters</div>
+            </div>
+            <div *ngIf="profileForm.controls['startTime'].errors && profileForm.controls['startTime'].touched" class="error_msg">
+              <div [hidden]="!profileForm.controls['startTime'].errors.required">Select Shift start time</div>
+            </div>
+          </div>
+          <div fxFlex="5"></div>
+          <div fxFlex="45">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>END TIME</mat-label>
+              <input [textMask]="{mask: time}" matInput name="endTime" formControlName="endTime" [(ngModel)]="shift.endTime"
+                (focusout)="checkZero(shift.endTime,'mend')" (keyup)="timeCheck(shift.endTime)" required>
+            </mat-form-field>
+            <div *ngIf="shift.endTime && (shift.endTime < shift.startTime)" class="error_msg">Warning : Shift ends next
+              day</div>
+            <div *ngIf="shift.endTime && (shift.endTime === shift.startTime)" class="error_msg">Shift start cannot be the same as end time</div>
+            <div *ngIf="profileForm.controls['endTime'].errors && profileForm.controls['endTime'].touched" class="error_msg">
+              <div [hidden]="!profileForm.controls['endTime'].errors.required">Select Shift end time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-scroll-highlight>
+  </div>
+
+  <mat-dialog-actions>
+    <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" [disabled]="!profileForm.valid || (shift.endTime === shift.startTime)" (click)="addShift()">DONE</button>
+    <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+    <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="!profileForm.valid || (shift.endTime === shift.startTime)" (click)="updateShift()"
+      [mat-dialog-close]>UPDATE</button>
+    <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+  </mat-dialog-actions>
+</form>

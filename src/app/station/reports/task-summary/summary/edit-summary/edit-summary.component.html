@@ -1,0 +1,50 @@
+<h1 mat-dialog-title class="add-mat-dialog-title">
+  <span> &nbsp;Edit Summary Details</span>
+  <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+</h1>
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="5"></div>
+    <div fxFlex="40">
+      <div class="task-codes-title">ACTUAL START TIME</div>
+      {{summary.taskActualStartTime | date:'HH:mm': zoneOffset}}
+    </div>
+    <div fxFlex="10"></div>
+    <div fxFlex="40">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>MODIFIED START TIME</mat-label>
+        <input [textMask]="{mask: time}" matInput name="mstart" [(ngModel)]="summary.modStart"
+          (focusout)="checkZero(summary.modStart,'mstart')" (keyup)="timeCheck(summary.modStart)" required>
+      </mat-form-field>
+    </div>
+    <div fxFlex="5"></div>
+    <!-- end time section -->
+    <div fxFlex="5"></div>
+    <div fxFlex="40">
+      <div class="task-codes-title">ACTUAL END TIME</div>
+      {{summary.taskActualEndTime | date:'HH:mm': zoneOffset}}
+    </div>
+    <div fxFlex="10"></div>
+    <div fxFlex="40">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>MODIFIED END TIME</mat-label>
+        <input *ngIf="summary.taskDuration != 0" [textMask]="{mask: time}" matInput name="mend" [(ngModel)]="summary.modEnd"
+          (focusout)="checkZero(summary.modEnd,'mend')" (keyup)="timeCheck(summary.modEnd)" required>
+        <input *ngIf="summary.taskDuration == 0" matInput name="mend" [(ngModel)]="summary.modStart" [disabled]="true">
+      </mat-form-field>
+    </div>
+    <div fxFlex="5"></div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="summary-action">
+    <button mat-raised-button color="primary" class="summaryDone" (click)="update(summary)">DONE</button>
+    <button mat-button class="cancel-btn" [mat-dialog-close]>CANCEL</button>
+  </div>
+  <!-- <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+    <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="!profileForm.valid" (click)="updateBay()"
+        [mat-dialog-close]>UPDATE</button>
+    <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button> -->
+
+</mat-dialog-actions>

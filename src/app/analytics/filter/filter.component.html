@@ -1,0 +1,154 @@
+<div class="row filter-menu">
+	<span class="col-lg-5 col-md-12 col-sm-12"><i class="fa fa-clock"></i><strong>Last refresh: </strong>{{updatedTime}}</span>
+	<!-- <span class="col-lg-3 col-md-12 col-sm-12 "><strong>From: </strong>{{formatDisplayTime(filter.from)}}</span>
+	<span class="col-lg-3 col-md-12 col-sm-12 "><strong>To: </strong>{{formatDisplayTime(filter.to)}}</span> -->
+	<span class="col-lg-3 col-md-12 col-sm-12 "><strong> </strong></span>
+	<span class="col-lg-3 col-md-12 col-sm-12 "><strong> </strong></span> 
+	<!-- <button class="btn btn-primary" (click)="initDownload()" title="Download as PDF"><i class="fa fa-download"></i></button> -->
+	<div class="col-lg-1 col-md-12 col-sm-12 dropdown" >
+	    <!-- <button class="dropdown-btn btn btn-primary" ><i class="fa fa-filter"></i>{{currentPeriod.name}}</button> -->
+	    <button class="dropdown-btn btn btn-primary"  (click)="showFilterMenu()" ><i class="fa fa-filter"></i></button>
+	    
+	    <div class="dropdown-content" [class]="filterMenuVisible?'dropdown-content filter-menu-visible':'dropdown-content filter-menu-invisible'">
+	      <a *ngFor="let period of periodFilter" (click)="setPeriod(period)">{{period.name}}</a>
+	    </div>
+	</div>
+</div>
+<!-- <div class="container-fluid filter-div" *ngIf='isCustom'> -->
+<div [class]="filterDisabled?'filter-div div-disabled':'filter-div'" *ngIf='isCustom'>
+<div class="row filter1" >
+	<div class="col col-lg-5">
+		<!-- <div class="list-group">
+		    <a *ngFor="let type of filterTypes" href="javascript:;" [class]="filter.type==type.id?'list-group-item active':'list-group-item'" (click)="setType(type.id)">{{type.name}}</a>
+		</div> -->
+		<button *ngFor="let type of filterTypes" [class]="filter.type==type.id?'btn btn-info':'btn btn-default'" (click)="setType(type.id)">{{type.id}}</button>
+	  
+	</div>
+	<div class="col col-lg-7">
+		<form class="row" #filterForm="ngForm">
+		  <div class="col-lg-10" *ngIf="filter.type=='YEAR'">
+		    <!-- <form class="row" #yearForm="ngForm"> -->
+    		  <div class="col-lg-12 frm-grp">
+				  <div class="col col-lg-12">
+				      <input type="radio" name="option" value="1" [(ngModel)]="filterOption" > Last Year
+				      <input type="radio" name="option" value="0" [(ngModel)]="filterOption"> This Year
+				      <input type="radio" name="option" value="2" [(ngModel)]="filterOption" > For Year 
+				      <select [attr.disabled]="filterOption!=2?'':null" name="custYear" [(ngModel)]="customData.custYear" >
+				          <option *ngFor="let year of yearFilter" [ngValue]="year">{{year}}</option>
+				      </select>
+			      </div>
+		      </div>
+		      
+			  <!-- <div class="col-lg-4 btn-grp">
+			      <button type="submit" (click)="setDate(yearForm)" >Submit</button>
+			      <button (click)="hide()" class="hide1" >Close</button>
+		      </div> -->
+		    <!-- </form> -->
+  		  </div>
+		  <div class="col-lg-10" *ngIf="filter.type=='QUARTER'" >
+		    <!-- <form #quarters="ngForm"> -->
+		    	<div class="col-lg-12 frm-grp">
+					<div class="col col-lg-12">
+				      <input type="radio" name="option" value="1" [(ngModel)]="filterOption"> Last Quarter
+				      <input type="radio" name="option" value="0" [(ngModel)]="filterOption" > This Quarter
+				      <input type="radio" name="option" value="2"  [(ngModel)]="filterOption"> For <!--<input type="number"name="custqua" [(ngModel)]="custqua">of <input type="number"name="custyear1" [(ngModel)]="custyear1">-->
+				      <select [attr.disabled]="filterOption!=2?'':null" name="custYear" [(ngModel)]="customData.custYear" >
+				          <option *ngFor="let year of yearFilter" [ngValue]="year">{{year}}</option>
+			          </select> Quarter 
+			          <select [attr.disabled]="filterOption!=2?'':null" name="custQuarter" [(ngModel)]="customData.custQuarter" >
+				          <option *ngFor="let quarter of quarterFilter" [ngValue]="quarter">{{quarter.QTR_DESC.substring(0,2)}}</option>
+				      </select>
+					</div>
+				</div>
+				<!--<div class="col-lg-4 btn-grp">
+			      <button type="submit" (click)="setDate(quarters)" >Submit</button>
+			      <button (click)="hide()" class="hide1" >Close</button>
+				</div>-->
+		    <!-- </form> -->
+		  </div>
+		  <div class="col-lg-10" *ngIf="filter.type=='MONTH'" >
+		    <!-- <form class="row" #months="ngForm" > -->
+		    	<div class="col-lg-12 frm-grp">
+					<div class="col col-lg-12">
+				      <input type="radio" name="option" value="1" [(ngModel)]="filterOption" > Last Month
+				      <input type="radio" name="option" value="0" [(ngModel)]="filterOption"> This Month
+				      <input type="radio" name="option" value="2" [(ngModel)]="filterOption"> For 
+				      <select [attr.disabled]="filterOption!=2?'':null" name="custYear" [(ngModel)]="customData.custYear" >
+				          <option *ngFor="let year of yearFilter" [ngValue]="year">{{year}}</option>
+			       	  </select> Month
+				      <select [attr.disabled]="filterOption!=2?'':null" name="custMonth"[(ngModel)]="customData.custMonth" >
+				          <option *ngFor="let month of monthFilter" [ngValue]="month">{{month.MONTH_DESC}}</option>
+				      </select>
+				    </div>
+			    </div>
+			    <!--
+				<div class="col-lg-4 btn-grp">
+								  <button type="submit" (click)="setDate(months)" >Submit</button>
+								  <button (click)="hide()" class="hide1" >Close</button>
+								  </div>-->
+				
+		    <!-- </form> -->
+		  </div>
+  		
+  		<div class="col-lg-10" *ngIf="filter.type=='WEEK'" >
+	      <!-- <form class="row" #weeks="ngForm" > -->
+	      		<div class="col-lg-12 frm-grp">
+					<div class="col col-lg-12">
+			          <input type="radio" name="option" value="1" [(ngModel)]="filterOption"> Last Week
+			          <input type="radio" name="option" value="0" [(ngModel)]="filterOption"> This Week
+			          <input type="radio" name="option" value="2" [(ngModel)]="filterOption"> For
+			          <select [attr.disabled]="filterOption!=2?'':null" name="custYear" [(ngModel)]="customData.custYear" >
+				          <option *ngFor="let year of yearFilter" [ngValue]="year">{{year}}</option>
+			       	  </select> Week
+				      <select [attr.disabled]="filterOption!=2?'':null" name="custWeek"[(ngModel)]="customData.custWeek" >
+				          <option *ngFor="let week of weekFilter" [ngValue]="week">{{week.WEEK_SK % 100}}</option>
+				      </select>
+	              	</div>
+              	</div>
+              	<!--
+				  <div class="col-lg-4 btn-grp">
+									<button type="submit" (click)="setDate(weeks)" >Submit</button>
+									<button (click)="hide()" class="hide1" >Close</button>
+								  </div>-->
+	      <!-- </form> -->
+	    </div>
+	    <!--form class="row" #days="ngForm"-->
+			<div class="col-lg-10" *ngIf="filter.type=='DAY'" >
+		    	<div class="col-lg-12 frm-grp">
+					<div class="col col-lg-12">
+				    	<input type="radio" name="option" value="Yesterday"  [(ngModel)]="filterOption"> Yesterday
+					    <input class="" type="radio" name="option" value="Today"  [(ngModel)]="filterOption" > Today
+					  	<input type="radio" name="option" value="Last" [(ngModel)]="filterOption"> Last 
+					    <input [attr.disabled]="filterOption!='Last'?'':null" type="number" name="custDay" [(ngModel)]="customData.custDay" min="1" max="180"> Days<br>
+					 </div>
+				</div>
+				
+	  		</div>
+	  	  <!--/form>-->
+		  
+		  <div class="col-lg-10" *ngIf="filter.type=='RANGE'" >
+		    <!--form class="row" #ranges="ngForm" -->
+		      <div class="col-lg-12 frm-grp">
+				<div class="col col-lg-12">
+			      From <input type="datetime-local" name="custFrom"  [(ngModel)]="customData.custFrom" [min]="rangeFilter.FROM_DATE_SK.substring(0,16)" [max]="rangeFilter.TO_DATE_SK.substring(0,16)">
+			      To <input  type="datetime-local" name="custTo"  [(ngModel)]="customData.custTo" [min]="rangeFilter.FROM_DATE_SK.substring(0,16)" [max]="rangeFilter.TO_DATE_SK.substring(0,16)">
+			  	</div>
+			  </div>    
+			  <!--
+			  <div class="col-lg-4 btn-grp">
+								<button type="submit" (click)="setDate(ranges)" >Submit</button>
+								<button (click)="hide()" class="hide1" >Close</button>
+							</div>-->
+			  
+		    <!--/form-->
+		  </div>
+		  
+		  <div class="col-lg-2 btn-grp">
+			<button class="btn btn-success" type="submit" (click)="setDate(filterForm)" >Apply</button>
+			<!-- <button class="btn btn-danger" (click)="hide()" >Cancel</button> -->
+		  </div>
+		</form>
+	</div>
+ </div> 
+</div> 
+  

@@ -1,0 +1,66 @@
+
+:host{
+  background: #66be4f;
+}
+.success-mode:host {
+  background: #66be4f;
+}
+.error-mode:host{
+  background: #af0808;
+}
+.warning-mode:host{
+  background: #ed3f23;
+}
+:host {
+  position: relative;
+  overflow: hidden;
+  padding: 5px 10px;
+  border-radius: 3px 3px 3px 3px;
+  color: #FFFFFF;
+  pointer-events: all;
+  cursor: pointer;
+  width: 95%;
+  margin: 10px auto;
+  box-shadow: 0 0 8px 0 rgba(1, 1, 1, 0.3);
+}
+.message-block .toast-title{
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.25;
+  color: #ffffff;
+}
+.buttons-block{
+  text-align: right;
+}
+.buttons-block button{
+  border-radius: 5px;
+  background-color: #498539;
+  line-height: 30px;
+}
+.warning-mode:host .buttons-block button{
+  background-color: #af0808;
+}
+.error-mode:host .buttons-block button{
+  background-color: #530808;
+}
+.icon-block .toaster-icon{
+  background: #498539;
+  color: #66be4f;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 30px;
+  width: 30px;
+  padding: 2px;
+}
+.warning-mode:host .icon-block .toaster-icon{
+  background: #962210;
+  color: #ed3f23;
+}
+.error-mode:host .icon-block{
+  background: transparent;
+}
+.error-mode:host .icon-block .toaster-icon{
+  background: transparent;
+  color: #530808;
+}

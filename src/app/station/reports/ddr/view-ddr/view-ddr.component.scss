@@ -1,0 +1,27 @@
+// .cancel-btn {
+//   color: black !important;
+//   margin-left: 10px;
+//   background: #d6d6d6;
+// }
+.cancel-btn {
+  color: #a2a2a2;
+  margin-right: 10px;
+}
+
+
+.mat-dialog-actions {
+  position: absolute;
+  // bottom: -12px;
+      bottom: 0px;
+  padding-left: 5px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+.add-mat-dialog-title {
+  background: white;
+  color: #000000;
+}
+// ::ng-deep .addModelDialog.mat-form-field-appearance-outline .mat-form-field-wrapper {
+//   margin: 5px 0;
+// }

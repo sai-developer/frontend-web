@@ -1,0 +1,88 @@
+<!-- Upper half of the page start -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <!-- Top left card start -->
+
+  <div fxFlex="40" class="m-gap p-gap">
+    <mat-card class=".flight-status-card top-left-card delay-fact">
+      <mat-card-content class="">
+        <div fxLayoutWrap="row">
+          <div fxFlex="100">
+            <div class="delay-na-block">
+              <span class="da-per" *ngIf="checkdata">{{fscDetails.ontime_percentage}}
+                <span class="per-symbol">%</span>
+              </span>
+              <br>
+              <span class="da-txt">ON SCHEDULE</span>
+            </div>
+            <div class="delay-airline-block">
+              <span class="da-per" *ngIf="checkdata">{{fscDetails.delay_percentage}}
+                <span class="per-symbol">%</span>
+              </span>
+              <br />
+              <span class="da-txt">DELAYED</span>
+            </div>
+          </div>
+        </div>
+        <div fxLayoutWrap="row">
+          <div fxFlex="100">
+            <div class="progress">
+              <div *ngIf="checkdata" class="progress-bar delay-airline" [style.width.%]="fscDetails.ontime_percentage"></div>
+              <div *ngIf="checkdata" class="progress-bar nd-airline" [style.width.%]="fscDetails.delay_percentage"></div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- Top left card end -->
+  <!-- Top right card start -->
+  <div fxFlex.gt-sm="60" fxFlex.gt-xs="100" fxFlex="100">
+    <!-- <mat-card class="top-right-card">
+          <mat-card-content> -->
+    <div class="top-right-card">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="25">
+          <img src="assets/flight-status/cross-flight.png" class="fh-img" />
+          <div class="fh-title">ACTIVE AIRCRAFTS</div>
+          <div class="fh-count" *ngIf="todayCountOfFlights">{{todayCountOfFlights.totalFlights}}</div>
+        </div>
+        <div fxFlex="75">
+          <img src="assets/flight-status/seperate.png" class="sus-img" />
+          <div class="sus-title">AIRCRAFT STATUS</div>
+          <div class="sus-inline-block">
+            <div class="sus-sub-title">IN AIR</div>
+            <div class="sus-sub-count" *ngIf="todayCountOfFlights">{{todayCountOfFlights.inAirFlights}}</div>
+          </div>
+          <div class="sus-inline-block">
+            <div class="sus-sub-title">ON GROUND</div>
+            <div class="sus-sub-count" *ngIf="todayCountOfFlights">{{todayCountOfFlights.onGround}}</div>
+          </div>
+          <!-- <button mat-button (click)="">OK</button> -->
+        </div>
+      </div>
+    </div>
+    <!-- </mat-card-content>
+        </mat-card> -->
+  </div>
+  <!-- Top right card end -->
+</div>
+<!-- Upper half of the page end -->
+
+<hr class="tc-separator p-gap m-gap">
+<div *ngIf="load">
+    <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+      <h2 *ngIf="i == 2">Turning Around . . .</h2>
+    </div>
+  </div>
+<div [hidden]="load">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+      <!-- start -->
+      <div class="vis-fixed-bar">
+        <div id="mytimeline" class="i-vis-timeline i-flight-chart"></div>
+      </div>
+      <!-- end -->
+    </div>
+
+  </div>
+</div>

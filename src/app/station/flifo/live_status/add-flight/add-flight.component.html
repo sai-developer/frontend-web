@@ -1,0 +1,200 @@
+<div class="test-class">
+  <h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+    <span *ngIf="details.mode == 'ADD'"> &nbsp;Add New Route</span>
+    <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+  </h1>
+  <form #form="ngForm" autocomplete="nope" id="staff">
+    <div class="" [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+      <app-scroll-highlight>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="task-blk model-content-margin">
+          <!-- FLIGHT TYPE SECTION -->
+          <div fxFlex="100">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>FLIGHT TYPE</mat-label>
+              <!-- <div class="task-codes-title">FLIGHT TYPE
+              <sup class="required-astricks">*</sup>
+            </div> -->
+              <mat-select name="flightType" [(ngModel)]="postList.flightType" required (ngModelChange)="fltTypeChange(postList.flightType)"
+                #flightType="ngModel">
+                <mat-option *ngFor="let flightType of constants.flightType" [value]="flightType.id" class="mat-normal-option">{{flightType.type}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="flightType.errors && flightType.touched" class="error_msg">
+              <div [hidden]="!flightType.errors.required">Select a Flight type</div>
+            </div>
+          </div>
+          <!-- EQUIPMENT TYPE SECTION -->
+          <div fxFlex="100" *ngIf="(postList.flightType !== null)">
+            <!-- <div fxFlex="100"> -->
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>EQUIPMENT TYPE</mat-label>
+              <!-- <div class="task-codes-title">EQUIPMENT TYPE<sup class="required-astricks">*</sup></div> -->
+              <mat-select name="eqpType" [(ngModel)]="postList.equipmentTypeId.id" required #eqpType="ngModel">
+                <mat-option *ngFor="let eqp of eqpList" [value]="eqp.id" class="mat-normal-option">{{eqp.type}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="eqpType.errors && eqpType.touched" class="error_msg">
+              <div [hidden]="!eqpType.errors.required">Select an equipment type</div>
+            </div>
+            <!-- </div> -->
+            <!-- <div fxFlex="5"></div> -->
+            <!-- BAY NUMBER SECTION -->
+            <!-- <div fxFlex="45">
+        <mat-form-field class="w-100">
+          <div class="task-codes-title">BAY<sup class="required-astricks">*</sup></div>
+          <mat-select name="bay">
+            <mat-option *ngFor="let bay of bays" [value]="bay.id" class="mat-normal-option">{{bay.bayCode}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+          </div>
+          <!-- ARRIVAL SECTION START -->
+          <!-- ARRIVAL FLIGHT NUMBER -->
+          <div [hidden]="(postList.flightType == 0 || postList.flightType == null)" fxFlex="100" class="task-codes-title">ARRIVAL</div>
+          <div fxFlex="100" *ngIf="(postList.flightType == 2 ||postList.flightType == 3 || postList.flightType == 1)">
+            <div fxFlex="30">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <!-- <div class="task-codes-title margin-adjust">FLIGHT NUMBER<sup class="required-astricks">*</sup>
+              </div> -->
+                <mat-label>FLIGHT NUMBER</mat-label>
+                <div class="fltNoBlk">
+                  <span class="defaultCode">{{defaultCode}} </span>
+                  <input type="text" matInput name="arrFltNo" [(ngModel)]="postList.arrFlightNumber" required
+                    #arrFlightNumber="ngModel" class="mar-left-5" minlength="3" maxlength="4" pattern="[A-Za-z0-9 ]+"
+                    (keyup)="checkDepFlight();prepopulateflightnumber(postList.flightType,postList.arrFlightNumber)"
+                    autocomplete="nope">
+                </div>
+              </mat-form-field>
+              <!-- validation -->
+              <div *ngIf="arrFlightNumber.errors && (arrFlightNumber.dirty || arrFlightNumber.touched)" class="error_msg">
+                <div [hidden]="!arrFlightNumber.errors.required">
+                  Enter a valid flight number (eg. {{defaultCode}}214)
+                </div>
+                <!-- <div [hidden]="!arrFlightNumber.errors.minlength">
+              Arrival Flight number must have atleast of 3 characters
+          </div> -->
+                <div [hidden]="!arrFlightNumber.errors.pattern">
+                  Arrival flight number should not have numbers or special characters
+                </div>
+              </div>
+              <div *ngIf="!arrValidation" class="error_msg">
+                Enter valid Flight Number
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <!-- ORIGIN -->
+            <div fxFlex="30">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>ORIGIN</mat-label>
+                <!-- <div class="task-codes-title">ORIGIN<sup class="required-astricks">*</sup></div> -->
+                <mat-select name="origin" [(ngModel)]="postList.origin.id" required #origin="ngModel">
+                  <mat-option *ngFor="let airport of airports" [value]="airport.id" class="mat-normal-option">{{airport.code}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="origin.errors && origin.touched" class="error_msg">
+                <div [hidden]="!origin.errors.required">Select an Origin airport</div>
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <!-- STA SECTION -->
+            <div fxFlex="30">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>STA </mat-label>
+                <!-- <div class="task-codes-title">STA <sup class="required-astricks">*</sup></div> -->
+                <span>
+                  <input [textMask]="{mask: time}" matInput name="sta" (focusout)="checkZero(postList.standardArrivalTime,'sta')"
+                    (keyup)="timeCheck(postList.standardArrivalTime)" [(ngModel)]="postList.standardArrivalTime"
+                    #displaySTA="ngModel" required autocomplete="nope">
+                </span>
+              </mat-form-field>
+              <div *ngIf="displaySTA.errors && (displaySTA.dirty || displaySTA.touched)" class="error_msg">
+                <div [hidden]="!displaySTA.errors.required">
+                  Enter the scheduled time of arrival
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ARRIVAL SECTION END -->
+          <!-- DEPARTURE SECTION START -->
+          <div [hidden]="(postList.flightType == 3 || postList.flightType == null)" fxFlex="100" class="task-codes-title">DEPARTURE</div>
+          <div fxFlex="100" *ngIf="(postList.flightType == 2 ||postList.flightType == 0 || postList.flightType == 1)">
+            <!-- DEPARTURE FLIGHT NUMBER -->
+            <div fxFlex="30">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>FLIGHT NUMBER</mat-label>
+                <!-- <div class="task-codes-title margin-adjust">FLIGHT NUMBER<sup class="required-astricks">*</sup></div> -->
+                <div class="fltNoBlk">
+                  <span class="defaultCode">{{defaultCode}} </span>
+                  <input type="text" matInput name="depFltNo" [disabled]="depNumber" [(ngModel)]="postList.depFlightNumber"
+                    required class="mar-left-5" minlength="3" maxlength="4" pattern="[A-Za-z0-9 ]+" #depFlightNumber="ngModel"
+                    (keyup)="checkDepFlight();depflightnumber(postList.depFlightNumber)">
+                </div>
+              </mat-form-field>
+              <!-- validation -->
+              <div *ngIf="depFlightNumber.errors && (depFlightNumber.dirty || depFlightNumber.touched)" class="error_msg">
+                <div [hidden]="!depFlightNumber.errors.required">
+                  Enter a valid flight number (eg.{{defaultCode}}213)
+                </div>
+                <!-- <div [hidden]="!depFlightNumber.errors.minlength">
+              Departure flight number must have atleast of 3 characters
+          </div> -->
+                <div [hidden]="!depFlightNumber.errors.pattern">
+                  Departure flight number should not have numbers or special characters
+                </div>
+              </div>
+              <div *ngIf="depValid || !depValidation" class="error_msg">
+                Enter valid flight number
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <!-- DESTINATION -->
+            <div fxFlex="30">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <!-- <div class="task-codes-title">DESTINATION<sup class="required-astricks">*</sup></div> -->
+                <mat-label>DESTINATION</mat-label>
+                <mat-select name="destination" [(ngModel)]="postList.destination.id" required #destination="ngModel">
+                  <mat-option *ngFor="let airport of airports" [value]="airport.id" class="mat-normal-option">{{airport.code}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="destination.errors && destination.touched" class="error_msg">
+                <div [hidden]="!destination.errors.required">Select an Destination airport</div>
+              </div>
+              <div *ngIf="destination.dirty && postList.destination.id && postList.flightType == 1 && (postList.origin.id == postList.destination.id)"
+                class="error_msg">
+                Enter valid origin/destination
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <!-- STD SECTION -->
+            <div fxFlex="30">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <!-- <div class="task-codes-title">STD <sup class="required-astricks">*</sup></div> -->
+                <mat-label>STD</mat-label>
+                <span>
+                  <input [textMask]="{mask: time}" (focusout)="checkZero(postList.standardDepartureTime,'std'); checkTime()"
+                    (keyup)="timeCheck(postList.standardDepartureTime)" [(ngModel)]="postList.standardDepartureTime"
+                    matInput name="std" #displaySTD="ngModel" required autocomplete="nope">
+                </span>
+              </mat-form-field>
+              <div *ngIf="displaySTD.errors && (displaySTD.dirty || displaySTD.touched)" class="error_msg">
+                <div [hidden]="!displaySTD.errors.required">
+                  Enter the scheduled time of departure
+                </div>
+              </div>
+              <div [hidden]="!timeDiff" class="error_msg">
+                Warning : STD is STA + next day
+              </div>
+            </div>
+          </div>
+          <!-- DEPARTURE SECTION END -->
+        </div>
+      </app-scroll-highlight>
+    </div>
+
+    <mat-dialog-actions>
+      <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" [disabled]="!form.valid || postList.destination && (postList.destination.id && postList.flightType == 1 && (postList.origin.id == postList.destination.id)) || depValid || !arrValidation || !depValidation"
+        (click)="addFlight(postList)">DONE</button>
+      <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" [mat-dialog-close]>CANCEL</button>
+    </mat-dialog-actions>
+  </form>
+</div>

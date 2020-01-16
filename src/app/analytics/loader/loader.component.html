@@ -1,0 +1,12 @@
+<div [hidden]="!isLoading" class="text-xs-center" style="color: grey;">
+  <div class="spin" *ngIf="loaderType=='spinner'">
+	<h3 align="center" >Turning Around ...</h3>
+	<i class="fas fa-cog fa-spin fa-6x"></i> <span>{{ message }}</span>
+  </div>
+  <div class="band" *ngIf="loaderType!='spinner'">
+	  <div class="loader-band"></div>
+	  <div class="loader-band">
+	  	<h3 align="center" >Turning Around . . .</h3></div>
+	  <div class="loader-band"></div>
+  </div>
+</div>

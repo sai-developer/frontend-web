@@ -1,0 +1,226 @@
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load">
+  <div fxLayout="row" class="dc-page top-row">
+    <img src="assets/images/master/task-icon.png" class="staffs-icon">
+    <div fxFlex="10">
+      <div class="dc-txt">FLIGHTS</div>
+      <div class="dc-no">{{flightsList.length}}</div>
+    </div>
+    <div fxFlex="20" [hidden]="!taskShow" class="dc-txts">{{taskName}}</div>
+    <div fxFlex="45"></div>
+    <div fxFlex="20" class="text-right">
+      <mat-form-field class="title-filters">
+        <div class="task-codes-title">EQUIPMENT</div>
+        <mat-select class="mat-select-placeholder-color" [(ngModel)]="equip" disableOptionCentering
+          (ngModelChange)="modifiedEquip(equip,flighttype)">
+          <mat-option *ngFor="let equip of equipLists" [value]="equip" class="mat-normal-option">
+            {{equip}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="20" class="text-right">
+      <mat-form-field class="title-filters">
+        <div class="task-codes-title">FLIGHT TYPE</div>
+        <mat-select class="mat-select-placeholder-color" [(ngModel)]="flighttype" disableOptionCentering
+          (ngModelChange)="modifiedEquip(equip,flighttype)">
+          <mat-option *ngFor="let flightype of flightType" [value]="flightype.id" class="mat-normal-option">
+            {{flightype.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <hr class="i-hr">
+
+  <div fxLayout="row" class="master-fixed-head" fxLayoutWrap="wrap">
+    <div fxFlex="100">
+      <!--{{filter.from | date:'dd MMM yyyy'}} to {{filter.to | date:'dd MMM yyyy'}}-->
+      <table class="table margin-bot-0">
+        <thead>
+          <tr fxLayout="row" class="table-header-padding employee-tr">
+            <th fxFlex="15">
+              <div>{{filterName}}</div>
+              FLIGHT DETAILS
+            </th>
+            <th fxFlex *ngFor="let day of daysList ;" [ngClass]="{'high-light': day.date == todayDate}">
+              <div> <span class="table-head-date-row">{{day.date | date:'EEE'}}</span></div>
+              <div><b>{{day.date | date:'dd'}}</b></div>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div>
+    <table class="table">
+      <tbody class="">
+        <tr *ngFor="let flt of flightsList | ReportSearch : searchText :'arr_flight_number' :'dep_flight_number' :'origin' :'destination' "
+          class="flight-row" fxLayout="row">
+          <td fxFlex="15" fxLayout="row" class="flight-det">
+            <div fxFlex="33" class="flight-times">
+              {{flt.origin || " "}}
+              <div class="flight-no">{{flt.arr_flight_number ? flt.arr_flight_number : 'BASE'}}</div>
+            </div>
+            <div fxFlex="33" class="flight-equip">
+              {{flt.e_type}}
+            </div>
+            <div fxFlex="33" class="flight-time-right">
+              {{flt.destination || " "}}
+              <div class="flight-no">
+                {{flt.dep_flight_number ? flt.dep_flight_number : 'HALT'}}</div>
+            </div>
+          </td>
+          <td fxFlex *ngFor="let day of daysList" class="task-color-blk">
+            <div *ngFor="let flight of flt.task_data">
+              <div *ngIf="day.date == flight.date_str">
+                <div
+                  [ngClass]="{'task-color-grid-save': flight.priority==0,'task-color-grid-delay': flight.priority==1,'task-color-grid-warning': flight.priority==2}">
+                </div>
+                <div *ngIf="day.date == flight.date_str" class="tooltips">
+                  <div class="tooltiptexts">
+                    <div class="flight-tooltips">
+                      <div class="tool-content" fxLayout="row" fxLayoutWrap="wrap">
+                        <div fxFlex="{{flexValue}}">
+                          <div [hidden]="flight.task_name" class="tool-location">{{flt.origin}}</div>
+                          <div [hidden]="flight.task_name" class="tool-fltnumber">{{flt.arr_flight_number}}</div>
+                          <div *ngIf="flight.task_name" class="tool-fltnumber task-fltnumber">
+                            {{flt.arr_flight_number}}<span *ngIf="flt.flight_type == 1 || flt.flight_type == 2"> -
+                            </span>{{flt.dep_flight_number}}</div>
+                          <div [hidden]="flight.task_name">
+                            <div class="tool-stdtitle" *ngIf="flt.flight_type!=0">
+                              STA : <span
+                                class="tool-stdtime">{{flight.sta ? (flight.sta | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                            <div class="tool-stdtitle" *ngIf="flt.flight_type!=0">
+                              ATA : <span
+                                class="tool-stdtime">{{flight.ata ? (flight.ata | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                          </div>
+                          <div *ngIf="flight.task_name">
+                            <div class="tool-stdtitle">
+                              PLANNED START : <span
+                                class="tool-stdtime">{{flight.est ? (flight.est | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                            <div class="tool-stdtitle">
+                              PLANNED END : <span
+                                class="tool-stdtime">{{flight.eet ? (flight.eet | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                            <div class="tool-stdtitle">
+                              ACTUAL START : <span
+                                class="tool-stdtime">{{flight.ast ? (flight.ast | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                            <div class="tool-stdtitle">
+                              ACTUAL END : <span
+                                class="tool-stdtime">{{flight.aet ? (flight.aet | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div fxFlex="{{flexValue1}}">
+                        </div>
+                        <div fxFlex="{{flexValue2}}">
+                          <div [hidden]="flight.task_name" class="tool-location">{{flt.destination}}</div>
+                          <div class="tool-fltnumber" [hidden]="flight.task_name">{{flt.dep_flight_number}}</div>
+                          <div [hidden]="flight.task_name">
+                            <div class="tool-stdtitle" *ngIf="flt.flight_type!=3">
+                              STD : <span
+                                class="tool-stdtime">{{flight.std ? (flight.std | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                            <div class="tool-stdtitle" *ngIf="flt.flight_type!=3">
+                              ATD : <span
+                                class="tool-stdtime">{{flight.atd ? (flight.atd | date: 'HH:mm': zoneOffset):'--:--'}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div [hidden]="flight.task_name" class="tool-status" *ngIf="flight.priority != 0">
+                          DELAYED BY {{flight.diff ? flight.diff.toFixed(0) : 0}} min
+                        </div>
+                        <div [hidden]="flight.task_name" class="tool-status-on" *ngIf="flight.priority == 0">
+                          ONTIME
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div *ngIf="day.date && !(flight.date_str)" class="task-color-grid-not-avail"> 
+              </div> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <div class="no-datamsg" *ngIf="flightsList.length == 0">Sorry, no flights available for this selection
+      </div>
+    </table>
+  </div>
+  <div class="roster-footer">
+    <div class="i-footer">
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field fxFlex class="task-dropdown-form">
+            <mat-select class="mat-select-placeholder-color" [(ngModel)]="filterSelected"
+              (ngModelChange)="modifiedList(filterSelected)">
+              <mat-option *ngFor="let filter of filterType" [value]="filter.value">
+                {{filter.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="2">
+        </div>
+        <div fxFlex *ngIf="this.filterSelected == 'Task Based'">
+          <mat-form-field fxFlex class="task-dropdown-form">
+            <mat-select class="mat-select-placeholder-color" required [(ngModel)]="taskSelected"
+              (ngModelChange)="modifiedList(taskSelected)">
+              <mat-option [value]="0">Select </mat-option>
+              <mat-option *ngFor="let values of taskList" [value]="values.id">
+                {{values.name}}
+              </mat-option>
+              <!-- placeholder="Select" -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="5">
+        </div>
+        <div fxFlex>
+          <div class="date-pad">
+            <mat-form-field class="date-selector">
+              <input matInput readonly [matDatepicker]="to" [max]="today" [(ngModel)]="filter.to"
+                (dateChange)="daterange($event,'to');from.open()" class="w-100">
+              <mat-datepicker-toggle class="date-arrow" matSuffix [for]="to">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex="3" class="select-arr">
+          <img src="assets/images/dashboard/to-arrow.png" alt="arrow-icon">
+        </div>
+        <div fxFlex>
+          <div class="date-pad">
+            <mat-form-field class="date-selector">
+              <input matInput readonly [matDatepicker]="from" [max]="filter.to" [(ngModel)]="filter.from"
+                (dateChange)="daterange($event,'from')" class="w-100">
+              <mat-datepicker-toggle class="date-arrow" matSuffix [for]="from">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex="14"></div>
+        <div fxFlex="20">
+          <div class="text-right roster-btn">
+            <button mat-raised-button color="primary" (click)="getFlights(filterSelected)">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

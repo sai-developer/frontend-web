@@ -1,0 +1,94 @@
+
+<div class="loader-div" *ngIf="isLoading">
+	<app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
+<div class="tab-content" *ngIf="!isLoading">
+	<analytics-filter (downloader)="downloadPDF()" (filtered)="myInit()"></analytics-filter>
+  <div id="tab-1" class="tab-pane active">
+    <div class="panel-body">
+      <div #chart class="wrapper wrapper-content">
+        <div class="row">
+          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+            <sunburst-chart
+              id="obd-sunburst"
+              [chartId]="'obd-sunburst'"
+              [chartTitle]="'OBD Statistics'"
+              [titleSuffix]="'(By Flights)'"
+              [input]="sunburstData"
+            ></sunburst-chart>
+          </div>
+          <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <stacked-bar-chart
+              id="obd-bay-stacked"
+              [chartId]="'obd-bay-stacked'"
+              [chartTitle]="'Departure OBD Statistics'"
+              [titleSuffix]="'(By Bay)'"
+              [input]="obdBayData"
+            ></stacked-bar-chart>
+          </div>
+
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div style="margin-bottom:20px;">
+              <h6 class="no-margins graphtitle" align="center">Flight Type Statistics</h6>
+            </div>
+            <div class="row">
+              <div style="margin-top: 20px; margin-bottom: 10px" style="width: 100%">
+                <h6 class="no-margins graphtitle" align="center">Arrival</h6>
+                <obd-table [input]="obdArrFlightData"></obd-table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div style="margin-top: 20px; margin-bottom: 10px" style="width: 100%">
+                <h6 class="no-margins graphtitle" align="center">Departure</h6>
+                <obd-table [input]="obdDepFlightData"></obd-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="padding-top: 35px;">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <heatmap-chart
+              id="obdTimeHeatmap"
+              [chartId]="'obdTimeHeatmap'"
+              [chartTitle]="'Time Interval Statistics'"
+              [titleSuffix]="'(Departure)'"
+              [input]="obdTimeData"
+            ></heatmap-chart>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <heatmap-chart
+              id="obdDayHeatmap"
+              [chartId]="'obdDayHeatmap'"
+              [chartTitle]="'Day of Week Statistics'"
+              [titleSuffix]="'(Departure)'"
+              [input]="obdDayData"
+            ></heatmap-chart>
+          </div>
+
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <heatmap-chart
+              id="obdWeekHeatmap"
+              [chartId]="'obdWeekHeatmap'"
+              [chartTitle]="'Weekly Time Statistics'"
+              [titleSuffix]="'(Departure)'"
+              [input]="obdDayTimeData"
+            ></heatmap-chart>
+            <div style="padding-left: 30px">
+              <label class="radio-inline" *ngFor="let item of obdWeekStatusList" style="padding-right: 10px">
+                <input
+                  type="radio"
+                  [(ngModel)]="obdWeekStatus"
+                  value="{{ item.value }}"
+                  (change)="updateWeekStatus(item.value)"
+                />{{ item.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

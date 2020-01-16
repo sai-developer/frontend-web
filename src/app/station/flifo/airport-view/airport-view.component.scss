@@ -1,0 +1,505 @@
+.txt-center{
+  text-align: center;
+}
+
+.base-align
+{
+  margin-left: 28px;
+  font-size: 24px;
+  padding-top: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.bold{
+  font-weight: bold;
+}
+.agmMapShadow agm-map {
+  height: 88vh;
+}
+::ng-deep .agmMapShadow .agm-map-container-inner {
+  border: none !important;
+}
+.agmMapShadow {
+  box-shadow: 0px 0 20px 6px #d9dee6;
+  // box-shadow: 0px 0 20px 6px rgb(255, 255, 255);
+}
+// ::ng-deep .agmMapShadow .agm-map-container-inner .gm-style > div > div:last-child {
+//   // box-shadow: inset 0px 0 20px 6px rgb(255, 255, 255);
+//   box-shadow: inset 2px 0 50px 15px #d9dee6;
+// }
+.dc-card {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.dc-card:hover {
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: 0.4s;
+}
+.taskDiv {
+  max-height: 81vh;
+  top: 4%;
+  width: 28%;
+  position: absolute;
+  left: 1%;
+  overflow-y: auto;
+  z-index: 110;
+}
+.flightDiv{
+  bottom: 7%;
+  width: 30%;
+  position: absolute;
+  right: 2%;
+  z-index: 110;
+}
+
+.taskDiv::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar {
+  width: 3px !important;
+  background-color: #f5f5f5;
+}
+.taskDiv::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #191c29;
+}
+.taskSubDiv {
+  width: 100%;
+}
+.task-time-sEmpty,
+.task-time-eEmpty {
+  background-color: #cdcdcd;
+  padding: 0px 10px;
+  opacity: 0.3;
+}
+
+::ng-deep .taskSubDiv .i-gantt-details-expecting {
+  padding: 15px 10px;
+  height: 40px;
+  width: 100%;
+  color: #000000;
+  line-height: 9px;
+  // display: block;
+  background: #ffffff;
+}
+::ng-deep .taskSubDiv .i-gantt-details-delay {
+  background: linear-gradient(to right, #fde8e9, #ffff, #ffff);
+  border-left: 4px solid #e81a1a !important;
+  padding: 15px 10px;
+  height: 40px;
+  width: 100%;
+  line-height: 9px;
+  // display: block;
+}
+::ng-deep .taskSubDiv .i-gantt-details-save {
+  background: linear-gradient(to right, #e2f8d3, #ffff, #ffff);
+  border-left: 4px solid #5cbb1d !important;
+  padding: 15px 10px;
+  height: 40px;
+  width: 100%;
+  line-height: 9px;
+  // display: block;
+}
+::ng-deep .taskSubDiv .i-gantt-details-warning {
+  background: linear-gradient(to right, #fbeed0, #ffff, #ffff);
+  border-left: 4px solid #e9ab15 !important;
+  padding: 15px 10px;
+  height: 40px;
+  width: 100%;
+  line-height: 9px;
+  // display: block;
+}
+
+::ng-deep .taskSubDiv .i-gantt-detail-expecting:hover {
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+}
+
+::ng-deep .taskSubDiv .i-gantt-details-expecting .activities-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  // line-height: 2.8;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
+::ng-deep .taskSubDiv .i-gantt-details-save .activities-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  // line-height: 2.8;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
+::ng-deep .taskSubDiv .i-gantt-details-delay .activities-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  // line-height: 2.8;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin: 0px 0px;
+}
+::ng-deep .taskSubDiv .i-gantt-details-warning .activities-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  // line-height: 2.8;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin: 0px 0px;
+}
+
+::ng-deep .taskSubDiv .task-time-expecting {
+  background: #e8e8e8;
+  // padding: 5px;
+  // border-radius: 2px;
+  margin: -15px 10px 0px 5px;
+}
+::ng-deep .task-time-save {
+  background: #d8ffbe;
+  // padding: 5px;
+  // border-radius: 2px;
+  margin: -15px 10px 0px 5px;
+}
+::ng-deep .task-time-delay {
+  background: #f9cbcd;
+  // padding: 5px;
+  // border-radius: 2px;
+  margin: -15px 10px 0px 5px;
+}
+::ng-deep .task-time-warning {
+  background: #f9d991;
+  // padding: 5px;
+  // border-radius: 2px;
+  margin: -15px 10px 0px 5px;
+}
+
+// ::ng-deep .gantt-display {
+//   display: block;
+// }
+::ng-deep .gantt-display {
+  display: block;
+}
+::ng-deep .gantt-none {
+  display: block;
+}
+::ng-deep .hide {
+  visibility: none !important;
+}
+
+::ng-deep .task-dropdown-form.mat-form-field {
+  position: relative;
+  top: 0px;
+  .mat-form-field-label-wrapper {
+    text-align: center;
+    }
+    .mat-form-field-empty.mat-form-field-label {
+      font-size: 14px;
+      line-height: 14px;
+      text-align: center;
+     }
+ 
+    .mat-form-field-label {
+    color: #ffffff;
+    }
+    .mat-select-placeholder-color {
+    text-align: center;
+    }
+}
+
+::ng-deep .task-dropdown-form .mat-form-field-infix {
+  background: #2f3243;
+  border-radius: 3px;
+  height: 39px;
+  margin-top: 0px;
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 1;
+  border-top: 7px solid transparent;
+   }
+// ::ng-deep .task-dropdown-form .mat-form-field-wrapper {
+//   padding: 0px;
+// }
+
+::ng-deep .task-dropdown-form .mat-form-field-infix .mat-select-placeholder-color .mat-select-placeholder {
+  color: #ffffff;
+  text-align: center;
+}
+:ng-deep .task-dropdown-form .mat-form-field-infix .mat-select-placeholder-color {
+  position: relative;
+  top: -4px;
+}
+
+.gantt-head {
+  position: fixed;
+  z-index: 100;
+  background: #fff;
+  // width: 100vw;
+  margin-left: -1px;
+  // margin-top: -20px;
+  // height: 45px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: -6px;
+  box-shadow: 0px 1px 10px 0px #000;
+}
+
+.back-button {
+  color: #000;
+}
+
+.back-icon button:hover {
+  cursor: pointer;
+}
+.map-full-view {
+  // margin: -20px -15px 0 -30px;
+  margin: -20px -16px 0 -32px;
+}
+
+.back-live {
+  height: 40px;
+  background: #fff;
+  border: 0px;
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) {
+  .agmMapShadow agm-map {
+    height: 88vh;
+  }
+  .bay-no{
+    font-size: 32px;
+  }
+  .flt-not{
+    font-size: 24px;
+  }
+  // .taskDiv {
+  //   max-height: 82vh;
+  //   top: 5%;
+  //   width: 25%;
+  //   position: absolute;
+  //   left: 72%;
+  //   overflow-y: scroll;
+  // }
+}
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
+  .agmMapShadow agm-map {
+    height: 86vh;
+  }
+  .bay-type{
+    font-size: 11px !important;
+  }
+  .flt-no{
+    font-size: 20px !important;
+  }
+  .bay-no{
+    font-size: 28px !important;
+  }
+  .bay-sec{
+    padding: 0px 10px !important;
+  }
+}
+  
+      
+  // @media screen and (min-width: 1600px) and (max-width: 1920px) {
+  //   .agmMapShadow agm-map {
+  //       height: 81vh;
+  //     }
+  //     // .taskDiv {
+  //     //   max-height: 77vh;
+  //     //   top: 5%;
+  //     //   width: 25%;
+  //     //   position: absolute;
+  //     //   left: 72%;
+  //     //   overflow-y: scroll;
+  //     // }
+  // }
+
+  .svg-cls{
+    // transform: rotate(-20deg) !important;
+    height: 65vh;
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    transform: rotate(180deg);
+
+  }
+  // flight card css
+  .back-btn{
+    padding: 2% 0% 0% 4%;
+    display: -webkit-inline-box;
+  }
+  .back-btn:hover{
+    cursor: pointer;
+  }
+  .fltData{
+    width: 392px;
+    // height: 151px;
+    // height: 175px;
+    border-radius: 5px;
+    background: #fff;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .bay-title,
+  .flt-org{
+    font-size: 16px;
+    font-weight: bold;
+    color: gray;
+  }
+
+  .bay-no{
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .flt-no{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .flt-timne{
+    font-size: 12px;
+  }
+  .task-count{
+    background: #000;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 22px;
+  }
+  .flt-eqp,
+  .bay-type{
+    background: #e9e9e9;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 0px;
+  }
+  .flt-dep{
+    text-align: right;
+  }
+  .back-title{
+    padding-top: 2px;
+    padding-left: 5px;
+  }
+  .task-lst{
+    border-radius: unset;
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .taskSubDiv:first-child{
+    border-radius: 5px 5px 0px 0px !important;
+  }
+
+.button{
+  color: #444;
+  border: 1px solid #444;
+  border-radius: 20px;
+  width: 60px;
+  text-align: center;
+}
+.filter-options{
+  padding: 10px;    
+  position: sticky;
+  top: 0px;
+  background: #fff;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 1px solid #e9e9e9;
+}
+  .buttonState {
+    -webkit-appearance:none;
+    padding: 0px 5px;
+  }  
+  .button:hover{
+cursor: pointer;
+  }
+  .buttonState:checked+.button {
+    background: #cdf0ff;
+    padding: 0px 10px;
+    color: #1b55e2;
+    cursor: default;
+    border-radius: 20px;
+    border: 1px solid #1b55e2;
+  }
+  .task-filters{
+    background: #fff;
+    border-radius: 5px;
+  }
+  .task-time{
+    border-radius: 15px;
+    padding:5px;
+  }
+  .bay-sec{
+    padding: 0px 15px;
+  }
+  .eqp-sec{
+    padding: 8px 12px
+  }
+  .dashboard-flight-card .mat-tab-label {
+    height: 35px;
+    opacity: 1;
+    min-width: 100px;
+  }
+  .fltFilter {
+    -webkit-appearance:none;
+    padding: 0px 5px;
+  }  
+  .fltBtn:hover{
+cursor: pointer;
+  }
+  .fltFilter:checked+.fltBtn {
+    // padding: 0px 10px;
+    color: #1b55e2;
+    cursor: default;
+    border-bottom: 4px solid #1b55e2;
+  }
+  .fltFilter-sec{
+    padding: 12px 0px 0px 0px;
+    text-align: center;
+  }
+  
+  .staff-list{
+    background: #fff;
+    padding: 10px;
+  }
+  .staff-name{
+    font-size: 18px;
+  }
+  .staff-role{
+    font-size: 12px;
+  }
+  .staff-det{
+    line-height: 1.2;
+  }
+  .last-seen-blk{
+    background: #cdcdcd;
+    padding: 1px 7px;
+    border-radius: 10px;
+  }
+  .last-seen-label{
+    color: #e9e9e9;
+  }
+  .task-total{
+    font-size: 18px;
+  }
+  .task-completed{
+    font-size: 24px;
+  }
+  .task-det{
+    font-weight: bold;
+  }
+  .last-seen{
+    margin-top: 12px;
+  }
+  .task-det div{
+    margin-top: 2px;
+  }

@@ -1,0 +1,538 @@
+<div class="contracts-container">
+  <!-- html for contract not created yet -->
+  <div [hidden]="true" class="text-center">
+    <img src='assets\images\contracts\no-contract-img.png' class="contract-img">
+    <h2 class="new-content">Let’s create a contract!</h2>
+    <button mat-raised-button color="primary" class="add-cont" (click)="actionClick('addContract')">
+      <mat-icon class="add-icon">add</mat-icon>&nbsp; NEW CONTRACT
+    </button>
+  </div>
+  <!-- html for content consolidated grid view -->
+  <div *ngIf="this.value == 'noData'">
+    <!-- Contracts grid view start -->
+    <div>
+      <div fxLayout="row">
+        <img src="assets/images/master/task-icon.png" class="contract-icon">
+        <div fxFlex="10">
+          <div class="con-txt">TOTAL CONTRACTS</div>
+          <div class="con-no">4</div>
+        </div>
+      </div>
+      <hr class="i-hr">
+    </div>
+    <!-- Contracts grid view end -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div class="cont-tab" fxFlex="23" *ngFor="let flight of flights">
+        <div class="cont-grid"
+          [ngClass]="{'spice': flight.bg == 'spice','al':flight.bg == 'al','anz':flight.bg == 'anz'}">
+          <img [src]='"assets/images/billing/"+flight.airline+".png"'>
+          <!-- <div class="text-right">
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <button mat-menu-item>EDIT</button>
+              <button mat-menu-item>REMOVE</button>
+            </mat-menu>
+          </div> -->
+        </div>
+        <div class="cont-head">
+          {{flight.clientName}}
+        </div>
+        <div class="cont-shead">
+          {{flight.contractType}}
+        </div>
+        <hr class="grid-hr">
+        <div class="accord-cont">
+          <mat-accordion>
+            <mat-expansion-panel class="client-accord">
+              <!-- <mat-expansion-panel-header [expandedHeight]="'30px'" [collapsedHeight]="'30px'">
+                    <span class="cont-indicator">{{(equipList.length)>2?('+'+ (equipList.length-2)):''}}</span>
+                    <mat-panel-description>
+                      <div class="cont-start" fxLayout="row" fxLayoutWrap="wrap"
+                        *ngFor="let equip of equipList;let j = index">
+                        <span class="cont-detail" *ngIf="j<2">{{equip.type}}</span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header> -->
+              <mat-expansion-panel-header [expandedHeight]="'30px'" [collapsedHeight]="'30px'">
+                <mat-panel-description>
+                  <div class="cont-start" fxLayout="row" fxLayoutWrap="wrap" *ngFor="let equip of flight.eqpType">
+                    <span class="cont-detail">{{equip.type}}</span>
+                  </div>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+                <span *ngFor="let equip of equipList;let j = index">
+                  <span class="cont-detail" *ngIf="j>=2">{{equip.type}}</span>
+                </span>
+              </div> -->
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <hr class="grid-hr">
+        <div class="date-row" fxLayout="row">
+          <div fxFlex="50">
+            <div class="cont-tit"> START DATE</div>
+            <div class="cont-tit cont-date">{{flight.start}}</div>
+          </div>
+          <div fxFlex="50">
+            <div class="cont-tit"> END DATE</div>
+            <div class="cont-tit cont-date">{{flight.end}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contract-footer">
+      <button mat-raised-button (click)="actionClick('addContract')" class="edit-ser add-ser create">
+        CREATE</button>
+    </div>
+  </div>
+  <!-- Client Info section start -->
+  <div *ngIf="this.value != 'noData'" fxLayout="row" fxLayoutWrap="wrap" class="add-contract">
+    <!-- constant left side start -->
+    <div fxFlex="25" class="stepper">
+      <mat-vertical-stepper class="mat-step" #stepper>
+        <mat-step>
+          <ng-template matStepLabel>
+            <p class="contracts-head" (click)="actionClick('addContract')">CLIENT INFO</p>
+          </ng-template>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Client Details
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Duration
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Types of Equipments
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>
+            <p class="contracts-head" (click)="actionClick('contractService')">CONTRACT SERVICES</p>
+          </ng-template>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Aircraft Maintenance
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Ground Support Equipment
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Ground Services
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Security
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Cargo
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>
+            <p class="contracts-head" (click)="actionClick('equipments')">EQUIPMENTS</p>
+          </ng-template>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Pax Handling
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Baggage Handling
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Aircraft Servicing
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Supplymentary Equipment
+          </div>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Extras
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>
+            <p class="contracts-head" (click)="actionClick('serviceLevel')">SERVICE-LEVEL AGREEMENT</p>
+          </ng-template>
+          <div class="step-details">
+            <mat-icon>fiber_manual_record</mat-icon>Service-Level Agreement
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </div>
+    <!-- constant left side end -->
+    <div fxFlex="5">
+
+    </div>
+    <!-- buffer space -->
+    <div fxFlex="70" class="add-wizard">
+      <!-- dynamic right section 1 start -->
+      <!-- Client Info block start -->
+      <div *ngIf="this.value == 'addContract'" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" class="block-head">
+          Client Info
+        </div>
+        <div fxFlex="47">
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <mat-label>CLIENT NAME</mat-label>
+            <mat-select name="clientName">
+              <mat-option *ngFor="let client of clientList" [value]="client.id" class="mat-normal-option">
+                {{client.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="6"></div>
+        <div fxFlex="47">
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <mat-label>CONTRACT NAME</mat-label>
+            <div class="client-font">
+              <input type="text" spellcheck="false" matInput name="contractName">
+            </div>
+          </mat-form-field>
+        </div>
+        <div fxFlex="47">
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <mat-label>BILLING CURRENCY</mat-label>
+            <mat-select name="currency">
+              <mat-option *ngFor="let curr of currency" [value]="curr.id" class="mat-normal-option">({{curr.symbol}})
+                {{curr.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="6"></div>
+        <div fxFlex="47" class="custom-toggle width-100" role="group">
+          <!-- <button type="button" [ngClass]="{'btn-active': contractType}" (click)="contType('comp')"
+            class="width-50">COMPREHENSIVE</button>
+          <button type="button" [ngClass]="{'btn-active': !contractType}" (click)="contType('adHoc')"
+            class="width-50">AD-HOC</button> -->
+        </div>
+        <!-- Client Info block End -->
+        <!-- Contract Duration start -->
+        <div fxFlex="100" class="block-head">
+          Contract duration
+        </div>
+        <div fxFlex="47">
+          <mat-form-field class="i-mat-form-field w-100" appearance="outline" floatLabel="always">
+            <mat-label>EFFECTIVE FROM</mat-label>
+            <input readonly matInput [matDatepicker]="from" name="effFrom">
+            <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+            <mat-datepicker #from></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxFlex="6"></div>
+        <div fxFlex="47">
+          <mat-form-field class="i-mat-form-field w-100" appearance="outline" floatLabel="always">
+            <mat-label>EFFECTIVE TO</mat-label>
+            <input readonly matInput [matDatepicker]="to" name="effTo">
+            <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+            <mat-datepicker #to></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <!-- Equipments serviced start -->
+        <div fxFlex="100" class="block-head">
+          Equipments serviced
+        </div>
+        <div fxFlex="47">
+          <div class="task-codes-block">
+            <div fxLayout="row">
+              <mat-form-field fxFlex="100" appearance="outline" floatLabel="always">
+                <mat-label>EQUIPMENT TYPES</mat-label>
+                <!-- <span matPrefix>
+                    <mat-icon>search</mat-icon> &nbsp;
+                  </span> -->
+                <input type="text" name="search" matInput placeholder="Type an equipment type" class=""
+                  [(ngModel)]="searchText">
+                <!-- <span matSuffix class="taskCheckedCount"></span> -->
+              </mat-form-field>
+            </div>
+            <div *ngIf="searchText" class="row mat-dialog-content" fxLayout="row">
+              <div class="col-sm-12" *ngFor="let eqp of equipList">
+                <div class="task-option " fxLayout="row">
+                  <mat-checkbox fxFlex="100" name="eqpTypes" class="primary-checkbox i-mat-checkbox1">
+                    {{eqp.name}} </mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="6"></div>
+        <div fxFlex="47">
+          <div class="task-codes-block">
+            <div fxLayout="row">
+              <mat-form-field fxFlex="100" appearance="outline" floatLabel="always">
+                <mat-label>EQUIPMENT TYPES</mat-label>
+                <!-- <span matPrefix>
+                    <mat-icon>search</mat-icon> &nbsp;
+                  </span> -->
+                <input type="text" name="search" matInput placeholder="Type an equipment type" class=""
+                  [(ngModel)]="searchInt">
+                <!-- <span matSuffix class="taskCheckedCount"></span> -->
+              </mat-form-field>
+            </div>
+            <div *ngIf="searchInt" class="row mat-dialog-content" fxLayout="row">
+              <div class="col-sm-12" *ngFor="let eqp of equipList">
+                <div class="task-option " fxLayout="row">
+                  <mat-checkbox fxFlex="100" name="eqpTypes" class="primary-checkbox i-mat-checkbox1">
+                    {{eqp.name}} </mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Equipments serviced end -->
+        <div class="footer-section">
+          <button mat-raised-button class="cancl" (click)="actionClick('noData')">
+            CANCEL</button>
+          <button mat-raised-button class="edit-ser add-ser" (click)="goNext(stepper); actionClick('contractService')">
+            CONTINUE</button>
+        </div>
+      </div>
+      <!-- Contract Duration end -->
+      <!-- dynamic right section 1 end -->
+      <!-- dynamic right section 2 start -->
+      <div *ngIf="this.value == 'serviceLevel'" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="80" class="service-head">
+          Service-Level Agreement
+        </div>
+        <div fxFlex="20">
+          <!-- <button mat-raised-button class="edit-ser add-ser">
+            ADD SERVICE</button> -->
+        </div>
+        <div class="service-card">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header [expandedHeight]="'75px'" [collapsedHeight]="'75px'" class="service-mat">
+              <mat-panel-title class="service-title">
+                Indemnification
+              </mat-panel-title>
+              <div class="service-con">
+                Client hereby agrees to indemnify, release, discharge and hold harmless the Company, its heirs, legal
+                representatives, assigns,
+                employees or any persons or corporations acting under permission or authority of the Company from and..
+              </div>
+            </mat-expansion-panel-header>
+            <div class="button-section" fxLayout="row">
+              <button mat-raised-button class="edit-ser">
+                EDIT COPY</button>
+              <button mat-raised-button class="edit-ser del">
+                DELETE</button>
+            </div>
+          </mat-expansion-panel>
+        </div>
+        <div class="service-card">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header [expandedHeight]="'75px'" [collapsedHeight]="'75px'" class="service-mat">
+              <mat-panel-title class="service-title">
+                Description of Services
+              </mat-panel-title>
+              <div class="service-con">
+                This agreement constitutes an order for services, and any additional services outlined above in Package.
+                It is agreed
+                to by both parties, Company and Client, as described above. Client agrees to pay Total Amount by the
+                Final Payment
+                Due By Date as defined above.
+              </div>
+            </mat-expansion-panel-header>
+            <div class="button-section" fxLayout="row">
+              <button mat-raised-button class="edit-ser">
+                EDIT COPY</button>
+              <button mat-raised-button class="edit-ser del">
+                DELETE</button>
+            </div>
+          </mat-expansion-panel>
+        </div>
+        <div class="service-card">
+          <div class="mat-inputs" fxLayout="row" fxLayoutWrap="wrap">
+            <mat-form-field class="w-80" appearance="outline" floatLabel="always">
+              <mat-label>CLAUSE TITLE</mat-label>
+              <input type="text" matInput name="clauseTitle" required>
+            </mat-form-field>
+            <mat-form-field class="w-80 descript" appearance="outline" floatLabel="always">
+              <mat-label>DESCRIPTION</mat-label>
+              <input type="text" placeholder="Write a description" matInput name="description" required>
+            </mat-form-field>
+            <div class="button-section final" fxLayout="row">
+              <button mat-raised-button class="edit-ser save-ser">
+                SAVE CLAUSE</button>
+              <button mat-raised-button class="edit-ser del">
+                DELETE</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="footer-section">
+          <button mat-raised-button class="cancl" (click)="goBack(stepper);actionClick('equipments')">
+            PREVIOUS</button>
+          <button mat-raised-button class="edit-ser add-ser" (click)="goNext(stepper);actionClick('noData')">
+            CREATE</button>
+        </div>
+      </div>
+      <div *ngIf="this.value == 'contractService'" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="80" class="service-head">
+          Contract Services
+        </div>
+        <div fxFlex="20">
+          <!-- <button mat-raised-button class="edit-ser add-ser">
+            ADD SERVICE</button> -->
+        </div>
+        <div class="equip-list" fxLayout="row" fxFlex="100">
+          <div fxFlex *ngFor="let eqp of equipmentList" [ngClass]="{'eqp-active': eqp.type == activeEquip}"
+            (click)="equipType(eqp.type)">
+            {{eqp.type}}<br>
+            <span class="equip-value" [ngClass]="{'eqp-value-active': eqp.type == activeEquip}">
+              {{eqp.value}}</span>
+          </div>
+        </div>
+        <div fxFlex="100" class="custom-toggle width-100 center" role="group">
+          <button type="button" [ngClass]="{'btn-active': flightType== 'base'}" (click)="typeFlight('base')"
+            class="width-100">BASE</button>
+          <button type="button" [ngClass]="{'btn-active': flightType== 'turnaround'}" (click)="typeFlight('turnaround')"
+            class="width-100">TURNAROUND</button>
+          <button type="button" [ngClass]="{'btn-active': flightType== 'halt'}" (click)="typeFlight('halt')"
+            class="width-100">HALT</button>
+        </div>
+        <div class="service-accord">
+          <mat-accordion>
+            <mat-expansion-panel class="services-type" [expanded]="isFirst"
+              *ngFor="let serve of serveList; first as isFirst">
+              <mat-expansion-panel-header [expandedHeight]="'60px'" [collapsedHeight]="'90px'">
+                <span *ngIf="serve.service_category.length != 0" class="cont-indicator">{{(serve.service_category.length)}}</span>
+                <mat-panel-title>
+                  <div class="services-option " fxLayout="row">
+                    <mat-checkbox fxFlex name="eqpTypes" class="primary-checkbox i-mat-checkbox1">
+                      {{serve.name}} </mat-checkbox>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div class="roles-list" *ngFor="let roles of staffs">
+                  <div>
+                    <button class="increment" type="button"
+                      onclick="this.parentNode.querySelector('[type=number]').stepDown();">-
+                    </button>
+                    <input class="icon" type="number" name="quantity" min="1" max="20">
+                    <button class="decrement" type="button"
+                      onclick="this.parentNode.querySelector('[type=number]').stepUp();">+
+                    </button>
+                    {{roles.type}}
+                  </div>
+                </div>
+                <div fxFlex="45" class="contract-type" *ngFor="let service of serve.service_category">
+                  <mat-accordion>
+                    <mat-expansion-panel class="services-expansion">
+                      <mat-expansion-panel-header [expandedHeight]="'40px'" [collapsedHeight]="'40px'"
+                        class="service-mat">
+                        <mat-panel-title>
+                          <div class="services-option " fxLayout="row" fxLayoutWrap="wrap">
+                            <mat-checkbox fxFlex="100" name="eqpTypes" class="primary-checkbox i-mat-checkbox1">
+                              {{service.name}} </mat-checkbox>
+                          </div>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <div class="footer-section">
+          <button mat-raised-button class="cancl" (click)="goBack(stepper);actionClick('addContract')">
+            PREVIOUS</button>
+          <button mat-raised-button class="edit-ser add-ser" (click)="goNext(stepper);actionClick('equipments')">
+            CONTINUE</button>
+        </div>
+      </div>
+      <div *ngIf="this.value == 'equipments'" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="80" class="service-head">
+          Equipment List
+        </div>
+        <div fxFlex="20">
+          <!-- <button mat-raised-button class="edit-ser add-ser">
+            ADD SERVICE</button> -->
+        </div>
+        <div class="equip-list" fxLayout="row" fxFlex="100">
+          <div fxFlex *ngFor="let eqp of equipmentList" [ngClass]="{'eqp-active': eqp.type == activeEquip}"
+            (click)="equipType(eqp.type)">
+            {{eqp.type}}<br>
+            <span class="equip-value" [ngClass]="{'eqp-value-active': eqp.type == activeEquip}">
+              {{eqp.value}}</span>
+          </div>
+        </div>
+        <div fxFlex="100" class="custom-toggle width-100 center" role="group">
+          <button type="button" [ngClass]="{'btn-active': flightType== 'base'}" (click)="typeFlight('base')"
+            class="width-100">BASE</button>
+          <button type="button" [ngClass]="{'btn-active': flightType== 'turnaround'}" (click)="typeFlight('turnaround')"
+            class="width-100">TURNAROUND</button>
+          <button type="button" [ngClass]="{'btn-active': flightType== 'halt'}" (click)="typeFlight('halt')"
+            class="width-100">HALT</button>
+        </div>
+        <div class="service-accord">
+          <mat-accordion>
+            <mat-expansion-panel class="services-type" [expanded]="isFirst"
+              *ngFor="let serve of EquipDetailsList; first as isFirst">
+              <mat-expansion-panel-header [expandedHeight]="'60px'" [collapsedHeight]="'90px'">
+                <span *ngIf="serve.service_category.length != 0" class="cont-indicator">{{(serve.service_category.length)}}</span>
+                <mat-panel-title>
+                  <div class="services-option " fxLayout="row">
+                    <mat-checkbox fxFlex name="eqpTypes" class="primary-checkbox i-mat-checkbox1">
+                      {{serve.name}} </mat-checkbox>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="45" class="contract-type" *ngFor="let service of serve.service_category">
+                  <mat-accordion>
+                    <mat-expansion-panel class="services-expansion">
+                      <mat-expansion-panel-header [expandedHeight]="'40px'" [collapsedHeight]="'40px'"
+                        class="service-mat">
+                        <mat-panel-title>
+                          <div class="services-option " fxLayout="row" fxLayoutWrap="wrap">
+                            <mat-checkbox fxFlex="100" name="eqpTypes" class="primary-checkbox i-mat-checkbox1">
+                              {{service.name}} </mat-checkbox>
+                          </div>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="roles-lists" fxLayout="row">
+                        <div fxFlex="50">
+                          <button class="increment" type="button"
+                            onclick="this.parentNode.querySelector('[type=number]').stepDown();">-
+                          </button>
+                          <input class="icon" type="number" name="quantity" min="1" max="100">
+                          <button class="decrement" type="button"
+                            onclick="this.parentNode.querySelector('[type=number]').stepUp();">+
+                          </button>
+                          Number(s)
+                        </div>
+                        <div fxFlex="50">
+                          <button class="increment" type="button"
+                            onclick="this.parentNode.querySelector('[type=number]').stepDown();">-
+                          </button>
+                          <input class="icon" type="number" name="quantity" min="10" max="500">
+                          <button class="decrement" type="button"
+                            onclick="this.parentNode.querySelector('[type=number]').stepUp();">+
+                          </button>
+                          Minutes
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <div class="footer-section">
+          <button mat-raised-button class="cancl" (click)="goBack(stepper);actionClick('contractService')">
+            PREVIOUS</button>
+          <button mat-raised-button class="edit-ser add-ser" (click)="goNext(stepper);actionClick('serviceLevel')">
+            CONTINUE</button>
+        </div>
+      </div>
+      <!-- <div class="footer-section">
+        <button mat-raised-button class="edit-ser add-ser" (click)="goBack(stepper)">
+          NEXT</button>
+      </div> -->
+    </div>
+    <!-- dynamic right section 2 end -->
+  </div>
+</div>
+<!-- Client Info section end -->

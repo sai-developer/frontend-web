@@ -1,0 +1,49 @@
+
+.task-codes-block{
+  width: 99%;
+  border-radius: 5px;
+  border: 1px solid gainsboro;
+  //box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+}
+.task-codes-block .task-codes{
+  height: 300px;
+  overflow: auto;
+  padding: 5px 0 5px 10px;
+  // margin: -10px 10px 10px 0px;
+}
+
+.add-mat-dialog-title{
+  background: white;
+  color: #000000;
+}
+.cancel-btn{
+  color: #a2a2a2;
+  margin-right: 10px;
+}
+.task-codes-block .tc-search{
+  position: relative;
+  left: -4px;
+  top: 5px;
+}
+
+::ng-deep .task-codes .mat-checkbox-layout {
+  max-width: 100%;
+}
+
+.mat-dialog-actions{
+  position: absolute;
+    // bottom: -12px;
+      bottom: 0px;
+    padding-left: 5px;
+    // margin-bottom: 12px;
+    margin-left:10px;
+}
+.add-mat-dialog-title img{
+  width: 19px !important;
+  height: auto !important;
+}
+
+.delay-task-name {
+  font-size: 18px;
+  font-weight: 700;
+}

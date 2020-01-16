@@ -1,0 +1,32 @@
+<table [@animator]="animationType?animationType:'show'" class="table table-hover margin bottom" style="font-size: 13px !important">
+  <thead>
+    <tr>
+      <th style="width: 2%" class="text-center">&nbsp;</th>
+      <th>Flight Type</th>
+      <th class="text-center obd-table-header-ontime">OnTime</th>
+      <th class="text-center obd-table-header-buffer">Buffer</th>
+      <th class="text-center obd-table-header-delay">Delay</th>
+      <th class="text-center obd-table-header-grey">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of input">
+      <td style="width: 2%" class="text-center">&nbsp;</td>
+      <td>{{ data.flt_type }}</td>
+      <td class="text-center obd-table-value-ontime">
+        <span id="arrTransitOT">{{ data.ontime }}</span>
+      </td>
+      <td class="text-center obd-table-value-buffer">
+        <span id="arrTransitBuf">{{ data.buffer }}</span>
+      </td>
+      <td class="text-center obd-table-value-delay">
+        <span id="arrTransitDel">{{ data.delay }}</span>
+      </td>
+      <td class="text-center obd-table-value-grey">
+        <strong
+          ><span id="arrTransitTot">{{ data.Total }}</span></strong
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>

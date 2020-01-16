@@ -1,0 +1,41 @@
+<div fxLayout="row" fxLayoutWrap="wrap" class="invoice-container">
+  <div fxFlex="100" class="">
+    <div fxFlex="25" class="contract-sec" [ngClass]="{'spice': flight.bg == 'spice', 'al': flight.bg == 'al', 'delta': flight.bg == 'delta', 'klm': flight.bg == 'klm', 'anz': flight.bg == 'anz', 'emirates': flight.bg == 'emirates'}">
+      <div fxLayout="column" class="contract-details">
+        <div fxLayout="column" class="form-intro">
+         Contract for:
+        </div>
+        <div class="airline-name">
+          <!-- <img src="assets/images/"+ {{flight.airline}}+""> -->
+          <img [src]='"assets/images/billing/"+flight.airline+".png"'>
+        </div>
+        <div class="flt-eqp">
+          <hr>
+          <div>COMPREHENSIVE
+            <br>
+            <span>{{flight.eqpType}}</span>
+          </div>
+          <div fxLayout="row">
+            <div fxFlex="50">
+              <div>FROM : 01-03-2018</div>
+            </div>
+            <div fxFlex="50">
+              <div>TO : 01-03-2019</div>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="flt-det">
+        </div>
+        <hr>
+        <div class="package">
+        </div>
+        <div class="total">
+        </div>
+      </div>
+    </div>
+    <div fxFlex="5"></div>
+    <div fxFlex="70" class="table-sec">
+    </div>
+  </div>
+</div>

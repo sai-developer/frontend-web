@@ -1,0 +1,11 @@
+<mat-dialog-content class="i-md-content text-center">
+  <div class="main-container">
+    <!-- <div *ngIf="!!details.text.main" class="main-text">{{details.text.main}}</div> -->
+    <div *ngIf="!!details.text.sub" class="sub-text">{{details.text.sub}}</div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" *ngIf="!!details.ok" (click)="proceed()">{{details.ok}}</button>
+  <button mat-button class="cancel-btn" *ngIf="!!details.cancel" [mat-dialog-close]>{{details.cancel}}</button>
+</mat-dialog-actions>

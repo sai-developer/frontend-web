@@ -1,0 +1,139 @@
+<div fxLayout="row" class="dc-page top-row">
+  <img src="assets/images/master/Delay_code_icon.png" class="Delay-code-icon">
+  <div fxFlex="10">
+    <div class="dc-txt">TASKS MAPPED</div>
+    <div class="dc-no">{{manipulatedDelayTask.length}}</div>
+  </div>
+  <!--<div fxFlex="90">
+    <div class="options">
+      <button mat-button class="opt-btn">EXPORT <mat-icon class="export">file_upload</mat-icon></button>
+      <button mat-button class="opt-btn">PRINT <mat-icon>print</mat-icon></button>
+      <mat-button-toggle-group class="i-mat-btg" #viewMode="matButtonToggleGroup" [value]="viewType" (change)="viewType = $event.value">
+        <mat-button-toggle value="GRID_VIEW"><mat-icon>view_module</mat-icon></mat-button-toggle>
+        <mat-button-toggle value="LIST_VIEW"><mat-icon>view_headline</mat-icon></mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>-->
+</div>
+<hr class="i-hr">
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load">
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'GRID_VIEW'">
+    <div fxFlex.xl="20" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-sm="33"
+      *ngFor="let delayTaskIns of manipulatedDelayTask  | MasterSearch : searchText :'task_name'; let i = index">
+      <div class="dc-grid">
+        <div class="text-right">
+          <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+            <button mat-menu-item (click)="edit(delayTaskIns)">EDIT</button>
+            <!--<button mat-menu-item >EDIT</button>-->
+            <button mat-menu-item (click)="delete(delayTaskIns[0].task_id)">REMOVE</button>
+          </mat-menu>
+        </div>
+        <div class="task-name">{{delayTaskIns[0].task_name}}</div>
+        <div class="delay-codes"><span class="dc-default-title">DEFAULT CODE</span><span
+            *ngFor="let delayIns of delayTaskIns">
+            <span *ngIf="delayIns.is_default" class="delay-code">{{delayIns.delay_numeric_code }}
+              ({{delayIns.delay_alphabetic_code}})</span></span></div>
+        <hr>
+        <div class="delay-codes bottom-list">
+          <!-- <span *ngFor="let delayIns of delayTaskIns;let j = index"><span [hidden]="j>=4">{{delayIns.delay_numeric_code}}
+              ({{delayIns.delay_alphabetic_code}})</span></span> -->
+          <mat-accordion>
+            <mat-expansion-panel class="box-shadow-none" [disabled]="delayTaskIns.length<=4">
+              <mat-expansion-panel-header class="delay-codes-grid-padding" [expandedHeight]="'30px'" [collapsedHeight]="'30px'">
+                <!-- <span style="padding: 0 5px;">{{(delayTaskIns.length)>4?('+'+ (delayTaskIns.length-4)):''}}</span> -->
+                <mat-panel-description>
+                  <div *ngFor="let delayIns of delayTaskIns;let j = index">
+                    <span *ngIf="j<4" class="delay-code">{{delayIns.delay_numeric_code }}
+                      ({{delayIns.delay_alphabetic_code}})</span>
+                  </div>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div fxLayout="row" fxLayoutWrap="wrap" class="gridView-expanded-panel-header">
+                <span *ngFor="let delayIns of delayTaskIns;let j = index">
+                  <span *ngIf="j>=4" class="delay-code">{{delayIns.delay_numeric_code }}
+                    ({{delayIns.delay_alphabetic_code}})</span>
+                </span>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(manipulatedDelayTask  | MasterSearch : searchText :'task_name').length === 0  && searchText">No matches found </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'LIST_VIEW'">
+    <div fxFlex="100" class="master-fixed-header">
+      <div fxLayout="row" class="dc-th">
+        <div fxFlex="40">TASK NAME</div>
+        <div fxFlex="25">DEFAULT DELAY CODE</div>
+        <div fxFlex="30">DELAY CODES</div>
+        <div fxFlex="5" class="text-right">ACTION</div>
+      </div>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(manipulatedDelayTask  | MasterSearch : searchText :'task_name').length === 0  && searchText">No
+      match found</div>
+    <div fxFlex="100">
+      <div class="dc-card"
+        *ngFor="let delayTaskIns of manipulatedDelayTask  | MasterSearch : searchText :'task_name' ; let i = index">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+          <div fxFlex="40" class="task-name">{{delayTaskIns[0].task_name}}</div>
+          <div fxFlex="25" class="delay-codes"><span *ngFor="let delayIns of delayTaskIns"><span
+                *ngIf="delayIns.is_default" class="delay-code">{{delayIns.delay_numeric_code}}
+                ({{delayIns.delay_alphabetic_code}})</span></span></div>
+
+          <div fxFlex="30" class="delay-codes"> 
+            <!-- <span *ngFor="let delayIns of delayTaskIns;let j = index">
+              <span [hidden]="j>=4" class="delay-code">{{delayIns.delay_numeric_code}}
+                ({{delayIns.delay_alphabetic_code}})
+              </span>
+            </span>
+            <span matTooltip="Print" matTooltipPosition="above">
+                +{{(delayTaskIns.length)>=4?delayTaskIns.length-4:'0'}}
+            </span> -->
+            <!-- [ngClass]="{'header-expansion-indicator': delayTaskIns.length<=4}" -->
+            <mat-accordion>
+              <mat-expansion-panel class="box-shadow-none" [disabled]="delayTaskIns.length<=4">
+                <mat-expansion-panel-header class="header-expansion-panel-count" [expandedHeight]="'30px'"
+                  [collapsedHeight]="'30px'">
+                  <!-- <span>{{(delayTaskIns.length)>4?('+'+ (delayTaskIns.length-4)):''}}</span> -->
+                  <mat-panel-description>
+                    <div *ngFor="let delayIns of delayTaskIns;let j = index">
+                      <span *ngIf="j<4" class="delay-code">{{delayIns.delay_numeric_code }}
+                        ({{delayIns.delay_alphabetic_code}})</span>
+                    </div>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="delay-expansion-div">
+                  <span *ngFor="let delayIns of delayTaskIns;let j = index">
+                    <span *ngIf="j>=4" class="delay-code">{{delayIns.delay_numeric_code }}
+                      ({{delayIns.delay_alphabetic_code}})</span>
+                  </span>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <div fxFlex="5" class="text-right">
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <!--<button mat-menu-item>EDIT</button>-->
+              <button mat-menu-item (click)="edit(delayTaskIns)">EDIT</button>
+              <button mat-menu-item (click)="delete(delayTaskIns[0].task_id)">REMOVE</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

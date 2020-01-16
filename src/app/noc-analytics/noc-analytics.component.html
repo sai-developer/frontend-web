@@ -1,0 +1,146 @@
+<div class="div-width">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="22" class="noc-title">
+            Performance Comparison
+        </div>
+        <div fxFlex="25" fxLayout="row">
+            <div class="date-pad">
+                <mat-form-field class="date-selector">
+                    <input matInput readonly [matDatepicker]="from" [max]="filter.to" [(ngModel)]="filter.from"
+                        (dateChange)="daterange($event,'from');to.open()" class="w-100">
+                    <mat-datepicker-toggle class="date-arrow" matSuffix [for]="from">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="date-arrows">
+                <mat-icon>arrow_right_alt</mat-icon>
+            </div>
+            <div class="date-pads">
+                <mat-form-field class="date-selector">
+                    <input matInput readonly [matDatepicker]="to" [max]="today" [min]="filter.from"
+                        [(ngModel)]="filter.to" (dateChange)="daterange($event,'to');updateRange()" class="w-100">
+                    <mat-datepicker-toggle class="date-arrow" matSuffix [for]="to">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="divide-noc"></div>
+        <div class="station-card" fxFlex="11">
+            <div class="title-card bg">
+                {{st}}
+            </div>
+            <mat-form-field class="title-filt">
+                <mat-select class="mat-select-placeholder-color" [(ngModel)]="st"
+                    (ngModelChange)="stationChange(st,1);updateRange()" disableOptionCentering>
+                    <mat-option *ngFor="let station of airportList" [value]="station.code" class="mat-normal-option">
+                        {{station.code}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="vs-title">vs</div>
+        <div class="station-card" fxFlex="11">
+            <div class="title-card bg1">
+                {{st1}}
+            </div>
+            <mat-form-field class="title-filt">
+                <mat-select class="mat-select-placeholder-color" [(ngModel)]="st1"
+                    (ngModelChange)="stationChange(st1,2);updateRange()" disableOptionCentering>
+                    <mat-option *ngFor="let station of airportList1" [value]="station.code" class="mat-normal-option">
+                        {{station.code}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="vs-title">vs</div>
+        <div class="station-card" fxFlex="11">
+            <div class="title-card bg2">
+                {{st2}}
+            </div>
+            <mat-form-field class="title-filt">
+                <mat-select class="mat-select-placeholder-color" [(ngModel)]="st2"
+                    (ngModelChange)="stationChange(st2,3);updateRange()" disableOptionCentering>
+                    <mat-option *ngFor="let station of airportList2" [value]="station.code" class="mat-normal-option">
+                        {{station.code}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="noc-tab width">
+            <div fxFlex="100" class="tab-title">Turnaround OTP</div>
+            <div class="turn-left" fxLayout="column" fxFlex="30">
+                <div class="noc-titles">
+                    <div class="noc-otp-title">{{stationOne[0]}}</div>
+                    <div class="noc-otp-per">{{stationPer[0]}}%</div>
+                </div>
+                <div class="noc-titles">
+                    <div class="noc-otp-title1">{{stationOne[1]}}</div>
+                    <div class="noc-otp-per1">{{stationPer[1]}}%</div>
+                </div>
+                <div class="noc-titles">
+                    <div class="noc-otp-title2">{{stationOne[2]}}</div>
+                    <div class="noc-otp-per2">{{stationPer[2]}}%</div>
+                </div>
+            </div>
+            <div class="turn-div" fxFlex="70">
+                <div class="turn-one">
+                    <round-progress class="round-pro" [current]="stationPer[0]" [max]="100" [rounded]="true" [radius]=50
+                        [stroke]="10" [semicircle]="false" [responsive]="false" [duration]="800"
+                        [animation]="'easeInOutQuart'" [color]="'#1b55e2'" [background]="'#d7d7eb'" [clockwise]="true">
+                    </round-progress>
+                </div>
+                <div class="turn-two">
+                    <round-progress class="round-pro" [current]="stationPer[1]" [max]="100" [rounded]="true" [radius]=50
+                        [stroke]="15" [semicircle]="false" [responsive]="false" [duration]="800"
+                        [animation]="'easeInOutQuart'" [color]="'#7821de'" [background]="'#d7d7eb'" [clockwise]="true">
+                    </round-progress>
+                </div>
+                <div class="turn-three">
+                    <round-progress class="round-pro" [current]="stationPer[2]" [max]="100" [rounded]="true" [radius]=50
+                        [stroke]="20" [semicircle]="false" [responsive]="false" [duration]="800"
+                        [animation]="'easeInOutQuart'" [color]="'#d62470'" [background]="'#d7d7eb'" [clockwise]="true">
+                    </round-progress>
+                </div>
+            </div>
+        </div>
+        <div class="noc-tab width white-bg">
+            <div class="tab-title">Arrival + Departure OTP</div>
+            <div class="noc-dep-chart">
+                <canvas baseChart [datasets]="barChartData" [labels]="arrBarChartLabels" [options]="barChartOptions"
+                    [legend]="barChartLegend" [colors]="arrBarChartColors" [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="noc-tab width white-bg">
+            <div class="tab-title">Equipment Type + OTP</div>
+            <div class="noc-equip-chart">
+                <canvas baseChart [datasets]="equipBarChartData" [labels]="eqBarChartLabels" [options]="barChartOptions"
+                    [legend]="barChartLegend" [colors]="barChartColors" [chartType]="hzbarChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div class="noc-tab width2 white-bg">
+            <div class="tab-title">Flights + OTP</div>
+            <div class="noc-flight-chart">
+                <canvas baseChart [datasets]="ComboChartData" [labels]="lineChartLabels" [options]="ComboChartOptions"
+                    [colors]="lineChartColors" [legend]='true' [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="noc-tab width2 white-bg">
+            <div class="tab-title">Department OTP</div>
+            <div class="noc-flight-chart">
+                <canvas baseChart [datasets]="CombosChartData" [labels]="lineChartsLabels"
+                    [options]="departmentChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                    [chartType]="lineChartType">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>

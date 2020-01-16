@@ -1,0 +1,266 @@
+<div fxLayout="row" class="db-page">
+    <div fxFlex="{{showRegion ? 85 : 100}}">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="45">
+                <mat-card class="top-left-card">
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start start">
+                            <div fxFlex="50">
+                                <div><img src="assets/images/dashboard/flight-up-down.png" class="flight-up-down" />
+                                </div>
+                                <div class="flights-handled-text">FLIGHTS HANDLED</div>
+                                <div *ngIf="fscdetails" class="flights-handled-no">
+                                    {{fscdetails.flight_handled}}<span>/{{fscdetails.total_flights}}</span></div>
+                            </div>
+                            <div fxFlex="50">
+                                <div><img src="assets/images/dashboard/load-factor.png" class="load-factor" /></div>
+                                <div class="load-factor-text">LOAD FACTOR</div>
+                                <!-- {{fscdetails.load_factor ? fscdetails.load_factor.toFixed(0) :0}} -->
+                                <div *ngIf="fscdetails" class="load-factor-per">70<span>%</span></div>
+                            </div>
+                            <div fxFlex="22">
+                                <div *ngIf="fscdetails" class="otp-value otp-value-colour">{{fscdetails.delay_percentage ?
+                                (fscdetails.delay_percentage).toFixed(0) : 0}}<span>%</span></div>
+                                <div class="otp-text">REPORTABLE DELAY</div>
+
+                                <!-- <div *ngIf="fscdetails" class="delay-value">{{fscdetails.config_delay_percentage ? (fscdetails.config_delay_percentage).toFixed(0):0}}<span>%</span></div>
+                              <div class="delay-text">NON-REPORTABLE DELAY</div> -->
+                            </div>
+                            <div fxFlex="56" class="fsc-dounetChart">
+                                <canvas height="300" baseChart class="chart" [data]="doughnutChartData"
+                                    [labels]="doughnutChartLabels" [options]="doughnutOptions"
+                                    [colors]="doughnutChartColors" [chartType]="doughnutChartType">
+                                </canvas>
+                            </div>
+                            <div fxFlex="22">
+                                <div *ngIf="fscdetails" class="otp-value">{{fscdetails.ontime_percentage ?
+                                (fscdetails.ontime_percentage).toFixed(0) : 0}}<span>%</span></div>
+                                <div class="otp-text">ON TIME PERFORMANCE</div>
+
+                                <div *ngIf="fscdetails" class="delay-value">{{fscdetails.config_delay_percentage ?
+                                (fscdetails.config_delay_percentage).toFixed(0):0}}<span>%</span></div>
+                                <div class="delay-text">NON-REPORTABLE DELAY</div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div fxFlex="55">
+                <mat-tab-group (selectedTabChange)="selectRegion($event)">
+                    <mat-tab label="All"></mat-tab>
+                    <mat-tab *ngFor="let r of regionList; let i = index" label={{r.region_name}}></mat-tab>
+                </mat-tab-group>
+                <div class="m-gap p-gap w-100">
+                    <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+                        [zoomControl]="false" [streetViewControl]="false" class="gm-style-iw">
+
+                        <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.id, i);"
+                            [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.iconUrl"
+                            (mouseOver)="onMouseOver(infoWindow, gm, m.id)" (mouseOut)="onMouseOut(infoWindow, gm)">
+                            <div>
+                                <agm-info-window [isOpen]="isInfoWindowOpen(m.id)" [latitude]="m.lat"
+                                    [longitude]="m.lng" [disableAutoPan]="false" #infoWindow>
+                                    <div><strong>{{m.label}}</strong></div>
+                                    <div style="text-align:center;"><strong>OTP: {{m.otp}}%</strong></div>
+                                </agm-info-window>
+                            </div>
+                        </agm-marker>
+                    </agm-map>
+                  
+                </div>
+            </div>
+        </div>
+        <hr class="tc-separator p-gap m-gap">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="70">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" class="m-gap p-gap p-l-0" *ngIf="ComboChartData">
+                        <mat-card class="dashboard-card">
+                            <mat-card-title fxLayout="row" fxLayoutAlign="start center">
+                                ON TIME PERFORMANCE
+                                <span fxFlex></span>
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </mat-card-title>
+                            <mat-card-content>
+                                <canvas height="100" baseChart class="chart" [datasets]="ComboChartData"
+                                    [labels]="lineChartLabels" [options]="ComboChartOptions" [colors]="lineChartColors"
+                                    [legend]="lineChartLegend" [chartType]="barChartType">
+                                </canvas>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="68" class="p-l-0">
+                        <mat-card class="dashboard-card trans-bg dc-card-v2">
+                            <mat-card-title>
+                                <span class="dc-head">DELAY CATEGORIZATION</span>
+                                <span fxFlex></span>
+                                <div class="toggle-menu">
+                                    <mat-button-toggle-group
+                                        (change)="onValChange($event.value,stateid,regionOrstation)" name="view-options"
+                                        #viewMode="matButtonToggleGroup" [value]="'actual'">
+                                        <mat-button-toggle value="actual">ACTUALS</mat-button-toggle>
+                                        <mat-button-toggle value="reported">REPORTED</mat-button-toggle>
+                                    </mat-button-toggle-group>
+                                </div>
+                            </mat-card-title>
+                            <mat-card-content>
+                                <div>
+                                    <div class="dc-chart">
+                                        <canvas class="chart" height="150" baseChart [data]="doughnutDelayChartData"
+                                            [labels]="doughnutDelayChartLabels" [options]="doughnutDelayOptions"
+                                            [colors]="doughnutDelayChartColors" [chartType]="doughnutDelayChartType">
+                                        </canvas>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" *ngFor="let delay of delays; let i = index">
+                                            <div class="dc-block"
+                                                [ngClass]="{'i-disabled': delay.delay_percentage == 0,'dc-blue': i === 1, 'dc-red': i === 2, 'dc-yellow': i === 3,
+                                                'dc-green': i === 4, 'dc-g-white': i === 5, 'dc-purple': i === 6, 'dc-violet': i === 7,'dc-eight': i === 8,'dc-nine': i === 9}">
+                                                <div class="cat-content">
+                                                    <div>
+                                                        <div class="cat-per">
+                                                            {{delay.delay_percentage.toFixed(0)}}<span>%</span></div>
+                                                        <div class="cat-title">{{delay.category_department}}</div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div *ngIf="delay.delay_percentage.toFixed(0) != 0 && delay.details != null" class="tooltips">
+                                                    <div class="tooltiptexts">
+                                                        <span *ngFor="let detail of delay.details">
+                                                            {{detail.delay_numeric_code}}({{detail.delay_alphabetic_code}})<span
+                                                                class="tooltip-right">{{detail.time ? detail.time : 0}}
+                                                                mins</span>
+                                                        </span>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div fxFlex="32" class="m-gap">
+                        <mat-card class="dashboard-card trans-bg department-card">
+                            <mat-card-title>DELAYS BY DEPARTMENT</mat-card-title>
+                            <mat-card-content>
+                                <div class="dp-block" *ngFor="let delay of taskDelayDepartments; let i = index">
+                                    <div class="dp-content">
+                                        <div class="dp-title">{{delay.name}}<span class="dp-per">{{(delay.delay_percentage || 0
+                                                  ).toFixed(0)}}<span>%</span></span>
+                                        </div>
+                                        <progressbar max="100" [value]="delay.delay_percentage" type="danger"
+                                            [animate]="true">
+                                        </progressbar>
+                                    </div>
+                                    <div class="dp-caret">
+                                        <mat-icon>keyboard_arrow_right</mat-icon>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="30" class="m-gap p-gap">
+                <mat-card class="trans-bg-card ft-card-v2">
+                    <mat-card-content class="flight-padding-0">
+                        <div class="master-fixed-header">
+                            <div class="ft-title">FLIGHTS</div>
+                            <mat-tab-group mat-stretch-tabs (selectedTabChange)="selectFlights($event)"
+                                headerPosition="below" class="dashboard-flight-card">
+                                <mat-tab label="({{onGroundCount}}) ON GROUND"></mat-tab>
+                                <mat-tab label="({{yetToArriveCount}})  YET TO ARRIVE" class="last-tab">
+                                </mat-tab>
+                            </mat-tab-group>
+                        </div>
+                        <div class="flight-head" *ngFor="let flight of flights;">
+                            <!-- *ngIf="etaCheck.boolenValue" -->
+                            <!-- <span *ngIf="etaCheck.boolenValue" class="tooltiptext"><i
+                                    class="material-icons">flight_land</i>{{etaCheck.number}}
+                                is
+                                on final approach</span> -->
+                            <div fxLayout="row" class="fs-v2" fxLayoutWrap="wrap">
+                                <div fxFlex="33">
+                                    <div fxFlex>
+                                        <div *ngIf="flight.flightType==0" class="mar-top-30">BASE</div>
+                                        <div class="station" [ngClass]="{'no-value': false}">
+                                            {{flight.originAirportCode || ''}}</div>
+                                        <div class="flight-no" [ngClass]="{'no-value': false}">
+                                            {{flight.arrFlightNumber || ''}}</div>
+                                        <div class="timing mt-10" *ngIf="flight.flightType!=0"
+                                            [ngClass]="{'no-value': false}">STA: <span>{{flight.standardArrivalTime
+                                    ?
+                                    (flight.standardArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                                        <div class="timing" *ngIf="flight.actualArrivalTime == null"
+                                            [hidden]="flight.flightType==0" [ngClass]="{'no-value': false}">ETA:
+                                            <span>{{flight.estimatedArrivalTime
+                                    ? (flight.estimatedArrivalTime | date: 'HH:mm': zoneOffset):'--:--'}}</span></div>
+                                        <div class="timing" *ngIf="flight.actualArrivalTime"
+                                            [ngClass]="{'no-value': false}">ATA: <span>{{flight.actualArrivalTime
+                                    ? (flight.actualArrivalTime | date: 'HH:mm': zoneOffset):'--:--'}}</span></div>
+                                    </div>
+                                </div>
+                                <div fxFlex="34">
+                                    <!-- <div class="bay-info">{{flight.bayCode || '--'}}<span> | </span>{{flight.bayType == 0
+                                ?constants.bayType[0].type :(flight.bayType == 1)?constants.bayType[1].type : '----'}}
+                                    </div> -->
+                                    <div class="flights-handled">
+                                        {{flight.taskCompletedCount || "0"}}<span>/{{flight.taskAssignedCount || "0"}}</span>
+                                    </div>
+                                    <div class="tail-no">{{flight.equipmentType}}</div>
+                                </div>
+                                <div fxFlex="33" class="text-right">
+                                    <div fxFlex>
+                                        <div *ngIf="flight.flightType==3" class="mar-top-30">HALT</div>
+                                        <div class="station" [ngClass]="{'no-value': false}">
+                                            {{flight.destinationAirportCode || ''}}</div>
+                                        <div class="flight-no" [ngClass]="{'no-value': false}">
+                                            {{flight.depFlightNumber || ''}}</div>
+                                        <div class="timing mt-10" *ngIf="flight.flightType!=3"
+                                            [ngClass]="{'no-value': false}">STD: <span>{{flight.standardDepartureTime
+                                    ?
+                                    (flight.standardDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                                        <div class="timing" *ngIf="flight.actualDepartureTime == null"
+                                            [hidden]="flight.flightType==3" [ngClass]="{'no-value': false}">ETD:
+                                            <span>{{flight.estimatedDepartureTime ? (flight.estimatedDepartureTime | date: 'HH:mm':
+                                    zoneOffset)
+                                    :
+                                    '--:--'}}</span>
+                                        </div>
+                                        <div class="timing" *ngIf="flight.actualDepartureTime"
+                                            [ngClass]="{'no-value': false}">ATD: <span>{{flight.actualDepartureTime
+                                    ? (flight.actualDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="etaCheck.boolenValue && etaCheck.number == (flight.depFlightNumber ? flight.depFlightNumber : flight.arrFlightNumber)"
+                                class="fs-v22">
+                                <i class="material-icons">
+                                    flight_land
+                                </i> {{etaCheck.number}} is on final approach
+                            </div> -->
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>
+    <div fxFlex="15" class="p-gap station-back" *ngIf="showRegion">
+        <div class="station-list">
+            <div class="station-name">{{stationValue}}</div>
+            <div class="active-region" [ngClass]="{'active-state': station.id == stateid}"
+                *ngFor="let station of stations">
+                <div (click)="stationBasedDetails(station.id)" class="region-station">{{station.name}} <span
+                        class="per-no">{{station.percentage.toFixed(0)}}<span class="per-symbol">%</span></span>
+                </div>
+                <progressbar [value]="station.percentage"
+                    [ngClass]="{'i-high': station.percentage > 70, 'i-mid': station.percentage > 30 && station.percentage <= 70, 'i-low': station.percentage <= 30}"
+                    class="mb-1 progress-station">
+                </progressbar>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+.add-mat-dialog-title{
+  background: white;
+  color: #000000;
+}
+
+.cancel-btn {
+  color: #a2a2a2;
+  margin-right: 10px;
+}
+
+.reset-btn {
+  color: #a2a2a2;
+  // margin-left: 110px !important;
+}
+
+.password span {
+  cursor: pointer;
+}
+ .station-header-arrow-staff{
+  padding: 0px 15px;
+  top: 0px;
+ // bottom:px;
+ position: relative;
+//  width: 50px;
+//  height: 20px;
+}
+
+.mat-dialog-actions {
+  position: absolute;
+  // bottom: -12px;
+      bottom: 0px;
+  padding-left: 5px;
+  // margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+.add-mat-dialog-title .shifts-icon{
+  width: 19px !important;
+  height: auto !important;
+
+}
+.location-fontsize{
+  font-size:20px;
+  text-align: center;
+  }
+
+::ng-deep .designation-role .mat-select-value-text {
+  color: #000000;
+}
+
+// #password-border {
+//   position: relative;
+//   top: 15px;
+// }
+#password-border {
+  position: relative;
+  top: 15px;
+  width: 100%;
+}
+.dialogContentWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .dialogContentWrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1279px) and (orientation: landscape) {
+  .dialogContentWrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.show-user {
+  flex: 1 1 95% !important;
+  box-sizing: border-box !important;
+  max-width: 95% !important;
+}
+
+.show-pass {
+  flex: 1 1 0% !important;
+  box-sizing: border-box !important;
+  max-width: 0% !important;
+}

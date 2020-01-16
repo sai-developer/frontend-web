@@ -1,0 +1,62 @@
+<div fxLayout="row" class="top-row">
+  <img src="assets/images/master/bays-icon.png" class="bays-icon">
+  <div fxFlex="10">
+    <div class="aircraft-txt">AIRCRAFTS</div>
+    <div class="aircraft-no">{{this.aircraftsLength}}</div>
+  </div>
+  <div fxFlex="45">
+    <div *ngFor="let air of aircrafts" class="progress-block" [style.width.%]="air.tails.length/aircraftsLength*100">
+      <div class="aircraft-no">{{air.tails.length}}</div>
+      <div class="tail-no">{{air.type}}</div>
+    </div>
+    <div class="progress">
+      <div *ngFor="let air of aircrafts" class="progress-bar prog-bg" role="progressbar"
+        [style.width.%]="air.tails.length/aircraftsLength*100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+  <div fxFlex="30">
+  </div>
+</div>
+<hr class="cust-hr">
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load" fxLayout="row" fxLayoutWrap="wrap">
+  <div *ngFor="let type of aircrafts | MasterSearch: searchText : 'tailNumber'">
+    <div fxFlex="100" class="no-datamsg" *ngIf="type===-1">
+      No match found
+    </div>
+    <div *ngIf="type!==-1" fxFlex="100" [ngStyle]="type.tails.length===0 && {'display':'none'}" class="eqp-groups ">
+      <h4 *ngIf="type.type"> {{type.type}} </h4>
+      <!-- <hr *ngIf="type.type" class="cust-hr"> -->
+      {{aircrafts[0].result}}
+      <!-- <h4 [hidden]="(type.tails | MasterSearch : searchText : 'tailNumber').length === 0" > 
+        {{type.type}} </h4>
+        <h4> {{type.type}} </h4>
+    
+        <div *ngIf="(type.tails | MasterSearch : searchText : 'tailNumber').length !== 0 ">
+        <hr class="cust-hr" >
+      </div> -->
+      <div class="aircraft-card" *ngFor="let tail of type.tails">
+        <button mat-icon-button mat-button-sm [mat-menu-trigger-for]="actionMenu" aria-label="Open card menu"
+          class="action-btn">
+          <!-- <div  [hidden]="(type.tails | MasterSearch : searchText : 'tailNumber').length === 0"> -->
+          <mat-icon>more_horiz</mat-icon>
+          <!-- </div> -->
+        </button>
+        <mat-menu #actionMenu="matMenu" class="aa-menu cust-mat-menu">
+          <button mat-menu-item (click)="edit(tail)">EDIT</button>
+          <button mat-menu-item (click)="delete(tail)">REMOVE</button>
+        </mat-menu>
+        <div class="clearfix"></div>
+        <img src="assets/images/master/tail-icon.png" class="tail-icon" />
+        <div class="content">
+          <!-- <div>REGISTRATION</div> -->
+          <div class="value">{{tail.tailNumber}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="test-class">
+  <h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+    <img src="assets/images/master/bays-icon.png" class="shifts-icon">
+    <span *ngIf="details.mode !== 'ADD'"> &nbsp;Edit Aircraft Info</span>
+    <span *ngIf="details.mode == 'ADD'"> &nbsp;Add Aircraft Info</span>
+    <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+  </h1>
+  <form #form="ngForm" [formGroup]="profileForm" autocomplete="nope" id="staff">
+    <div [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+      <app-scroll-highlight>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="model-content-margin" id="staff1">
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <!-- <div class="task-codes-title">EQUIPMENT TYPE<sup class="required-astricks">*</sup></div> -->
+            <mat-label>EQUIPMENT TYPE</mat-label>
+            <mat-select name="eqpType" [(ngModel)]="aircraft.type" formControlName="eqpType" required>
+              <mat-option *ngFor="let equipment of equipments" [value]="equipment.id" class="mat-normal-option">{{equipment.type}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="profileForm.controls['eqpType'].errors && profileForm.controls['eqpType'].touched" class="error_msg error-position">
+            <div [hidden]="!profileForm.controls['eqpType'].errors.required">Please select an Equipment type</div>
+          </div>
+          <!-- <div *ngIf="profileForm.controls['bayType'].errors && profileForm.controls['bayType'].touched" class="error_msg error-position">
+        <div [hidden]="!profileForm.controls['bayType'].errors.required">Select a Stand type.</div>
+      </div> -->
+          <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+            <!-- <div class="task-codes-title">REGISTRATION<sup class="required-astricks">*</sup></div> -->
+            <mat-label>REGISTRATION</mat-label>
+            <!-- [textMask]="{mask: textMask}" -->
+            <input [textMask]="{mask: textMask}" type="text" class="font-uppercase" matInput
+              name="registration" [(ngModel)]="aircraft.tailNumber" (keyup)="registrationCodeChange()" formControlName="registration"
+              required spellcheck="false">
+              <!-- (keyup)="prepopulateflightnumber(aircraft.tailNumber)" -->
+          </mat-form-field>
+          <div *ngIf="profileForm.controls['registration'].errors && profileForm.controls['registration'].touched" class="error_msg error-position">
+            <div [hidden]="!profileForm.controls['registration'].errors.required">Please enter a valid Registration (eg. VT- SGA)</div>
+            <div [hidden]="!profileForm.controls['registration'].errors.pattern">Registration Number should be either alpha or
+              alphanumeric</div>
+          </div>
+          
+          <!-- <div [hidden]="!registration.errors.pattern" class="error_msg error-position">
+              Enter a valid Registration (eg. VT- SGA)
+            </div> -->
+          <!-- <div *ngIf="profileForm.controls['bayCode'].errors && profileForm.controls['bayCode'].touched" class="error_msg error-position">
+        <div [hidden]="!profileForm.controls['bayCode'].errors.required">Enter Stand number</div>
+        <div [hidden]="!profileForm.controls['bayCode'].errors.pattern">Stand Number should be either numeric or
+          alphanumeric</div>
+      </div> -->
+        </div>
+      </app-scroll-highlight>
+    </div>
+
+    <mat-dialog-actions>
+      <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" (click)="addReg(aircraft)" [disabled]="(!form.valid)">DONE</button>
+      <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" (click)="updateReg(aircraft)" [disabled]="(!form.valid)"
+        [mat-dialog-close]>UPDATE</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+
+    </mat-dialog-actions>
+  </form>
+</div>

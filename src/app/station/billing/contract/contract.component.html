@@ -1,0 +1,25 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-sm="25" *ngFor="let air of airline">
+    <div class="summary-card contract-display" (click)="openContract(air)">
+      <div class="airline-title-only" [ngClass]="{'spice': air.bg == 'spice', 'al': air.bg == 'al', 'delta': air.bg == 'delta', 'klm': air.bg == 'klm', 'anz': air.bg == 'anz', 'emirates': air.bg == 'emirates'}">
+        <img [src]='"assets/images/billing/"+air.airline+".png"'>
+      </div>
+      <!-- <div class="flight-det">
+        <div [hidden]="flight.flightType === 0" fxFlex>
+            <div class="station station-top">{{flight.originAirportCode}}</div>
+          <div class="flight-no">{{flight.arrFlightNumber}}</div>
+        </div>
+        <div *ngIf="flight.flightType === 0" class="base-flt">
+          <span>BASE</span>
+        </div>
+        <div [hidden]="flight.flightType === 3" fxFlex class="text-right">
+            <div class="station station-top">{{flight.destinationAirportCode}}</div>
+          <div class="flight-no">{{flight.depFlightNumber}}</div>
+        </div>
+        <div *ngIf="flight.flightType === 3" class="base-flt">
+          <span>HALT</span>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="(!load) && (fuelDetails.length != 0)" class="mat-elevation-z8 summary-sheet">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" class="master-fixed-header">
+      <div fxLayout="row" class="dc-th">
+        <div fxFlex="7">FLIGHT NO.</div>
+        <div fxFlex="7">REG NO.</div>
+        <div fxFlex="7">DEST</div>
+        <div fxFlex="7">TOTAL FUEL<br>(kg)</div>
+        <div fxFlex="7">TRIP FUEL<br>(kg)</div>
+        <div fxFlex="7">EXTRA FUEL<br>(kg)</div>
+        <div fxFlex="20">EXTRA FUEL<br>REASON</div>
+        <div fxFlex="7">TOTAL BAGS</div>
+        <div fxFlex="8">OVERWEIGHT<br>BAGS</div>
+        <div fxFlex="7">OVERSIZE<br>BAGS</div>
+        <div fxFlex="8">CABIN CAPACITY<br> EXCEEDED</div>
+        <div fxFlex="8">INADEQUATE<br>PACKING</div>
+      </div>
+    </div>
+    <div fxFlex="100">
+      <!-- <div class="dc-card" *ngFor="let row of taskList" > -->
+      <div class="no-datamsg"
+        *ngIf="(fuelDetails | ReportSearch : searchText  :'depFlightNumber' :'destinationAirportCode').length === 0 && searchText">
+        No match found</div>
+      <div class="dc-card"
+        *ngFor="let fuel of fuelDetails | ReportSearch : searchText  :'depFlightNumber' :'destinationAirportCode'">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+          <div fxFlex="7" class="staff-data flt-no-bold">{{fuel.depFlightNumber}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.tailNumber ? fuel.tailNumber : '-'}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.destinationAirportCode}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.total_fuel ? fuel.total_fuel : '-'}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.trip_fuel ? fuel.trip_fuel : '-'}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.extra_fuel ? fuel.extra_fuel : '-'}}</div>
+          <div fxFlex="20" class="staff-data">{{fuel.reason != 0 && fuel.reason ? fuel.reason : '-'}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.baggage ? fuel.baggage : '-'}}</div>
+          <div fxFlex="8" class="staff-data">{{fuel.bag_overweight ? fuel.bag_overweight : '-'}}</div>
+          <div fxFlex="7" class="staff-data">{{fuel.bag_oversize ? fuel.bag_oversize : '-'}}</div>
+          <div fxFlex="8" class="staff-data">{{fuel.cabin_capacity_exceeded ? fuel.cabin_capacity_exceeded : '-'}}</div>
+          <div fxFlex="8" class="staff-data">{{fuel.inadequate_packing ? fuel.inadequate_packing : '-'}}</div>
+        </div>
+      </div>
+      <!-- </form> -->
+    </div>
+  </div>
+</div>

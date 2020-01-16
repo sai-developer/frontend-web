@@ -1,0 +1,22 @@
+
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="10" class="icon-block">
+    <div class="toaster-icon">
+      <mat-icon *ngIf="this.toastPackage.toastType === 'success'">check</mat-icon>
+      <mat-icon *ngIf="this.toastPackage.toastType === 'warning'">close</mat-icon>
+      <mat-icon *ngIf="this.toastPackage.toastType === 'error'">report_problem</mat-icon>
+    </div>
+  </div>
+  <div fxFlex="80" class="message-block">
+    <div *ngIf="title" [class]="options.titleClass" [attr.aria-label]="title">{{ title }}</div>
+    <div *ngIf="message && options.enableHtml" role="alert" aria-live="polite" [class]="options.messageClass" class="message" [innerHTML]="message"></div>
+    <div *ngIf="message && !options.enableHtml" role="alert" aria-live="polite" [class]="options.messageClass" [attr.aria-label]="message">{{ message }}</div>
+  </div>
+  <div fxFlex="10" class="buttons-block">
+    <button mat-raised-button (click)="remove()">OK, GOT IT</button>
+  </div>
+</div>
+
+<div *ngIf="options.progressBar">
+  <div class="toast-progress" [style.width]="width + '%'"></div>
+</div>

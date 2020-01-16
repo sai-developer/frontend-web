@@ -1,0 +1,168 @@
+<div fxLayout="row" class="dc-page top-row">
+  <img src="assets/images/master/task-icon.png" class="staffs-icon">
+  <div fxFlex="10">
+    <div class="dc-txt">TASKS</div>
+    <!-- <div class="dc-no">{{(taskList  | MasterSearch : searchText : 'name' :'name').length}}</div> -->
+    <div class="dc-no">{{taskListLength}}</div>
+  </div>
+  <div fxFlex.gt-lg="45" fxFlex.gt-md="35" fxFlex.gt-sm="15"></div>
+  <div fxFlex.gt-lg="18" fxFlex.gt-md="20" fxFlex.gt-sm="24" class="taskinfo-types text-right">
+    <mat-form-field class="title-filters">
+      <div class="task-codes-title">FLIGHT TYPE</div>
+      <mat-select class="mat-select-placeholder-color" [(ngModel)]="taskCombo.flightType" disableOptionCentering
+        (ngModelChange)="modList($event)">
+        <mat-option *ngFor="let flightType of flightTypes" [value]="flightType.id" class="mat-normal-option">
+          {{flightType.type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex.gt-lg="18" fxFlex.gt-md="20" fxFlex.gt-sm="24" class="taskinfo-types text-right">
+    <mat-form-field class="title-filters">
+      <div class="task-codes-title">{{this.baytype}} TYPE</div>
+      <mat-select class="mat-select-placeholder-color" [(ngModel)]="taskCombo.bayType" disableOptionCentering
+        (ngModelChange)="modList(taskCombo)">
+        <mat-option *ngFor="let bayType of bayTypes" [value]="bayType.id" class="mat-normal-option">{{bayType.type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex.gt-lg="18" fxFlex.gt-md="20" fxFlex.gt-sm="24" class="taskinfo-types text-right">
+    <mat-form-field class="title-filters">
+      <div class="task-codes-title">EQUIPMENT TYPE</div>
+      <mat-select class="mat-select-placeholder-color" [(ngModel)]="taskCombo.equipmentTypeId" disableOptionCentering
+        (ngModelChange)="modList(taskCombo)">
+        <!-- <mat-option>None</mat-option> -->
+        <mat-option *ngFor="let equipmentType of equipments" [value]="equipmentType.id" class="mat-normal-option">
+          {{equipmentType.type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<hr class="i-hr">
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load">
+  <!-- card view start -->
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'GRID_VIEW'">
+
+    <div fxFlex.xl="20" fxFlex.gt-lg="25" fxFlex.gt-md="25" fxFlex.gt-sm="33"
+      *ngFor="let task of taskList | MasterSearch : searchText : 'name' :'name'">
+      <mat-card fxFlex="100" class="task-grid">
+        <mat-card-title>
+          <span fxFlex></span>
+          <div class="task-name">{{task.taskId.name}}<div class="service-name">{{task.taskId.activityId.name}}</div>
+          </div>
+
+          <span fxFlex></span>
+
+          <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+            <button mat-menu-item (click)="edit(task)">EDIT</button>
+            <button mat-menu-item (click)="delete(task)">REMOVE</button>
+          </mat-menu>
+        </mat-card-title>
+        <hr class="grid-hr">
+        <mat-card-content>
+          <div fxLayout="row">
+            <div fxFlex="50">
+              <div class="priority-title">PRIORITY</div>
+              <div class="dependency-report">{{(task.optional)==0?"Mandatory":"Optional"}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="priority-title">SEQUENCE</div>
+              <div class="dependency-report">{{task.taskSequenceNumber}}</div>
+            </div>
+          </div>
+        </mat-card-content>
+        <hr class="grid-hr">
+        <mat-card-content>
+          <div fxLayout="row">
+            <div fxFlex="50">
+              <div class="time-detail">START TIME</div>
+              <div class="time-value">{{(task.arrDepType==0)?"D-":"A+"}}{{task.activityStart}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="time-detail">DURATION (MINS)</div>
+              <div class="time-value">{{task.duration}}</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(taskList  | MasterSearch : searchText : 'name' :'name').length === 0  && searchText">No
+      match found</div>
+  </div>
+  <!-- card view end -->
+  <!-- list view start -->
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'LIST_VIEW'">
+    <div fxFlex="100" class="master-fixed-header">
+      <div fxLayout="row" class="dc-th">
+        <div fxFlex="20">TASK NAME</div>
+        <div fxFlex="13">DEPARTMENT</div>
+        <div fxFlex="8">START TIME</div>
+        <div fxFlex="10">DURATION (mins)</div>
+        <div fxFlex="24" class="dependency-acc">DEPENDENCY</div>
+        <div fxFlex="10">PRIORITY </div>
+        <div fxFlex="10">SEQUENCE</div>
+        <div fxFlex class="text-right">ACTION</div>
+      </div>
+    </div>
+    <div class="no-datamsg" fxFlex="100"
+      *ngIf="(taskList  | MasterSearch : searchText : 'name' :'name').length === 0  && searchText">No
+      match found
+    </div>
+    <div fxFlex="100">
+      <div class="dc-card" *ngFor="let task of taskList | MasterSearch : searchText : 'name' :'name'">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row">
+          <div fxFlex="20" class="staff-data">{{task.taskId.name}}</div>
+          <div fxFlex="13" class="staff-data">{{task.taskId.activityId.name}}</div>
+          <div fxFlex="8" class="staff-data">{{(task.arrDepType==1)?"A+":"D-"}}{{task.activityStart}}</div>
+          <div fxFlex="10" class="staff-data">{{task.duration}}</div>
+          <div fxFlex="24" class="staff-data dependency-acc">
+            <mat-accordion>
+              <mat-expansion-panel class="box-shadow-none"
+                [disabled]="(task.dependency ? (task.dependency.length<=1): true)">
+                <mat-expansion-panel-header class="header-expansion-panel-count" [expandedHeight]="'30px'"
+                  [collapsedHeight]="'30px'">
+                  <!-- <span>{{(task.dependency.length)>4?('+'+ (task.dependency.length-4)):''}}</span> -->
+                  <mat-panel-description>
+                    <div *ngFor="let dependency of task.dependency;let j = index">
+                      <span *ngIf="j<1" class="delay-code">{{dependency.dependent_task_desc}} &nbsp;</span>
+                      <span *ngIf="task.dependency==0" class="delay-code">None &nbsp;</span>
+                    </div>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="delay-expansion-div">
+                  <span class="delay-code-span" *ngFor="let dependency of task.dependency;let j = index">
+                    <p *ngIf="j>=1" class="delay-code">
+                      <span>&nbsp;{{dependency.dependent_task_desc}}</span><span class="delay-code-comma">,</span>
+                    </p>
+                  </span>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <!-- <div fxFlex class="staff-data">
+          <span>Chocks on</span></div> -->
+          <div fxFlex="10" class="staff-data">{{(task.optional==0)?"Mandatory":"Optional"}}</div>
+          <div fxFlex="10" class="staff-data">{{task.taskSequenceNumber}}</div>
+          <div fxFlex class="text-right">
+            <button mat-icon-button [mat-menu-trigger-for]="actionMenu" class="cust-action-btn dc-tab-btn">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="cust-mat-menu">
+              <button mat-menu-item (click)="edit(task)">EDIT</button>
+              <button mat-menu-item (click)="delete(task)">REMOVE</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- list view end -->

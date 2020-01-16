@@ -1,0 +1,232 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.view-ddr {
+  cursor: pointer;
+}
+
+.equipdis {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+td,
+th,
+thead {
+  // width: 25%;
+  text-align: center;
+  border: 1px solid #ebedf1;
+}
+
+td.mat-cell:first-child,
+td.mat-footer-cell:first-child,
+th.mat-header-cell:first-child {
+  padding-left: 0px !important;
+}
+
+td.mat-cell:last-child,
+td.mat-footer-cell:last-child,
+th.mat-header-cell:last-child {
+  padding-right: 0px !important;
+}
+
+td.mat-cell[_ngcontent-c7]:first-child,
+td.mat-footer-cell[_ngcontent-c7]:first-child,
+th.mat-header-cell {
+  text-align: center !important;
+}
+
+.sp-top {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.sp-date {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.sp-date h4 {
+  font-size: 20px;
+  margin-top: 13px;
+  color: #969393;
+}
+
+.sp-top h2 {
+  // font-size: 22px;
+  color: #969393;
+  text-align: center;
+}
+
+.i-mat-form-field .mat-input-element,
+.i-mat-form-field .mat-select-trigger {
+  font-size: 17.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.17 !important;
+  color: #999999 !important;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 0px transparent !important;
+}
+
+.dc-card {
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  color: #000000;
+  transition: 0.4s;
+  cursor: default;
+}
+
+.dc-card:hover {
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: 0.4s;
+}
+
+.dc-card .dc-row {
+  align-items: center;
+  padding: 5px;
+}
+
+.dc-card .dc-tab-btn {
+  margin-right: 4px;
+}
+
+.dc-th div,
+.staff-data {
+  text-align: center;
+}
+
+.rowDelay {
+  color: red;
+}
+
+.rowSaved {
+  color: green;
+}
+
+// footer
+
+.density-footer {
+  bottom: 1% !important;
+  position: fixed !important;
+  width: 98vw;
+  background: #191c29;
+  left: 15px !important;
+  text-align: center;
+  border-radius: 5px;
+  height: 42px;
+}
+
+.tab-section-daily-roster {
+  border-top: 4px solid red;
+}
+
+.footer-label-align {
+  margin: -10px 0 0 0;
+}
+
+.time-label {
+  max-width: 50%;
+  color: #ffffff;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-date .date-pad input {
+  background: transparent;
+  border: transparent;
+  color: #ffffff !important;
+  font-size: 18px;
+  outline: none;
+  text-align: left !important;
+}
+
+.time-date .date-pad .mat-datepicker-toggle {
+  color: #ffffff !important;
+}
+
+.top-row .dc-txt {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.1px;
+  text-align: left;
+  color: #000000;
+
+}
+
+.task-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.i-hr {
+  margin: 15px 0px;
+  // margin-bottom: 10px;
+}
+
+.send-mail {
+  font-size: 14px;
+  text-overflow: ellipsis !important;
+  top: 2px;
+  position: relative;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+
+::ng-deep .i-mat-form-field.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+}
+.title-filters{
+  border: 1px solid #777b90;
+  border-radius: 5px;
+  padding: 0px 10px;
+  height: 70px;
+}
+::ng-deep .title-filters .mat-input-element{
+  font-size: 24px !important;
+  color: #000000 !important;
+}
+::ng-deep .title-filters .mat-form-field-appearance-legacy .mat-form-field-underline{
+  background: transparent !important;
+}
+
+::ng-deep .title-filters .mat-form-field-underline{
+  background: transparent !important;
+}
+::ng-deep .title-filters .mat-form-field-infix{
+  margin-top: -15px !important;
+}
+.date-icon{
+  position: absolute;
+  right: 0;
+  top: 25px;
+  font-size: 24px;
+}
+.title-filters .mat-datepicker-toggle{
+  top: -5px;
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+}

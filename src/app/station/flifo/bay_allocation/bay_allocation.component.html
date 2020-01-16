@@ -1,0 +1,221 @@
+<div class="task-family">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="30" class="task-left mat-tab-task">
+      <div class="">
+        <p class="task-heading">AVAILABLE FLIGHTS</p>
+        <!-- <mat-divider class="task-mat-divider"></mat-divider> -->
+        <mat-tab-group (selectedTabChange)="onLinkClick($event)" class="w-100 bayStands-tab">
+          <mat-tab label="{{todayState}} ({{todayFlightData.length}})" class="w-50-perc">
+            <mat-list role="list" class="task-expansion-overflow1 mat-dialog-content">
+              <mat-list-item class="task-list-item" role="listitem" *ngFor="let today_flight of todayFlightData"
+                draggable [dragData]="today_flight">
+                <div style="width:100%;" fxLayout="row wrap">
+                  <div fxFlex="32" class="inline-block text-left bay-allocate-flight-left">
+                    <div *ngIf="today_flight.flightType==0" class="bay-allocate-text">BASE</div>
+                    <div class="bayAllocateFlightName">{{today_flight.originAirportCode}}</div>
+                    <div class="bayAllocateFlightID">{{today_flight.arrFlightNumber}}</div>
+                    <div class="bayAllocationFlightTime mt-10" *ngIf="today_flight.flightType!=0"><span
+                        class="bayAllocationFlightTimeSTA">STA:</span><span class="bayAllocationFlightTimeDue">{{today_flight.standardArrivalTime ?
+                        (today_flight.standardArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                  </div>
+                  <div fxFlex="36">
+                    <p class="taskCount"
+                      [hidden]="((today_flight.actualDepartureTime) && (today_flight.taskAssignedCount==0)||(today_flight.actualArrivalTime) && (today_flight.taskAssignedCount==0))">
+                      <span
+                        class="font-size-30">{{today_flight.taskCompletedCount || 0}}</span>/<span>{{today_flight.taskAssignedCount || 0}}</span>
+                    </p>
+                    <div class="text-center" [hidden]="today_flight.actualDepartureTime">
+                      <!-- <button mat-raised-button color="primary" class="add-btn" (click)="assignTask()">Assign Task</button> -->
+                      <a class="taskAssignAnchor" (click)="assignTask(today_flight)"
+                        *ngIf="today_flight.taskAssignedCount==0">Assign
+                        Task</a>
+                      <a class="taskAssignAnchor" (click)="assignTask(today_flight)"
+                        *ngIf="today_flight.taskAssignedCount!=0">Reassign
+                        Task</a>
+                    </div>
+                  </div>
+                  <div fxFlex="32" class="inline-block text-right bay-allocate-flight-right">
+                    <div *ngIf="today_flight.flightType==3" class="bay-allocate-text">HALT</div>
+                    <div class="bayAllocateFlightName">{{today_flight.destinationAirportCode}}</div>
+                    <div class="bayAllocateFlightID">{{today_flight.depFlightNumber}}</div>
+                    <div class="bayAllocationFlightTime mt-10" *ngIf="today_flight.flightType!=3"><span
+                        class="bayAllocationFlightTimeSTD">STD:</span><span>{{today_flight.standardDepartureTime
+                        ?
+                        (today_flight.standardDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                  </div>
+                  <hr *ngIf="((today_flight.actualDepartureTime) && (today_flight.taskAssignedCount==0)||(today_flight.actualArrivalTime) && (today_flight.taskAssignedCount==0))" class="i-hr rule">
+                  <div fxFlex="100" class="arms-msg"
+                    *ngIf="((today_flight.actualDepartureTime) && (today_flight.taskAssignedCount==0)||(today_flight.actualArrivalTime) && (today_flight.taskAssignedCount==0))">
+                    Not handled by Rapid</div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+          <mat-tab label="{{nextDayState}} ({{ (values != 0) ? values : nextDayFlightData.length}})" class="w-50-perc">
+            <mat-list role="list" class="task-expansion-overflow1 mat-dialog-content">
+              <mat-list-item class="task-list-item" role="listitem" *ngFor="let next_flight of nextDayFlightData"
+                draggable [dragData]="next_flight">
+                <!-- <div style="width:100%;">
+                  <div class="inline-block text-left bay-allocate-flight-left" *ngIf="next_flight.flightType!=0">
+                    <div class="bayAllocateFlightName">{{next_flight.originAirportCode}}</div>
+                    <div class="bayAllocateFlightID">{{next_flight.arrFlightNumber}}</div>
+                    <div class="bayAllocationFlightTime"><span class="bayAllocationFlightTimeSTD">STA:</span><span
+                        class="bayAllocationFlightTimeDue">{{next_flight.standardArrivalTime | date:'HH:mm'}}</span></div>
+                  </div>
+
+                  <div class="inline-block text-right bay-allocate-flight-right" *ngIf="next_flight.flightType!=3">
+                    <div class="bayAllocateFlightName">{{next_flight.destinationAirportCode}}</div>
+                    <div class="bayAllocateFlightID">{{next_flight.depFlightNumber}}</div>
+                    <div class="bayAllocationFlightTime"><span class="bayAllocationFlightTime">STD:</span><span>{{next_flight.standardDepartureTime
+                        | date:'HH:mm'}}</span></div>
+                  </div>
+                </div> -->
+                <div style="width:100%;" fxLayout="row">
+                  <div fxFlex="32" class="inline-block text-left bay-allocate-flight-left">
+                    <div *ngIf="next_flight.flightType==0" class="bay-allocate-text">BASE</div>
+                    <div class="bayAllocateFlightName">{{next_flight.originAirportCode}}</div>
+                    <div class="bayAllocateFlightID">{{next_flight.arrFlightNumber}}</div>
+                    <div class="bayAllocationFlightTime mt-10" *ngIf="next_flight.flightType!=0"><span
+                        class="bayAllocationFlightTimeSTA">STA:</span><span class="bayAllocationFlightTimeDue">{{next_flight.standardArrivalTime ?
+                        (next_flight.standardArrivalTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                  </div>
+                  <div fxFlex="36">
+                    <p class="taskCount"><span
+                        class="font-size-30">{{next_flight.taskCompletedCount || "0"}}</span>/<span>{{next_flight.taskAssignedCount || "0"}}</span>
+                    </p>
+                    <div class="text-center">
+                      <!-- <button mat-raised-button color="primary" class="add-btn" (click)="assignTask()">Assign Task</button> -->
+                      <a class="taskAssignAnchor" (click)="assignTask(next_flight)"
+                        *ngIf="next_flight.taskAssignedCount==0">Assign
+                        Task</a>
+                      <a class="taskAssignAnchor" (click)="assignTask(next_flight)"
+                        *ngIf="next_flight.taskAssignedCount!=0">Reassign
+                        Task</a>
+                    </div>
+                  </div>
+                  <div fxFlex="32" class="inline-block text-right bay-allocate-flight-right">
+                    <div *ngIf="next_flight.flightType==3" class="bay-allocate-text">HALT</div>
+                    <div class="bayAllocateFlightName">{{next_flight.destinationAirportCode}}</div>
+                    <div class="bayAllocateFlightID">{{next_flight.depFlightNumber}}</div>
+                    <div class="bayAllocationFlightTime mt-10" *ngIf="next_flight.flightType!=3"><span
+                        class="bayAllocationFlightTimeSTD">STD:</span><span>{{next_flight.standardDepartureTime
+                        ?
+                        (next_flight.standardDepartureTime | date: 'HH:mm': zoneOffset) : '--:--'}}</span></div>
+                  </div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+
+        </mat-tab-group>
+      </div>
+    </div>
+    <div fxFlex="65" class="task-right ">
+      <div class="">
+        <p class="task-heading">AVAILABLE {{constants.bayTitle}}S </p>
+        <!-- ({{bayList.length}}) -->
+      </div>
+      <mat-divider class="task-mat-divider"></mat-divider>
+      <div *ngIf="load">
+        <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+          <h2 *ngIf="i == 2">Turning Around . . .</h2>
+        </div>
+      </div>
+      <div [hidden]="load">
+        <div class="task-expansion-overflow mat-dialog-content">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let bay of bayList" class="margin-topBottom" [disabled]="bay.list.length<=2"
+              droppable (onDrop)="onItemDrop($event, bay)">
+              <mat-expansion-panel-header fxLayout="row" class="bay-expansion-panel-click-arrow panel-head-indicator"
+                [expandedHeight]="'98px'" [collapsedHeight]="'98px'">
+                <mat-panel-title fxFlex="20" class="task-expansion-panel-title">
+                  <mat-list>
+                    <!-- <span class="bayAllocateFlightName">BAY</span>&nbsp; -->
+                    <mat-list-item class="task-item-list-height"><span
+                        class="bayAllocateFlightID">{{bay.bayCode}}</span></mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item class="task-item-list-height bayAllocateFlightContact ">
+                      <span *ngFor="let bays of constants.bayType">
+                        <span *ngIf="bay.bayType==bays.id">{{bays.type}}</span>
+                      </span>
+
+                      <!-- <span>{{bay.bayName}}</span> -->
+                    </mat-list-item>
+                  </mat-list>
+                </mat-panel-title>
+
+                <mat-panel-description fxFlex="80" fxLayout="row" fxLayoutWrap="wrap">
+                  <div *ngFor="let item of bay.list;let j = index" fxFlex="50" fxLayout="row" fxLayoutWrap="wrap">
+                    <span *ngIf="j<2" fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover"
+                      [ngClass]="{'departedFlight': item.actualDepartureTime!=null}">
+                      <div fxFlex="90" fxLayout="row" fxLayoutWrap="wrap" class="task-drop-class">
+                        <div fxFlex="35" class="bay-allocate-flight-left text-left bay-allocate-left-right ">
+                          <div *ngIf="item.flightType==0" class="bayAllocateFlightID baystands-baseHalt">BASE</div>
+                          <div class="baystands-aircode">{{item.originAirportCode || ''}}</div>
+                          <div class="baystands-align">{{item.arrFlightNumber || ''}}</div>
+                          <div *ngIf="item.flightType!=0" class="mt-10"><span
+                              class="baystands-timecolor">STA:</span><span class="baystands-time">{{item.standardArrivalTime | date:'HH:mm': zoneOffset ||
+                              '--:--'}}</span></div>
+                        </div>
+                        <div fxFlex="30" class="bay-allocate-flight-center">
+                          <span
+                            class="font-size-30 baystands-count">{{item.taskCompletedCount || "0"}}</span>/<span>{{item.taskAssignedCount || "0"}}</span>
+                        </div>
+                        <div fxFlex="35" class="bay-allocate-flight-right text-right bay-allocate-left-right ">
+                          <div *ngIf="item.flightType==3" class="bayAllocateFlightID baystands-baseHalt">HALT</div>
+                          <div class="baystands-aircode">{{item.destinationAirportCode || ''}}</div>
+                          <div class="baystands-align">{{item.depFlightNumber || ''}}</div>
+                          <div *ngIf="item.flightType!=3" class="mt-10"><span
+                              class="baystands-timecolor">STD:</span><span class="baystands-time">{{item.standardDepartureTime | date: 'HH:mm': zoneOffset
+                              ||
+                              '--:--'}}</span></div>
+                        </div>
+                      </div>
+                      <i fxFlex="10" class="material-icons task-drag-close" (click)="dropItem(bay, item)"
+                        *ngIf="item.actualDepartureTime==null && item.actualArrivalTime==null">clear</i>
+                    </span>
+                  </div>
+                </mat-panel-description>
+                <span class="bay-expansion-count">{{(bay.list.length)>2?('+'+ (bay.list.length-2)):''}}</span>
+              </mat-expansion-panel-header>
+              <div fxLayout="row" fxLayoutWrap="wrap" class="bay-expansion-div">
+                <span *ngFor="let item of bay.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                  <span *ngIf="j>=2" fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover"
+                    [ngClass]="{'departedFlight': item.actualDepartureTime!=null}">
+                    <div fxFlex="90" fxLayout="row" fxLayoutWrap="wrap" class="task-drop-class">
+                      <div fxFlex="35" class="bay-allocate-flight-left text-left bay-allocate-left-right ">
+                        <div *ngIf="item.flightType==0" class="bayAllocateFlightID baystands-baseHalt">BASE</div>
+                        <div class="baystands-aircode">{{item.originAirportCode || ''}}</div>
+                        <div class="baystands-align">{{item.arrFlightNumber || ''}}</div>
+                        <div *ngIf="item.flightType!=0" class="mt-10"><span class="baystands-timecolor">STA:</span><span
+                            class="baystands-time">{{item.standardArrivalTime | date:'HH:mm': zoneOffset ||
+                            '--:--'}}</span></div>
+                      </div>
+                      <div fxFlex="30" class="bay-allocate-flight-center">
+                        <span
+                          class="font-size-30 baystands-count">{{item.taskCompletedCount || "0"}}</span>/<span>{{item.taskAssignedCount || "0"}}</span>
+                      </div>
+                      <div fxFlex="35" class="bay-allocate-flight-right text-right bay-allocate-left-right ">
+                        <div *ngIf="item.flightType==3" class="bayAllocateFlightID baystands-baseHalt">HALT</div>
+                        <div class="baystands-aircode">{{item.destinationAirportCode || ''}}</div>
+                        <div class="baystands-align">{{item.depFlightNumber || ''}}</div>
+                        <div *ngIf="item.flightType!=3" class="mt-10"><span class="baystands-timecolor">STD:</span><span
+                            class="baystands-time">{{item.standardDepartureTime | date: 'HH:mm': zoneOffset ||
+                            '--:--'}}</span></div>
+                      </div>
+                    </div>
+                    <i fxFlex="10" class="material-icons task-drag-close" (click)="dropItem(bay, item)"
+                      *ngIf="item.actualDepartureTime==null && item.actualArrivalTime==null">clear</i>
+                  </span>
+                </span>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- </div> -->

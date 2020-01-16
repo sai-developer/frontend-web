@@ -1,0 +1,33 @@
+.dc-card{
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    color: #000000;
+    transition: 0.4s;
+    cursor: default;
+}
+.dc-card:hover{
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+    transition: 0.4s;
+}
+.dc-card .dc-row{
+    align-items: center;
+    padding: 5px;
+ //   border-bottom: 1px solid #9999 !important;
+    
+}
+::ng-deep .summary-fixed-header{
+    border-bottom: 1px solid #babfc7;
+    position: -webkit-sticky;
+    position: sticky;
+    background: #d4d9e2;
+    top: 0px;
+    z-index: 2;
+    padding-top: 5px;
+    // margin-bottom: 10px;
+}
+::ng-deep .summary-sheet{
+    box-shadow: 0px 0px !important;
+    text-align: center;
+    // border-bottom: 1px solid #9999;
+    }

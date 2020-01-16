@@ -1,0 +1,84 @@
+// .summary-card{
+//     border-radius: 5px;
+//     background-color: #ffffff;
+//     margin: 10px 10px 0px 0px;
+//     text-align: center;
+//     padding: 0px 5px;
+// }
+.summary-card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    // margin-bottom: 5px;
+    margin: 10px 10px;
+  }
+.summary-card:hover{
+    cursor:pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.33);
+    transition: 0.4s;
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    // transform: scale(1.075);
+    // transition: 0.5s;
+}
+.summary-card .station{
+font-size: 12px;
+font-weight: normal;
+line-height: 1.5;
+color: #000000;
+}
+.summary-card .flight-no{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 0.9;
+    color: #000000;
+  }
+.summary-card .timing{
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: 0.1px;
+  }
+  .summary-card.timing span{
+    font-weight: normal;
+    color: #666666;
+  }
+  .base-flt span{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .base-flt{
+    margin-top: 10px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .summary-card .flight-no{
+      font-size: 15px;
+      font-weight: bold;
+      line-height: 0.9;
+      color: #000000;
+    }
+    .summary-card .station{
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1.5;
+      color: #000000;
+    }
+    .summary-card .timing{
+      font-size: 10px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: 0.1px;
+    }
+    .base-flt span{
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .base-flt{
+      margin-top: 8px;
+    }
+  }

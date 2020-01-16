@@ -1,0 +1,99 @@
+<!-- <div class="relative">
+    <div class="form-bg">
+        <div fxLayout="row" fxLayoutAlign="center start" class="pt-2">
+            <div fxLayout="column" fxFlex.xl="40" fxFlex.lg="40" fxFlex.md="50" fxFlex.sm="80" fxFlex.xs="90">
+                <mat-card class="login-session">
+                    <div>
+                        <h2 class="base-border">Login Form</h2>
+                        <p>Enter Your Login Details</p>
+                        <form #form="ngForm" (ngSubmit)="login()">
+                            <div fxLayout="column" fxLayoutAlign="start stretch">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput placeholder="E-Mail" type="text" name="email" required [(ngModel)]="email">
+                                </mat-form-field>
+                                <mat-form-field style="width: 100%" class="mb-1">
+                                    <input matInput placeholder="Password" type="password" name="password" required [(ngModel)]="password">
+                                </mat-form-field>
+                                <button class="mat-green" mat-raised-button>SIGN IN</button>
+                                <p class="mat-text-warn mb-0">Forgot password?</p>
+                                <p class="mb-0">Don't have an account? <a [routerLink]="['/register']" class="mat-text-primary">Register Here</a></p>
+                            </div>
+                            <div>
+                                <p>Sign in using</p> <a href="#" class="shared-icon mr-1 mat-blue"><i class="fa fa-facebook fa-lg mr-1"></i> Facebook</a><a href="#" class="shared-icon mat-red"><i class="fa fa-google fa-lg mr-1"></i>Google</a></div>
+                        </form>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- New Login Design -->
+
+<div fxLayout="row" fxLayoutWrap="wrap" class="loginBg">
+    <div fxFlex="100">
+        <mat-card class="loginCard">
+            <mat-card-title>
+                <img src="assets/images/tsi_logo.png" />
+                <!-- <img src="assets/images/logo/Copa_Airlines _Login.svg" /> -->
+            </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <form #form="ngForm" autocomplete="nope">
+                        <mat-form-field class="mb-1 i-mat-form-field w-100" [ngClass]="{'loginUser': setting === true}"
+                            (click)="loginSetting()">
+                            <input type="text" [(ngModel)]="user.username" matInput placeholder="Username"
+                                name="username" spellcheck="false" autocomplete="nope" #username="ngModel" required
+                                maxlength="15">
+                        </mat-form-field>
+                        <mat-form-field class="mb-1 i-mat-form-field w-100" [ngClass]="{'loginUser': setting === true}"
+                            (click)="loginSetting()">
+                            <div fxFlex="90">
+                                <input type="{{showPass ? 'text' : 'password'}}" [(ngModel)]="user.password" matInput
+                                    placeholder="Password" name="password" autocomplete="new-password"
+                                    #password="ngModel" required maxlength="15">
+                                <div fxFlex="10" class="password">
+                                    <span (click)="showPass = !showPass "><i
+                                            [ngClass]="{'fa-eye-slash' : !showPass, 'fa-eye' : showPass}"
+                                            class="fa-1x fa"
+                                            matTooltip="{{showPass ? 'Hide password' : 'Show password'}}"
+                                            [matTooltipPosition]="'after'"></i></span>
+                                </div>
+                            </div>
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" class="login-btn" (click)="login()"
+                            [disabled]="form.invalid" *ngIf="!showLoading">LOGIN</button>
+                        <button mat-raised-button color="primary" class="login-btn " *ngIf="showLoading"> <span
+                                class="loading">Loading...
+                            </span><span class="login-animation"></span> </button>
+                    </form>
+                </div>
+                <div fxLayout="row" fxLayout="wrap" class="loginFoot">
+                    <div fxFlex="50" class="rapidLogo">
+                        <img src="assets/images/logo/RapidTurn_logo.svg" />
+                    </div>
+                    <div fxFlex="50" class="copyRights">
+                        Powered by TSI
+                        <br>© All rights reserved
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<!-- <div *ngIf="!view">
+    <div class="coming-soon">
+        <mat-card class="loginCard_mobile">
+            <mat-card-title>
+                <img src="assets/images/rapid_logo_white.png" />
+            </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="error_message">
+                    <span>Our Rapid Web application is not viewable on mobile.<br>
+                        Please try it on a larger display</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div> -->

@@ -1,0 +1,9 @@
+<div class="progress-comp">
+	<h6 class="no-margins title" (click)="clicked()">{{chartTitle}}</h6>
+	<div class="stat-percent"><b><span id="asDept" (click)="clicked()"> {{progressPercent}}%</span></b>
+	<!-- <i class="fa fa-level-up text-navy"></i> -->
+	</div>
+	<div class="progress progress-mini" (click)="clicked()">
+	<div [@progress]="getProgress()" id="asDeptPB" class="progress-bar"  [ngStyle]="getStyle()"></div>
+	</div>
+</div>

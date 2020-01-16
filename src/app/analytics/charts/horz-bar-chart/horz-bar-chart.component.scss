@@ -1,0 +1,36 @@
+horz-bar-chart {
+  .bar {
+    fill: #191c29;
+  }
+
+  .axis--x path {
+    display: none;
+  }
+}
+
+horz-bar-chart div {
+  width: 100%;
+}
+
+.axis-label {
+  font-size: 12px;
+}
+
+.legend-label {
+  font-size: 12px;
+}
+
+.bar-label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+small {
+  font-size: 10px;
+}
+
+.no-data-div {
+  width: 100%;
+  margin-top: 50px;
+  color: red;
+}

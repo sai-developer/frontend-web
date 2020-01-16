@@ -1,0 +1,8 @@
+<div [@animator]="animationType?animationType:'show'" (window:resize)="onResize($event)">
+  <h6 align="center">
+    {{ chartTitle }}&nbsp;<small>{{ titleSuffix }}</small>
+  </h6>
+  <div *ngIf="emptyData" class="no-data-div"> 
+	<h3 align="center">No Data Found</h3>
+  </div>
+</div>

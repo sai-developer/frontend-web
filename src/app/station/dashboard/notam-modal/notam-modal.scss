@@ -1,0 +1,13 @@
+@import "../../../../assets/styles/scss/rapid.variables.scss";
+
+.content pre{
+  font-family: Averta !important;
+  color: $color-black;
+  font-size: 14px;
+}
+.notam-icon{
+  height: 24px;
+  position: relative;
+  top: -3px;
+  margin-right: 10px;
+}

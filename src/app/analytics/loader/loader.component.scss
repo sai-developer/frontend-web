@@ -1,0 +1,39 @@
+app-loader {
+  padding: 5px;
+}
+
+.spin i {
+  margin-left: 50%;
+}
+
+.band h3 {
+  //padding-left: 40%;
+}
+.spin h3 {
+  //padding-left: 40%;
+}
+
+.fa {
+  vertical-align: top;
+}
+
+.loader-band {
+  width: 100%;
+  height: 55px;
+  background-color: #ffffff;
+  background: linear-gradient(-90deg, #dfdfdf, #fff, #dfdfdf, #fff);
+  background-size: 200% 200%;
+  margin: 10px;
+  animation: 3s infinite Animator;
+  border-radius: 5px;
+}
+
+@keyframes Animator {
+  0%,
+  100% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}

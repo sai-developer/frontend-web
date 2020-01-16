@@ -1,0 +1,227 @@
+<div class="full-width" [ngClass]="{'schedulealign': !activeState}">
+  <br>
+  <div *ngIf="load">
+    <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+      <h2 *ngIf="i == 2">Turning Around . . .</h2>
+    </div>
+  </div>
+  <div [hidden]="load">
+    <div fxLayout="row" class="dc-page top-row">
+      <img [hidden]="!activeState" src="assets/images/master/task-icon.png" class="staffs-icon">
+      <div [hidden]="!activeState" fxFlex.gt-lg="10" fxFlex.gt-md="15" fxFlex.gt-sm="15">
+        <div class="dc-txt">STAFF AVAILABLE</div>
+        <div class="dc-no">{{staffListLength}}</div>
+      </div>
+      <div fxFlex.gt-lg="90" fxFlex.gt-md="80" fxFlex.gt-sm="75">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="shift-pg1"> <!--float-right-->
+          <div class="">
+            <mat-form-field class="i-mat-form-field mat-form-field-fromDate title-filters">
+              <div class="task-codes-title">From</div>
+              <input matInput readonly [min]="today" [matDatepicker]="from" [(ngModel)]="filter.from" (dateChange)="daterange($event,'from')"
+                class="w-100">
+              <mat-datepicker-toggle matSuffix [for]="from">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="date-seperator">
+            <img src="assets/images/dashboard/to-arrow.png" alt="arrow-icon">
+          </div>
+          <div class="">
+            <mat-form-field class="i-mat-form-field mat-form-field-toDate title-filters">
+              <div class="task-codes-title">To</div>
+              <input matInput readonly [min]="filter.from" [max]="maxDateValue" [matDatepicker]="to" [(ngModel)]="filter.to"
+                (dateChange)="daterange($event,'to')" class="w-100">
+              <mat-datepicker-toggle matSuffix [for]="to">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewTemplate">
+      <div fxFlex="100" class="master-fixed-header">
+        <!--{{filter.from | date:'dd MMM yyyy'}} to {{filter.to | date:'dd MMM yyyy'}}-->
+        <table class="table margin-bot-0">
+          <thead>
+            <tr fxLayout="row" class="table-header-padding employee-tr">
+              <th fxFlex="15">STAFF NAME</th>
+              <th fxFlex *ngFor="let day of shiftsByDesign[0].employees[0].dates;"
+                [ngClass]="{'high-light': day.date == todayDate}">
+                <!-- <div>{{day.date}}-------{{day}}</div> -->
+                <div> <span class="table-head-date-row">{{day.date | date:'EEE'}}</span></div>
+                <div><b>{{day.date | date:'dd'}}</b></div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div fxFlex="100" class="">
+        <div>
+          <!--{{filter.from | date:'dd MMM yyyy'}} to {{filter.to | date:'dd MMM yyyy'}}-->
+          <table class="table">
+            <tbody *ngFor="let designation of shiftsByDesign;" class="margin-top-5 emp-list">
+              {{designation.employee}}
+              <tr class="table-header-padding resource-name-head">
+                <td [attr.colspan]="shiftsByDesign[0].employees[0].dates.length + 1" class="design-td">
+                  <a (click)="designation.hide = !designation.hide" class="font-size-18">
+                    {{designation.designation}} ({{designation.employees.length}})
+                    <mat-icon [ngClass]="{'hide-details' : designation.hide}">arrow_drop_down</mat-icon>
+                  </a>
+                </td>
+              </tr>
+              <!-- <ng-container *ngFor="let employee of designation.employees | SearchPipe :searchText :'name'"> -->
+              <tr *ngFor="let employee of designation.employees | SearchPipe :searchText :'name';"
+                [hidden]="designation.hide" class="employee-tr table-header-padding" fxLayout="row">
+
+                <!-- <tr class="employee-tr table-header-padding" fxLayout="row" [hidden]="designation.hide"> -->
+                <td fxFlex="15" class="employee-first-td">{{employee.name}}</td>
+                <td (mousedown)="mouseDown(day)" (mouseover)="mouseOver(day,employee)" (mouseup)="mouseUp(day)" fxFlex
+                  class="employee-last-td" *ngFor="let day of employee.dates; let j=index"
+                  (dblclick)="dbl(day, employee)" (click)="appendOptions(day, employee)" [ngClass]="{'td-selected' : day.selected, 'disable-cell': day.disable,
+                    'highlighted-cell':  selectedCell === day, 'fade-hightlight': fadeHighlight === true }"
+                  [title]="day.alias?'Drag to copy the cell or Click to change the shift':'Click to assign a shift'">
+                  <div class="shift-form-field shift-form-field-color-{{day.color}}">
+                    {{day.alias}}
+                  </div>
+                </td>
+              </tr>
+              <!-- <tr class="higlighted" *ngIf="selectedRow == employee.user_id">
+                  <td width="100%">
+                    <div class="pull-left" >
+                      <button title="{{shift.name}}" (click)="changeShift(selectedDay, 'choose',employee, shift.id)" class="shift-form-field shift-form-field-color-{{selectedDay.color}}"
+                        *ngFor="let shift of shifts">{{shift.alias}}</button>
+                    </div>
+                    <div class="pull-right" (click)="closePopOver()">
+                      <button class="mat-raised-button mat-primary">X</button>
+                    </div>
+                  </td>
+                </tr> -->
+              <!-- </ng-container> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- <div fxFlex="100" class="text-center margin-bt-20">
+        <button mat-raised-button color="primary" (click)="isExistsRostering()" [disabled]="!submitFlag">SUBMIT</button>
+        <button mat-raised-button color="primary" style="margin: 15px;"(click)="reDirect('true')">Go To Flight Info</button>
+      </div> -->
+    </div>
+  </div>
+  <div *ngIf="!activeState" class="schedule-density">
+    <div fxFlex>
+      <div fxlayout="row" fxFlex>
+        <div class="sch-close" (click)="selectRoster()">
+          <mat-icon>clear</mat-icon>
+        </div>
+      </div>
+      <div fxFlex class="schedule-control">
+        <button class="upChevron" [disabled]="scrollUp" (click)="upScroll()">
+          <mat-icon>expand_less</mat-icon>
+        </button>
+        <button class="downChevron" [disabled]="scrollDown" (click)="downScroll()">
+          <mat-icon>expand_more</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div fxFlex="95" class="shifts-schedule" #widgetsContent>
+      <table class="table">
+        <thead>
+          <tr fxLayout="row" *ngFor="let day of scheduleDays; let i=index ;" class="table-header-padding schedule-days">
+            <th class="schedule-shift" fxFlex="15">
+              <span class="shift-type"
+                [ngClass]="{'dc-blue': i === 0, 'dc-red': i === 1, 'dc-yellow': i === 2, 'dc-green': i === 3, 'dc-g-white': i === 4, 'dc-purple': i === 5, 'dc-violet': i === 6,'dc-eight': i === 7,'dc-nine': i === 8}">{{day.name}}
+                ({{day.alias}})</span></th>
+            <th fxFlex *ngFor="let days of day.flightdetails">
+              <div
+                [ngClass]="{'sch-value': days.count > 16, 'sch-value-med': days.count >= 8 && days.count <= 16,'sch-value-low': days.count < 8}">
+                {{days.count}}</div>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div fxFlex="1.2"></div>
+  </div>
+  <div class="roster-footer">
+    <div class="i-footer">
+      <div fxLayout="row">
+        <!-- <div fxFlex="5" class="custom-print-div">
+          <mat-icon matTooltip="Print" matTooltipPosition="above" class="custom-print-icon">print</mat-icon>
+        </div> -->
+        <!-- <div fxFlxe="10" class="fromLabel">
+          <label>From: </label>
+        </div>
+        <div fxFlex="10">
+          <mat-form-field class="i-mat-form-field inputFrom">
+            <input readonly matInput [min]="today" [max]="filter.to" [matDatepicker]="from" [(ngModel)]="filter.from"
+              (dateChange)="daterange($event,'from')" class="w-100">
+            <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+            <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxFlex="5" class="toLabel">
+          <label>To: </label>
+        </div>
+        <div fxFlex="10">
+          <mat-form-field class="i-mat-form-field inputTo">
+            <input readonly matInput [min]="filter.from" [max]="maxdatevalue" [matDatepicker]="to" [(ngModel)]="filter.to"
+              (dateChange)="daterange($event,'to')" class="w-100">
+            <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+            <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl></mat-datepicker>
+          </mat-form-field>
+        </div> -->
+        <div fxFlex="9" (click)="selectRoster()" [ngClass]="{'active' : activeState == true}" class="footer-title">
+          STAFF LIST
+        </div>
+        <div fxFlex="12" (click)="selectDensity();stateChange('den')" [ngClass]="{'active' : activeState == false}" class="footer-title">
+          SCHEDULE DENSITY
+        </div>
+        <div fxFlex="12"></div>
+        <!-- Date From section starts -->
+        <!-- <div fxFlex>
+          <div class="date-pad">
+            <mat-form-field class="date-selector">
+              <input matInput readonly [min]="today" [matDatepicker]="from" [(ngModel)]="filter.from"
+                (dateChange)="daterange($event,'from')" class="w-100">
+              <mat-datepicker-toggle class="date-arrow" matSuffix [for]="from">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div> -->
+        <!-- Date From section ends -->
+        <!-- <div fxFlex="2" class="select-arr">
+          <img src="assets/images/dashboard/to-arrow.png" alt="arrow-icon">
+        </div> -->
+        <!-- Date To section starts -->
+        <!-- <div fxFlex>
+          <div class="date-pad">
+            <mat-form-field class="date-selector">
+              <input matInput readonly [min]="filter.from" [max]="maxDateValue" [matDatepicker]="to"
+                [(ngModel)]="filter.to" (dateChange)="daterange($event,'to')" class="w-100">
+              <mat-datepicker-toggle class="date-arrow" matSuffix [for]="to">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div> -->
+        <!-- Date To section ends -->
+        <div fxFlex="57"></div>
+        <div fxFlex="10">
+          <div class="text-right roster-btn">
+            <button mat-raised-button color="primary" (click)="isExistsRostering()"
+              [disabled]="!submitFlag">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

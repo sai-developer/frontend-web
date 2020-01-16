@@ -1,0 +1,25 @@
+@import "../../../../assets/styles/scss/rapid.variables.scss";
+
+.metar-icon{
+  height: 24px;
+  position: relative;
+  top: -5px;
+  margin-right: 10px;
+}
+.topic{
+  font-size: 14px;
+  line-height: 2.14;
+  display: inline-block;
+}
+.value{
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 2.14;
+  color: $color-black;
+  display: inline-block;
+}
+ .mat-dialog-content {
+  max-height: 100%!important;
+  padding-top: 20px!important;
+  padding-bottom: 20px!important;
+}

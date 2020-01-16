@@ -1,0 +1,537 @@
+<div class="div-width">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="64">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div class="turn-head" fxFlex="35">
+          Turnaround analysis
+        </div>
+        <div fxFlex="40" fxLayout="row" [hidden]="true">
+          <div class="date-pad">
+            <mat-form-field class="date-selector">
+              <input matInput readonly [matDatepicker]="from" [max]="filter.to" [(ngModel)]="filter.from"
+                (dateChange)="daterange($event,'from')" class="w-100">
+              <mat-datepicker-toggle class="date-arrow" matSuffix [for]="from">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="date-pads">
+            <mat-form-field class="date-selector">
+              <input matInput readonly [matDatepicker]="to" [max]="today" [(ngModel)]="filter.to"
+                (dateChange)="daterange($event,'to')" class="w-100">
+              <mat-datepicker-toggle class="date-arrow" matSuffix [for]="to">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="date-arrows" (click)="filterrange()">
+            <mat-icon>arrow_right_alt</mat-icon>
+          </div>
+        </div>
+        <div fxFlex="20"></div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="turnar-otp">
+            <round-progress class="round-pro" [current]="turnArOtp" [max]="100" [rounded]="false" [radius]=60
+              [stroke]="16" [semicircle]="true" [responsive]="true" [duration]="800" [animation]="'easeInOutQuart'"
+              [color]="turnArOtp > 70 ?'#5cbb1d' : turnArOtp < 50 ? '#e81426' : '#e9ab15'" [background]="'#dadfe7'"
+              [clockwise]="true"></round-progress>
+            <div class="turn-title">
+              <div class="turnar-otps" [ngClass]="{'turnar-otps': turnArOtp > 70,'turnar-otps-amber': turnArOtp> 50 && 
+                  turnArOtp<= 70, 'turnar-otps-red': turnArOtp<= 50}">
+                {{turnArOtp}}%<br>
+                <span class="turnar-inner">
+                  TURNAROUND OTP
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="base-second">
+            <div class="second-cont" fxFlex="25">
+              <div class="second-title">
+                TURNAROUND FLIGHTS
+              </div>
+              <div class="second-title-per">
+                {{turnFlights}}%
+              </div>
+              <div class="second-title">
+                COUNT
+              </div>
+              <div class="second-title-cont">
+                {{turnFlightsNo}}
+              </div>
+            </div>
+            <div fxFlex="40">
+              <div class="turn-otp">
+                <canvas baseChart [data]="turnOtp.values" [labels]="turnOtp.labels" [colors]="turnOtp.colors"
+                  [chartType]="turnOtp.type" [options]="turnOtp.options">
+                </canvas>
+              </div>
+            </div>
+            <div class="second-cont" fxFlex="25">
+              <div class="second-title align-left">
+                BASE+HALT
+                FLIGHTS
+              </div>
+              <div class="second-title-pers pull-left">
+                {{turnBaseFlights}}%
+              </div>
+              <div class="second-title align-left">
+                COUNT
+              </div>
+              <div class="second-title-cont pull-left">
+                {{turnBaseFlightsNo}}
+              </div>
+            </div>
+          </div>
+          <div class="base-third">
+            <div class="term-otp" [ngClass]="{'high': contactPer > 70, 'amber': contactPer> 50 && 
+                      contactPer<= 70, 'delay': contactPer<= 50}">
+              <div class="term-title">{{constants.bayType[1].type}} {{constants.bayTitle}} OTP</div>
+              <div class="term-per">{{contactPer}}%</div>
+              <div class="term-otp-det">FLIGHTS<span class="pull-right">{{closedOntime}}/{{closedData}}</span>
+              </div>
+              <progressbar [value]=contactPer class="term-progress-bar" [ngClass]="{'high-progress-bar': contactPer > 70, 'med-progress-bar': contactPer> 50 && 
+                  contactPer<= 70, 'low-progress-bar': contactPer<= 50}">
+              </progressbar>
+            </div>
+            <div class="term-otp" [ngClass]="{'high': openPer > 70, 'amber': openPer> 50 && 
+                      openPer<= 70, 'delay': openPer<= 50}">
+              <div class="term-title">{{constants.bayType[0].type}} {{constants.bayTitle}} OTP</div>
+              <div class="term-per">{{openPer}}%</div>
+              <div class="term-otp-det">FLIGHTS<span class="pull-right">{{openOntime}}/{{openData}}</span>
+              </div>
+              <progressbar [value]=openPer class="term-progress-bar" [ngClass]="{'high-progress-bar': openPer > 70, 'med-progress-bar': openPer> 50 && 
+                      openPer<= 70, 'low-progress-bar': openPer<= 50}">
+              </progressbar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="turn-path">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="4">
+            <mat-icon>flight_land</mat-icon>
+          </div>
+          <div class="taxi-path taxi-in-out" fxFlex={{taxiIn-2}}>
+            {{taxiIn}}%
+            <span class="taxi-title">TAXI IN</span>
+          </div>
+          <div fxFlex="4">
+            <img src="assets/images/chocks_icon.svg" class="taxi-icon" />
+          </div>
+          <div class="taxi-path dock-in-out" fxFlex={{dock-2}}>
+            {{dock}}%
+            <span class="taxi-title">DOCK</span>
+          </div>
+          <div fxFlex="4">
+            <img src="assets/images/path_icon.svg" class="taxi-icon" />
+          </div>
+          <div class="taxi-path" [ngClass]="{'taxi-high': turnAround > 70, 'taxi-amber': turnAround> 50 && 
+              turnAround<= 70, 'taxi-delay': turnAround<= 50}" fxFlex={{turnAround-20}}>
+            {{turnAround}}%
+            <span class="taxi-title">TURNAROUND</span>
+          </div>
+          <div fxFlex="4">
+            <img src="assets/images/path_icon.svg" class="taxi-icon" />
+          </div>
+          <div class="taxi-path dock-in-out" fxFlex={{unDock-2}}>
+            {{unDock}}%
+            <span class="taxi-title">UNDOCK</span>
+          </div>
+          <div fxFlex="4">
+            <img src="assets/images/chocks_icon.svg" class="taxi-icon" />
+          </div>
+          <div class="taxi-path taxi-in-out" fxFlex={{taxiOut-2}}>
+            {{taxiOut}}%
+            <span class="taxi-title">TAXI OUT</span>
+          </div>
+          <div fxFlex="4">
+            <mat-icon>flight_takeoff</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="35">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="80" class="equip-head">
+          Turnaround by Equipment
+        </div>
+        <div fxFlex="100">
+          <mat-card class="equip-card">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="100">
+                <table class="table margin-bot-0 analytics-table">
+                  <thead>
+                    <tr fxLayout="row">
+                      <th fxFlex="25">
+                        <div class="equip-thead">EQUIPMENT TYPE</div>
+                      </th>
+                      <th fxFlex="25">
+                        <div class="equip-shead">
+                          NUMBER OF FLIGHTS
+                        </div>
+                      </th>
+                      <th fxFlex="25">
+                        <div class="equip-shead">AVG TIME IN MINS
+                        </div>
+                      </th>
+                      <th fxFlex="25">
+                        <div class="equip-shead">TURN OTP
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="margin-top-5 emp-list">
+                    <tr class="bay_equiment_size" *ngFor="let equip of equipInfo">
+                      <td fxFlex="25" class="align-left e-type">{{equip.type}}</td>
+                      <td fxFlex="25">{{equip.total_flights}}</td>
+                      <td fxFlex="25">{{equip.avg_time || 0}}</td>
+                      <td fxFlex="25" [ngClass]="{'equip-high': equip.turn_otp > 70, 'equip-amber': equip.turn_otp> 50 && 
+                          equip.turn_otp<= 70, 'equip-delay': equip.turn_otp<= 50}">{{equip.turn_otp}}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+    </div>
+    <div fxFlex="99">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+
+        <mat-card class="recovery-card">
+          <div class="depart-head white">Recovery + Delay Metrics</div>
+          <div class="recovery-shead">TOTAL FLIGHT TURNS</div>
+          <div class="recovery-turns">{{totalFlights}}</div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div class="delay-green" fxFlex="32">
+              <div>{{onTimeMetricsData?.toFixed(0)}}%</div>
+            </div>
+            <div class="delay-amber" fxFlex="32">
+              <div>{{bufferMetricsData?.toFixed(0)}}%</div>
+            </div>
+            <div class="delay-red" fxFlex="32">
+              <div>{{delayMetricsData?.toFixed(0)}}%</div>
+            </div>
+            <div fxFlex="3"></div>
+            <div class="recovery-flight" fxFlex="5">
+              <mat-icon>flight_land</mat-icon>
+            </div>
+            <div fxFlex="30">
+              <progressbar [value]=onTimeMetricsData type="success" class="recovery-main-progress-bar">
+              </progressbar>
+            </div>
+            <div fxFlex="30">
+              <progressbar [value]=bufferMetricsData type="warning" class="recovery-main-progress-bar">
+              </progressbar>
+            </div>
+            <div fxFlex="30">
+              <progressbar [value]=delayMetricsData type="danger" class="recovery-main-progress-bar">
+              </progressbar>
+            </div>
+            <div fxFlex="5">
+            </div>
+            <div class="recovery-flight" fxFlex="5">
+              <mat-icon>flight_takeoff</mat-icon>
+            </div>
+            <div fxFlex="30">
+              <progressbar [value]=onTimeDelayPercentages class="recovery-progress-bar">
+              </progressbar>
+            </div>
+            <div fxFlex="30">
+              <progressbar [value]=bufferDelayPercentages class="recovery-progress-bar">
+              </progressbar>
+            </div>
+            <div fxFlex="30">
+              <progressbar [value]=delayedDelayPercentages class="recovery-progress-bar">
+              </progressbar>
+            </div>
+            <div fxFlex="5">
+            </div>
+          </div>
+        </mat-card>
+
+        <div fxFlex="25">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" class="recovery-margin">
+              <div class="delay-rate delay">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="35">
+                    <div class="recovery-title">DELAY RATE</div>
+                    <div class="recovery-per">{{delayPercentage?.toFixed(0)}}%</div>
+                  </div>
+                  <div fxFlex="10">
+                  </div>
+                  <div fxFlex="55">
+                    <div class="delay-con">
+                      ONTIME TO DELAY/BUFFER FLIGHTS</div>
+                    <progressbar [value]=delayPercentage class="term-progress-bar low-progress-bar">
+                    </progressbar>
+                    <div class="delay-fr">
+                      {{bufferFlights}}/{{delayFlights}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="delay-rate high">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="35">
+                    <div class="recovery-title">RECOVERY RATE</div>
+                    <div class="recovery-per">{{recoverPercentage?.toFixed(0)}}%</div>
+                  </div>
+                  <div fxFlex="10">
+                  </div>
+                  <div fxFlex="55">
+                    <div class="delay-con">
+                      DELAY/BUFFER TO ONTIME FLIGHTS</div>
+                    <progressbar [value]=recoverPercentage class="term-progress-bar high-progress-bar">
+                    </progressbar>
+                    <div class="delay-fr">
+                      {{recoveryBuff}}/{{recoveryFlts}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" class="depart-head">Turnaround by Departments</div>
+        <div fxFlex="100">
+          <mat-card fxLayout="row" fxLayoutWrap="wrap" class="depart-main-card">
+            <div class="main-bar-chart">
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div class="total-task" fxFlex="100">TOTAL TASKS</div>
+                <div fxFlex="100" class="total-task-count">{{totalTasks}}</div>
+                <div class="turn-depart">
+                  <canvas baseChart [datasets]="departBarChartData" [labels]="departBarChartLabels"
+                    [options]="departBarChartOptions" [legend]="barChartLegend" [colors]="departBarChartColors"
+                    [chartType]="barChartType" (chartClick)="chartClicked($event)">
+                  </canvas>
+                </div>
+                <div fxFlex="6"></div>
+                <div fxFlex="92">
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex class="turn-labels" *ngFor="let value of departTask"
+                      [ngClass]="{'depart-active': value.id == currentDepId}">
+                      <div>{{value.department}}</div>
+                      <div>Task count: {{value.tasks}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="2"></div>
+              </div>
+            </div>
+            <hr fxFlex="100" class="a-hr">
+            <div class="depart-sub-card">
+              <div class="depart-head">Time of the Day</div>
+              <div class="depart-bar">
+                <canvas baseChart [datasets]="departTodChartData" [labels]="departTodChartLabels"
+                  [options]="barChartOptions" [legend]="barChartLegend" [colors]="barChartColors"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+            <div class="depart-sub-card">
+              <div class="depart-head">Day of the Week</div>
+              <div class="depart-bar">
+                <canvas baseChart [datasets]="mixedChartData" [labels]="mixedChartLabels" [options]="barChartOptions"
+                  [legend]="barChartLegend" [colors]="mixedChartColors" [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+            <div class="depart-sub-card">
+              <div class="depart-head">Heatmap</div>
+              <div class="heat-map">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="16">
+                  </div>
+                  <div *ngFor="let value of heatmapValues" class="heat-time" fxFlex="12">
+                    {{value.day}}
+                  </div>
+                </div>
+                <div fxLayout="row" class="heat-values" fxLayoutWrap="wrap" *ngFor="let title of data">
+                  <div class="heat-days" fxFlex="13">
+                    {{title.time}}
+                  </div>
+                  <div fxFlex="11" class="heat-content" *ngFor="let value of heatmapValues">
+                    <div *ngFor="let titles of title.val">
+                      <div *ngIf="value.dow == titles.dow">
+                        <div [ngClass]="{'heat-null': titles.sucess_prct == null,'heat-high': titles.sucess_prct > 80, 'heat-mhigh': titles.sucess_prct> 60 && titles.sucess_prct <= 80, 
+                                'heat-med': titles.sucess_prct> 40 && titles.sucess_prct <= 60,'heat-low-med': titles.sucess_prct> 20 && titles.sucess_prct <= 40,
+                                'heat-low': titles.sucess_prct <= 20}">{{titles.sucess_prct}}%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr fxFlex="100" class="a-hr">
+            <div class=task-sub-card>
+              <div class="depart-head">Tasks({{taskLength}})</div>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="3">
+                  <button class="leftChevron" (click)="leftScroll()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                  </button>
+                </div>
+                <div fxFlex="94" #widgetsContent class="task-width">
+                  <div fxLayout="row">
+                    <div *ngFor="let tasksBar of taskGroup" fxFlex (click)="selectedTask(tasksBar)">
+                      <div class="task-bar" [ngClass]="{'active-tasks': currentTaskId === tasksBar.id}">
+                        <round-progress class="round-pro" [current]="tasksBar.task_percentage" [max]="100"
+                          [rounded]="true" [radius]=50 [stroke]="10" [semicircle]="false" [responsive]="false"
+                          [duration]="800" [animation]="'easeInOutQuart'"
+                          [color]="tasksBar.task_percentage > 75 ?'#5cbb1d' : tasksBar.task_percentage < 50 ? '#e81426' : '#e9ab15'"
+                          [background]="'#dadfe7'" [clockwise]="true">
+                        </round-progress>
+                        <div class="task-per">{{tasksBar.task_percentage}}%</div>
+                        <div class="task-name">{{tasksBar.name}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="3">
+                  <button class="rightChevron" (click)="rightScroll()">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+            </div>
+          </mat-card>
+          <mat-card class="task-main-card">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="50">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div *ngFor="let value of selectedTasks" fxFlex="40">
+                    <div class="dtask-small-head">TASK:</div>
+                    <div class="dtask-head dtasks-head">{{value.name}}</div>
+                    <div class="task-assign" fxLayout="row" fxLayoutWrap="wrap">
+                      <div class="task-box" fxFlex="100">
+                        <div>Total assigned</div>
+                        <div class="task-box-count">{{value.total_task}}</div>
+                      </div>
+                      <div class="task-box" fxFlex="45">
+                        <div>Total performed</div>
+                        <div class="task-box-count">{{value.performed_task}}</div>
+                      </div>
+                      <div class="task-box" fxFlex="45">
+                        <div>On time</div>
+                        <div class="task-box-count">{{value.ontime_task}}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxFlex="60">
+                    <div class="depart-sub-card">
+                      <div class="dtask-head">OTP Heatmap</div>
+                      <div class="dtask-heat-map">
+                        <div class="heat-map"></div>
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+                          <div fxFlex="16">
+                          </div>
+                          <div *ngFor="let value of taskHeatmapValue" class="heat-time dtask" fxFlex="12">
+                            {{value.day}}
+                          </div>
+                        </div>
+                        <div fxLayout="row" class="heat-values" fxLayoutWrap="wrap" *ngFor="let title of taskHeatData">
+                          <div class="heat-days dtask" fxFlex="13">
+                            {{title.time}}
+                          </div>
+                          <div fxFlex="11" class="heat-contents" *ngFor="let value of taskHeatmapValue">
+                            <div *ngFor="let titles of title.val">
+                              <div *ngIf="value.dow == titles.dow">
+                                <div [ngClass]="{'heat-null': titles.sucess_prct == null,'heat-high': titles.sucess_prct > 80, 'heat-mhigh': titles.sucess_prct> 60 && titles.sucess_prct <= 80, 
+                                          'heat-med': titles.sucess_prct> 40 && titles.sucess_prct <= 60,'heat-low-med': titles.sucess_prct> 20 && titles.sucess_prct <= 40,
+                                          'heat-low': titles.sucess_prct <= 20}">{{titles.sucess_prct}}%
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxFlex="50">
+                    <div class="dtask-sub-card">
+                      <div class="dtask-head">Time of the Day</div>
+                      <div class="dtask-bar">
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                          [options]="barChartOptions" [legend]="barChartLegend" [colors]="barChartColors"
+                          [chartType]="barChartType">
+                        </canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxFlex="50">
+                    <div class="dtask-sub-card">
+                      <div class="dtask-head">Day of the Week</div>
+                      <div class="dtask-bar">
+                        <canvas baseChart [datasets]="taskMixedChartData" [labels]="taskMixedChartLabels"
+                          [options]="barChartOptions" [legend]="barChartLegend" [colors]="mixedChartColors"
+                          [chartType]="barChartType">
+                        </canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="2">
+
+              </div>
+              <div fxFlex="48">
+                <div class="dtask-head">Delay code usage</div>
+                <div class="dtask-header" fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="20">
+                    DELAY CODE
+                  </div>
+                  <div fxFlex="20">
+                    %CODE USED
+                  </div>
+                  <div fxFlex="20">
+                    #CODE USED
+                  </div>
+                  <div fxFlex="20">
+                    TOTAL DELAY MINS
+                  </div>
+                  <div fxFlex="20">
+                    AVG. DELAY MINS
+                  </div>
+                </div>
+                <div class="dtask-div">
+                  <div fxLayout="row" fxLayoutWrap="wrap" class="dtask-content" *ngFor="let delay of delayInfo">
+                    <div fxFlex="20">
+                      {{delay.dnc}}({{delay.dac}})
+                    </div>
+                    <div fxFlex="20">
+                      {{delay.code_pec.toFixed(0)}}%
+                    </div>
+                    <div fxFlex="20">
+                      {{delay.code_used}}
+                    </div>
+                    <div fxFlex="20">
+                      {{delay.delay_min}}
+                    </div>
+                    <div fxFlex="20">
+                      {{delay.avg_in_min}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

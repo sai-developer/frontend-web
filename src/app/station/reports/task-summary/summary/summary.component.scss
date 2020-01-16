@@ -1,0 +1,287 @@
+.summary-dialogs .task-title {
+  font-family: Averta;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin-top: 6px;
+  display: -webkit-inline-box;
+}
+
+::ng-deep .summary-dialogs {
+  max-width: 90vw !important;
+  max-height: 96vh !important;
+  padding-top: 12px !important;
+  margin-right: 10px !important;
+  margin-left: 0px !important;
+}
+
+.summary-dialogs .flight-card {
+  margin: 3px 0px 3px 15px;
+}
+
+.summary-dialogs .flight-img {
+  text-align: center;
+}
+
+.summary-dialogs.task-header {
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.6);
+  background-color: #ffffff;
+}
+
+.summary-dialogs .task-filters {
+  font-family: Averta;
+  font-size: 14px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: #9fa3b6;
+}
+
+.summary-dialogs .task-filters .black {
+  font-family: Averta;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: #999999;
+}
+
+
+.summary-dialogs .flight-icon {
+  margin-top: 2px;
+  margin-right: 8px
+}
+
+.summary-dialogs .flight-details {
+  text-align: center;
+  display: -webkit-inline-box;
+  padding-top: 15px;
+}
+
+.summary-dialogs .task-head {
+  font-family: Averta;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  text-align: center;
+  color: #9fa3b6;
+  margin-top: 15px;
+}
+
+
+.summary-dialogs .task-delay-count {
+  font-family: Averta;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 14px;
+  color: #e81a1a;
+}
+
+.summary-dialogs .task-head-count {
+  font-family: Averta;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 14px;
+  color: #000000;
+
+}
+
+.summary-dialogs .tail-no {
+  font-family: Averta;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+mat-icon.close {
+  width: 30px;
+  height: -2px;
+  font-size: 21px;
+  position: relative;
+  top: 10px;
+  float: right;
+  opacity: 1;
+}
+
+.summary-dialogs .Divider {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.summary-dialogs .tasks-icon {
+  width: 19px;
+  height: 24px;
+  margin-top: 6px;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+::ng-deep .summary-dialogs .summary-sheet .dc-bh {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.22;
+  color: #000000;
+  padding: 26px 0px 8px 0px !important;
+  margin: 0px 15px 5px 16px !important;
+  border-bottom: 1px solid #c7c8ca !important;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  z-index: 2 !important;
+  top: 0 !important;
+}
+
+.summary-dialogs .dc-card {
+  border-radius: 2px;
+  margin-left: 16px;
+  margin-right: 15px;
+  background-color: #ffffff;
+  margin-bottom: 7px;
+  color: #000000;
+  transition: 0.4s;
+  cursor: default;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.summary-dialogs .dc-card:first-child {
+  border-radius: 2px;
+  margin-left: 16px;
+  margin-right: 15px;
+  background-color: #ffffff;
+  margin-bottom: 7px;
+  color: #000000;
+  transition: 0.4s;
+  cursor: default;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.35);
+  margin-top: 12px;
+}
+
+// .dc-card:hover {
+//   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+//   transition: 0.4s;
+// }
+
+.summary-dialogs .dc-card .dc-row {
+  align-items: center;
+  padding: 5px;
+  //  border-bottom: 1px solid #9999 !important;
+
+}
+
+.update-icon:hover {
+  cursor: pointer;
+  transform: scale(1.25);
+  transition: 0.5s;
+}
+
+.timePicker input {
+  width: 95px;
+  border: 0px;
+  border-bottom: 1px solid #9999;
+  font-size: 17.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.17 !important;
+  color: #000000 !important;
+}
+
+.picker-margin {
+  margin: 4% 0;
+}
+
+::ng-deep .staff-data input {
+  width: 60px;
+  text-align: center;
+  border-radius: 3px;
+  border: 2px solid #9999;
+}
+
+.dc-card .staff-delay-data {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dc-card .staff-delay-data:hover {
+  transition: 0.4s;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-all;
+  cursor: pointer;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+::ng-deep .summary-dialogs .summary-fixed-header {
+  background-color: #dadfe7;
+  position: sticky;
+  z-index: 100;
+  top: 0px;
+}
+
+::ng-deep mat-dialog-actions .summaryDone.mat-primary {
+  left: 40px !important;
+}
+
+.summary-dialogs .mat-dialog-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-height: 76vh !important;
+}
+
+::ng-deep .summary-dialogs .summary-sheet {
+  text-align: left !important;
+  box-shadow: 0px 0px !important;
+}
+
+.summary-dialogs .summary-sheet .summary-fix-head {
+  position: sticky;
+  z-index: 100;
+  top: 0px;
+  background: #fff;
+  padding-bottom: 5px;
+}
+
+.export.xls{
+  border: none !important;
+  background-color: transparent !important;
+  margin-left: 70% !important;
+  outline:none !important
+}
+
+.export-cls{
+  margin: 0px 10px;
+  position: absolute;
+  top: 22px;
+  outline:none !important;
+  border: none !important;
+}
+
+.export-cls:hover{
+  cursor: pointer;
+}

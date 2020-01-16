@@ -1,0 +1,609 @@
+::ng-deep .i-gant-chart .vis-custom-time::before {
+  margin-top: 12px;
+}
+
+::ng-deep .i-gant-chart .vis-panel.vis-top {
+    border-right-color: #dadfe7;
+    position: fixed;
+    top: 73px!important;
+    margin-left: 29px!important;
+    background-color: #DADFE7;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+::ng-deep .i-gant-chart .vis-panel.vis-top:before {
+  display: block;
+  background: #dadfe7;
+  width: 300px;
+  content: '';
+  height: 51px;
+  position: absolute;
+  left: -301px;
+  z-index: 0;
+  top: 0;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+
+::ng-deep .fscGantt-fixed .vis-text.vis-minor.vis-odd {
+  background: #f1f1f1;
+}
+
+::ng-deep .vis-panel.vis-top {
+  border-right-color: #dadfe7;
+}
+
+.flight-sec {
+  background-color: #ffffff;
+  box-shadow: 0px 3px 4px 0 rgba(1, 1, 1, 0.12);
+  height: 53px;
+  position: sticky !important;
+  top: 0px !important;
+  border-top: 1px solid #d4d9e2;
+  z-index: 1 !important;
+}
+
+.tail-no {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  //color: #ffffff;
+  color: black;
+}
+
+.flight-img {
+  text-align: center;
+}
+
+.ganttchart {
+  max-height: 80vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+
+.ganttchart::-webkit-scrollbar-track,
+.i-scroll::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+.ganttchart::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar {
+  width: 3px;
+  padding: 3px;
+}
+
+.ganttchart::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #191c29;
+}
+
+.Divider {
+  width: 120%;
+  vertical-align: bottom;
+}
+
+::ng-deep .diamond-save {
+  margin-top: -1px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #5cbb1d;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+}
+
+::ng-deep .diamond-warning {
+  margin-top: -1px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #d7a01d;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+}
+
+::ng-deep .diamond-delay {
+  margin-top: -1px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e81a1a;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+}
+
+::ng-deep .diamond-expecting {
+  margin-top: -1px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  // background: #999999; 
+  background: transparent;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+}
+
+::ng-deep .diamond-plan {
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+  border: 2px solid grey;
+}
+
+::ng-deep .diamond-border-black {
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+  border: 2px solid #000000;
+}
+
+::ng-deep .diamond-border-green {
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+  border: 2px solid #000000;
+}
+
+::ng-deep .diamond-border-amber {
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+  border: 2px solid #d7a01d;
+}
+
+::ng-deep .diamond-border-red {
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+  border: 2px solid #e81a1a;
+  ;
+}
+
+::ng-deep .diamond-grey {
+  margin-top: -1px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #999999;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+}
+
+::ng-deep .vis-item .vis-item-overflow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: inherit;
+}
+
+::ng-deep .vis-item .vis-item-overflow .vis-item-content {
+  position: sticky;
+}
+
+.flifo-back {
+  padding: 10px 10px;
+  //background: #2f3243;
+  //background: #d4d9e2;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.backarrow-align {
+  position: relative;
+  top: 8px;
+  margin: 0 10px 0 0;
+}
+
+
+
+
+.mat-dialog-title.title {
+  font-size: 16px !important;
+}
+
+// ::ng-deep mat-dialog-title{
+// padding: 0px 0px 0px 0px !important;
+// height: 50px !important;
+// }
+::ng-deep .task-time {
+  // background:#e9e9e9;
+  color: #000000;
+  font-weight: bold;
+  // height: 15px;
+  padding: 4px 3px;
+  margin-top: -5px;
+  font-size: 14px;
+  min-width: 80px;
+  text-align: right;
+  // border-radius: 5px;
+}
+
+::ng-deep .task-end {
+  margin-top: 3px !important;
+}
+
+// for header section
+// :
+::ng-deep .topnav {
+  overflow: hidden;
+  font-size: 12px;
+  padding-left: 30px;
+}
+
+::ng-deep .topnav a {
+  float: left;
+  // color: #f2f2f2;
+  color: #000000;
+  text-align: center;
+  padding: 5px 30px;
+  text-decoration: none;
+  // font-size: 17px;
+}
+
+// ::ng-deep .topnav a:hover {
+//   background-color: #ddd;
+//   color: black;
+// }
+
+::ng-deep .topnav a.active {
+  color: #000000;
+  border-bottom: 4px solid red;
+}
+
+::ng-deep .task-filter {
+  font-size: 12px;
+  color: gray;
+}
+
+::ng-deep .task-filter span {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+::ng-deep .task-filter .black {
+  color: #000000;
+}
+
+::ng-deep .task-filter .red {
+  color: #e81a1a;
+}
+
+::ng-deep .task-filter .amber {
+  color: #d7a01d;
+}
+
+::ng-deep .flight-time {
+  padding: 5px 20px;
+  text-align: center;
+  display: -webkit-inline-box;
+}
+
+::ng-deep .flight-time div {
+  padding-left: 40px;
+}
+
+::ng-deep .flight-time mat-icon {
+  margin-right: -30px;
+  margin-top: 5px;
+}
+
+.gantt-sec {
+  padding: 0px 50px;
+  background: #d4d9e2 !important;
+  // height:100% !important;
+  height: 100vh !important;
+}
+
+.blue-icon {
+  color: blue
+}
+
+.green-icon {
+  color: green
+}
+
+::ng-deep .i-gant-chart .vis-item.vis-range {
+  font-weight: bold;
+  text-align: center;
+  border: 0px;
+  background: #e9e9e9;
+  height: 30px !important;
+  top: 0px !important;
+  margin-top: 5px !important;
+  border-radius: 3px !important;
+  color: #ffff;
+}
+
+::ng-deep .i-gant-chart .vis-item.vis-range.planned {
+  background: #e9e9e9;
+  height: 40px !important;
+  top: 0px !important;
+  margin-top: 0px !important;
+  border-radius: 2px !important;
+  color: transparent !important;
+  border-top: 2px solid gray;
+}
+
+::ng-deep .i-gant-chart .vis-item.vis-range.border-black {
+  background: #e9e9e9;
+  height: 40px !important;
+  top: 0px !important;
+  margin-top: 0px !important;
+  border-radius: 2px !important;
+  color: transparent !important;
+  border-top: 2px solid #000000;
+}
+
+::ng-deep .i-gant-chart .vis-item.vis-range.border-amber {
+  background: #e9e9e9;
+  height: 40px !important;
+  top: 0px !important;
+  margin-top: 0px !important;
+  border-radius: 2px !important;
+  color: transparent !important;
+  border-top: 2px solid #d7a01d;
+}
+
+::ng-deep .i-gant-chart .vis-item.vis-range.border-red {
+  background: #e9e9e9;
+  height: 40px !important;
+  top: 0px !important;
+  margin-top: 0px !important;
+  border-radius: 2px !important;
+  color: transparent !important;
+  border-top: 2px solid #e81a1a;
+}
+
+::ng-deep .i-gant-chart .vis-item.vis-range.expecting{
+    background: #999999;
+    columns: #ffff;
+}
+::ng-deep .i-gant-chart .vis-item.vis-range.delay{
+  height: 30px !important;
+  margin-top: 5px !important;
+  border-radius: 5px !important;
+background: #e81426 !important;
+color: #ffff !important;
+}
+::ng-deep .i-gant-chart .vis-item.vis-range.save{
+  height: 30px !important;
+  margin-top: 5px !important;
+  border-radius: 5px !important;
+  background:#5cbb1d !important;
+  color: #ffff !important;
+}
+::ng-deep .i-gant-chart .vis-item.vis-range.warning{
+  height: 30px !important;
+  margin-top: 5px !important;
+  border-radius: 5px !important;
+  background:#e9ab15 !important;
+  color:#ffff !important;
+}
+
+// footer css
+.i-footer {
+  z-index: 100;
+  bottom: 5% !important;
+  height: 40px;
+  background-color: #191c29;
+  position: absolute;
+  right: 3%;
+  border-radius: 5px;
+}
+
+.i-footer .actions {
+  margin-bottom: 0px;
+  padding: 5px;
+  height: 100vh;
+}
+
+.i-footer .actions .action-items {
+  display: inline-block;
+  padding: 0px 5px;
+  border-right: 1px solid #5e616a;
+  cursor: pointer;
+  user-select: none;
+}
+
+.i-footer mat-icon {
+  height: 25px !important;
+  width: 25px !important;
+  color: #ffff;
+}
+
+.i-footer button {
+  background: #2f3243;
+  border: 0px solid transparent !important;
+  border-radius: 5px;
+}
+
+.i-footer .zoom-in {
+  margin-left: 20px;
+}
+
+.i-footer button.disabled {
+  opacity: 0.3;
+}
+
+.move-btn {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0px 10px;
+  vertical-align: super;
+}
+
+.move-right {
+  margin-right: 10px !important;
+}
+
+.zoom-left {
+  margin-left: 15px !important;
+}
+
+.mat-dialog-content {
+  max-height: 81vh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) {
+  .mat-dialog-content {
+    max-height: 94.5vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .mat-dialog-content {
+    max-height: 82vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1279px) {
+  .mat-dialog-content {
+    max-height: 74vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+::ng-deep .display-hide {
+  display: none !important;
+}
+
+::ng-deep .i-vis-timeline.i-gant-chart {
+  z-index: 0 !important;
+  width: 95vw;
+  margin-left: 15px;
+}
+
+.gantt-head {
+  position: fixed;
+  z-index: 100;
+  background: #fff;
+  width: 97.3vw;
+  margin-top: -20px;
+  height: 45px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: -22px;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.back-icon mat-icon {
+  font-size: 45px;
+}
+
+.back-icon button:hover {
+  cursor: pointer;
+}
+
+.all-flights,
+.single-flight {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.all-flights:hover {
+  cursor: pointer;
+}
+
+.all-flights {
+  height: 35px;
+  margin-left: 10px;
+  // border-bottom: 3px solid red;
+}
+
+.task-head {
+  font-size: 14px;
+  font-weight: bold;
+  color: #9fa3b6;
+}
+
+.arrival-blk mat-icon,
+.departure-blk mat-icon {
+  margin-top: 10px;
+}
+
+.arrival-blk mat-icon {
+  color: blue;
+}
+
+.departure-blk mat-icon {
+  color: green;
+}
+
+.back-live {
+  height: 40px;
+  background: #fff;
+  border: 0px;
+  font-size: 30px;
+  outline: none;
+}
+
+.back-live:hover{
+  cursor: pointer
+}
+
+.gantt-footer {
+  position: fixed !important;
+}
+
+.flt-label {
+  margin-top: 11px;
+  font-size: 14px;
+  font-weight: bold;
+}

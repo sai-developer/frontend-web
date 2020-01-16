@@ -1,0 +1,135 @@
+.task-count{
+    font-size:24px;
+    // color:#ffffff
+}
+.seperator{
+    border-top: 1px solid #c7c8ca;
+    background: #ffffff !important;
+}
+.bay-seperator{
+    border-top: 1px solid #c7c8ca;
+    margin-top: 10px !important;
+}
+.button-list{
+    padding: 10px 0px;
+}
+.bay-blk{
+    padding: 5px 0px 0px 0px;
+    text-align: center;
+}
+.bay-blk span{
+    font-weight: bold;
+}
+.flight-blk span{
+    font-weight: bold;
+}
+.flight-blk .location{
+padding-left:15px;
+}
+.flight-blk .flight-time1{
+    padding: 5px 0px 0px 0px;
+    line-height: 25px;
+    text-align: center;
+}
+.flight-blk .flight-time{
+    padding: 5px 0px 0px 25px;
+    line-height: 25px;
+    text-align: center;
+}
+.flight-blk .flight-seperator{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #c7c8ca;
+}
+.bay-blk , .flight-blk{
+    font-size: 14px;
+}
+.button-list button{    
+    margin-right: 10px;
+    margin-top: 10px;
+    // min-width: 146px;
+    min-width: 70px;
+}
+.edit-btn{
+    outline: unset;
+    background: #191c29;
+    min-width: 75px !important;
+    border-radius: 5px;
+}
+.save-btn{
+    background: #ffffff !important;
+    border-radius: 5px;
+    color: #191c29 !important;
+}
+mat-dialog-content{
+    padding: 0px !important;
+    margin: 15px!important;
+  }
+::ng-deep .flight-blk .mat-form-field-infix,
+::ng-deep .bay-blk .mat-form-field-infix{
+    width: 75px !important;
+    background:#191c29;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0px 2px;
+}
+
+::ng-deep .bay-blk .reg-no-width .mat-form-field-infix{
+    width: 95px !important;
+}
+::ng-deep .flight-blk .mat-select-value-text,
+::ng-deep .bay-blk .mat-select-value-text{
+    color: #ffffff !important;
+}
+::ng-deep .flight-blk .mat-select-arrow,
+::ng-deep .bay-blk .mat-select-arrow{
+    color: #ffffff
+}
+::ng-deep  .flight-time input{
+    width: 50px !important;
+    background: #191c29;
+    border: 0px;
+    padding: 0px 2px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 5px;
+}
+.bay-blk .labels{
+    color: #9fa3b6 !important;
+}
+// ::ng-deep .flight_status .mat-dialog-content {
+//     padding-top: 0px !important;
+//     padding-bottom: 0px !important;
+// }
+@media screen and (max-width: 1920px) and (min-width: 1600px){
+// ::ng-deep .mat-dialog-content {
+//     padding-top: 0px !important;
+//     padding-bottom: 0px !important;
+// }
+}
+::ng-deep .flight_status{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+.arrival-blk{
+    margin-top: 10px !important;
+}
+.reg-no-width .mat-form-field-infix{
+    width: 95px !important;
+}
+
+.cancl-btn
+{
+    background: #a2a2a2;
+    color: black;
+}
+.message{
+    background: #f9cf44;
+    color: #000;
+    height: 50px;
+    text-align: center;
+    align-items: center;
+    // border-radius: 5px;
+    border: 1px solid  #E9A643;
+    font-size: 14px;
+}

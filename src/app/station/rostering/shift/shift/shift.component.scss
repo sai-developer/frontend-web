@@ -1,0 +1,54 @@
+.i-md-content{
+  //height: 50vh;
+}
+.add-mat-dialog-title{
+  background: white !important;
+  color: #000000 !important;
+}
+.cancel-btn{
+  color: #a2a2a2;
+  margin-right: 10px;
+}
+
+.timePicker input{
+border: 0px;
+border-bottom: 1px solid #9999;
+font-size: 17.5px !important;
+font-weight: 600 !important;
+line-height: 1.17 !important;
+color: #000000 !important;
+}
+::ng-deep .owl-dt-timer-content .owl-dt-timer-input{
+  border:0px !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+// ::ng-deep .owl-dt-inline-container, .owl-dt-popup-container{
+::ng-deep owl-date-time-container{
+  border-radius: 6px !important;
+  width: 210px !important;
+}
+::ng-deep .owl-dt-timer-box{
+  width:40%
+}
+::ng-deep .owl-dt-timer-divider:after, 
+::ng-deep .owl-dt-timer-divider:before{
+  width: .25em !important;
+  height: .25em !important;
+}
+.mat-dialog-actions{
+  position: absolute;
+    // bottom: -12px;
+      bottom: 0px;
+    padding-left: 5px;
+    // margin-bottom: 12px;
+    margin-left:10px;
+}
+.add-mat-dialog-title img{
+  width: 19px !important;
+  height: auto !important;
+
+}
+.picker-margin {
+  margin: 4% 0;
+}

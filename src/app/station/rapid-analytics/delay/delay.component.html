@@ -1,0 +1,161 @@
+<div class="div-width">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="15" class="turn-head">Delay analysis</div>
+    <div fxFlex="25"  fxLayout="row">
+      <!-- <div class="date-pad">
+        <mat-form-field class="date-selector">
+          <input matInput readonly [matDatepicker]="to" [max]="today" [(ngModel)]="filter.to"
+            (dateChange)="daterange($event,'to')" class="w-100">
+          <mat-datepicker-toggle class="date-arrow" matSuffix [for]="to">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #to [(ngModel)]="filter.to" ngDefaultControl></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="date-pads">
+        <mat-form-field class="date-selector">
+          <input matInput readonly [matDatepicker]="from" [max]="filter.to" [(ngModel)]="filter.from"
+            (dateChange)="daterange($event,'from')" class="w-100">
+          <mat-datepicker-toggle class="date-arrow" matSuffix [for]="from">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #from [(ngModel)]="filter.from" ngDefaultControl></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="date-arrows" (click)="filterrange()">
+        <mat-icon>arrow_right_alt</mat-icon>
+      </div> -->
+    </div>
+    <div fxFlex="50"></div>
+    <div fxFlex="46">
+      <div class="dc-chart">
+        <canvas baseChart [data]="delayChart.values" [labels]="delayChart.labels" [options]="delayChart.options"
+          [colors]="delayChart.colors" [chartType]="delayChart.type"> 
+        </canvas>
+      </div>
+    </div>
+    <div fxFlex="47">
+      <mat-card class="delay-sec">
+        <div class="delay-sec-title">Top 5 delay codes used</div>
+        <div class="bar-cont">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [colors]="barChartColors" [legend]="false" [chartType]="hzbarChartType">
+          </canvas>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="task-width" fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex class="task-lists" [ngClass]="{'active': content.id == currentTaskId}"
+      *ngFor="let content of delayedTask" (click)="activeTask(content.id)">
+      {{content.category}}
+    </div>
+  </div>
+  <mat-card class="task-main-card">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="50">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="40">
+            <div class="dtask-head">Top delayed tasks</div>
+            <div class="task-assign" *ngFor="let value of topDelayCodes" fxLayout="row" fxLayoutWrap="wrap">
+              <div class="task-card">
+                {{value.name}}
+              </div>
+            </div>
+          </div>
+          <div fxFlex="60">
+            <div class="depart-sub-card">
+              <div class="dtask-head">Heatmap</div>
+              <div class="dtask-heat-map">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="16">
+                  </div>
+                  <div *ngFor="let value of taskHeatmapValue" class="heat-time dtask" fxFlex="12">
+                    {{value.day}}
+                  </div>
+                </div>
+                <div fxLayout="row" class="heat-values" fxLayoutWrap="wrap" *ngFor="let title of taskHeatData">
+                  <div class="heat-days dtask" fxFlex="14">
+                    {{title.time}}
+                  </div>
+                  <div fxFlex="11" class="heat-content" *ngFor="let value of taskHeatmapValue">
+                    <div *ngFor="let titles of title.val">
+                      <div *ngIf="value.dow == titles.dow">
+                        <div [ngClass]="{'heat-null': titles.sucess_prct == null,'heat-high': titles.sucess_prct > 80, 'heat-mhigh': titles.sucess_prct> 60 && titles.sucess_prct <= 80, 
+                                  'heat-med': titles.sucess_prct> 40 && titles.sucess_prct <= 60,'heat-low-med': titles.sucess_prct> 20 && titles.sucess_prct <= 40,
+                                  'heat-low': titles.sucess_prct <= 20}">{{titles.sucess_prct}}%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="50">
+            <div class="dtask-sub-card">
+              <div class="dtask-head">Time of the Day</div>
+              <div class="dtask-bar">
+                <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions"
+                  [legend]="barChartLegend" [colors]="barChartColors1" [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="50">
+            <div class="dtask-sub-card">
+              <div class="dtask-head">Day of the Week</div>
+              <div class="dtask-bar">
+                <canvas baseChart [datasets]="mixedChartData" [labels]="mixedChartLabels" [options]="barChartOptions"
+                  [legend]="barChartLegend" [colors]="mixedChartColors" [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="2">
+
+      </div>
+      <div fxFlex="48">
+        <div class="dtask-head">Delay code usage</div>
+        <div class="dtask-header" fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="20">
+            DELAY CODE
+          </div>
+          <div fxFlex="20">
+            %CODE USED
+          </div>
+          <div fxFlex="20">
+            #CODE USED
+          </div>
+          <div fxFlex="20">
+            TOTAL DELAY MINS
+          </div>
+          <div fxFlex="20">
+            AVG. DELAY MINS
+          </div>
+        </div>
+        <div class="dtask-div">
+          <div fxLayout="row" fxLayoutWrap="wrap" class="dtask-content" *ngFor="let delay of delayInfo">
+            <div fxFlex="20">
+              {{delay.dnc}}({{delay.dac}})
+            </div>
+            <div fxFlex="20">
+              {{delay.code_pec.toFixed(0)}}%
+            </div>
+            <div fxFlex="20">
+              {{delay.code_used}}
+            </div>
+            <div fxFlex="20">
+              {{delay.delay_min}}
+            </div>
+            <div fxFlex="20">
+              {{delay.avg_in_min}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

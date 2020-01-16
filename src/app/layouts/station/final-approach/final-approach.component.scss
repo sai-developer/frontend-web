@@ -1,0 +1,59 @@
+::ng-deep .mat-bottom-sheet-container {
+  background: transparent;
+  padding: 0 !important;
+  color: #ffffff;
+  box-shadow: none;
+  min-width: 100vw;
+}
+
+.final-approach-common-div {
+  background: -moz-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 76%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, transparent), color-stop(76%, rgba(236, 28, 35, 1)));
+  background: -webkit-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 76%);
+  background: -o-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 76%);
+  background: -ms-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 76%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(236, 28, 35, 1) 76%);
+  height: 29vh;
+  padding: 2em 0 0 0;
+}
+
+.flight-icon {
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.final-approach-ok-button {
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #000000;
+  outline: none;
+}
+
+.final-approach-section {
+  margin: 10px 0;
+  padding: 0 0 0 20px;
+  font-size: 20px;
+}
+
+.final-approach-section-span {
+  margin: 0 10px 0 0;
+}
+
+.final-approach-section-span2 {
+  margin: 0 0 0 10px;
+}
+
+@media screen and (min-width: 1600px) and (max-width: 1920px) {
+  .final-approach-common-div {
+    background: -moz-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 66%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, transparent), color-stop(66%, rgba(236, 28, 35, 1)));
+    background: -webkit-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 66%);
+    background: -o-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 66%);
+    background: -ms-linear-gradient(top, transparent 0%, rgba(236, 28, 35, 1) 76%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(236, 28, 35, 1) 76%);
+    height: 20vh;
+    padding: 2em 0 0 0;
+  }
+}

@@ -1,0 +1,270 @@
+
+  <h1 mat-dialog-title class="title">
+    <div *ngIf="assigned == 0" fxFlex="15" class="margin-top-15">
+      ASSIGN TASKS
+    </div>
+    <div *ngIf="assigned != 0" fxFlex="15" class="margin-top-15">
+      RE-ASSIGN TASKS
+    </div>
+    <div fxFlex="40">
+      <div *ngIf="fArrNo" fxFlex="15" class="flight-img">
+        <mat-icon>flight_land</mat-icon>
+        <div class="tail-no">{{fArrNo}}</div>
+
+      </div>
+      <div fxFlex="10" *ngIf="fArrNo && depNo">
+        <img src="assets\images\master\divider@1.png" class="Divider">
+      </div>
+      <div *ngIf="depNo" fxFlex="15" class="flight-img">
+        <mat-icon>flight_takeoff</mat-icon>
+        <div class="tail-no">{{depNo}}</div>
+      </div>
+    </div>
+    <div fxFlex="90" class="margin-top-15">
+      <mat-icon class="close" (click)="closeModal()">close</mat-icon>
+    </div>
+
+  </h1>
+  <div *ngIf="load">
+    <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+      <h2 *ngIf="i == 2">Turning Around . . .</h2>
+    </div>
+  </div>
+  <div [hidden]="load" class="task-family">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="30" class="task-left">
+        <div class="">
+          <p class="task-heading">ALL TASKS ({{taskList.length}})</p>
+          <mat-divider></mat-divider>
+          <div>
+            <div class="w-100">
+              <select placeholder="Task" multiple class="form-control-tsk-assign mat-dialog-content" style="padding:0 10px 0 0!important;"
+                [(ngModel)]="selectedList">
+                <option class="mat-normal-option list-item-tsk-assign" *ngFor="let taskAssign of taskList" [value]="taskAssign.taskName"
+                  (mouseover)="listtask();">
+                  {{taskAssign.taskName}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="65" class="task-right1">
+        <div class="task-assign-align">
+          <div class="head-margin" fxLayout="row" fxLayoutWrap="wrap">
+            <span class="task-heading" fxFlex="21">STAFF NAME</span>
+            <span class="task-heading" fxFlex="78">TASKS ASSIGNED</span>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="task-expansion-overflow mat-dialog-content">
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="panel-Changes"
+              [expanded]="true" *ngIf="userData.user.userRoleMasterList[0].name=='Admin' || userData.user.userRoleMasterList[0].name=='Duty Manager'">
+              <mat-expansion-panel-header class="task-expansion-panel">
+                <mat-panel-title>
+                  DUTY MANAGERS ({{dutyManager.length}})
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="margin-topBottom"
+                  #matExpansionPanel *ngFor="let data of dutyManager">
+                  <mat-expansion-panel-header fxLayout="row" class="panel-head-indicator expansion-panel-head-indicator"
+                    (click)="expandPanel(matExpansionPanel, $event)" (click)="assignTask(selectedList, $event, data, 'Duty Manager')">
+                    <mat-panel-title fxFlex="20">
+                      <div class="text-content-center">{{data.firstName}}
+                        {{data.lastName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description fxFlex="70" fxLayout="row" fxLayoutWrap="wrap">
+                      <div *ngFor="let item of data.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                        <span fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover" [ngClass]="{'departedFlight': item.taskActualEndTime!=null}">
+                          <div fxFlex="90" class="task-drop-class">{{item.taskName}}</div>
+                          <i fxFlex="10" class="material-icons task-drag-close" (click)="unAssign(item,data,'Duty Manager')"
+                            *ngIf="item.taskActualEndTime==null">clear</i>
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-expansion-panel>
+
+            <mat-divider></mat-divider>
+
+            <mat-expansion-panel class="panel-Changes" [expanded]="true" *ngIf="userData.user.userRoleMasterList[0].name=='Admin' || userData.user.userRoleMasterList[0].name=='Duty Manager'">
+              <mat-expansion-panel-header class="task-expansion-panel">
+                <mat-panel-title>
+                  RAMP OFFICERS ({{rampOfficer.length}})
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="margin-topBottom"
+                  #matExpansionPanel *ngFor="let data of rampOfficer">
+                  <mat-expansion-panel-header fxLayout="row" class="panel-head-indicator expansion-panel-head-indicator"
+                    (click)="expandPanel(matExpansionPanel, $event)" (click)="assignTask(selectedList, $event, data, 'Ramp Officer')">
+                    <mat-panel-title fxFlex="20" class="task-expansion-panel-title">
+                      <div class="text-content-center">{{data.firstName}}
+                        {{data.lastName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description fxFlex="80" fxLayout="row" fxLayoutWrap="wrap">
+
+                      <div *ngFor="let item of data.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                        <span fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover" [ngClass]="{'departedFlight': item.taskActualEndTime!=null}">
+                          <div fxFlex="90" class="task-drop-class">{{item.taskName}}</div>
+                          <i fxFlex="10" class="material-icons task-drag-close" (click)="unAssign(item,data,'Ramp Officer')"
+                            *ngIf="item.taskActualEndTime==null">clear</i>
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </mat-expansion-panel>
+
+            <mat-divider></mat-divider>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="panel-Changes"
+              [expanded]="true" *ngIf="userData.user.userRoleMasterList[0].name=='Admin' || userData.user.userRoleMasterList[0].name=='Duty Manager'">
+              <mat-expansion-panel-header class="task-expansion-panel">
+                <mat-panel-title>
+                  RAMP AGENTS ({{rampAgent.length}})
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="margin-topBottom"
+                  #matExpansionPanel *ngFor="let data of rampAgent">
+                  <mat-expansion-panel-header fxLayout="row" class="panel-head-indicator expansion-panel-head-indicator"
+                    (click)="expandPanel(matExpansionPanel, $event)" (click)="assignTask(selectedList, $event, data, 'Ramp Agent')">
+                    <mat-panel-title fxFlex="20">
+                      <div class="text-content-center">{{data.firstName}}
+                        {{data.lastName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description fxFlex="70" fxLayout="row" fxLayoutWrap="wrap">
+                      <div *ngFor="let item of data.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                        <span fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover" [ngClass]="{'departedFlight': item.taskActualEndTime!=null}">
+                          <div fxFlex="90" class="task-drop-class">{{item.taskName}}</div>
+                          <i fxFlex="10" class="material-icons task-drag-close" (click)="unAssign(item,data,'Ramp Agent')"
+                            *ngIf="item.taskActualEndTime==null">clear</i>
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-expansion-panel>
+
+            <mat-divider></mat-divider>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="panel-Changes"
+              [expanded]="true" *ngIf="securitySupervisor.length>0 && (userData.user.userRoleMasterList[0].name=='Admin' || userData.user.userRoleMasterList[0].name=='Security Supervisor')">
+              <mat-expansion-panel-header class="task-expansion-panel">
+                <mat-panel-title>
+                  SECURITY SUPERVISOR ({{securitySupervisor.length}})
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="margin-topBottom"
+                  #matExpansionPanel *ngFor="let data of securitySupervisor">
+                  <mat-expansion-panel-header fxLayout="row" class="panel-head-indicator expansion-panel-head-indicator"
+                    (click)="expandPanel(matExpansionPanel, $event)" (click)="assignTask(selectedList, $event, data, 'Security Supervisor')">
+                    <mat-panel-title fxFlex="20">
+                      <div class="text-content-center">{{data.firstName}}
+                        {{data.lastName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description fxFlex="70" fxLayout="row" fxLayoutWrap="wrap">
+                      <div *ngFor="let item of data.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                        <span fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover">
+                          <div fxFlex="90" class="task-drop-class">{{item.taskName}}</div>
+                          <i fxFlex="10" class="material-icons task-drag-close" (click)="unAssign(item,data,'Security Supervisor')"
+                            *ngIf="item.taskActualEndTime==null">clear</i>
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-expansion-panel>
+
+            <!-- <mat-divider></mat-divider> -->
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="panel-Changes"
+              [expanded]="true" *ngIf="securityScreener.length>0 && (userData.user.userRoleMasterList[0].name=='Admin' || userData.user.userRoleMasterList[0].name=='Security Supervisor')">
+              <mat-expansion-panel-header class="task-expansion-panel">
+                <mat-panel-title>
+                  SCREENER ({{securityScreener.length}})
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="margin-topBottom"
+                  #matExpansionPanel *ngFor="let data of securityScreener">
+                  <mat-expansion-panel-header fxLayout="row" class="panel-head-indicator expansion-panel-head-indicator"
+                    (click)="expandPanel(matExpansionPanel, $event)" (click)="assignTask(selectedList, $event, data, 'Screener')">
+                    <mat-panel-title fxFlex="20">
+                      <div class="text-content-center">{{data.firstName}}
+                        {{data.lastName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description fxFlex="70" fxLayout="row" fxLayoutWrap="wrap">
+                      <div *ngFor="let item of data.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                        <span fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover">
+                          <div fxFlex="90" class="task-drop-class">{{item.taskName}}</div>
+                          <i fxFlex="10" class="material-icons task-drag-close" (click)="unAssign(item,data,'Screener')"
+                            *ngIf="item.taskActualEndTime==null">clear</i>
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-expansion-panel>
+
+            <!-- <mat-divider></mat-divider> -->
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="panel-Changes"
+              [expanded]="true" *ngIf="securityAgent.length>0 && (userData.user.userRoleMasterList[0].name=='Admin' || userData.user.userRoleMasterList[0].name=='Security Supervisor')">
+              <mat-expansion-panel-header class="task-expansion-panel">
+                <mat-panel-title>
+                  SECURITY AGENT ({{securityAgent.length}})
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="margin-topBottom"
+                  #matExpansionPanel *ngFor="let data of securityAgent">
+                  <mat-expansion-panel-header fxLayout="row" class="panel-head-indicator expansion-panel-head-indicator"
+                    (click)="expandPanel(matExpansionPanel, $event)" (click)="assignTask(selectedList, $event, data, 'Security Agent')">
+                    <mat-panel-title fxFlex="20">
+                      <div class="text-content-center">{{data.firstName}}
+                        {{data.lastName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description fxFlex="70" fxLayout="row" fxLayoutWrap="wrap">
+                      <div *ngFor="let item of data.list;let j = index" fxFlex="46" fxLayout="row" fxLayoutWrap="wrap">
+                        <span fxFlex="100" fxLayout="row" fxLayoutWrap="wrap" class="task-close-hover">
+                          <div fxFlex="90" class="task-drop-class">{{item.taskName}}</div>
+                          <i fxFlex="10" class="material-icons task-drag-close" (click)="unAssign(item,data,'Security Agent')"
+                            *ngIf="item.taskActualEndTime==null">clear</i>
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-expansion-panel>
+
+            <!-- <mat-divider></mat-divider> -->
+
+
+          </div>
+        </div>
+        <!-- Missing component end -->
+        <!-- <div fxLayout="row" fxLayoutWarp="wrap" class="task-assign-submit">
+          <button mat-raised-button color="primary" (click)="taskAssignSubmit()" [disabled]="counter==0 ||
+            taskList.length !=0">Submit</button>
+        </div> -->
+
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWarp="wrap" class="task-assign-submit text-right">
+      <button mat-raised-button color="primary" class="task-assign-submit-button" (click)="taskAssignSubmit()" [disabled]="counter==0 || taskList.length
+        !=0">Submit</button>
+    </div>
+  </div>

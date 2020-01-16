@@ -1,0 +1,206 @@
+<div *ngIf="showTable">
+  <div fxLayout="row" class="dc-page top-row">
+    <img src="assets/images/master/task-icon.png" class="staffs-icon">
+    <div fxFlex.gt-lg="10" fxFlex.gt-md="20" fxFlex.gt-sm="25">
+      <div class="dc-txt">STAFF ALLOCATED</div>
+      <div class="dc-no">{{liveUsers.length}}</div>
+    </div>
+    <div fxFlex.gt-lg="90" fxFlex.gt-md="80" fxFlex.gt-sm="75" fxLayout="row" class="text-right auto-refresh-div">
+      <!-- <div fxFlex="100" class="shifts-div">
+      <mat-tab-group class="shift-align-staff">
+        <mat-tab *ngFor="let tab of shiftTab">
+          <ng-template mat-tab-label>{{tab.label}} <sup class="required-astricks">*</sup></ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div> -->
+      <!-- <div fxFlex="100" class="auto-refresh text-right">Refreshing in <span>{{displayTimer}}</span> seconds.</div> -->
+    </div>
+  </div>
+  <hr class="i-hr">
+</div>
+<!-- <div fxLayout="row">
+</div> -->
+
+<!-- <div *ngIf="noRecord" class="sp-top1 text-center">
+  <img src="assets/images/dashboard/attachment-1-copy.png" class="">
+  <h2 class="noData-content">Sorry, No staff allocated</h2>
+</div> -->
+
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<!--  -->
+<div *ngIf="!load">
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="showTable">
+    <div fxFlex class="resource-expansion-panel">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let user of liveUsers">
+          <mat-expansion-panel-header class="resource-expansion-header" [expandedHeight]="'40px'"
+            [collapsedHeight]="'40px'">
+            <mat-panel-title class="text-content-align font-size-17">
+              <!-- <div [ngClass]="{'state-active': user.status == 1, 'state-inactive': user.status == 0}"></div> -->
+              {{user.first_name}} {{user.last_name}}
+            </mat-panel-title>
+            <!-- <div class="bay-expansion-count" style="padding: 0 25px;"><span class="font-size-24">{{user.completed}}</span><span
+                class="font-size-17">/{{user.assigned}}</span></div> -->
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-lg="55" fxFlex.gt-md="50" fxFlex.gt-sm="50" class="resource-office-details">
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">ROLE</span>
+                <span fxFlex>{{user.name}}</span>
+              </div>
+              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="user.latitude">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">PIN</span>
+                <span fxFlex>{{user.latitude}},{{user.longitude}}</span>
+              </div>
+              <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">STATUS</span>
+                <span fxFlex *ngIf="user.status=='ACTIVE'" class="active-green">ACTIVE</span>
+                <span fxFlex *ngIf="user.status=='INACTIVE'" class="inactive-red">INACTIVE</span>
+              </div> -->
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">LAST SEEN</span>
+                <span fxFlex>{{user.last_seen | date:'dd MMM yyyy HH:mm:ss'}}</span>
+              </div>
+              <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">STATE</span>
+                <span fxFlex>{{user.state}}</span>
+              </div> -->
+            </div>
+            <div fxFlex.gt-lg="45" fxFlex.gt-md="50" fxFlex.gt-sm="50">
+              <div *ngIf="user.latitude">
+                <agm-map [zoom]="18" [latitude]="user.latitude" [zoomControl]="true" [scrollwheel]="false"
+                  [longitude]="user.longitude" class="map-width-height">
+                  <agm-marker [latitude]="user.latitude" [longitude]="user.longitude"></agm-marker>
+                  <agm-circle [latitude]="user.latitude" [longitude]="user.longitude" [fillColor]="blue" [radius]="40">
+                  </agm-circle>
+                </agm-map>
+              </div>
+              <div class="map-width-height" *ngIf="!user.latitude">
+                <img class="unavail-loc" src="assets/images/master/Unavailable icon.svg" alt="location_unavailable">
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>
+<!-- <div *ngIf="!load"> -->
+<!-- GRID VIEW -->
+<!-- <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'GRID_VIEW'">
+    <div fxFlex class="resource-expansion-panel">
+      <mat-accordion [multi]="true">
+        <mat-expansion-panel class="staff-panel-margin" *ngFor="let user of assignedUsers" [expanded]="user.last_seen">
+          <mat-expansion-panel-header [expandedHeight]="'80px'" [collapsedHeight]="'80px'" class="resource-expansion-header"
+            [ngClass]="{'activeGreen': user.latitude, 'inactiveRed': !user.latitude}">
+            <mat-panel-title class="text-content-align font-size-17">
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" class="task-name">{{user.firstName}} {{user.lastName}}
+                </div>
+                <div fxFlex="100" class="service-name">{{user.userRoleMasterList[0].name}}</div>
+              </div>
+            </mat-panel-title>
+            <div class="bay-expansion-count" style="padding: 0 10px;"><span class="font-size-24">{{user.completed}}</span><span
+                class="font-size-17">/{{user.assigned}}</span></div>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div>
+            <div fxLayout="row" style="padding: 10px 0;">
+              <div fxFlex="50">
+                <div class="priority-title">LAST SEEN</div>
+                <div *ngIf="user.latitude" class="dependency-report text-center">{{user.last_seen | date:'dd MMM yyyy
+                  HH:mm:ss'}}
+                </div>
+                <div *ngIf="!user.latitude" class="dependency-report text-center"> Unavailable </div>
+              </div>
+              <div fxFlex="50">
+                <div class="priority-title">STATUS</div>
+                <div class="dependency-report text-center">
+                  <div *ngIf="user.latitude">
+                    <span fxFlex *ngIf="user.status=='ACTIVE'" class="active-green">Active</span>
+                    <span fxFlex *ngIf="user.status=='INACTIVE'" class="inactive-red">Inactive</span>
+                  </div>
+                  <div *ngIf="!user.latitude">
+                    <span fxFlex class="inactive-red">Inactive</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="grid-hr">
+            <div fxLayout="row">
+              <div fxFlex="100" *ngIf="!user.latitude" style="margin: 10px;">
+                <img src="assets/images/master/location_unavailable.svg" alt="location_unavailable" />
+              </div>
+              <div fxFlex="100" *ngIf="user.latitude" style="margin: 10px;">
+                <div class="dependency-report text-center">{{user.latitude}}, {{user.longitude}}</div>
+                <agm-map [zoom]="15" [latitude]="user.latitude" [longitude]="user.longitude" class="map-width-height-grid">
+                  <agm-marker [latitude]="user.latitude" [longitude]="user.longitude"></agm-marker>
+                  <agm-circle [latitude]="user.latitude" [longitude]="user.longitude" [fillColor]="blue" [radius]="40">
+                  </agm-circle>
+                </agm-map>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div> -->
+<!-- LIST VIEW -->
+<!-- <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="viewType === 'LIST_VIEW'">
+    <div fxFlex class="resource-expansion-panel">
+      <mat-accordion>
+        <mat-expansion-panel [ngClass]="{'activeLeftGreen': user.latitude, 'inactiveLeftRed': !user.latitude}" *ngFor="let user of assignedUsers">
+          <mat-expansion-panel-header class="resource-expansion-header" [expandedHeight]="'40px'" [collapsedHeight]="'40px'">
+            <mat-panel-title class="text-content-align font-size-17">
+              {{user.firstName}} {{user.lastName}}
+            </mat-panel-title>
+            <div class="bay-expansion-count" style="padding: 0 25px;"><span class="font-size-24">{{user.completed}}</span><span
+                class="font-size-17">/{{user.assigned}}</span></div>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex.gt-lg="55" fxFlex.gt-md="50" fxFlex.gt-sm="50" class="resource-office-details">
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">ROLE</span>
+                <span fxFlex>{{user.userRoleMasterList[0].name}}</span>
+              </div>
+              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="user.latitude">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">PIN</span>
+                <span fxFlex>{{user.latitude}},{{user.longitude}}</span>
+              </div>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">STATUS</span>
+                <span fxFlex *ngIf="user.status=='ACTIVE'" class="active-green">ACTIVE</span>
+                <span fxFlex *ngIf="user.status=='INACTIVE'" class="inactive-red">INACTIVE</span>
+              </div>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <span fxFlex.gt-lg="15" fxFlex.gt-md="20" fxFlex.gt-sm="25">LAST SEEN</span>
+                <span fxFlex>{{user.last_seen | date:'dd MMM yyyy HH:mm:ss'}}</span>
+              </div>
+            </div>
+            <div fxFlex.gt-lg="45" fxFlex.gt-md="50" fxFlex.gt-sm="50">
+              <div *ngIf="user.latitude">
+                <agm-map [zoom]="18" [latitude]="user.latitude" [longitude]="user.longitude" class="map-width-height">
+                  <agm-marker [latitude]="user.latitude" [longitude]="user.longitude"></agm-marker>
+                  <agm-circle [latitude]="user.latitude" [longitude]="user.longitude" [fillColor]="blue" [radius]="40">
+                  </agm-circle>
+                </agm-map>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div> -->
+<!-- </div> -->

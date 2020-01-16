@@ -1,0 +1,16 @@
+<mat-dialog-content class="shift-modal" id="shift_selection">
+    <h4 fxLayout="row" fxLayoutAlign="center center">SHIFTS</h4>
+    <ul class="shift-list">
+       
+        <li *ngFor="let shift of details.shiftDetails" fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="40">
+                <button mat-raised-button [ngClass]="{'act-shift': shift.start_time != null, 'not-shift': shift.start_time == null}"
+                    [mat-dialog-close]="{'alias': shift.alias, 'name': shift.name, 'shift_id': shift.id, 'start_time':shift.start_time, 'end_time': shift.end_time}">
+                    <mat-icon class="icon-selected" *ngIf="shift.alias===details.dayDetails.shift">done</mat-icon>
+                    {{shift.alias}}
+                </button>
+            </div>
+            <div fxFlex="60">{{shift.name}}</div>
+        </li>
+    </ul>
+</mat-dialog-content>

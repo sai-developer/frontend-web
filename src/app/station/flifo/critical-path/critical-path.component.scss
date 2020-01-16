@@ -1,0 +1,1074 @@
+.critical-gantt-sec{
+    padding: 15px 10px;
+}
+.critical-sec-head{
+    height: 45px;
+    text-align: center;
+    font-weight: bold;
+}
+.back-icon,
+.back-live{
+    outline: none !important;
+}
+
+.critical-gantt-sec::-webkit-scrollbar-track,
+.i-scroll::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+.critical-gantt-sec::-webkit-scrollbar,
+.i-scroll::-webkit-scrollbar {
+  width: 3px;
+  padding: 3px;
+}
+
+.critical-gantt-sec::-webkit-scrollbar-thumb,
+.i-scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #191c29;
+}
+
+
+//test css
+
+// CSS for the page
+.met-card {
+  background-color: #2f3243;
+  color: #ffff;
+  //margin: 0px 2px;
+}
+
+hr {
+  background-color: #ffff;
+  margin: 11px 0px;
+}
+
+.met-card .met-heading {
+  font-size: 16px;
+  margin: 11px 0px;
+}
+
+.met-card .met-content {
+  line-height: 36px;
+}
+
+.met-card .notam {
+  line-height: 21px;
+  margin: 10px 0px;
+}
+
+.small-txt {
+  color: #828282;
+  font-size: 12px;
+}
+
+.accordian-head {
+  line-height: 17px;
+}
+
+.accordian-head b {
+  font-size: 18px;
+}
+
+.top-left-card {
+  margin-top: 0px;
+}
+
+.top-left-card mat-card-content {
+  border-radius: 2px;
+  background-image: radial-gradient(circle at 0 0, #05327d, #0d0a4f);
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  height: 150px;
+  // min-height: 443px;
+}
+
+.top-left-card mat-card-content canvas {
+  margin-top: 20px;
+}
+
+.top-left-card .otp-value {
+  font-size: 59px;
+  color: #6cc920;
+  // padding-top: 60px;
+  line-height: 1;
+}
+
+.top-left-card .otp-value span {
+  font-size: 30px;
+  position: relative;
+  top: -20px;
+  left: -5px;
+}
+
+.top-left-card .otp-text {
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.58;
+  letter-spacing: 0.1px;
+}
+
+.top-left-card .delay-value {
+  font-size: 24px;
+  color: #f0a920;
+  padding-top: 40px;
+  letter-spacing: 0.2px;
+  font-weight: bold;
+}
+
+.top-left-card .delay-value span {
+  font-size: 18px;
+  position: relative;
+  top: -5px;
+  font-weight: normal;
+}
+
+.top-left-card .delay-text {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  color: #ffffff;
+}
+
+.tc-separator {
+  border-top: 1px solid #c7c8ca;
+}
+
+.top-right-card .asset {
+  height: 64px;
+  width: 54px;
+}
+
+.top-right-card .sub-head {
+  font-size: 14px;
+  margin: 10px 0px 0px 0px;
+}
+
+.top-right-card .flight-count {
+  font-size: 59px;
+  font-weight: bold;
+  margin-top: -10px;
+}
+
+.top-right-card .grey-title {
+  color: #999999;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0px 50px 0px 0px;
+}
+
+.top-right-card .flight-value {
+  font-size: 25px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.m-l-0 {
+  margin-left: 0px;
+}
+
+.mat-expansion-panel-header:not([aria-disabled=true]) {
+  border-bottom: 1px solid gainsboro;
+}
+
+.flights-header {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  line-height: 46px;
+}
+
+.fs-accordion mat-expansion-panel {
+  margin: 10px 0px;
+}
+
+.fs-accordion .fs-acc-icon {
+  width: 20px;
+  height: 32px;
+  margin-top: 2px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.fs-accordion .fs-tail-no {
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 5px;
+  margin-right: 50px;
+  position: relative;
+  top: -4px;
+}
+
+.fs-accordion .fs-tail-no span {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #828282;
+  background: #eeeeee;
+  padding: 0px 3px;
+}
+
+.fs-accordion .fs-route-info {
+  max-height: 35px;
+  position: relative;
+  top: 7px;
+}
+
+.fs-accordion .fs-cur-route {
+  font-size: 18px;
+  line-height: 1.3;
+  color: #000000;
+  font-weight: bold;
+}
+
+.fs-accordion .fs-tot-route {
+  font-size: 12px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.fs-accordion .fs-routes {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0;
+  letter-spacing: normal;
+  text-align: left;
+  color: #999999;
+  position: relative;
+  top: -8px;
+}
+
+.m-r-50 {
+  margin-right: 50px;
+}
+
+.fs-accordion .fs-separator {
+  margin-right: 2px;
+}
+
+.fs-accordion .fs-fsegs {
+  width: 60%;
+  line-height: 2;
+  text-align: center;
+}
+
+.fs-accordion .fs-fsegs mat-icon {
+  transform: rotate(90deg);
+  color: #999999;
+  font-size: 16px;
+  position: relative;
+  left: -5px;
+}
+
+.fs-accordion .fs-route-dot {
+  font-size: 7px;
+  margin: 0px 5px;
+}
+
+.fs-accordion .fs-fseg {
+  font-size: 20px;
+  color: #000000;
+  position: relative;
+  top: 4px;
+  margin: 0px 10px;
+}
+
+.fs-state-blog {
+  top: 5px;
+  width: 10%;
+  max-height: 35px;
+  position: relative;
+}
+
+.fs-state-blog .fs-state-txt {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.fs-state-blog .fs-state-status {
+  font-size: 10px;
+  color: #999999;
+  position: relative;
+  top: -10px;
+}
+
+.top-right-card .split-up {
+  display: flex;
+  padding: 7px 0px 0px 0px;
+}
+
+.top-right-card {
+  background: transparent;
+  box-shadow: transparent !important;
+}
+
+.top-right-card .fh-img {
+  width: 37px;
+  height: 48px;
+}
+
+.top-right-card .fh-title {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  color: #0f113d;
+  margin: 16px 0px;
+}
+
+.top-right-card .fh-count {
+  font-size: 59px;
+  letter-spacing: 0.6px;
+  color: #010101;
+  line-height: 46px;
+}
+
+.top-right-card .sus-img {
+  width: 40px;
+  height: 48px;
+}
+
+.top-right-card .sus-title {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  color: #0f113d;
+  margin: 16px 0px;
+}
+
+.top-right-card .sus-inline-block {
+  display: inline-block;
+  margin-right: 75px;
+}
+
+.top-right-card .sus-sub-title {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.17;
+  color: #999999;
+}
+
+.top-right-card .sus-sub-count {
+  font-size: 32px;
+  line-height: 1.08;
+  color: #000000;
+  font-weight: bold;
+}
+
+// Upper left card
+.delay-fact {
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.delay-fact .df-grid {
+  padding: 10px;
+  height: 220px;
+  background: #ffffff;
+  margin: 0px 5px 10px;
+  border-radius: 5px;
+}
+
+.delay-fact .df-title {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.13;
+  color: #0f113d;
+}
+
+.delay-fact .df-value {
+  font-size: 32.5px;
+  letter-spacing: 0.3px;
+  color: #000000;
+  width: fit-content;
+  float: left;
+}
+
+.delay-fact .df-value span {
+  font-size: 21px;
+  position: relative;
+  top: -8px;
+}
+
+.delay-fact .progress {
+  border-radius: 10px;
+}
+
+.delay-fact .delay-airline {
+  background: linear-gradient(to left, #a8e72d, #6cc920);
+}
+
+.delay-fact .nd-airline {
+  background: linear-gradient(to right, #ee5728, #e91c19);
+}
+
+.delay-fact .delay-airline-block {
+  margin-right: 15px;
+  float: right;
+}
+
+.delay-fact .delay-na-block {
+  margin-left: 15px;
+  float: left;
+  text-align: left;
+}
+
+.delay-fact .delay-airline-block .da-per,
+.delay-fact .delay-na-block .da-per {
+  font-size: 49.5px;
+  letter-spacing: 0.5px;
+  color: #e91c19;
+}
+
+.delay-fact .delay-na-block .da-per {
+  color: #6cc920;
+}
+
+.delay-fact .delay-airline-block .da-txt,
+.delay-fact .delay-na-block .da-txt {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.38;
+  letter-spacing: 0.1px;
+  color: #ffffff;
+  position: relative;
+  top: -15px;
+}
+
+.delay-fact .delay-airline-block .per-symbol,
+.delay-fact .delay-na-block .per-symbol {
+  font-size: 24px;
+  position: relative;
+  top: -15px;
+}
+
+// dashboard card
+.flight-status-card mat-card-title {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  color: #010101;
+}
+
+.flight-status-card mat-card-title mat-icon {
+  font-size: 30px;
+  position: relative;
+  top: -7px;
+  color: #c1c1c1;
+}
+
+.fsegs {
+  padding: 15px 30px;
+}
+
+.fseg-block {
+  padding: 10px;
+  border-left: 1px solid gray;
+  height: 40px;
+  font-size: 14px;
+  color: #000000;
+}
+
+.fseg-block .fseg i {
+  font-size: 10px;
+  position: relative;
+  left: -20px;
+  top: -1px;
+  background: white;
+  border-radius: 50%;
+}
+
+.fsegs>.fseg-block:first-child {
+  padding-top: 0px;
+  line-height: 0;
+  margin-top: 10px;
+  height: 25px;
+}
+
+.fsegs>.fseg-block:last-child {
+  height: 25px;
+}
+
+.fsegs>.fseg-block:last-child i {
+  top: 1px;
+}
+
+.fseg-block-mid {
+  height: 23px;
+  margin-bottom: 17px;
+  font-weight: bold;
+}
+
+.trans-border {
+  border-color: transparent;
+  color: #b8b8b8;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.color-green {
+  color: #64b014;
+}
+
+.color-amber {
+  color: #ec8c21;
+}
+
+.color-danger {
+  color: #e81512;
+}
+
+// Timeline css
+.i-vis-timeline {
+  margin-top: -25px;
+  margin-bottom: 25px;
+  // z-index: 100;
+  z-index: 0 !important;
+  position: relative;
+}
+
+.vis-fixed-bar {
+  z-index: 9;
+  margin: 41px 0px 0px 0px;
+  /* overflow-y: scroll;
+height: 480px; */
+}
+
+.vis-custom-time::before {
+  font-family: Material Icons;
+  // font-family: Averta !important;
+  content: "\e904";
+  display: inline-block;
+  transform: scale(1.5);
+  color: blue
+}
+
+.vis-custom-time:nth-child(odd)::before {
+  font-family: Material Icons;
+  // font-family: Averta !important;
+  content: "\e905";
+  display: inline-block;
+  transform: scale(1.5);
+  color: green
+}
+
+.vis-custom-time {
+  background-color: #6e94ff;
+  width: 2px;
+  cursor: pointer !important;
+  z-index: 3
+}
+
+.vis-custom-time:nth-child(odd) {
+  background-color: green;
+}
+
+.vis-custom-time * {
+  position: fixed !important;
+}
+
+/* new flight status testing */
+.i-flight-detail {
+  padding: 15px 5px;
+  height: 59px;
+  color: #000000;
+  width: 310px;
+  display: flex;
+  background: #ffffff;
+}
+
+.i-flight-detail .regNo {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.i-flight-detail img {
+  width: 20px;
+  height: 32px;
+}
+
+.i-flight-chart .vis-panel .vis-left {
+  min-width: 310px !important;
+}
+
+.i-flight-chart .vis-timeline {
+  border: 0px solid transparent;
+}
+
+/* .i-flight-chart .vis-itemset .vis-background, .vis-itemset .vis-foreground{
+background:#ffffff;
+padding: 5px 0px;
+} */
+
+/* .i-flight-chart .vis-labelset .vis-label{
+border-bottom: 0px !important;
+} */
+
+.i-flight-chart .vis-labelset .vis-label .vis-inner {
+  /* background:#ffffff; */
+  /* padding:10px 0px; */
+  /* padding: 10px 0px 5px 0px; */
+  padding: 0px 0px 0px 0px;
+}
+
+.i-flight-chart .vis-current-time {
+  background: #464748;
+  // box-shadow: -4px 0px 14px #000000;
+  width: 2px !important;
+  z-index: 100;
+}
+
+.i-flight-chart .vis-item.vis-range {
+  top: 0px !important;
+  /* height: 100%; */
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  border: 0px;
+  margin: 10px 0px;
+}
+
+.i-flight-chart .vis-foreground .vis-group {
+  /* margin: 10px 0px;     */
+  height: 60px !important;
+  /* border-bottom: 0px !important; */
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* .vis-group{
+height:40px !important;
+background: #ffffff;
+z-index: 1;
+} */
+
+/* styling for the left side conttent */
+
+.i-flight-detail .fs-acc-icon {
+  width: 20px;
+  height: 32px;
+  margin-top: 2px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.i-flight-detail .fs-tail-no {
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 5px;
+  margin-right: 50px;
+  position: relative;
+  top: -4px;
+}
+
+.i-flight-detail .fs-tail-no span {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #828282;
+  background: #eeeeee;
+  padding: 0px 3px;
+}
+
+.i-flight-detail .fs-route-info {
+  max-height: 35px;
+  position: relative;
+  top: -3px;
+}
+
+.i-flight-detail .fs-cur-route {
+  font-size: 18px;
+  line-height: 1.3;
+  color: #000000;
+  font-weight: bold;
+}
+
+.i-flight-detail .fs-tot-route {
+  font-size: 12px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.i-flight-detail .fs-routes {
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0;
+  letter-spacing: normal;
+  text-align: left;
+  color: #999999;
+  position: relative;
+  top: -8px;
+}
+.back-gantt{
+  border: 0;
+  outline: none;
+}
+
+.m-r-50 {
+  margin-right: 50px;
+}
+
+.fs-location {
+  line-height: 1;
+  font-size: 16px;
+  position: relative;
+}
+
+.fs-location span {
+  font-size: 10px;
+  text-align: center;
+  padding: 0px 3px;
+}
+
+.fs-blank {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #d7d7d7;
+  line-height: 0.1em;
+  margin: 15px 0px;
+}
+
+.fs-blank .link {
+  background: #fff;
+  // padding: 0 10px;
+}
+
+.fs-blank .flt-no {
+  font-size: 12px
+}
+
+/* .fs-dummy{
+line-height: 0.50;
+font-size: 16px;
+position: relative; 
+margin-top: -5px;
+height:40px;
+}
+.fs-dummy .flt-no{
+font-size:10px;
+}
+.fs-dummy mat-icon{
+padding: 5px 0px 0px 0px !important;
+} */
+
+/* dynamic colors for the chart */
+
+.vis-item.delay {
+  background: #e81426 !important;
+  color: white;
+}
+
+.vis-item.expecting {
+  background: #dfdfdf;
+  // columns: #000000;
+  color: #ffff !important;
+}
+
+.vis-item.save {
+  background: #5cbb1d;
+  color: white;
+}
+
+.vis-item.warning {
+  background: #e9ab15;
+  color: white;
+}
+
+.vis-item.transparent {
+  background: transparent;
+  color: #999999;
+}
+
+/* Dot default */
+/* .dot-left{
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color:#5cbb1d;
+position: absolute;
+left: -8px;
+top: 11px;
+}
+.dot-right{
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color:#5cbb1d;
+position: absolute;
+right:-8px;
+top: 11px;
+} */
+
+/* Ontime flight */
+.dot-left-green {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #5cbb1d;
+  position: absolute;
+  left: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+.dot-right-green {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #5cbb1d;
+  position: absolute;
+  right: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+/* Warning flight amber */
+.dot-left-amber {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #e9ab15;
+  position: absolute;
+  left: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+.dot-right-amber {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #e9ab15;
+  position: absolute;
+  right: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+/* Yet to arrive grey */
+.dot-left-grey {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #999999;
+  position: absolute;
+  left: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+.dot-right-grey {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #999999;
+  position: absolute;
+  right: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+/* delay red */
+.dot-left-red {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #e81426;
+  position: absolute;
+  left: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+.dot-right-red {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #e81426;
+  position: absolute;
+  right: -8px !important;
+  top: 11px !important;
+  border: 1px solid white;
+}
+
+// frozen header
+::ng-deep .fsc-fixed {
+  position: fixed !important;
+  margin-left: 72px !important;
+  background-color: #DADFE7;
+  z-index: 98;
+}
+
+::ng-deep .fsc-fixed .vis-time-axis {
+  background-color: #DADFE7;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+::ng-deep .scroll-up-fsc {
+  top: 37px !important;
+}
+
+::ng-deep .scroll-down-fsc {
+  top: 104px !important;
+  transition-duration: 0.5s;
+}
+
+::ng-deep .fsc-fixed .vis-text.vis-minor.vis-odd {
+  background: #f1f1f1;
+}
+
+::ng-deep .fsc-fixed .vis-time-axis.vis-foreground {
+  & .vis-h0 {
+    border-left: 1px solid #bfbfbf;
+    //box-shadow: 1px 0px 0px inset #bfbfbf;
+  }
+}
+
+::ng-deep .vis-panel.vis-top {
+  border-right-color: #dadfe7;
+}
+
+
+
+::ng-deep .i-vis-timeline .vis-panel.vis-top.fsc-fixed:before {
+  display: block;
+  background: #dadfe7;
+  width: 310px;
+  content: '';
+  position: absolute;
+  left: -311px;
+  z-index: 102;
+  top: 0;
+  padding-top: 49px;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.criticalpath mat-dialog-container{
+  background: #828282;
+}
+
+.critical-name{
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+.critical-sec{
+  display: inline-flex;
+}
+
+::ng-deep .circle-yet {
+  margin-top: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -17px;
+  float: left;
+  border: 2px solid grey;
+}
+
+// ::ng-deep .circle-yet {
+//   margin-top: -2px;
+//   border-radius: 30px;
+//   width: 36px;
+//   height: 36px;
+//   background-color: #e9e9e9;
+//   border: solid 1px #ffffff;
+//   margin-left: -23px;
+//   float: left;
+//   border: 2px solid grey;
+// }
+
+::ng-deep .c-task-name{
+  margin-top: 4px;
+}
+
+::ng-deep .i-critical-detail{
+  padding: 10px 10px;
+  height: 41px;
+  color: #000;
+  width: 130px;
+  line-height: 9px;
+  display: block;
+  background: #fff;
+  border-radius: 0px;
+}
+
+::ng-deep .diamond-yet {
+  margin-top: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background: #e6e6e6 !important; 
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -20px;
+  float: left;
+  color: #000;
+}
+
+::ng-deep .diamond-ontime {
+  margin-top: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #5cbb1d;
+  border: solid 1px #ffffff;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin-left: -20px;
+  float: left;
+}
+
+::ng-deep .diamond-amber {
+  margin-top: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #d7a01d;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -20px;
+  float: left;
+  color: #fff;
+}
+
+::ng-deep .diamond-delayed {
+  margin-top: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #e81a1a;
+  border: solid 1px #ffffff;
+  transform: rotate(45deg);
+  margin-left: -20px;
+  float: left;
+  color : #fff;
+}
+
+::ng-deep .hidden{
+  visibility: hidden !important;
+}
+::ng-deep .vis-time-axis .vis-text{
+  text-align: left
+}
+::ng-deep .critical-gantt-fixed .vis-text.vis-minor.vis-odd {
+  background: #f1f1f1;
+}

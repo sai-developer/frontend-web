@@ -1,0 +1,325 @@
+.div-width {
+  width: 1336px;
+  margin: 0 auto;
+}
+
+.turn-head {
+  font-size: 24px;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 25px;
+}
+
+.dc-chart {
+  position: relative;
+  width: 590px;
+  height: 310px;
+  margin: 12px;
+}
+
+
+.delay-sec {
+  width: 630px;
+  height: 316px;
+  padding: 14px !important;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.04);
+  background-color: #1b55e2;
+}
+
+.delay-sec-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+}
+
+.bar-cont {
+  position: relative;
+  margin: auto;
+  height: 250px;
+  width: 590px;
+}
+
+.task-width {
+  width: 1248px;
+  margin: 34px 0px -5px 5px;
+}
+
+.task-main-card {
+  height: 520px;
+  width: 1248px;
+  padding: 8px !important;
+  border-radius: 6px;
+  background-color: #212f3c;
+}
+
+.dtask-head {
+  padding: 16px 0px 10px 0px;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+}
+
+.dtask-bar {
+  position: relative;
+  width: 310px;
+  height: 175px;
+  margin-right: 5px;
+}
+
+
+.dtask-bars {
+  position: relative;
+  width: 400px;
+  height: 220px;
+  margin-right: 5px;
+}
+
+
+.task-assign {
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  padding: 4px;
+  color: #cccccc;
+}
+
+.depart-sub-card {
+  width: 405px;
+  padding: 3px;
+}
+
+.dtask-heat-map {
+  width: 375px;
+  padding: 5px !important;
+}
+
+.heat-time {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: left;
+  color: #707070;
+}
+
+.dtask {
+  color: #ffffff !important;
+}
+
+.heat-values {
+  padding: 5px 0px;
+}
+
+.heat-days {
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 2.25;
+  text-align: left;
+  margin-top: 8px;
+  color: #707070;
+}
+
+.heat-content:hover {
+  color:#212f3c;
+}
+
+
+.heat-content {
+  width: 26px;
+  height: 30px;
+  opacity: 0.9;
+  border-radius: 3px;
+  cursor: default;
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+  font-size: 16px;
+  color: transparent;
+}
+
+//heat map valuesModel
+.heat-high {
+  background-color: #21883d;
+  border-radius: 3px;
+}
+
+.heat-mhigh {
+  background-color: #b0d666;
+  border-radius: 3px;
+}
+
+.heat-med {
+  background-color: #edd972;
+  border-radius: 3px;
+}
+
+.heat-low-med {
+  background-color: #ffa000;
+  border-radius: 3px;
+}
+
+.heat-low {
+  background-color: #f65314;
+  border-radius: 3px;
+}
+
+
+.heat-null {
+  background-color: transparent;
+  border-radius: 3px;
+}
+
+
+.dtask-sub-card {
+  width: 310px;
+  height: 219px;
+  padding: 3px;
+}
+
+.dtask-header {
+  font-size: 9px;
+  padding: 8px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.25;
+  text-align: left;
+  color: #8b8dac;
+  width: 572px;
+}
+
+.dtask-content {
+  font-size: 15px;
+  line-height: 2.13;
+  letter-spacing: normal;
+  text-align: left;
+  background-color: #17212a;
+  color: #f0f0f8;
+  margin: 5px;
+  text-align: left;
+  padding: 0px 0px 0px 20px;
+}
+
+
+.dtask-div {
+  overflow-y: auto;
+  width: 572px;
+  height: 390px;
+}
+
+
+.dtask-div::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #191c29;
+}
+
+.dtask-div::-webkit-scrollbar {
+  width: 3px;
+  background-color: #191c29;
+}
+
+.dtask-div::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #ffff;
+
+}
+
+.task-card {
+  height: 32px;
+  border-radius: 16px;
+  padding: 8px;
+  border: solid 1px #cccccc;
+}
+
+.task-lists {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.5 !important;
+  font-stretch: normal;
+  line-height: 0.64;
+  letter-spacing: normal;
+  text-align: center;
+  color: #999999;
+  cursor: pointer;
+}
+
+.active {
+  border-bottom: 4px solid #1b55e2;
+  color: #000000;
+}
+
+
+.date-pad {
+  font-size: 16px;
+  text-align: left;
+  color: #000000;
+  height: 40px;
+  background-color: #ffffff;
+  padding-left: 8px;
+  outline: none;
+  border-radius: 18px 0px 0px 18px;
+}
+
+.date-pads {
+  font-size: 16px;
+  text-align: left;
+  color: #000000;
+  height: 40px;
+  background-color: #ffffff;
+  padding-left: 8px;
+  outline: none;
+}
+
+.date-arrows {
+  font-size: 16px;
+  text-align: left;
+  color: #000000;
+  height: 40px;
+  padding: 9px;
+  background-color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  border-radius: 0px 18px 18px 0px;
+}
+
+.date-arrows .mat-icon:active {
+  background-color: #e8e4e4;
+  height: 25px;
+  width: 25px;
+  border-radius: 14px;
+}
+
+.date-arrow {
+  color: #000000;
+  font-size: 24px;
+  outline: none;
+}
+
+.date-selector .mat-icon-button {
+  outline: none !important;
+}
+
+.date-selector {
+  padding: 2px;
+}
+
+::ng-deep .date-selector .mat-form-field-infix {
+  border-top: 0px !important;
+  width: 100px !important;
+}
+
+::ng-deep .date-selector.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+}

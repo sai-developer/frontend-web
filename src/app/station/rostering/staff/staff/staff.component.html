@@ -1,0 +1,220 @@
+<div class="test-class">
+  <h1 mat-dialog-title class="add-mat-dialog-title" id="staffHeader">
+    <img src="assets/images/master/staff-icon.png" class="shifts-icon">
+    <span *ngIf="details.mode !== 'ADD'"> &nbsp;Edit Staff Details
+      <span class="station-header-arrow-staff">
+        <img src="assets/images/dashboard/to-arrow.png" alt="arrow-icon">
+       </span> <span class="location-fontsize">{{ details.Location }} </span>  
+    </span>
+     <span *ngIf="details.mode == 'ADD'"> &nbsp;Add New Staff
+      <span class="station-header-arrow-staff">
+        <img src="assets/images/dashboard/to-arrow.png"  alt="arrow-icon">
+           </span><span class="location-fontsize">{{ details.Location }} </span> 
+      </span>
+  
+    <!-- <mat-icon class="close" (click)="closeModal()">close</mat-icon> -->
+  </h1>
+  <form #form="ngForm" [formGroup]="profileForm" class="" autocomplete="nope" id="staff">
+    <div class="dialogContentWrap" [ngClass]="{'i-md-content': details.mode !== 'ADD'}">
+      <app-scroll-highlight>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="model-content-margin" id="staff1">
+          <div fxFlex="100">
+            <div fxFlex="45">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>FIRST NAME</mat-label>
+                <!-- <div class="task-codes-title">FIRST NAME <sup class="required-astricks">*</sup></div> -->
+                <input type="text" matInput name="fname" [(ngModel)]="staff.firstName" required minlength="2"
+                  maxlength="12" spellcheck="false" autocomplete="nope" pattern="[A-Za-z]+" formControlName="fname">
+                <!-- <mat-error *ngIf="fname.hasError('required')">Enter a valid first name (eg. Steve)</mat-error>
+              <mat-error *ngIf="fname.hasError('minlength')">First name must be atleast 2 characters long</mat-error>
+              <mat-error *ngIf="fname.hasError('pattern')">First name contains invalid characters</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['fname'].errors && profileForm.controls['fname'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['fname'].errors.required">Please enter a First name </div>
+                <div [hidden]="!profileForm.controls['fname'].errors.minlength">First name must be atleast 2 characters
+                  long</div>
+                <div [hidden]="!profileForm.controls['fname'].errors.pattern">First name contains invalid characters
+                </div>
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <div fxFlex="45">
+              <mat-form-field class=" w-100" appearance="outline" floatLabel="always">
+                <!-- <div class="task-codes-title">LAST NAME <sup class="required-astricks">*</sup></div> -->
+                <mat-label>LAST NAME</mat-label>
+                <input type="text" matInput name="lname" [(ngModel)]="staff.lastName" required minlength="1"
+                  maxlength="12" spellcheck="false" autocomplete="nope" pattern="[A-Za-z]+" formControlName="lname">
+                <!-- <mat-error *ngIf="lname.hasError('required')">Enter a valid lirst name (eg. Steve)</mat-error>
+        <mat-error *ngIf="lname.hasError('pattern')">Last name contains invalid characters</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['lname'].errors && profileForm.controls['lname'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['lname'].errors.required">Please enter a Last name </div>
+                <div [hidden]="!profileForm.controls['lname'].errors.pattern">Last name contains invalid characters
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="100">
+            <div fxFlex="45">
+              <mat-form-field class=" w-100" appearance="outline" floatLabel="always">
+                <!-- <div class="task-codes-title">EMAIL <sup class="required-astricks">*</sup></div> -->
+                <mat-label>EMAIL </mat-label>
+                <input type="email" matInput name="email" [(ngModel)]="staff.email" required formControlName="email"
+                  spellcheck="false" autocomplete="nope">
+                <!-- <mat-error *ngIf="email.hasError('required')">Email Adderess is required</mat-error>
+        <mat-error *ngIf="email.hasError('email')">Enter a valid email address</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['email'].errors && profileForm.controls['email'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['email'].errors.required">Please enter a valid email address</div>
+                <div [hidden]="!profileForm.controls['email'].errors.email">Please enter a valid email address</div>
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <div fxFlex="45">
+              <mat-form-field class=" w-100" appearance="outline" floatLabel="always">
+                <mat-label>CONTACT NUMBER </mat-label>
+                <!-- <div class="task-codes-title">CONTACT NUMBER <sup class="required-astricks">*</sup></div> -->
+                <input type="text" matInput name="contact" [(ngModel)]="staff.mobile" required minlength="10"
+                  maxlength="15" spellcheck="false" autocomplete="nope" pattern="[0-9||+]+" formControlName="mobile">
+                <!-- <mat-error *ngIf="mobile.hasError('required')">Contact number is required</mat-error>
+        <mat-error *ngIf="mobile.hasError('pattern')">Enter a valid contact number</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['mobile'].errors && profileForm.controls['mobile'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['mobile'].errors.required">Please enter contact number</div>
+                <div [hidden]="!profileForm.controls['mobile'].errors.minlength">Contact number must be atleast 10
+                  digits</div>
+                <div [hidden]="!profileForm.controls['mobile'].errors.pattern">Enter a valid contact number</div>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="100">
+            <div fxFlex="45" [ngClass]="{'show-user': details.mode !== 'ADD'}">
+              <mat-form-field class=" w-100" appearance="outline" floatLabel="always">
+                <mat-label>USER ID </mat-label>
+                <!-- <div class="task-codes-title">USER ID <sup class="required-astricks">*</sup></div> -->
+                <input type="text" matInput name="userId" [(ngModel)]="staff.userId" required minlength="6"
+                  maxlength="10" spellcheck="false" autocomplete="nope" pattern="[A-Za-z0-9]+" formControlName="user">
+                <!-- <mat-error *ngIf="user.hasError('required')">User Id is required</mat-error>
+        <mat-error *ngIf="user.hasError('pattern')">Enter a valid User Id</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['user'].errors && profileForm.controls['user'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['user'].errors.required">Please set an User Id</div>
+                <div [hidden]="!profileForm.controls['user'].errors.minlength">User Id must be atleast 6 characters long
+                </div>
+                <div [hidden]="!profileForm.controls['user'].errors.pattern">Enter a valid User Id</div>
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <div fxFlex="45" [ngClass]="{'show-pass': details.mode !== 'ADD'}">
+              <mat-form-field [hidden]="details.mode !== 'ADD'" class=" w-100 designation-role" appearance="outline"
+                floatLabel="always">
+                <mat-label>PASSWORD </mat-label>
+                <div fxFlex="100">
+                  <input type="{{showPass ? 'text' : 'password'}}" matInput name="password" [(ngModel)]="staff.password"
+                    spellcheck="false" autocomplete="new-password" required minlength="8" maxlength="15"
+                    formControlName="pass">
+                  <div fxFlex="4" class="password">
+                    <span (click)="showPass = !showPass "><i
+                        [ngClass]="{'fa-eye-slash' : !showPass, 'fa-eye' : showPass}" class="fa-1x fa"></i></span>
+                    <!--  matTooltip="{{showPass ? 'Hide password' : 'Show password'}}" [matTooltipPosition]="'after'" -->
+                  </div>
+                </div>
+                <!-- <mat-error *ngIf="pass.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="pass.hasError('minlength')">Password must contain atleast 8 characters</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['pass'].errors  && profileForm.controls['pass'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['pass'].errors.required">Please set a password</div>
+                <div [hidden]="!profileForm.controls['pass'].errors.minlength">Password must contain atleast 8
+                  characters</div>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="100">
+            <div fxFlex="45">
+              <mat-form-field class=" w-100 designation-role" appearance="outline" floatLabel="always">
+                <mat-label>DEPARTMENT </mat-label>
+                <!-- <div class="task-codes-title">DEPARTMENT <sup class="required-astricks">*</sup></div> -->
+                <mat-select name="designation" [(ngModel)]="staff.designationId" required formControlName="designation"
+                  (ngModelChange)="staffDesignation(staff.designationId)">
+                  <mat-option *ngFor="let designation of designations" [value]="designation.id"
+                     class="mat-normal-option">{{designation.type}}</mat-option>
+                  <!-- <mat-option [value]="1" class="mat-normal-option">Airport Services</mat-option> -->
+                  <!-- <mat-option [value]="2" class="mat-normal-option">Security</mat-option> -->
+                </mat-select>
+                <!-- <mat-error *ngIf="designation.hasError('required')">Designation is required</mat-error> -->
+              </mat-form-field>
+              <div *ngIf="profileForm.controls['designation'].errors && profileForm.controls['designation'].touched"
+                class="error-msg">
+                <div [hidden]="!profileForm.controls['designation'].errors.required">Please select a Department</div>
+              </div>
+            </div>
+            <div fxFlex="5"></div>
+            <div fxFlex="45">
+              <mat-form-field class=" w-100 designation-role" appearance="outline" floatLabel="always"
+                *ngIf="staff.designationId">
+                <mat-label>ROLE </mat-label>
+                <!-- <div class="task-codes-title">ROLE <sup class="required-astricks">*</sup></div> -->
+                <mat-select name="role" [(ngModel)]="selectedRole" required formControlName="role">
+                  <mat-option *ngFor="let role of roles" class="mat-normal-option" [value]=role.id>{{role.name}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="role.hasError('required')">Role is required</mat-error> -->
+              </mat-form-field>
+              <!-- <div *ngIf="profileForm.controls['role'].errors && profileForm.controls['role'].touched" class="error-msg">
+              <div [hidden]="!profileForm.controls['role'].errors.required">Please select a Role</div>
+              </div> -->
+            </div>
+          </div>
+          <div fxFlex="95">
+            <!-- <mat-form-field *ngIf="details.mode !== 'ADD'" class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>LOCATION </mat-label>
+              <input matInput type="text" [(ngModel)]="details.Location" name="location" formControlName="location"
+                [value]="details.Location" readonly>
+            </mat-form-field> -->
+            <!-- <mat-form-field *ngIf="details.mode === 'ADD'" class=" w-100 designation-role" appearance="outline"
+              floatLabel="always">
+              <mat-label>LOCATION </mat-label>
+              <input matInput type="text" [(ngModel)]="details.Location" name="location" formControlName="location"
+                [value]="details.Location" readonly> -->
+              <!-- <div class="task-codes-title">LOCATION <sup class="required-astricks">*</sup></div> -->
+              <!-- <mat-select name="location" [(ngModel)]="selectedLocation" required formControlName="location"
+                [(value)]="selected" disabled>
+                <mat-option [value]="details.Location" class="mat-normal-option" selected>{{details.Location}}
+                </mat-option>
+              </mat-select> -->
+              <!-- <mat-error *ngIf="location.hasError('required')">Location is required</mat-error> -->
+            <!-- </mat-form-field> -->
+            <!-- <div *ngIf="profileForm.controls['location'].errors && profileForm.controls['location'].touched"
+              class="error-msg">
+              <div [hidden]="!profileForm.controls['location'].errors.required">Please select a location</div>
+            </div> -->
+          </div>
+
+        </div>
+      </app-scroll-highlight>
+    </div>
+    <!-- <div [hidden]="details.mode !== 'ADD'" class="task-codes-title" id="password-border">PASSWORD <sup class="required-astricks">*</sup></div> -->
+    <!-- <mat-dialog-actions>
+    <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" [disabled]="form.invalid" (click)="addStaff()">DONE</button>
+    <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+    <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="form.invalid"
+      [mat-dialog-close] (click)="updateStaff()">UPDATE</button>
+  </mat-dialog-actions> -->
+
+    <mat-dialog-actions>
+      <button *ngIf="details.mode == 'ADD'" mat-raised-button color="primary" [disabled]="(!profileForm.valid)"
+        (click)="addStaff()">DONE</button>
+      <button *ngIf="details.mode == 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-raised-button color="primary" [disabled]="(!profileForm.valid)"
+        (click)="updateStaff()">UPDATE</button>
+      <button *ngIf="details.mode !== 'ADD'" mat-button class="cancel-btn" (click)="closeModal()">CANCEL</button>
+      <button mat-button class="reset-btn" (click)="reset()" [hidden]="details.mode == 'ADD'">RESET PASSWORD</button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -1,0 +1,49 @@
+stages:
+  - build
+  - deploy
+  - prod
+
+Compile:
+  stage: build
+  artifacts:
+    name: "atma-ui"
+    paths: 
+     - dist/
+  tags:
+    - rapid
+  script:
+    - npm install
+    - ng build  --base-href "app4" --prod --aot
+    - ls
+    - ls
+    - pwd
+
+Deploy-Staging:
+   stage: deploy
+   tags:
+     - rapid
+   script:
+     - pwd
+     - cd dist
+     - sshpass -V
+     - export SSHPASS=$test 
+     - sshpass -e scp -o stricthostkeychecking=no -r . priya@https://spicejet.rapidturnaround.flights:/var/www/html/app4
+     - cd /var/www/html/app4
+     - pwd
+
+
+Deploy-Production:
+   stage: prod
+   tags:
+     - rapid
+   script:
+     - pwd
+     - cd dist
+     - sshpass -V
+     - export SSHPASS=$rta 
+     - sshpass -e scp -o stricthostkeychecking=no -r . priya@rtasandbox.rapidturnaround.flights:/var/www/html/app4
+     - cd /var/www/html/app4
+     - pwd
+   when: manual
+
+    

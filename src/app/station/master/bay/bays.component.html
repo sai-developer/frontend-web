@@ -1,0 +1,74 @@
+<div fxLayout="row" class="top-row">
+  <img src="assets/images/master/bays-icon.png" class="bays-icon">
+  <div fxFlex="10">
+    <div class="aircraft-txt">{{constants.bayTitle}}S</div>
+    <div class="aircraft-no">{{openBays.length+contactBays.length}}</div>
+  </div>
+  <div fxFlex="45">
+       <div class="progress-block" [hidden]="contactBays.length == 0" [style.width.%]="contactBays.length/bayList.length*100">
+      <div class="aircraft-no">{{contactBays.length}}</div>
+      <div class="tail-no">{{constants.bayType[1].type}}</div>
+    </div>
+    <div class="progress-block" [hidden]="openBays.length == 0" [style.width.%]="openBays.length/bayList.length*100">
+      <div class="aircraft-no">{{openBays.length}}</div>
+      <div class="tail-no">{{constants.bayType[0].type}}</div>
+    </div>
+    <div class="progress">
+      <div class="progress-bar i-bg-blue" role="progressbar" [style.width.%]="contactBays.length/bayList.length*100"
+        aria-valuemin="0" aria-valuemax="100"></div>
+      <div class="progress-bar i-bg-violet" role="progressbar" [style.width.%]="openBays.length/bayList.length*100"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+  <div fxFlex="30">
+
+  </div>
+</div>
+<hr class="cust-hr">
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="100" [hidden]="contactBays.length == 0">
+    <h4 [hidden]="(contactBays | MasterSearch : searchText : 'bayCode').length === 0  && searchText"
+      class="bay-type-title ">{{constants.bayType[1].type}}
+      {{constants.bayTitle}}S</h4>
+    <div class="aircraft-card bay-card"
+      *ngFor="let cbay of contactBays | MasterSearch : searchText : 'bayCode'; let i = index">
+      <button mat-icon-button mat-button-sm [mat-menu-trigger-for]="actionMenu" aria-label="Open card menu"
+        class="action-btn">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #actionMenu="matMenu" class="aa-menu cust-mat-menu">
+        <button mat-menu-item (click)="edit(cbay)">EDIT</button>
+        <button mat-menu-item (click)="delete(cbay)">REMOVE</button>
+      </mat-menu>
+      <div class="clearfix"></div>
+      <div class="bay-no">
+        {{cbay.bayCode.length == 1 ? "0" + cbay.bayCode : cbay.bayCode }}
+      </div>
+    </div>
+  </div>
+  <mat-divider fxFlex="100" [hidden]="contactBays.length == 0" class="task-mat-divider"></mat-divider>
+  <div fxFlex="100">
+    <h4 [hidden]="(openBays | MasterSearch : searchText : 'bayCode').length === 0" class="bay-type-title mt-10">
+      {{constants.bayType[0].type}}
+      {{constants.bayTitle}}S</h4>
+    <div class="aircraft-card bay-card"
+      *ngFor="let obay of openBays | MasterSearch : searchText : 'bayCode'; let i = index">
+      <button mat-icon-button mat-button-sm [mat-menu-trigger-for]="actionMenu" aria-label="Open card menu"
+        class="action-btn">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <mat-menu #actionMenu="matMenu" class="aa-menu cust-mat-menu">
+        <button mat-menu-item (click)="edit(obay)">EDIT</button>
+        <button mat-menu-item (click)="delete(obay)">REMOVE</button>
+      </mat-menu>
+      <div class="clearfix"></div>
+      <div class="bay-no">{{obay.bayCode.length == 1 ? "0"+ obay.bayCode : obay.bayCode }}</div>
+    </div>
+  </div>
+  <div fxFlex="100" class="no-datamsg" *ngIf="(openBays | MasterSearch : searchText : 'bayCode').length === 0 && (contactBays | MasterSearch : searchText : 'bayCode').length === 0 && searchText">No match found </div>
+</div>

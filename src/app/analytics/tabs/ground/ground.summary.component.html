@@ -1,0 +1,91 @@
+<analytics-filter (filtered)="myInit()"></analytics-filter>
+<div class="loader-div" *ngIf="isLoading">
+	<app-loader [isLoading]="isLoading"></app-loader>
+</div>
+<div class="tab-content" *ngIf="!isLoading">
+  <div id="tab-1" class="tab-pane active">
+    <div class="panel-body">
+      <div class="wrapper wrapper-content">
+      	<div class="row">
+        	<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 chart" >
+		        <donut-chart id="groundPerfDonut" 
+		        			[chartId]="'groundPerfDonut'" 
+		        			[chartTitle]="'On Ground Performance Summary'" 
+		                    [titleSuffix]="''"
+		                    [input]="groundPerfData"></donut-chart>
+		    </div>
+		    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 chart" *ngIf="deptPerfData">
+		    	<div align="center">
+		    		<h6 class="no-margins">Department Performance</h6>
+				</div>
+				<div class="row dep-perf-div">&nbsp;</div>
+										
+		    	<div class="row">
+		    		<div class="col-lg-4" *ngFor="let data of deptPerfData.data" style="margin-bottom: 25px">
+		    			<chart-progress-bar [chartTitle]="data.DEPT_NAME" 
+		    				[progressPercent]="data.DEPT_PERF"
+		    				[input]="deptCallback"
+		    				[callbackParams]="data.DEPT_SK"
+		    				(compClicked)="selectDepartment($event)"></chart-progress-bar>
+		    		</div>
+		    		<div *ngIf="deptPerfData.data.length==0" class="no-data-div"> 
+		    			<h3 align="center">No Department Data Found</h3>
+		    		</div>
+		    	</div>
+	    	</div>
+        </div>
+        <div class="row" *ngIf="selectedDepartment">
+        	<div class="col-lg-12 gray-bg" style="margin-bottom: 20px">
+        		<h5 id="dept-name" style="text-align: center">{{selectedDeptName}}</h5></div>
+          <div class="loader-div" *ngIf="isLoadingDept">
+				<app-loader [isLoading]="isLoadingDept"></app-loader>
+		  </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 chart" *ngIf="!isLoadingDept">
+          	<label> Select Task</label>
+          	<select [(ngModel)]="selectedTask" (change)="selectTask(this.value)" align="center" style="float: right">
+          		<option *ngFor="let option of taskList" [value]="option.TASK_SK">{{option.TASK_NAME}}</option>
+          	</select>
+          	<div class="loader-div" *ngIf="isLoadingCrossTask">
+				<app-loader [isLoading]="isLoadingCrossTask" [loaderType]="'spinner'"></app-loader>
+		  	</div>
+            <line-chart id="crossTaskDep" *ngIf="!isLoadingCrossTask" [chartId]="'crossTaskDep'" 
+            			[chartTitle]="'Cross Task Statistics - Last 10 Departures'" 
+            			[subTitle]="'(Time Interval between Door Close and ' + selectedTaskName + ')'"
+                       [titleSuffix]="''"
+                       [input]="crossTaskDepData"></line-chart>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 chart" *ngIf="!isLoadingDept">
+            <heatmap-chart
+              id="shiftPerfHeatmap"
+              [chartId]="'shiftPerfHeatmap'"
+              [chartTitle]="'Shift Performance'"
+              [titleSuffix]="''"
+              [input]="taskDepDelayData"
+            ></heatmap-chart>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 chart" *ngIf="!isLoadingDept">
+            <horz-bar-chart
+              id="staffPerf"
+              [chartId]="'staffPerf'"
+              [chartTitle]="'Staff Performance'"
+              [titleSuffix]="'(Top 10)'"
+              [input]="deptStaffData"
+            ></horz-bar-chart>
+          </div>
+          
+        </div>
+        <div class="row" *ngIf="selectedDepartment">
+        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chart" *ngIf="!isLoadingDept">
+        		<div class="loader-div" *ngIf="isLoadingTask">
+					<app-loader [isLoading]="isLoadingTask" [loaderType]="'spinner'"></app-loader>
+			  	</div>
+            
+          		<grnd-sum-table *ngIf="!isLoadingTask" [tableTitle]="selectedTaskName + ' Statistics'" [input]="deptEquipTableData"></grnd-sum-table>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>

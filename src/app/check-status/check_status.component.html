@@ -1,0 +1,138 @@
+<div fxLayout="row" class="dc-page top-row">
+  <img src="assets/images/master/task-icon.png" class="staffs-icon">
+  <div fxFlex="10">
+    <div class="dc-txt">FLIGHT ROUTES</div>
+    <!-- <div class="dc-no">{{(taskList  | MasterSearch : searchText : 'name' :'name').length}}</div> -->
+    <div class="dc-no">{{flightListLength}}</div>
+  </div>
+  <div fxFlex="50"></div>
+  <div fxFlex="15" class="text-right">
+    <mat-form-field class="flightlist-types title-filters">
+      <div class="task-codes-title">FLIGHTS</div>
+      <mat-select class="mat-select-placeholder-color" disableOptionCentering [(ngModel)]="catgory"
+        (ngModelChange)="newfunction(catgory,station,tail,equip)">
+        <mat-option *ngFor="let flightType of options" [value]="flightType.value" class="mat-normal-option">
+          {{flightType.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex="5">
+  </div>
+  <div fxFlex="15" class="text-right">
+    <mat-form-field class="title-filters">
+      <div class="task-codes-title">STATION</div>
+      <mat-select class="mat-select-placeholder-color" disableOptionCentering  [(ngModel)]="station"
+        (ngModelChange)="newfunction(catgory,station,tail,equip)">
+        <mat-option *ngFor="let stationType of stations" [value]="stationType.value" class="mat-normal-option">
+          {{stationType.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex="5">
+  </div>
+  <div fxFlex="15" class="text-right">
+    <mat-form-field class="title-filters">
+      <div class="task-codes-title">TAIL NO</div>
+      <mat-select class="mat-select-placeholder-color" [(ngModel)]="tail" disableOptionCentering
+        (ngModelChange)="newfunction(catgory,station,tail,equip)">
+        <mat-option *ngFor=" let tail of tailnumbers" [value]="tail.value" class="mat-normal-option">{{tail.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- <div fxFlex="15" class="text-right">
+    <mat-form-field class="title-filter">
+      <div class="task-codes-title">TAIL NO</div>
+      <input type="text" class="task-codes-title" matInput [(ngModel)]="searchText" spellcheck="false"
+        autocomplete="off" (keyup)="resetHide()" [value]="tail.value">
+      <div class="options" [ngClass]="{'hide': hideOptions}">
+        <mat-option *ngFor="let tail of tailnumbers | CheckPipe : searchText : 'value'" [value]="tail.value"
+          (click)="filterSearch(tail.value);newfunction(catgory,station,tail.value,equip)">
+          {{tail.value}}
+        </mat-option>
+      </div>
+    </mat-form-field>
+  </div> -->
+  <div fxFlex="5">
+  </div>
+  <div fxFlex="15" class="text-right">
+    <mat-form-field class="title-filters">
+      <div class="task-codes-title">EQUIPMENT</div>
+      <mat-select class="mat-select-placeholder-color" [(ngModel)]="equip" disableOptionCentering
+        (ngModelChange)="newfunction(catgory,station,tail,equip)">
+        <mat-option *ngFor="let equips of equipments" [value]="equips.value" class="mat-normal-option">{{equips.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex="5"></div>
+</div>
+<hr class="i-hr">
+<div *ngIf="load">
+  <div *ngFor="let i of [1,2,3]" class="sp-top card-load">
+    <h2 *ngIf="i == 2">Turning Around . . .</h2>
+  </div>
+</div>
+<div *ngIf="!load" class="mat-elevation-z8">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" class="master-fixed-header">
+      <div fxLayout="row" class="dc-th">
+        <div fxFlex="10">FLT TYPE</div>
+        <div fxFlex="8">STATION</div>
+        <div fxFlex="8">ARR FLT #</div>
+        <div fxFlex="6">ORG</div>
+        <div fxFlex="6">STA</div>
+        <div fxFlex="6">ETA</div>
+        <div fxFlex="6">ATA</div>
+        <div fxFlex="8">DEP FLT #</div>
+        <div fxFlex="6">DES</div>
+        <div fxFlex="6">STD</div>
+        <div fxFlex="6">ETD</div>
+        <div fxFlex="6">ATD</div>
+        <div fxFlex="8">TAIL NO</div>
+        <div fxFlex="10">EQUIP</div>
+      </div>
+    </div>
+
+    <div fxFlex="100">
+      <div class="dc-card" *ngFor="let row of flightList | paginate: { itemsPerPage: 50, currentPage: p }">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="dc-row"
+          [ngClass]="{'delay': 'delay' == row.color, 'ontime': 'ontime' == row.color, 'amber': 'amber' == row.color}">
+          <div fxFlex="10" class="staff-data">
+            <span *ngFor="let flightType of constants.flightType">
+              <span *ngIf="row.flightType == flightType.id">{{flightType.type}}</span>
+            </span>
+          </div>
+          <div fxFlex="8" class="staff-data">{{row.stationAirportCode || ''}}</div>
+          <div fxFlex="8" class="staff-data">{{row.arrFlightNumber || ''}}</div>
+          <div fxFlex="6" class="staff-data">{{row.originAirportCode || ''}}</div>
+          <div fxFlex="6" class="staff-data">
+            {{row.standardArrivalTime ? (row.standardArrivalTime | date:'HH:mm': zoneOffset): ''}}</div>
+          <div fxFlex="6" class="staff-data">
+            {{row.estimatdArrivalTime ?(row.estimatdArrivalTime | date :'HH:mm'): ''}}</div>
+          <div fxFlex="6" class="staff-data">
+            {{row.actualArrivalTime ? (row.actualArrivalTime | date:'HH:mm': zoneOffset): ''}}</div>
+          <div fxFlex="8" class="staff-data">{{row.depFlightNumber || ''}}</div>
+          <div fxFlex="6" class="staff-data">{{row.destinationAirportCode || ''}}</div>
+          <div fxFlex="6" class="staff-data">
+            {{row.standardDepartureTime ? (row.standardDepartureTime | date:'HH:mm': zoneOffset): ''}}</div>
+          <div fxFlex="6" class="staff-data">
+            {{row.estimatedDepartureTime? (row.estimatedDepartureTime | date:'HH:mm': zoneOffset): ''}}</div>
+          <div fxFlex="6" class="staff-data">
+            {{row.actualDepartureTime ? (row.actualDepartureTime | date:'HH:mm': zoneOffset): ''}}</div>
+          <div fxFlex="8" class="staff-data">{{row.tailNumber}}</div>
+          <div fxFlex="10" class="staff-data">{{row.equipmentType}}</div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="35"></div>
+    <div class="paginate-footer">
+      <pagination-controls (pageChange)="p = $event" autoHide="true" screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
+    </div>
+    <div fxFlex="35"></div>
+    <div fxFlex="100" class="no-datamsg" *ngIf="flightList.length == 0">Sorry, no flights available for this selection
+    </div>
+  </div>
+</div>

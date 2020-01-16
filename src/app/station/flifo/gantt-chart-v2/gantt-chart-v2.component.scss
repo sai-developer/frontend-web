@@ -1,0 +1,94 @@
+.gnt-head-comp{
+    font-size: 34px;
+    font-weight: bold;
+}
+.gnt-head-tot{
+    font-size: 22px;
+}
+.gnt-head-task{
+    padding: 18px 0px 20px 20px;
+    display: inline-flex;
+}
+.gnt-head-task-title{
+    font-size: 16px;
+    color: gray;
+    font-weight: bold;
+}
+.buttonFilter {
+  -webkit-appearance:none;
+  padding: 50px 5px 0px 5px;
+  outline: none;
+}  
+.buttonFilter:checked+.button {
+    padding: 0px 15px 4px 15px;
+    color: #1b55e2;
+    cursor: default;
+    border-bottom: 4px solid #1b55e2;
+  }
+  .button{
+      padding: 0px 15px 4px 15px;
+      outline:none;
+      cursor: pointer;
+  }
+  .gantt-v2-head{
+    position: fixed;
+    z-index: 100;
+    width: 95vw;
+    margin-left: 15px;
+    border-bottom: 1px solid #aaaaaa;   
+    background: #dadfe7;
+    margin-top: -20px;
+    height : 65px;
+  }
+  .arr-det{
+      display: inline-flex;
+  }
+  .dep-det{
+      display: inline-flex;
+      margin-top: -12px;
+  }
+  .arr-no,
+  .dep-no{
+      font-size: 20px;
+      width: 90px;
+      padding: 5px 10px;
+  }
+  .flt-det{
+      padding: 10px;
+  }
+  .flt-time{
+      padding: 10px;
+      font-size: 14px;
+      width: 110px;
+      color: gray;
+  }
+  .gnt-head-filter{
+      font-size: 16px;
+      padding: 0px 40px;
+  }
+  .active-time{
+      font-weight: bold;
+      color: #000 !important;    
+  }
+  .back-live-v2{
+    background: #fff;
+    border: none;
+    border-radius: 20px;
+    height: 35px;
+    width: 35px;
+    font-size: 24px;
+    outline: none;
+    cursor: pointer;
+  }
+  .back-btn-v2{
+    padding-top: 6px;
+  }
+  .task-sec{
+      padding :0px 10px;
+  }
+  .flt-det-v2{
+      text-align: center;
+  }
+  .flt-icon-v2{
+      padding: 8px 0px;
+  }

@@ -1,0 +1,257 @@
+<div class="app search-i" [dir]="layoutDir"
+  [ngClass]="[ menuLayout, selectedSidebarImage, selectedSidebarColor, selectedHeaderColor, collapsedClass]"
+  [class.app-dark]="dark" [class.boxed]="boxed" [class.collapsed-sidebar]="collapseSidebar"
+  [class.compact-sidebar]="compactSidebar" [class.bg-img-disable]="!sidebarBg">
+  <mat-sidenav-container class="app-inner station-app-inner">
+    <mat-toolbar class="main-header" id="navbar">
+      <div class="horizontal-top-bar w-100" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex class="user-station-v2">
+          <button [mat-menu-trigger-for]="userLocation" mat-icon-button class="ml-xs"
+            [ngClass]="{'default-cursor': userInfo.userAirportMappingList.length <= 1}"
+            [disabled]="userInfo.userAirportMappingList.length <= 1">
+            <mat-icon class="location-icon">location_on</mat-icon>
+            <span class="station-txt"><span class="station">{{currentStation.code}}</span><span
+                *ngIf="!!currentStation.city">,
+                {{currentStation.city}}</span></span>
+          </button>
+          <mat-menu #userLocation="matMenu" class="opt-menu location-menu">
+            <div *ngIf="userInfo.userAirportMappingList.length > 1">
+              <button mat-menu-item class="us-button" *ngFor="let airport of userInfo.userAirportMappingList"
+                (click)="changeStation(airport)">
+                <mat-icon>location_on</mat-icon><span>{{airport.code}}, </span>{{airport.city}}
+              </button>
+            </div>
+          </mat-menu>
+        </div>
+        <div class="station-header-arrow">
+          <img src="assets/images/dashboard/to-arrow.png" alt="arrow-icon">
+        </div>
+        <div fxFlex>
+          <div class="nav-timings">
+            <div>LOCAL &nbsp;&nbsp;&nbsp;&nbsp;<span>{{timer.local ? (timer.local | date : 'dd MMM yyyy
+                &nbsp;&nbsp;&nbsp;HH:mm:ss' : timer.zoneOffset) : '-- --- ---- --:--:--'}}</span></div>
+            <div>UTC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{timer.utc ? (timer.utc | date : 'dd
+                MMM yyyy &nbsp;&nbsp;&nbsp;HH:mm:ss' : '+00:00') : '-- --- ---- --:--:--'}}</span></div>
+          </div>
+        </div>
+        <div fxFlex class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <img src="assets/images/logo/RapidTurn_logo.svg" class="top-rapid-logo" />          
+          <!-- <img src="assets/images/logo/Copa_Airlines_logo.svg" class="top-rapid-logo" /> -->
+        </div>
+        <div fxFlex class="text-right">
+          <div class="profile" [mat-menu-trigger-for]="user">
+            <div class="pull-left text-right">
+              <div class="name">{{userInfo.firstName}} {{userInfo.lastName}}</div>
+              <div class="design">{{userInfo.userRoleMasterList[0].name}}</div>
+            </div>
+            <img class="image-block" src="assets/images/profile-icon.png" />
+          </div>
+          <mat-menu #user="matMenu" class="opt-menu i-opt-menu">
+            <button mat-menu-item (click)="authService.logout()">
+              <mat-icon>exit_to_app</mat-icon>Log out
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-toolbar>
+    <div class="horizontal-menu" [ngClass]="{'hide-menu':pageState}" id="navbar1">
+      <nav>
+        <ul class="main-h-list">
+          <!-- {{menuItem.children.length}} -->
+          <li *ngFor="let menuItem of curMenuItems" class="menu-without-child"
+            [ngClass]="{'menu-with-child': menuItem.children && menuItem.children.length > 0}">
+            <!-- [@MainNavAnimation] -->
+            <a class="default-cursor">
+              <mat-icon>{{ menuItem.icon }}</mat-icon>
+              <span class="color-black">{{ menuItem.name | translate }} </span>
+            </a>
+          </li>
+          <!--<li><mat-icon>chevron_right</mat-icon></li>-->
+
+          <li *ngFor="let childItem of curMenuItems[0].children; let i = index" [ngClass]="{'menu-separator': i === 0}">
+            <!-- [@childNavAnimation] -->
+            <a [routerLink]="['/'+ curMenuItems[0].state + '/' + childItem.state]"  routerLinkActive="active">
+              <mat-icon *ngIf="childItem.icon">{{ childItem.icon }}</mat-icon>
+              <span>{{ childItem.name | translate }} </span>
+            </a>
+          </li>
+          <li class="search-box pull-right" [hidden]="searchEnd">
+            <img src="assets/images/master/search-icon@1.png" class="filter-icon" />
+            <input type="text" autocomplete="off" name="search" matInput placeholder="Search" onkeypress="return /[a-zA-Z0-9-]/i.test(event.key)" class="search-inputs"
+              [(ngModel)]="searchText" (keyup)="filterSearch()">
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- <div *ngIf="pageState" class="horizontal-menu">
+        <button>click me</button>
+            </div> -->
+    <div [ngClass]="((menuItems.length > 2)?'main-menu':'main-menu3') + ' ' + ((flag === 1)?'main-menu2':'main-menu3')"
+      [class.clicked]="setClicked" [hidden]="pageState">
+      <nav>
+        <ul class="main-list" [ngClass]="{'hide-menu':pageState}">
+          <li class="menu_li" *ngFor="let menuItem of menuItems | RemoveMenuItem : curMenuItems">
+            <a  [routerLink]="['/'+menuItem.state]"  routerLinkActive="active">
+              <!-- matTooltip="{{menuItem.name | translate}}" [matTooltipPosition]="'after'"  -->
+              <mat-icon class="menuIcon menuIcon-2x">{{ menuItem.icon }}</mat-icon> <span class="nav-text">
+                {{menuItem.name}}</span>
+            </a>
+            
+          </li>
+        </ul>
+        <!-- <div *ngIf="tool.action === 'FILTER'" class="filter"> -->
+      </nav>
+    </div>
+    <div class="body-container mat-dialog-content" [ngClass]="{'full-width': pageState}" id="fscClass"
+      (scroll)="onWindowScroll($event)">
+      <router-outlet></router-outlet>
+      <div *ngIf="noRecord" class="sp-top1 text-center no-content">
+        <h2 class="noData-content">Sorry, No data available</h2>
+      </div>
+    </div>
+    <div class="i-footer" *ngIf="layoutConfig.tools.length > 0">
+      <nav>
+        <ul class="actions">
+          <li *ngFor="let tool of layoutConfig.tools"
+            [ngClass]="{'list-type': tool.action === 'LIST_VIEW','grid-type': tool.action === 'GRID_VIEW','no-border': isAirportViewPage && !showDetails, 'no-rgt-border':tool.action === 'BAY_NUMBER', 'action-icon': tool.action !== 'ADD' && tool.action !== 'UPLOAD', 'content-right': tool.align === 'RIGHT', 'active': (tool.active && tool.action != 'TIMELINE')}"
+            (click)="footerClick(tool)">
+            <div class="active" *ngIf="tool.action !== 'ADD' || tool.action !== 'UPLOAD'"></div>
+            <div *ngIf="tool.action === 'PRINT'">
+              <span class="view-Grid-List">PRINT</span>
+              <!--  matTooltip="Print" matTooltipPosition="above" -->
+              <mat-icon>print</mat-icon>
+            </div>
+            <div *ngIf="tool.action === 'LIST_VIEW'" class="">
+              <span class="view-Grid-List">LIST</span>
+              <!-- matTooltip="List View" matTooltipPosition="above" -->
+              <mat-icon style="cursor: pointer;">view_headline</mat-icon>
+            </div>
+            <div *ngIf="tool.action === 'GRID_VIEW'" class="">
+              <span class="view-Grid-List">GRID</span>
+              <!-- matTooltip="Grid View" matTooltipPosition="above" -->
+              <mat-icon style="cursor: pointer;">view_module</mat-icon>
+            </div>
+            <div *ngIf="tool.action === 'FLIGHT_TYPE'">
+              <mat-form-field class="task-dropdown-form" [floatLabel]="options.value.floatLabel">
+                <mat-select placeholder="Flight Type" class="mat-select-placeholder-color"
+                  [(ngModel)]="selectedList.flightType" (ngModelChange)="modifiedList(selectedList, $event)">
+                  <mat-option *ngFor="let flight of flightType" [value]="flight.id">{{flight.type}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="tool.action === 'BAY_TYPE'">
+              <mat-form-field class="task-dropdown-form" [floatLabel]="options.value.floatLabel">
+                <mat-select placeholder="Bay Type" class="mat-select-placeholder-color"
+                  [(ngModel)]="selectedList.bayType" (ngModelChange)="modifiedList(selectedList, $event)">
+                  <mat-option *ngFor="let bay of bayType" [value]="bay.id">{{bay.type}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="tool.action === 'EQUIPMENT_TYPE'">
+              <mat-form-field class="task-dropdown-form" [floatLabel]="options.value.floatLabel">
+                <mat-select placeholder="Equipment Type" class="mat-select-placeholder-color"
+                  [(ngModel)]="selectedList.equipmentTypeId" (ngModelChange)="modifiedList(selectedList, $event)">
+                  <!-- <mat-option>None</mat-option> -->
+                  <mat-option *ngFor="let equipmentType of equipments" [value]="equipmentType.id">{{equipmentType.type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- timeline options start -->
+            <div *ngIf="tool.action === 'TIMELINE'" class="timeline-options">
+              <span>
+                <button (click)="move('left')" [disabled]="stopLeft" [ngClass]="{disabled:stopLeft}" class="leftBtn">
+                  <mat-icon>chevron_left</mat-icon>
+                </button><span class="move-btn">TRACK</span>
+                <button (click)="move('right')" [disabled]="stopRight" class="move-right"
+                  [ngClass]="{disabled:stopRight}">
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+              </span>
+            </div>
+            <!-- timeline options end -->
+            <button *ngIf="tool.action === 'ADD'" [disabled]="disableAdd" mat-raised-button color="primary"
+              class="add-btn">
+              <mat-icon>add</mat-icon> ADD NEW
+            </button>
+            <div class="upload-block" *ngIf="tool.action === 'UPLOAD'">
+              <label for="file-upload" class="mat-raised-button mat-primary mb-1">
+                <mat-icon class="file-upload-icon">file_upload</mat-icon> {{tool.label || 'UPLOAD'}}
+              </label>
+              <input type="file" id="file-upload" accept=".xls,.xlsx" ngFileSelect [options]="uploaderOptions"
+                [uploadInput]="uploadInput" (uploadOutput)="onUploadOutput($event)">
+            </div>
+
+            <!-- google airport view map -->
+            <div *ngIf="tool.action === 'FLIGHT_NUMBER' && showDetails">
+              <span class="view-Grid-List-bay"> BAY NUMBER </span>
+              <span style="color: #ffffff;cursor: default;"> - </span>
+              <span class="view-Grid-List-bay">{{fBay}}</span>
+            </div>
+            <div *ngIf="tool.action === 'FLIGHT_LOCATION' && showDetails">
+              <span class="view-Grid-List-bay" *ngIf="flok">{{flok}}</span>
+              <span class="view-Grid-List-bay" *ngIf="!flok">{{currentStation.code}}</span>
+              <span><img src="assets\images\dashboard\to-arrow.png" class="Divider"></span>
+              <span class="view-Grid-List-bay" *ngIf="dlok">{{dlok}}</span>
+              <span class="view-Grid-List-bay" *ngIf="!dlok">{{currentStation.code}}</span>
+
+            </div>
+            <div class="bay-active" *ngIf="tool.action === 'BAY_NUMBER'">
+              <span class="view-Grid-List-bay bay-number">FLIGHT NO</span>
+              <mat-form-field fxFlex class="task-dropdown-form" [floatLabel]="options.value.floatLabel">
+                <mat-label>Select</mat-label>
+                <mat-select class="mat-select-placeholder-color" [(ngModel)]="bayNumber"
+                  (ngModelChange)="modifiedBayList(bayNumber, $event)">
+                  <mat-option class="flight-no" [value]="0"> All Flights </mat-option>
+                  <mat-option *ngFor="let bay of bayNumberList" [value]="bay.bayId">
+                    <span *ngIf="!bay.originAirportCode">BASE</span><span
+                      *ngIf="bay.originAirportCode">{{bay.arrFlightNumber}}</span>
+                    - <span *ngIf="bay.depFlightNumber">{{bay.depFlightNumber}}</span><span
+                      *ngIf="!bay.depFlightNumber">HALT</span>
+                  </mat-option>
+                  <!-- placeholder="Select" -->
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="tool.action === 'BAY_TASKS' && showDetails">
+              <!-- <span class="view-Grid-List-bay view-Grid-List-delayAmb" (click)="allTask()">All TASKS</span>
+              <span class="view-Grid-List-bay view-Grid-List-delayAmb" (click)="taskDelay()"><span class="task-delayed"></span><span>DELAYED</span></span>
+              <span class="view-Grid-List view-Grid-List-delayAmb" (click)="taskAmber()"><span class="task-amber"></span><span>AMBER</span></span> -->
+
+
+              <input type="radio" name="Button" class="ButtonState" checked id="Button1" value="1" />
+              <label class="Button view-Grid-List-bay view-Grid-List-delayAmb" for="Button1" (click)="allTask()">All
+                TASKS</label>
+              <input type="radio" name="Button" class="ButtonState" id="Button2" value="2" />
+              <label class="Button view-Grid-List-bay view-Grid-List-delayAmb" for="Button2" (click)="taskDelay()"><span
+                  class="task-delayed"></span><span>DELAYED</span></label>
+              <input type="radio" name="Button" class="ButtonState" id="Button3" value="3" />
+              <label class="Button view-Grid-List view-Grid-List-delayAmb" for="Button3" (click)="taskAmber()"><span
+                  class="task-amber"></span><span>AMBER</span></label>
+
+
+
+            </div>
+
+            <!-- Auto refresh timer -->
+            <div class="auto-refresh">
+              <div></div>
+            </div>
+            <!-- shiftTiming -->
+
+            <!-- tasks-Assign & Re-Assign -->
+          </li>
+          <!--<li class="action-icon active"><div class="active"></div><mat-icon>view_module</mat-icon></li>-->
+          <!--<li class="action-icon active"><div class="active"></div><mat-icon>view_headline</mat-icon></li>-->
+          <!--<li class="content-right" [hidden]="!addBtn">-->
+          <!--<button mat-raised-button color="primary" class="add-btn" (click)="add()"><mat-icon>add</mat-icon> ADD NEW</button>-->
+          <!--</li>-->
+        </ul>
+      </nav>
+    </div>
+    <!-- <div class="final-approach-flights text-center">
+      <button mat-raised-button (click)="openBottomSheet()">click</button>
+    </div> -->
+  </mat-sidenav-container>
+</div>

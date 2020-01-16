@@ -1,0 +1,30 @@
+bar-line-chart {
+  .bar {
+    fill: #191c29;
+  }
+
+  .bar:hover {
+    fill: #191c29;
+  }
+
+  .axis--x path {
+    display: none;
+  }
+}
+
+bar-line-chart div {
+  width: 100%;
+  height: 350px;
+}
+
+.chart1 {
+  height: 300px;
+}
+
+.axis-label {
+  font-size: 12px;
+}
+
+.legend-label {
+  font-size: 12px;
+}

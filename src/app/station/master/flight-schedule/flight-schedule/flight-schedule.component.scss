@@ -1,0 +1,161 @@
+.i-md-content {
+  //height: 50vh;
+}
+
+
+
+.add-mat-dialog-title {
+  background: white;
+  color: #000000;
+}
+
+.cancel-btn {
+  color: #a2a2a2;
+  margin-right: 10px;
+}
+
+.password span {
+  cursor: pointer;
+}
+
+.mat-dialog-actions {
+  position: absolute;
+  // bottom: -12px;
+      bottom: 0px;
+  padding-left: 5px;
+  // margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+.add-mat-dialog-title img {
+  width: 19px !important;
+  height: auto !important;
+
+}
+
+::ng-deep .designation-role .mat-select-value-text {
+  color: #000000;
+}
+
+::ng-deep .location.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 10px !important;
+}
+::ng-deep .flight-time1 input{
+  width: 120px !important;
+}
+
+.weekDays-selector {
+  margin-right: 10px;
+}
+
+.weekDays-selector input {
+  display: none !important;
+}
+
+.weekDays-selector input[type=checkbox]+label {
+  display: inline-block;
+  border-radius: 40px;
+  background: #ebebeb;
+  color: #aeaeae;
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type=checkbox]:checked+label {
+  // background: #f93b1d;
+  background: #191c29 !important;
+  color: #ffffff;
+}
+
+.freq-days {
+  display: inline-flex !important;
+}
+
+// .freq-days .weekDays-selector:first-child{
+//   width: 90px !important;
+//   height: 24px !important;
+//   border-radius: 5px !important;
+//   background-color: #ebebeb !important;
+//   border: 0px solid !important;
+//   color: #aeaeae !important;
+//   text-align: center;
+//   cursor: pointer;
+// }
+// .freq-days .weekDays-selector:first-child input[type=checkbox]:checked+label {
+//   background: #ebebeb;
+//   color: #aeaeae;
+// }
+.picker-margin {
+  margin: 4% 0;
+}
+
+.margin-adjust {
+  margin-top: -6px;
+  line-height: 3;
+}
+
+.position-adjust {
+  // margin-top: 17px;
+}
+
+.add-mat-dialog-title {
+  background: white !important;
+  color: #000000 !important;
+}
+
+.mat-dialog-actions {
+  position: absolute;
+  // bottom: -12px;
+      bottom: 0px;
+  padding-left: 5px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+.fltNoBlk {
+  display: flex !important;
+}
+
+.fltNoBlk .defaultCode {
+  font-size: 14px;
+  font-weight: 600;
+  color: #999999;
+}
+
+.line-adjust {
+  margin-bottom: 8px !important;
+}
+
+.time-adjust {
+  margin-bottom: 4px !important;
+  margin-top: 16px!important;
+}
+
+.freq-adjust {
+  margin-bottom: 6px !important;
+}
+
+.time-error {
+  margin-top: -15px !important;
+}
+
+::ng-deep .i-mat-form-field .mat-form-field-suffix {
+  top: -0.35em !important;
+}
+
+::ng-deep .arrow .mat-select-arrow{
+  margin: 0px 24px 0px 0px !important;
+}
+
+::ng-deep .i-mat-form-field .mat-input-element{
+  font-size: 14px !important;
+  font-weight: unset !important;
+}
+::ng-deep .mat-datepicker-toggle-default-icon{
+  position: relative;
+  top: 6px;
+}

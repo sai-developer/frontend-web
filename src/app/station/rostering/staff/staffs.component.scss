@@ -1,0 +1,216 @@
+.i-hr {
+  margin: 15px 0px;
+  margin-bottom: 10px;
+}
+
+.dc-row.higlighted {
+  box-shadow: 0 0 7px 0 rgb(252, 148, 43);
+  transition: 0.4s;
+  background-color: #fff3e7;
+}
+
+.top-row .options {
+  float: right;
+  position: relative;
+  top: 29px;
+}
+
+.top-row .options .opt-btn {
+  font-size: 10px;
+  border: solid 1px #acacac;
+  line-height: 35px;
+  outline: none;
+  margin-right: 5px;
+  text-align: left;
+  padding: 0px 10px;
+}
+
+.top-row .options .opt-btn:hover {
+  background: #191c29;
+  border-color: #191c29;
+  color: white;
+}
+
+.top-row .options .opt-btn mat-icon {
+  font-size: 24px;
+  position: relative;
+  right: -15px;
+  color: #000;
+  opacity: 0.4;
+}
+
+.top-row .options .opt-btn mat-icon.export {
+  right: -10px;
+}
+
+.top-row .options .opt-btn:hover mat-icon {
+  color: white;
+  opacity: 1;
+}
+
+.top-row .dc-txt {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+}
+
+
+.dc-card {
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  padding: 0px 10px;
+  color: #000000;
+  transition: 0.4s;
+  cursor: default;
+}
+
+.dc-card:hover {
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: 0.4s;
+}
+
+.dc-card .dc-row {
+  align-items: center;
+}
+
+.dc-card .dc-tab-btn {
+  margin-right: 4px;
+}
+
+
+.task-name {
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.17;
+  padding-top: 25px;
+}
+
+.service-name {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.61;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.priority-title {
+  font-size: 10px;
+  line-height: 1.4;
+  color: #999999;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.dependency-report {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.dc-card .staff-data.staff-mobile span {
+  font-weight: normal;
+}
+
+
+.certificate {
+  button {
+    min-width: 16px;
+    max-height: 16px;
+    border-radius: 3px;
+    padding: 5px;
+    line-height: 6px;
+    font-size: 12px;
+    margin: 0 7px;
+
+    &.red {
+      background-color: rgb(251, 170, 177);
+      color: #e81426;
+    }
+
+    &.green {
+      background-color: rgba(33, 174, 38, 0.49);
+      color: #21ae26;
+    }
+
+    &.orange {
+      background-color: rgba(255, 160, 0, 0.35);
+      color: #ffa000;
+    }
+  }
+}
+
+::ng-deep .certi-menu .mat-menu-content {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #000;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.33);
+  min-width: 160px;
+}
+
+ul.certi-list {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+
+  li {
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+
+  p {
+    padding: 2px 5px;
+    margin-bottom: 0;
+    width: max-content;
+  }
+
+  .item-name {
+    font-weight: normal;
+    font-size: 15px;
+  }
+
+  .item-date {
+    font-weight: normal;
+    font-size: 10px;
+    border-radius: 3px;
+
+    &.expired {
+      background: rgba(232, 20, 38, 0.45);
+      border: 1px solid #e81426;
+
+      span {
+        color: #e81426;
+      }
+    }
+
+    &.valid {
+      background: rgba(33, 174, 38, 0.35);
+      border: 1px solid #21ae26;
+
+      span {
+        color: #21ae26;
+      }
+    }
+
+    & span {
+      text-align: right;
+      padding-left: 10px;
+    }
+  }
+}
